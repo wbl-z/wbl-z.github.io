@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en">
+<html lang="zh-CN">
   
 
     <head>
@@ -11,10 +11,10 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>3 数据的机器级表示 |  wbl-z&#39;s Blog</title>
+      <title>Tag: 计组 |  wbl-z&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
-      <link rel="shortcut icon" href="/images/ayer-side.svg" />
+      <link rel="shortcut icon" href="/images/logo.png" />
        
 <link rel="stylesheet" href="/dist/main.css">
 
@@ -52,210 +52,106 @@
       
     <main class="content on">
       <section class="outer">
-  <article
-  id="post-3 数据的机器级表示"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+  
+  
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">#&nbsp计组</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2022" class="archive-year">2022</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/%E8%AE%A1%E7%BB%84/3%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" class="archive-article-date">
+  <time datetime="2022-08-26T14:02:10.000Z" itemprop="datePublished">08/26</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  3 数据的机器级表示
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/%E8%AE%A1%E7%BB%84/3%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/"
+    >3 数据的机器级表示</a> 
+</h2>
  
 
-      
     </header>
-     
-    <div class="article-meta">
-      <a href="/uncategorized/3%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" class="article-date">
-  <time datetime="2022-11-02T12:48:32.842Z" itemprop="datePublished">2022-11-02</time>
-</a>   
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">527</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
-<h5 align="center">©author:zzb</h5>
-<div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
-
-
-<h1 id="3-数据的机器级表示"><a href="#3-数据的机器级表示" class="headerlink" title="3 数据的机器级表示"></a>3 数据的机器级表示</h1><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218090244930.png" alt="image-20211218090244930"></p>
-<h2 id="信息的二进制编码"><a href="#信息的二进制编码" class="headerlink" title="信息的二进制编码"></a>信息的二进制编码</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210914164832038.png" alt="image-20210914164832038"></p>
-<p>编码：用<strong>少量简单</strong>的<strong>基本符号</strong>对<strong>复杂多样</strong>的<strong>数据</strong>进行一定规律的组合。</p>
-<p>采用二进制的原因：</p>
-<ol>
-<li>多种物理器件可以表示为两种稳定的状态，如开和关</li>
-<li>二进制的规则简单</li>
-<li>二进制的0和1可以对应逻辑运算中的真和假</li>
-</ol>
-<p>用离散有限的数据去表示连续无限的数据，必然会产生偏差</p>
-<span id="more"></span>
-
-<h2 id="整数的二进制表示"><a href="#整数的二进制表示" class="headerlink" title="整数的二进制表示"></a>整数的二进制表示</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210914171400831.png" alt="image-20210914171400831"></p>
-<p>对于<strong>无符号整数不存在各种码的问题</strong>。各种码是用来解决如何表示带符号数的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105164323076.png" alt="image-20220105164323076"></p>
-<p><strong>补码表示的数，不必关心其符号而可以直接相加</strong>，即对应机器不关心数据到底是无符号数还是带符号数</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105170903478.png" alt="image-20220105170903478"></p>
-<p>补码的最高位符号位，<strong>如果是0那么和无符号一样，如果是1，那么就需要-2^n-1^，才是真正的值</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171042276.png" alt="image-20220105171042276"></p>
-<p>补码移码都只有一个0，而原码和反码中有两个0</p>
-<blockquote>
-<p>反码跟原码是正数时，一样；负数时，反码就是原码符号位除外，其他位按位取反</p>
-</blockquote>
-<p><strong>当移码的偏置常数为2^n-1^时，移码和补码仅第一位不同</strong></p>
-<h2 id="浮点数的二进制数表示"><a href="#浮点数的二进制数表示" class="headerlink" title="浮点数的二进制数表示"></a>浮点数的二进制数表示</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171706899.png" alt="image-20220105171706899"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171859823.png" alt="image-20220105171859823"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172415066.png" alt="image-20220105172415066"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172521518.png" alt="image-20220105172521518"></p>
-<p><strong>精度和范围的大小是相互矛盾的</strong>，因为k位二进制数最多只能表示2^k^个数字，因此范围大精度就小</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172626111.png" alt="image-20220105172626111"></p>
-<p>由上图可见，在两个阶码之间，能表示的数字个数为2^23^个，而随着阶码变大，<strong>这个区间变大，所以数字的精度会变小</strong>。</p>
-<p>非规格化数把阶码全0用于表示0~2^-126^之间的数字，和上面同理<strong>这个区间的长度是2^-126^-0&#x3D;2^-126^</strong>，<strong>而2^-126^~2^-125^之间的长度也是2^-126^</strong>，因此在这<strong>两个区间内都可以均匀地表示2^23^个数字</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173227836.png" alt="image-20220105173227836"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173456901.png" alt="image-20220105173456901"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173947144.png" alt="image-20220105173947144"></p>
- 
-      <!-- reward -->
-      
-      <div id="reword-out">
-        <div id="reward-btn">
-          Donate
-        </div>
-      </div>
-      
-    </div>
     
-
-    <!-- copyright -->
     
-    <div class="declare">
-      <ul class="post-copyright">
-        <li>
-          <i class="ri-copyright-line"></i>
-          <strong>Copyright： </strong>
-          
-          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
-          
-        </li>
-      </ul>
-    </div>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag">计组</a></li></ul>
+
     
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/uncategorized/3%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-    </footer>
   </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/uncategorized/4%20%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E7%A0%81/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            4 数据校验码
-          
-        </div>
-      </a>
-    
-    
-      <a href="/uncategorized/2%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E9%A1%B6%E5%B1%82%E8%A7%86%E5%9B%BE/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2 计算机的顶层视图</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
 </article>
+      
+  
+  
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/%E8%AE%A1%E7%BB%84/2%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E9%A1%B6%E5%B1%82%E8%A7%86%E5%9B%BE/" class="archive-article-date">
+  <time datetime="2022-08-26T14:02:10.000Z" itemprop="datePublished">08/26</time>
+</a>
+       
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/%E8%AE%A1%E7%BB%84/2%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E9%A1%B6%E5%B1%82%E8%A7%86%E5%9B%BE/"
+    >2 计算机的顶层视图</a> 
+</h2>
+ 
 
+    </header>
+    
+    
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag">计组</a></li></ul>
+
+    
+  </div>
+</article>
+      
+  
+  
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/%E8%AE%A1%E7%BB%84/4%20%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E7%A0%81/" class="archive-article-date">
+  <time datetime="2022-08-26T14:02:10.000Z" itemprop="datePublished">08/26</time>
+</a>
+       
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/%E8%AE%A1%E7%BB%84/4%20%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E7%A0%81/"
+    >4 数据校验码</a> 
+</h2>
+ 
+
+    </header>
+    
+    
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag">计组</a></li></ul>
+
+    
+  </div>
+</article>
+      
+      
+    </div>
+  </div>
+  
+  
+
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -276,9 +172,9 @@
         
         
         <span>
-  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
   <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
 </span>
         
       </li>
@@ -315,7 +211,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="wbl-z&#39;s Blog"></a>
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -341,7 +237,7 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
+      <a class="nav-item-link" href="/about">关于我</a>
     </li>
     
   </ul>
@@ -350,14 +246,10 @@
   <ul class="nav">
     <li class="nav-item">
       
-      <a class="nav-item-link nav-item-search"  title="Search">
+      <a class="nav-item-link nav-item-search"  title="搜索">
         <i class="ri-search-line"></i>
       </a>
       
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
       
     </li>
   </ul>
@@ -396,22 +288,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

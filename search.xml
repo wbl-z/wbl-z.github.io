@@ -1,110 +1,200 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>3 数据的机器级表示</title>
+    <url>/%E8%AE%A1%E7%BB%84/3%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
+    <content><![CDATA[<h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a href="https://github.com/wbl-z">Github主页</a>  <a href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 
 
-<html lang="en">
-  
+<h1 id="3-数据的机器级表示"><a href="#3-数据的机器级表示" class="headerlink" title="3 数据的机器级表示"></a>3 数据的机器级表示</h1><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218090244930.png" alt="image-20211218090244930"></p>
+<h2 id="信息的二进制编码"><a href="#信息的二进制编码" class="headerlink" title="信息的二进制编码"></a>信息的二进制编码</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210914164832038.png" alt="image-20210914164832038"></p>
+<p>编码：用<strong>少量简单</strong>的<strong>基本符号</strong>对<strong>复杂多样</strong>的<strong>数据</strong>进行一定规律的组合。</p>
+<p>采用二进制的原因：</p>
+<ol>
+<li>多种物理器件可以表示为两种稳定的状态，如开和关</li>
+<li>二进制的规则简单</li>
+<li>二进制的0和1可以对应逻辑运算中的真和假</li>
+</ol>
+<p>用离散有限的数据去表示连续无限的数据，必然会产生偏差</p>
+<span id="more"></span>
 
-    <head>
-      <meta charset="utf-8" />
-        
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-      />
-      <title>嵌入式复习提纲 |  wbl-z&#39;s Blog</title>
-  <meta name="generator" content="hexo-theme-ayer">
-      
-      <link rel="shortcut icon" href="/images/ayer-side.svg" />
-       
-<link rel="stylesheet" href="/dist/main.css">
-
-      
-<link rel="stylesheet" href="/css/fonts/remixicon.css">
-
-      
-<link rel="stylesheet" href="/css/custom.css">
- 
-      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
-       
- 
-
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-
-      <!-- mermaid -->
-      
-      <style>
-        .swal2-styled.swal2-confirm {
-          font-size: 1.6rem;
-        }
-      </style>
-    </head>
-  </html>
-</html>
-
-
-<body>
-  <div id="app">
-    
-      
-    <main class="content on">
-      <section class="outer">
-  <article
-  id="post-嵌入式复习提纲"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  嵌入式复习提纲
-</h1>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/uncategorized/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" class="article-date">
-  <time datetime="2022-11-02T09:58:10.324Z" itemprop="datePublished">2022-11-02</time>
-</a>   
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">9.5k</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">33 min</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
+<h2 id="整数的二进制表示"><a href="#整数的二进制表示" class="headerlink" title="整数的二进制表示"></a>整数的二进制表示</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210914171400831.png" alt="image-20210914171400831"></p>
+<p>对于<strong>无符号整数不存在各种码的问题</strong>。各种码是用来解决如何表示带符号数的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105164323076.png" alt="image-20220105164323076"></p>
+<p><strong>补码表示的数，不必关心其符号而可以直接相加</strong>，即对应机器不关心数据到底是无符号数还是带符号数</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105170903478.png" alt="image-20220105170903478"></p>
+<p>补码的最高位符号位，<strong>如果是0那么和无符号一样，如果是1，那么就需要-2^n-1^，才是真正的值</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171042276.png" alt="image-20220105171042276"></p>
+<p>补码移码都只有一个0，而原码和反码中有两个0</p>
+<blockquote>
+<p>反码跟原码是正数时，一样；负数时，反码就是原码符号位除外，其他位按位取反</p>
+</blockquote>
+<p><strong>当移码的偏置常数为2^n-1^时，移码和补码仅第一位不同</strong></p>
+<h2 id="浮点数的二进制数表示"><a href="#浮点数的二进制数表示" class="headerlink" title="浮点数的二进制数表示"></a>浮点数的二进制数表示</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171706899.png" alt="image-20220105171706899"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171859823.png" alt="image-20220105171859823"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172415066.png" alt="image-20220105172415066"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172521518.png" alt="image-20220105172521518"></p>
+<p><strong>精度和范围的大小是相互矛盾的</strong>，因为k位二进制数最多只能表示2^k^个数字，因此范围大精度就小</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172626111.png" alt="image-20220105172626111"></p>
+<p>由上图可见，在两个阶码之间，能表示的数字个数为2^23^个，而随着阶码变大，<strong>这个区间变大，所以数字的精度会变小</strong>。</p>
+<p>非规格化数把阶码全0用于表示0~2^-126^之间的数字，和上面同理<strong>这个区间的长度是2^-126^-0&#x3D;2^-126^</strong>，<strong>而2^-126^~2^-125^之间的长度也是2^-126^</strong>，因此在这<strong>两个区间内都可以均匀地表示2^23^个数字</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173227836.png" alt="image-20220105173227836"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173456901.png" alt="image-20220105173456901"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173947144.png" alt="image-20220105173947144"></p>
+]]></content>
+      <categories>
+        <category>计组</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2 计算机的顶层视图</title>
+    <url>/%E8%AE%A1%E7%BB%84/2%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E9%A1%B6%E5%B1%82%E8%A7%86%E5%9B%BE/</url>
+    <content><![CDATA[<h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a href="https://github.com/wbl-z">Github主页</a>  <a href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 
 
+<h1 id="2-计算机的顶层视图"><a href="#2-计算机的顶层视图" class="headerlink" title="2 计算机的顶层视图"></a>2 计算机的顶层视图</h1><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909141552837.png" alt="image-20210909141552837"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909142008485.png" alt="image-20210909142008485"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105151814210.png" alt="image-20220105151814210"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105151913519.png" alt="image-20220105151913519"></p>
+<span id="more"></span>
+
+<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p>利用系统总线把各个部分连接起来</p>
+<p>数据和指令存储在一起，存储器只需要按位置寻址，而无需去考虑其中的数据类型</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909144340448.png" alt="image-20210909144340448"></p>
+<p>如I&#x2F;O设备可以使得程序中断，因此CPU可以大胆去做其他的事情，因为I&#x2F;O设备可以使得其他事情中断，从而继续处理待I&#x2F;O输入后才发生的事情（如add），这样可以增大CPU的利用率，避免了CPU在等待I&#x2F;O的过程中空闲</p>
+<p><strong>为什么要禁止中断？</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909144638643.png" alt="image-20210909144638643"></p>
+<h2 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h2><p>内存（主存）。内存又分为随机读写存储器（RAM）和只读存储器（ROM）。前者主要用于大容量内存储器和调整缓冲存储器；后者用于存放专用的固定程序，如BIOS</p>
+<p>外存（辅存）。外存包括硬盘、磁盘、磁带、光盘和U盘等，特点是容量大、价格低，但存取速度较低。磁盘是最常用的外存，一般分为软磁盘和硬磁盘两类</p>
+<p><strong>外存不是冯诺依曼结构中的存储器</strong>，而是属于计算机外的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909151708072.png" alt="image-20210909151708072"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909152123388.png" alt="image-20210909152123388"></p>
+<p>cache在主存和CPU之间，容量小，速度快（接近CPU），把CPU需要在主存中获取的数据先放在cache中，这样CPU需要数据时可以快速提供。从而解决了内存墙的问题</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909153134834.png" alt="image-20210909153134834"></p>
+<h2 id="I-x2F-O"><a href="#I-x2F-O" class="headerlink" title="I&#x2F;O"></a>I&#x2F;O</h2><p>冯诺依曼结构中的I&#x2F;O不是I&#x2F;O设备，如鼠标键盘，而是<strong>I&#x2F;O模块</strong>，如USB接口，是帮助计算机系统与外界进行信息交换的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909154127490.png" alt="image-20210909154127490"></p>
+<p>采用缓冲区来解决数据传输速度时快时慢的问题，如数据太少了就先放在缓冲区，等数据量较大时一起输入</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909154609403.png" alt="image-20210909154609403"></p>
+<h2 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105154039892.png" alt="image-20220105154039892"></p>
+<p>问题：计算机部件互连复杂</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909154935686.png" alt="image-20210909154935686"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210909155043045.png" alt="image-20210909155043045"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105154430876.png" alt="image-20220105154430876"></p>
+]]></content>
+      <categories>
+        <category>计组</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>4 数据校验码</title>
+    <url>/%E8%AE%A1%E7%BB%84/4%20%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E7%A0%81/</url>
+    <content><![CDATA[<h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a href="https://github.com/wbl-z">Github主页</a>  <a href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 
 
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="1-嵌入式系统"><a href="#1-嵌入式系统" class="headerlink" title="1. 嵌入式系统"></a>1. 嵌入式系统</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1. 定义"></a>1.1. 定义</h3><ul>
+<h1 id="4-数据校验码"><a href="#4-数据校验码" class="headerlink" title="4 数据校验码"></a>4 数据校验码</h1><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105193631099.png" alt="image-20220105193631099"></p>
+<h2 id="差错error"><a href="#差错error" class="headerlink" title="差错error"></a>差错error</h2><p>以存储为例：</p>
+<ul>
+<li>硬故障：永久性物理故障</li>
+<li>软故障：随机非破坏性事件，改变了某些内容，但没有损坏机器</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105195420473.png" alt="image-20220105195420473"></p>
+<span id="more"></span>
+
+<h2 id="纠错error-correction"><a href="#纠错error-correction" class="headerlink" title="纠错error correction"></a>纠错error correction</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925101417978.png" alt="image-20210925101417978"></p>
+<p>注意，C’’不是和C去比较，<strong>因为既然D有可能出现差错变成D’，那么与之相应的校验码C也可能差错</strong>，因此，取出来的不是C，而是C‘，是将用D’生成的C‘’去和取出来的C‘比较</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925102425592.png" alt="image-20210925102425592"></p>
+<p>一旦D存进存储器&#x2F;网络，那么原来的D就消失了，取出来的就是D’。（<em>如果能保证存进去和取出来的是一样的，那么也就不存在纠错</em>，<strong>事实上，这是无法保证的</strong>）</p>
+<h2 id="奇偶校验码"><a href="#奇偶校验码" class="headerlink" title="奇偶校验码"></a>奇偶校验码</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925103619330.png" alt="image-20210925103619330"></p>
+<p>奇校验码：如果有奇数个1，那么C&#x3D;0，否则为1</p>
+<p>偶校验码：如果有偶数个1，那么C&#x3D;0，否则为1</p>
+<p>（理解：<strong>把原来的数据和这个校验码拼在一起时应当还是和校验码名字中的奇偶一致</strong>，所以奇校验码当1为奇数，C&#x3D;0，那么拼在一起还是奇数个）</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925110201147.png" alt="image-20210925110201147"></p>
+<p>当数据D中<strong>出错的位数为偶数</strong>时，那么1的个数的奇偶性仍然是不变的，因此校验码不变</p>
+<p><strong>因此奇偶校验码适用于较短的数据进行检错</strong>，这样出现<strong>多位错的概率相对较小</strong>，检错的效果较好（当然还是会有可能出现多位错误，但概率很小）</p>
+<p>代价很低，<strong>只需要1位</strong>即可</p>
+<blockquote>
+<p><strong>发现错误比发现后纠正更难</strong>，因为如果发现了，那么纠正也就是把0变成1，1变成0就好了，相对找到错误更为简单</p>
+</blockquote>
+<h2 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925111310238.png" alt="image-20210925111310238"></p>
+<p>分组的时候要求任何两位所属的组的情况都是不一样的，同时一位数据可能会属于若干个小组（<strong>至少两个组</strong>，与下面的故障字规则一致，否则如果只一个组的话，会和校验码出错冲突）</p>
+<p><font color=#FF0000><strong>前提假设：最多一位发生错误</strong></font></p>
+<p>奇偶校验码是海明码的基础</p>
+<p>利用的原理就是校验码出错的几个所在小组中公共的那一位就是出错的位，这样就<strong>能够定位到错误</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925112636796.png" alt="image-20210925112636796"></p>
+<p>因为K位校验码可以表示2^K种情形，而出错的情形为M+K+1，因此可以求出K的最小值</p>
+<p>由表格可见，随着数据位的增加，最小校验码的位数增加较少，所占比例较小</p>
+<p>但是不能通过把M的位数设成很大，来使得校验码的的位数相对少，<strong>因为如果数据位数很大，则只发生一位错误的假设就不成立了</strong></p>
+<p>因此要实现一个<strong>平衡</strong>：<strong>海明码有效且所占比例较少</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925113559485.png" alt="image-20210925113559485"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925114223953.png" alt="image-20210925114223953"></p>
+<p><strong>先把故障字分配给每一位数据位故障，然后再进行分组，把这一个Dn放到故障字中数值为1的那一位所对应的组中</strong>，如上，D8对应故障字1100，那么D8应当分到C1和C2组中去</p>
+<p>故障字从0001开始分配，因为0000已经用于表示没有发生故障</p>
+<p>这里C的计算用的是偶校验（当然奇校验也行）</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925115343889.png" alt="image-20210925115343889"></p>
+<p>注意：<strong>存储时是按上面表格的顺序来存储的</strong>，而不是D8D7……D1C4……C1（<em>上图蓝色的表示校验码，黑色表示数据</em>）</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211219093628238.png" alt="image-20211219093628238"></p>
+<p><strong>将计算出的C‘’与C‘异或，那么就可以得到故障字</strong>，从而定位到出错的是哪一位</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120406447.png" alt="image-20210925120406447"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120449107.png" alt="image-20210925120449107"></p>
+<blockquote>
+<p>主存的实际容量比用户可以使用的容量要<strong>大</strong>，因为对于存储的数据，<strong>也是可能会发生错误的</strong>，因此需要去添加纠错码，如磁盘中就有纠错区，之后的区域才是数据区等</p>
+</blockquote>
+<p><strong>加强版的海明码</strong></p>
+<hr>
+<h2 id="循环冗余校验"><a href="#循环冗余校验" class="headerlink" title="循环冗余校验"></a>循环冗余校验</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120653073.png" alt="image-20210925120653073"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120852514.png" alt="image-20210925120852514"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925121203909.png" alt="image-20210925121203909"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211219095317053.png" alt="image-20211219095317053"></p>
+<ul>
+<li>当<strong>余数位数与除数位数相同</strong>时，才进行异或运算（模二除法），<strong>即与除数对齐的第一位为1时才异或并上商为1，否则不进行异或直把除数右移并上商为0</strong>了，直到被除数最后一位</li>
+</ul>
+<p>如果这两个 CRC结果不一致，则说明发送中出现了差错，接收方计算机可要求发送方计算机重新发送该数据</p>
+<p>CRC 算法检验的检错能力极强，且检测成本较低</p>
+<p>因而，CRC 成为计算机信息通信领域最为普遍的校验方式</p>
+<hr>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925121237083.png" alt="image-20210925121237083"></p>
+]]></content>
+      <categories>
+        <category>计组</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/uncategorized/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>嵌入式复习提纲</title>
+    <url>/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/</url>
+    <content><![CDATA[<h2 id="1-嵌入式系统"><a href="#1-嵌入式系统" class="headerlink" title="1. 嵌入式系统"></a>1. 嵌入式系统</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1. 定义"></a>1.1. 定义</h3><ul>
 <li>IEEE定义：用于控制、监控或者辅助操作机器和设备的装置</li>
 <li>国内定义：嵌入式系统是以应用为中心，以计算机技术为基础，软硬件可裁剪，适用于应用系统对功能、可靠性、成本、体积、功耗有严格要求的专业计算机系统</li>
 <li><strong>三要素：</strong><ul>
@@ -514,12 +604,12 @@
 </ol>
 <h5 id="实时系统及任务调度-star"><a href="#实时系统及任务调度-star" class="headerlink" title="实时系统及任务调度:star:"></a>实时系统及任务调度:star:</h5><ol>
 <li><p>单一速率调度 **RMS **算法Rate Monotonic Scheduling</p>
-<p><a target="_blank" rel="noopener" href="https://www.cdsy.xyz/computer/system/OS/20210307/cd161510310410910.html">单调速率调度（RMS）算法（详解版） (cdsy.xyz)</a></p>
+<p><a href="https://www.cdsy.xyz/computer/system/OS/20210307/cd161510310410910.html">单调速率调度（RMS）算法（详解版） (cdsy.xyz)</a></p>
 <p><strong>静态</strong>调度策略，分配给每个进程的优先级是固定不变的，基于单一速率分析。</p>
 <p>周期（即最后期限）短的进程被指定为最高优先级。每个周期进去，p进去，根据优先级调度执行，执行结束就从就绪状态退出直到下一个周期开始</p>
 </li>
 <li><p>最早截止时限优先调度 <strong>EDF</strong> 算法 Earliest deadline first</p>
-<p><a target="_blank" rel="noopener" href="https://www.cdsy.xyz/computer/system/OS/20210307/cd161510310310909.html">最早截止时间优先（EDF）算法详解 (cdsy.xyz)</a></p>
+<p><a href="https://www.cdsy.xyz/computer/system/OS/20210307/cd161510310310909.html">最早截止时间优先（EDF）算法详解 (cdsy.xyz)</a></p>
 <p><strong>动态</strong>的优先级方案，在进程执行时当前所有进程的截止时限改变进程的优先级，截止时限最近的优先级最高</p>
 <p>与单调速率调度不一样，EDF 调度不要求进程应是周期的，也不要求进程的 CPU 执行的长度是固定的。<strong>唯一的要求是，进程在变成可运行（即就绪态）时，每个时刻应该宣布它的截止期限。</strong>如果截止时限比当前的进程高，那就会抢占当前进程</p>
 </li>
@@ -809,476 +899,12 @@
 <li><p>面向对象设计模式：相比于其他方式，更容易维护和扩展，降低了实际状态之间的耦合，通过抽象接口来实现，当需要修改或添加状态时，只需要修改内部实现而不需要改变接口，隐藏内部实现一定程度上分解了复杂度，使得代码容易理解。</p>
 </li>
 </ol>
- 
-      <!-- reward -->
-      
-      <div id="reword-out">
-        <div id="reward-btn">
-          Donate
-        </div>
-      </div>
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <div class="declare">
-      <ul class="post-copyright">
-        <li>
-          <i class="ri-copyright-line"></i>
-          <strong>Copyright： </strong>
-          
-          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
-          
-        </li>
-      </ul>
-    </div>
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/uncategorized/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-    </footer>
-  </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/uncategorized/2%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E9%A1%B6%E5%B1%82%E8%A7%86%E5%9B%BE/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            2 计算机的顶层视图
-          
-        </div>
-      </a>
-    
-    
-      <a href="/uncategorized/hello-world/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Hello World</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
-</article>
-
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2022
-        <i class="ri-heart-fill heart_icon"></i> zzb
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        <span>
-  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
-  <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
-</span>
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
-  </div>
-</footer>    
-    </main>
-    <div class="float_btns">
-      <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
-
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
-
-    </div>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="wbl-z&#39;s Blog"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="Search">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-3.6.0.min.js"></script>
- 
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
-
-<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
-/>
-<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
-
-<script src="/dist/main.js"></script>
-
-<!-- ImageViewer -->
- <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
-    }
-    viewer_init()
-</script> 
-<!-- MathJax -->
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
- 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
- 
-<!-- ClickLove -->
-
-<!-- ClickBoom1 -->
-
-<!-- ClickBoom2 -->
-
-<!-- CodeCopy -->
- 
-<link rel="stylesheet" href="/css/clipboard.css">
- <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
-</script>
- 
-<!-- CanvasBackground -->
-
-<script>
-  if (window.mermaid) {
-    mermaid.initialize({ theme: "forest" });
-  }
-</script>
-
-
-    
-    
-
-  </div>
-</body>
-
-</html>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+      </tags>
+  </entry>
+</search>
