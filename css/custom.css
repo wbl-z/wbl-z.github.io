@@ -20,6 +20,13 @@
     width: 90rem !important;
   }
 }
+@media (min-width: 768px) {
+  .outer-without-shadow,
+  .wrap {
+    width: 90rem !important;
+    background-color: #eee;
+  }
+}
 @media (max-width: 768px) {
   .tocbot {
     display: none !important;
