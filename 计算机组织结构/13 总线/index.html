@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>13 总线 |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-COA计组/13 总线"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  13 总线
+</h1>
+ 
+
+      
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/13%20%E6%80%BB%E7%BA%BF/" class="article-date">
+  <time datetime="2022-08-26T14:02:21.000Z" itemprop="datePublished">2022-08-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/">计算机组织结构</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
+<h1>13 总线</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153248644.png" alt="image-20211207153248644"></p>
+<span id="more"></span>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153453753.png" alt="image-20211207153453753"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153523369.png" alt="image-20211207153523369"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153628700.png" alt="image-20211207153628700"></p>
+<p>总线包括<strong>芯片内部总线、系统总线、通信总线</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153843673.png" alt="image-20211207153843673"></p>
+<p>系统总线在不同位置不同场景下会有不同的含义，课程中主要把系统总线作为一个通用的概念，而不是特指某条总线</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154032467.png" alt="image-20211207154032467"></p>
+<p>地址不一定只能一次传输，事实上有时候是可以分成两次来传输地址的，这样就能扩展寻址空间，即寻址空间不是由地址线的宽度来决定的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154229952.png" alt="image-20211207154229952"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154449894.png" alt="image-20211207154449894"></p>
+<p><strong>当总线被使用时，其他设备不能抢占</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154524872.png" alt="image-20211207154524872"></p>
+<h2 id="用途">用途</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154644495.png" alt="image-20211207154644495"></p>
+<h2 id="仲裁">仲裁</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154759597.png" alt="image-20211207154759597"></p>
+<p>要在<strong>优先级和公平性之间取得平衡</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207163212308.png" alt="image-20211207163212308"></p>
+<p>仲裁器是硬件设备，集中处理总线使用权</p>
+<h3 id="集中式">集中式</h3>
+<h4 id="链式查询">链式查询</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207163402586.png" alt="image-20211207163402586"></p>
+<p>允许信号从仲裁器下发，按优先级从高到底传递（<strong>串行</strong>），从而高优先级的设备如果要使用总线，则可以截取允许信号</p>
+<p>繁忙线与各个设备之间是<strong>双向箭头</strong>，因为各个设备要去监听看总线是否繁忙，如果繁忙则不能发起请求。同时得到允许的设备要去修改这条线的状态，使之变成繁忙</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207164628442.png" alt="image-20211207164628442"></p>
+<p>连接的设备<strong>越多</strong>，那么速度就会<strong>越慢</strong>，因为允许信号要经过每一个设备</p>
+<h4 id="计数器查询">计数器查询</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207164945819.png" alt="image-20211207164945819"></p>
+<p>至少要<strong>log<sub>2</sub>n</strong>根线，来区分不同的设备ID，可以灵活的调整优先级</p>
+<p>相当于一个个的报学号，可以按不同的顺序报，也可以从不同的位置开始报，从而来平衡优先级和公平性，先报到的可以使用总线</p>
+<p>如果一个响应后又从1开始计数，那么就和上面的链式查询效果一样的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207165624775.png" alt="image-20211207165624775"></p>
+<h4 id="独立请求">独立请求</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207165913987.png" alt="image-20211207165913987"></p>
+<p>仲裁器可以灵活使用不同的策略来分配总线</p>
+<p>但线路更多了</p>
+<p>不需要和前面一样要等待询问其他设备就可以请求总线，随时都发送请求，如果仲裁器通过了，就可以直接获得允许</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207171157206.png" alt="image-20211207171157206"></p>
+<h3 id="分布式">分布式</h3>
+<h4 id="自举式">自举式</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207171325430.png" alt="image-20211207171325430"></p>
+<p>设备<strong>只需要</strong>关心优先级比它高的设备是否需要使用总线，而<strong>无需</strong>去关心优先级比它低的设备是否需要总线</p>
+<p>因此<strong>高优先级需要关心的少</strong>，上面设备3的优先级最高，只需要关心是否总线忙即可</p>
+<p>而<strong>最低优先级的设备没有请求线</strong>，如上的设备0，因为没有其他设备需要去关心它的请求</p>
+<p>同样的当使用总线时要把总线设为忙</p>
+<p><strong>优先级很明显</strong></p>
+<h4 id="冲突检测">冲突检测</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207172059705.png" alt="image-20211207172059705"></p>
+<p><strong>公平性很明显</strong></p>
+<p>解决冲突要消耗一定的时间，效率会低一些</p>
+<h2 id="时序">时序</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207172448029.png" alt="image-20211207172448029"></p>
+<p><strong>总线事务</strong>是指在总线上完成一次数据的传递：是指根据<strong>一个地址，但数据可能会传输多次</strong></p>
+<h4 id="同步时序？？">同步时序？？</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207172655523.png" alt="image-20211207172655523"></p>
+<p>所有设备共用一个时钟，会导致快的设备要去迁就慢的设备(即要等待慢的设备，而不像下面的异步一样快的设备只要发出信号就可以去做其他事情)，也即快的设备的速度没法发挥出来。</p>
+<blockquote>
+<p>如时钟周期为50ns，存储器准备数据230ns，那么实际上仍然需要250ns才能完成数据的准备，因为必须在一个时钟周期开始才能进行下一步，所以即使存储器完成了准备，也需要等待时钟周期，而异步时序则当数据准备完成即可直接传输</p>
+</blockquote>
+<p>总线不能太长，如果总线很长，那么时钟信号会有较大的延迟</p>
+<h4 id="异步时序">异步时序</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207173006368.png" alt="image-20211207173006368"></p>
+<p>Ready信号说明已经准备好了，设备可以来取，Ack信号表明告诉对方已经取完了，对方可以把ready信号给拿走了</p>
+<p>信号都有上升沿和下降沿，分别表示把信号放到总线上和把信号从总线上拿走的过程</p>
+<p><strong>一次握手其实就是表明一个前后关系</strong></p>
+<ul>
+<li><strong>非互锁</strong>是一个自然的状态，只通过<strong>一次握手</strong>，而没有加额外的限制，只是一个自然的先后关系，先准备好才能去取，然后才有取好信号</li>
+<li><strong>半互锁</strong>是用<strong>两次握手</strong>强调已经取完了之后Ready信号才能撤走，这是为了防止出现在取之前（并不是一出现Ready就去取，可能正在处理其他事务）就已经撤走了Ready，即撤早了，而无法取数据就一直处于等待的情况</li>
+<li><strong>全互锁</strong>是用<strong>三次握手</strong>强调只有Ready撤走后，才能撤走Ack，如果ready的设备正在处理其他事务，而另一个设备已经取好了，并撤走了Ack，那么设备就以为对方还没有取好，因此会一直处于Ready状态</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207205114405.png" alt="image-20211207205114405"></p>
+<p>注意总共为<strong>7次握手</strong>，<strong>握手中即有数据传输的时间</strong>，所有的握手时间加起来即一次总线事务的时间，而不需要额外考虑数据传输。</p>
+<blockquote>
+<p>如1花费了40ns，即存储器得到ReadReq信号并读取了地址并设置了Ack信号花费40ns。此时存储器已经得到了地址信息，可以<strong>开始准备数据</strong>。</p>
+<p>数据准备阶段：在234中有3次握手，是为了保证顺序，当4结束时存储器把数据放到数据线上，因此这里花费的时间为<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220107113225293.png" alt="image-20220107113225293">3次握手的时间和存储器准备这些数据的时间的<strong>最大值</strong>。</p>
+<p>数据传输阶段：567则是通过3次握手，保证数据能传输到CPU中</p>
+<p>上面3个部分全部加起来就是一次总线事务的时间，数据量/时间即数据传输速率</p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207205610699.png" alt="image-20211207205610699"></p>
+<p>速度快的设备在Ready后，就可以去忙别的事情了，而等慢的设备Ack后，快的设备再回来处理这件事，从而<strong>协调好不同速度的设备</strong></p>
+<p><strong>对噪声敏感</strong>是指设备可能把噪声误认为是信号，从而出现错误。因为异步信号的发送是没有固定的时间的，是<strong>很随意的</strong>，任何时间段都可以发出信号，所以会容易把偶然的噪声当作信号</p>
+<h4 id="半同步时序">半同步时序</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207205842375.png" alt="image-20211207205842375"></p>
+<p>固定在<strong>上升沿</strong>才能发出<strong>准备和响应信号</strong>，其他时间段的信号均为无效，从而减少噪声的影响</p>
+<h4 id="分离事务">分离事务</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207210148594.png" alt="image-20211207210148594"></p>
+<p>即把总线事务分成地址传过去和数据传过来两个过程，在得到地址后准备数据的过程中，可以把总线释放出来，给其他设备使用，等数据准备好了，再去申请总线</p>
+<p>提高了<strong>总线利用率</strong></p>
+<p>但这样会<strong>增加每个总线事务的时长</strong>，因为在数据准备好后再申请总线不一定立刻就能得到，可能需要等待一段时间</p>
+<h2 id="总线带宽和数据传输速率">总线带宽和数据传输速率</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207210713756.png" alt="image-20211207210713756"></p>
+<p>总线带宽是<strong>理想状态</strong>下的<strong>数据传输速率</strong>，不考虑<strong>地址传输</strong>和总线仲裁</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211038040.png" alt="image-20211207211038040"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211207154.png" alt="image-20211207211207154"></p>
+<p><strong>地址不算数据</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211252537.png" alt="image-20211207211252537"></p>
+<p>同步总线中一个时钟周期内只能做一件事情</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211412513.png" alt="image-20211207211412513"></p>
+<p>计算数据传输速率只要计算传输一次4个或16个字即可，同时<strong>最后全部传完之后的空闲也要算进去，因为肯定还会有下一次总线事务，所以可以算入到每次传完后里面</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207212358935.png" alt="image-20211207212358935"></p>
+<p>这里每次总线事务都是可以理解是第一次访问内存，所以都需要花费200ns，只有像下面的一次传输一个块的，才是考虑后面的访cache速度快</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207212407122.png" alt="image-20211207212407122"></p>
+<h4 id="提高总线的数据传输率">提高总线的数据传输率</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211201211349.png" alt="image-20211211201211349"></p>
+<p>块传输可以<strong>减少地址传输的时间</strong>，同时<strong>减少了准备数据的时间</strong>，因为有cache的存在，所以第一次数据读取会比较慢，但后续的读取会很快</p>
+<h2 id="总线的层次结构">总线的层次结构</h2>
+<p>总线主要讨论<strong>CPU、主存、IO</strong>之间的连接和数据传输</p>
+<h4 id="单总线结构">单总线结构</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213440303.png" alt="image-20211211213440303"></p>
+<h4 id="双总线结构1">双总线结构1</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213600776.png" alt="image-20211211213600776"></p>
+<h4 id="双总线结构2">双总线结构2</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213732850.png" alt="image-20211211213732850"></p>
+<p>####　多总线结构１</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213813963.png" alt="image-20211211213813963"></p>
+<p>这种情况是cache还设计在CPU外,与之分离的时候的总线结构,当cache合并到CPU中时,就是内部总线了,而不存在上面的本地总线</p>
+<h4 id="多总线结构2">多总线结构2</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211214009253.png" alt="image-20211211214009253"></p>
+<p><strong>从外部输入的数据可以直接存入主存，而不需要经过CPU</strong></p>
+<h4 id="多总线结构3">多总线结构3</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211214258764.png" alt="image-20211211214258764"></p>
+<h2 id="总结">总结</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211214355193.png" alt="image-20211211214355193"></p>
+<p><strong>总线的巨大缺点是一次只能有一个数据在总线上，如果多个，那么会出错</strong></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/13%20%E6%80%BB%E7%BA%BF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/" rel="tag">计算机组织结构</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/14%20%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            14 指令系统
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/12%20%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">12 虚拟存储器</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

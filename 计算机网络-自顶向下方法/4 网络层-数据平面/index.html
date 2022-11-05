@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>4 网络层-数据平面 |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-计算机网络自顶向下方法/4 网络层-数据平面"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  4 网络层-数据平面
+</h1>
+ 
+
+      
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/4%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2/" class="article-date">
+  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">17 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1>4 网络层-数据平面</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429111116397.png" alt="image-20220429111116397"></p>
+<h2 id="4-1-导论">4.1 导论</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429111936600.png" alt="image-20220429111936600"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429112347623.png" alt="image-20220429112347623"></p>
+<p><strong>转发</strong>——数据平面，决定从哪个端口入，从哪个端口出，是局部功能</p>
+<p><strong>路由</strong>——控制平面，决定分组该怎么走，是全局功能</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429112447141.png" alt="image-20220429112447141"></p>
+<p>转发和路由分别有传统方式的 SDN 方式，因此共有四种组合</p>
+<p>传统方式是数据平面和控制平面<strong>强耦合</strong>在一起，在一个路由器上一起实现，并且控制平面的路由表是分布式地在不同的路由器各自计算的【因此要修改非常难】</p>
+<p>传统方式：<strong>控制平面算出路由表，数据平面根据路由表和分组的目标 IP 地址进行转发</strong> <strong>不可编程</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429113624038.png" alt="image-20220429113624038"></p>
+<blockquote>
+<p>SDN 根据多个字段而不是仅仅根据 IP 可以有多个动作：转发、block、泛洪、修改字段，<strong>因此是可编程的</strong></p>
+<p>流表是网络操作系统(一个服务器)算出来，通过南向接口交给分组交换设备，分组交换设备把流表装载上之后就可以根据流表进行多个字段的匹配。<strong>因此控制平面是集中式的</strong></p>
+<p><strong>这里的路由器叫做分组交换机</strong></p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429114444557.png" alt="image-20220429114444557"></p>
+<p><strong>网络服务模型</strong>（<em>network service model</em>）定义了分组在发送与接收端系统之间的<strong>端到端运输特性</strong>。</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429115302243.png" alt="image-20220429115302243"></p>
+<p><strong>（可见 IP 网络是尽力而为的，即什么都不保证。尽力而为服务看起来是根本无服务的一种委婉说法）</strong></p>
+<p>主机到主机的网络层连接不仅仅体现在端主机之上，而且体现在中间路径上经过的所有交换节点</p>
+<p><strong>TCP / IP 网络中 IP 网络层向上层提供的服务（不存在连接建立）：</strong> 路由表由控制平面产生，交给 IP 协议，根据路由表对到来的分组进行转发，实现数据平面的功能</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429115117104.png" alt="image-20220429115117104"></p>
+<p>对有一些网络，要提供连接建立的功能</p>
+<h2 id="4-2-路由器组成">4.2 路由器组成</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429120911015.png" alt="image-20220429120911015"></p>
+<p>任何一个端口都可以既输入又输出混合在一起的，没有独立的输入/输出端口</p>
+<p>每个端口有 3 个方框，分别为物理层，链路层，网络层。路由表要交给每个端口的网络层</p>
+<blockquote>
+<p>指的是路由器的物理输入和输出接口，这完全 不同于第2、3章中所讨论的与网络应用程序和套接字相关联的软件端口</p>
+</blockquote>
+<h3 id="输入端口">输入端口</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430093745617.png" alt="image-20220430093745617"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430094051788.png" alt="image-20220430094051788"></p>
+<p>当出现多个输入端口转到相同输出端口时，需要排队，因此会导致交换速率小于输入速率，所以需要排队</p>
+<p><strong>队头阻塞</strong> <strong>HOL blocking</strong>  <em>head of the line blocking</em> ：队列的首个packet由于它的目的端口正忙而被延迟转发，导致后面的packets被blocked</p>
+<h3 id="交换结构">交换结构</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430104949033.png" alt="image-20220430104949033"></p>
+<p>交换速率应当是 N 倍于输入线路的输入速率（ N 为输入端口数量）</p>
+<p><strong>通过内存交换</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430105129633.png" alt="image-20220430105129633"></p>
+<p>通过 bus 两次</p>
+<p><strong>通过总线交换</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430105514365.png" alt="image-20220430105514365"></p>
+<p>分组通过 bus 时要加上输出端口的地址，输出端口发现是自己的端口，那么就将其从这个端口输出</p>
+<p><strong>通过互联网络交换</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430105713225.png" alt="image-20220430105713225"></p>
+<p>同时可以<strong>转发多个分组</strong></p>
+<h3 id="输出端口">输出端口</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110116587.png" alt="image-20220430110116587"></p>
+<p>队列中的分组发送顺序不一定是 FIFO 的，可以采用一些调度规则，实现按优先级发送</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110458097.png" alt="image-20220430110458097"></p>
+<p>输入和输出端口都有可能导致分组的丢弃</p>
+<h3 id="调度机制">调度机制</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110602462.png" alt="image-20220430110602462"></p>
+<p>通常默认是 FIFO</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110730870.png" alt="image-20220430110730870"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110923709.png" alt="image-20220430110923709"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430111048050.png" alt="image-20220430111048050"></p>
+<h2 id="4-3-Internet-Protocol">4.3 Internet Protocol</h2>
+<p>所有网络从IP 角度看都是 IP 网络，<strong>IP 是 over everything 的</strong>，IP 是在各种物理网络上运行的。<strong>能够成功的兼容不同的物理网络【不同的链路协议】让不同的链路协议可以组合在一起，在网络层都是 IP 协议，在链路层的不同跳上则是不同类型的链路协议</strong>，IP 的提出就是为了让当时不同类型的网络能够相互兼容地运行</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430111344286.png" alt="image-20220430111344286"></p>
+<p><strong>IP 协议</strong>根据分组头部的 DA 字段匹配路由表，<strong>实现数据平面的转发功能</strong></p>
+<h3 id="IP-数据报格式">IP 数据报格式</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430111703747.png" alt="image-20220430111703747"></p>
+<p><strong>20 B 的头部</strong> + 可能的 option 【由 head len 字段记录头部总长】+ data</p>
+<ul>
+<li><strong>版本号</strong>：在 IPv4 为 4【4 bit】</li>
+<li><strong>首部长度</strong> head len 的单位是 4 B ，因此如果head len = 5 ，那么表示 4*5 = 20 B 【4 bit】</li>
+<li><strong>区分服务</strong>: 用来区分不同的数据报，以便按优先级获得更好的服务,但实际上一直没被用过【8 bit】</li>
+<li><strong>总长度</strong>：IP 报头+数据的长度【16 bit】</li>
+<li><strong>标识</strong> identification：在IP软件在存储器中维持着一个计数器，每产生一个数据报，计数器就+1，并将此值赋值给标识字段。当IP数据报长度超过 MTU 而必须进行分片，这个标识字段的值就被复制到所有的数据报片的标识字段中。相同的标识字段的值使分片后的各个数据报片最后的能正确地重装成为原来的数据。【16 bit】</li>
+<li><strong>标志</strong> flag：目前只有两位有意义【3 bit】
+<ul>
+<li>标志字段中的<strong>最低位为MF</strong> <em>more fragments</em>。MF=1即表示后面“还有分片”的数据报。MF=0表示的是这个数据报的最后一个。</li>
+<li>标志字段中的<strong>中间一位记为DF</strong> <em>don’t fragment</em>，当DF记为1时，表示的是“不能分片”。</li>
+<li>最高位：<em>reversed bit</em></li>
+</ul>
+</li>
+<li><strong>片偏移</strong>：某片在原分组中的相对位置，便于后续接收时正确地重组。<strong>片偏移以8字节为单位</strong>。这就是说，<strong>每个分片长度一定是8字节的整数倍。</strong>【13 bit】</li>
+<li><strong>生存时间</strong> ：数据报能在因特网中经过的路由器的最大数值是<strong>255</strong>【8 bit】</li>
+<li><strong>上层协议</strong> protocol：指出此数据携带的数据是使用何种协议，以便让目的 IP 层知道将数据部分上交到哪个处理过程。如TCP，UDP**[17]**等等【8 bit】</li>
+<li><strong>首部检验和</strong>：检验头部是否正确【16 bit】</li>
+<li><strong>源IP地址</strong>：【32 bit】</li>
+<li><strong>目的IP地址</strong>：【32 bit】</li>
+</ul>
+<h3 id="分片和重组">分片和重组</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430142315368.png" alt="image-20220430142315368"></p>
+<p>以太网对数据帧的长度都有一个限制，即 <strong>最大传输单元 MTU</strong> <em>Maximum Transmission Unit</em> 为<strong>1500 B</strong></p>
+<p>因此需要将大的 IP 数据报/包分片，但不能直接分片，要拷贝头部信息</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430142132152.png" alt="image-20220430142132152"></p>
+<p>每一个片的载荷/数据部分【不包括头部】都一定是 8 B 的倍数，如上的 1480 B</p>
+<p>每一片都具有<strong>相同的标识</strong>【用于确定哪些是一个组的】，但不同的偏移量，偏移量记录的是<strong>分片的数据部分在原来的数据部分的偏移量【均不涉及头部】</strong></p>
+<p><strong>重组一定只在最终的目标主机上进行</strong>，减少对中间路由器的压力，同时，不同的片可能走不同的路径，也无法在中间路径上全部重组</p>
+<p><strong>如果有某分片丢失了</strong>，那么所有该标识的分片都会被目标主机丢弃，如果上层是 TCP，那么超时重发。因此分片会增加丢失的概率，导致重发增加，效率降低，因此不建议切分 IP 数据报。</p>
+<blockquote>
+<p>TCP协议为了减少IP报被切分的概率，双方主机在握手阶段会交换自己的MSS</p>
+<p>MSS是TCP层交互给IP层最大分段大小，不包含TCP报头，只包含数据所以TCP为了减少被切分的概率，就确定一个MSS限制每一次交互给IP层的数据大小。MSS数据大小去掉IP报头和TCP报头，IP报头和TCP报头都是20个字节（不考虑扩展项）。因此：<strong>MSS数据大小=MTU-20-20</strong>（MTU默认值是1500个字节，也可以是其它值）。</p>
+<p><strong>所以双方主机在建立连接的时候会交换自己的MSS大小值</strong>，最终大小<strong>取决于双方主机的较小值</strong>，如果一台主机的MSS是1200个字节，另一台主机的MSS是1300个字节，所以双方主机MSS都取1200个字节，那么双方通信的时候TCP层面发送的数据都是1200个字节。<br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/sjp11/article/details/124170051">https://blog.csdn.net/sjp11/article/details/124170051</a></p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430142925705.png" alt="image-20220430142925705"></p>
+<h3 id="IP-编址">IP 编址</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430143913198.png" alt="image-20220430143913198"></p>
+<p><strong>IP 地址用来标识接口</strong>，如主机，IP 地址不是用来标识主机，而是标识主机连接的那个接口/点的，一个主机也可以有多个接口，包含多个 IP</p>
+<h4 id="子网">子网</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430144422811.png" alt="image-20220430144422811"></p>
+<p>IP 地址：</p>
+<ul>
+<li>子网部分（高位 bit）</li>
+<li>主机部分（低位 bit）</li>
+</ul>
+<p>一个子网内部的主机的到达<strong>在 IP 层面一跳可达</strong>，<strong>不需要借助路由器，可以借助交换机即可</strong></p>
+<blockquote>
+<p>链路层：在长途链路中采用点到点的连接，减少绕路；在局域网中采用多点连接即多个设备连到交换机上，经过交换机到达其他点</p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430144733795.png" alt="image-20220430144733795"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430145144550.png" alt="image-20220430145144550"></p>
+<p>如上，有 <strong>6</strong> 个子网</p>
+<h4 id="IP-地址分类">IP 地址分类</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430145244700.png" alt="image-20220430145244700"></p>
+<ul>
+<li>
+<p>A 类地址：<strong>最高地址为0</strong>，2<sup>7</sup>-2 = 126 个网络，<strong>注意减 2 是因为全 0 和全 1 的网络不使用</strong>，每个网络有 2<sup>24</sup>-2 个主机</p>
+</li>
+<li>
+<p>B 类地址：<strong>最高地址为 10</strong>，2<sup>14</sup>-2 个网络，2<sup>16</sup>-2 个主机</p>
+</li>
+<li>
+<p>C 类地址：<strong>最高地址为 110</strong>，2<sup>21</sup>-2 个网络，2<sup>8</sup>-2个 主机</p>
+<p>ABC 类地址均为单播地址，D类地址为组播地址<a target="_blank" rel="noopener" href="https://m.elecfans.com/article/1163386.html">单播与组播、广播及任播有什么区别-电子发烧友网 (elecfans.com)</a></p>
+<blockquote>
+<p>组播解决了单播和广播方式效率低的问题，组播路由器借助组播路由协议为组播数据包建立树型路由，被传递的信息在尽可能远的分叉路口才开始复制和分发。</p>
+</blockquote>
+</li>
+<li>
+<p>D 类地址：<strong>最高地址为 1110</strong>，2<sup>28</sup>-2 个，D类地址不能出现在IP报文的<strong>源IP地址</strong>字段。</p>
+</li>
+<li>
+<p>E 类地址：<strong>最高地址为 11110</strong>，为未来预留的</p>
+</li>
+</ul>
+<p>互联网的路由是**以网络为单位【而不是一个 IP 地址一个表项】**来路由信息的发布和计算的，<strong>一个子网在路由器中就是一个表项</strong></p>
+<p>而且如上面的子网图中，可以将 3 个子网<strong>聚集</strong>成一条<strong>向外发布</strong> <em>【即这些子网从更短的掩码或者从外部来看，也可以看作一个子网，因此只要是这些子网【即根据更短的掩码】的数据报，都发给这个路由器即可，接下来往哪个子网发，这个路由器会知道】</em>，进一步减少在广域网中路由表表项的数目和计算的代价</p>
+<h4 id="特殊-IP-地址">特殊 IP 地址</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430152710393.png" alt="image-20220430152710393"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430154658524.png" alt="image-20220430154658524"></p>
+<ul>
+<li>
+<p><strong>网络地址</strong>：{<Network-number>，<Host-number>}={<Network-number>，0} 该地址用于标识网络，不能分配给主机，因此不能作为数据的源地址和目的地址。</p>
+</li>
+<li>
+<p><strong>直接广播地址</strong>：{<Network-number>，<Host-number>}={<Network-number>, -1} 向某个网络上所有的主机发送报文。<strong>直接广播地址只能作为目的地址。</strong></p>
+</li>
+<li>
+<p><strong>受限广播地址</strong>：{<Network-number>，<Host-umber>}={-1, -1} 受限广播地址是在本网络内部进行广播的一种广播地址。TCP/IP规定，32比特全为“1”的IP地址用于本网络内的广播。**受限广播地址只能作为目的地址。 **</p>
+<blockquote>
+<p>直接广播要求发送方必须知道信宿网络的网络号。但有些主机在启动时，往往并不知道本网络的网络号，这时候如果想要向本网络广播，只能采用受限广播地址（Limited Broadcast Address）。 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv14336375">https://www.bilibili.com/read/cv14336375</a></p>
+</blockquote>
+</li>
+<li>
+<p><strong>回环地址</strong>：127开头，后面任意*【除了全0，全0表示网络地址和全1，全1表示该网络的广播地址】*到了 IP 层会直接返回</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430152840849.png" alt="image-20220430152840849"></p>
+</li>
+<li>
+<p><strong>0.0.0.0</strong>，特殊的源地址，表示的是网络上的所有主机，一般在写服务端程序绑定监听地址时常用此地址。</p>
+</li>
+</ul>
+<h4 id="专用-内网-IP-地址">专用(内网) IP 地址</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430154844277.png" alt="image-20220430154844277"></p>
+<p><strong>内网地址用于区分局部网络中的不同设备</strong></p>
+<p>路由器不对目标地址是内网地址的分组进行转发，即不能在公网中转发，只能在内网中使用</p>
+<blockquote>
+<p>因此 ping 上述的内网地址一定会超时，分组被丢弃。但 ping 除内网地址外的地址都是可以 ping 到的【也有可能超时，有些 IP 不能访问】，因为 IPv4 地址早已分配完了</p>
+</blockquote>
+<h4 id="CIDR">CIDR</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430155530440.png" alt="image-20220430155530440"></p>
+<p>B 类地址主机太多，C 类地址主机太少，因此都不太合适，所以产生了<strong>无类域间路由</strong>，不分类，可以任意划分前多少个 bit 为网络号，这样就可以控制主机数目适中。</p>
+<p>但这样看到 IP 地址时就不能像按类划分那样看前面几位就能确定前面多少位是网络号了，<strong>因此需要将 IP 与子网掩码与操作，即可得到网络号</strong></p>
+<h3 id="转发">转发</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430160426352.png" alt="image-20220430160426352"></p>
+<p>对于到来的 IP 数据报中的目标地址，需要对每一个表项进行掩码与并和对应的网络号对比，相同则从这个端口转发出去</p>
+<h3 id="如何获得-IP-地址">如何获得 IP 地址</h3>
+<h4 id="主机如何获得-IP-地址">主机如何获得 IP 地址</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430160854594.png" alt="image-20220430160854594"></p>
+<p>需要配置4个信息：<strong>IP、子网掩码、默认网关、local DNS</strong></p>
+<h5 id="DHCP">DHCP</h5>
+<p><em>Dynamic Host Configuration Protocol</em> 动态主机配置协议</p>
+<p><strong>DHCP 是基于 UDP 的应用</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430161109899.png" alt="image-20220430161109899"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430161402186.png" alt="image-20220430161402186"></p>
+<p>自动申请IP地址的过程：</p>
+<ol>
+<li>
+<p>主机**广播请求【全1的 IP 广播】**寻找能够提供IP地址的DHCP服务器</p>
+<p>【DHCP 请求报文👉目的端口 <strong>67</strong> （DHCP服务器）和源端口 <strong>68</strong> （DHCP客户）的UDP报文段👉有广播 IP 目的地址（<strong>255.255.255.255</strong>）和源 IP 地址 <strong>0. 0. 0. 0</strong> 的 IP 数据报👉有目的 MAC 地址 <strong>FF : FF : FF : FF : FF : FF</strong> 和 源 MAC 地址的以太网帧】</p>
+</li>
+<li>
+<p>服务器收到请求后，查看自己是否有可提供的IP地址（需要事先在DHCP服务器上配置地址池和可以提供的IP地址范围）。如果有，就回应可以提供的IP地址和可使用的时间（通常叫租期）</p>
+</li>
+<li>
+<p>主机收到服务器回应的消息后，知道可以使用这个IP地址和租期，会发送确认请求</p>
+</li>
+<li>
+<p>服务器收到来自主机的请求，再 ACK</p>
+</li>
+</ol>
+<p>为什么需要再发一次 request 呢？</p>
+<p>因为<strong>可能有多个</strong> DHCP 服务器，主机只需要选择一个 DHCP 提供的 IP 即可【一般第一个】，因此要告诉其余的 DHCP 服务器，不需要它们分配的 IP 了</p>
+<h4 id="机构如何获得-IP-地址池">机构如何获得 IP 地址池</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430162535943.png" alt="image-20220430162535943"></p>
+<p>通过将 ISP 的网络号增加几位，如上增加 3 位，则前 20 位为网络号，后 3 位为子网号【<em>可以分配给 8 个机构</em>】，再后面为主机号，这样就能从 ISP  获取一个 IP 地址池</p>
+<h5 id="层次编址：可以路由聚集">层次编址：可以路由聚集</h5>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430163526208.png" alt="image-20220430163526208"></p>
+<p>路由器 IP0 向前面的路由器 IPx 发布通告，凡是通过掩码（23）得到是 IP0 的，那么下一跳 <em>hop</em> 都是 IP0 路由器，IPx 需要转发到连接 IP0 的接口。</p>
+<p>其他的同理，因此上图左下可见 IPx 的路由表。</p>
+<p>而对于 IPx 它要把路由表信息发布给更前面的路由器 IPw，可以把路由表中每一条都转发，只不过在 IPw 中相应 IP 的下一跳会变成 IPx，但这样会导致越往上，路由表越大。</p>
+<p>因此这里可以<strong>路由聚集</strong>，显然 IP0~IP3 都是从 IPx 划分出来的子网，因此 IPx 可以向 IPw 发布这样的信息，凡是掩码（20） 得到是 IPx 的都转发到 IPx路由器，等报文到了 IPx 中，它根据自己的路由表可以将其进行进一步的转发</p>
+<p><strong>要可以聚集才能聚集，如果不是由一个大的划分成小的，那么必须一条一条的发布通告</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430164719591.png" alt="image-20220430164719591"></p>
+<p>当 IP1 被分到另外一个 ISP时，原来的 ISP 的路由器 IPx <strong>即使有空洞</strong>，即并不是掩码（20）后为 IPx 的都应该转发给它，IP1 就不是，但为了减少表项数目，<strong>仍然可以进行路由聚集</strong>。在 IPy 中 IP1 不能聚集，因此需要单条地发布给上层 IPw。</p>
+<p><em><em>因此在路由表项匹配时，可能会出现多个能够匹配的表项</em>【如上 IPw 的第一和第二条都能匹配 200.23.18.1】*，要选择其中匹配长度最长的表项作为转发</em>*</p>
+<h4 id="ISP-如何获取-IP-地址池">ISP 如何获取 IP 地址池</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430162425118.png" alt="image-20220430162425118"></p>
+<p>ISP 则可以从 ICANN <em>Internet Corporation for Assigned Names and Numbers</em> 获取 IP 地址池</p>
+<h3 id="NAT">NAT</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430165900248.png" alt="image-20220430165900248"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430170049881.png" alt="image-20220430170049881"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430170418853.png" alt="image-20220430170418853"></p>
+<p>内网可以访问到外网，但外网不能主动访问到内网，需要内网穿透</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430171112883.png" alt="image-20220430171112883"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430171153839.png" alt="image-20220430171153839"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430171830343.png" alt="image-20220430171830343"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430172053958.png" alt="image-20220430172053958"></p>
+<p>如 Skype</p>
+<h3 id="IPv6">IPv6</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430172244401.png" alt="image-20220430172244401"></p>
+<p>IPv4 的问题</p>
+<ul>
+<li>每到一个路由器，<strong>TTL要减去 1，因此首部校验和也要作相应的改变</strong>，会加重路由器负担</li>
+<li>会产生分片</li>
+<li>IPv4 的头部没有机制对 <strong>QoS</strong> <em>Quality of Service</em>，<strong>服务质量</strong> 的支持，即是尽力而为的</li>
+</ul>
+<blockquote>
+<p>IPv5是一个<strong>实验性的</strong>资源预留协议，被称为因特网流协议(ST)，目的是提供服务质量-QOS。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/383008986">为什么有IPv4、IPv6，却没有IPv5？IPv10又是什么新鲜物种？ - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430173422178.png" alt="image-20220430173422178"></p>
+<p>头部固定 40 B，options被 next header 标识，放在 data 部分</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430173733458.png" alt="image-20220430173733458"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430174322411.png" alt="image-20220430174322411"></p>
+<p>只能<strong>平滑过渡</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430174346683.png" alt="image-20220430174346683"></p>
+<h2 id="4-4-通用转发和-SDN【了解】">4.4 通用转发和 SDN【了解】</h2>
+<h3 id="传统方式的弊端">传统方式的弊端</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501153930425.png" alt="image-20220501153930425"></p>
+<p>传统方式：<strong>垂直集成</strong>：每个路由器既实现数据平面的功能又实现控制平面的功能。路由表粘合两个平面</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501153802620.png" alt="image-20220501153802620"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154014259.png" alt="image-20220501154014259"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501155022133.png" alt="image-20220501155022133"></p>
+<p>而在 SDN 中很容易实现，因为 SDN 可以匹配多个字段，而不是传统的仅仅为 DA 字段，因此可以区分出不同的主机通信等，实现流量分路</p>
+<h3 id="SDN-2005">SDN ~2005</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154124348.png" alt="image-20220501154124348"></p>
+<p><strong>CA</strong> <em>control agent</em></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154429238.png" alt="image-20220501154429238"></p>
+<p>注意：这里的分组交换机就是路由器，不是链路层的交换机</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154625154.png" alt="image-20220501154625154"></p>
+<p>这里所说的<strong>网络操作系统</strong>是指 <strong>SDN 下的远程控制器</strong>，不是指 windows 等【SDN 控制器在<strong>逻辑上是集中的</strong>，但为了可拓展性、性能等也可以采用分布式实现】</p>
+<p>SDN 体系结构的 <strong>4 个关键特征</strong>：</p>
+<ol>
+<li>
+<p>通用“flow-based”<strong>基于流</strong>的匹配+行动</p>
+</li>
+<li>
+<p>控制平面和数据平面分离</p>
+</li>
+<li>
+<p>控制平面功能在数据交换设备外实现，由两个组件组成：一个 SDN 控制器或网络 OS；若干的网络控制应用</p>
+</li>
+<li>
+<p>可编程控制：在远程控制器之上以网络应用的形式【<em>如防火墙、负载均衡等</em>】实现各种网络功能，<strong>SDN 控制器通过北向接口 API 和网络控制应用交互</strong></p>
+<p>编程的结果形成流表，控制器通过<strong>南向接口 API （如 OpenFlow 标准）<strong>下发给</strong>分组交换机</strong>，南向接口同时支持分组交换机将自身的状态上报给 SDN 控制器</p>
+<p>OpenFlow协议运行在<strong>TCP</strong>之上，<strong>使用6653的默认端口号</strong></p>
+</li>
+</ol>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160327162.png" alt="image-20220501160327162"></p>
+<p>在SDN中<strong>数据平面交换机</strong>，<strong>SDN控制器</strong>和<strong>网络控制应用程序</strong>是分离的实体。因此可以由不同的厂商来生产，有利于竞争和更良好的业态</p>
+<h3 id="OpenFlow">OpenFlow</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160357280.png" alt="image-20220501160357280"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160508718.png" alt="image-20220501160508718"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160546054.png" alt="image-20220501160546054"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160641579.png" alt="image-20220501160641579"></p>
+<p>如上，可以根据 MAC 进行转发，起到了交换机的作用</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160719695.png" alt="image-20220501160719695"></p>
+<p><strong>几乎所有的网络设备</strong>都能通过<strong>匹配不同的流表+行动</strong>来实现</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160940364.png" alt="image-20220501160940364"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/4%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/0%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0自顶向下
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/1%E6%A6%82%E8%BF%B0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">1概述</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>15 指令周期和流水线 |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-COA计组/15 指令周期和流水线"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  15 指令周期和流水线
+</h1>
+ 
+
+      
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/15%20%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F%E5%92%8C%E6%B5%81%E6%B0%B4%E7%BA%BF/" class="article-date">
+  <time datetime="2022-08-26T14:02:23.000Z" itemprop="datePublished">2022-08-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/">计算机组织结构</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
+<h1>15 指令周期和指令流水线</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212172556900.png" alt="image-20211212172556900"></p>
+<span id="more"></span>
+<h2 id="指令周期">指令周期</h2>
+<h3 id="指令周期-2">指令周期</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212172643616.png" alt="image-20211212172643616"></p>
+<p>只有机器关闭，发生错误，遇到停止计算机的指令时，程序才会停止。只要计算机开着，即使不使用，也是持续在执行指令的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212172844488.png" alt="image-20211212172844488"></p>
+<p><code>返回字符串或向量数据</code>是指比如要取一个字符串，那么一次可能无法全部得到，那么就<strong>必须要分多次，多次的计算源操作地址，取字符串，计算目的操作数地址，存字符串</strong>。但这是<strong>一条指令的功能</strong>，所以直到全部取完后，才进行下一条指令的地址计算</p>
+<h3 id="带中断的指令周期">带中断的指令周期</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212173408972.png" alt="image-20211212173408972"></p>
+<p><strong>在这条指令执行完，下一条指令未开始的中间进行中断的判断</strong>（这时候PC已经是下一条指令的地址了）</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212173517551.png" alt="image-20211212173517551"></p>
+<h3 id="间址周期">间址周期</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212173634159.png" alt="image-20211212173634159"></p>
+<p>把间接地址的读取看作一个额外的指令子周期，相比于直接寻址，<strong>多了存储器的访问，所以单独作为一个子周期</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212173845638.png" alt="image-20211212173845638"></p>
+<h2 id="CPU的任务">CPU的任务</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212174036530.png" alt="image-20211212174036530"></p>
+<h3 id="寄存器">寄存器</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212174727688.png" alt="image-20211212174727688"></p>
+<h3 id="数据流">数据流</h3>
+<h4 id="取指周期">取指周期</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212174908311.png" alt="image-20211212174908311"></p>
+<p>如果是同步的总线，那么只要按时间取做上面的流程即可，如果是异步总线，那么在存储器把数据放到数据总线上时，还要通过控制总线告诉CPU已经好了，所以存储器与控制总线之间是双向箭头。</p>
+<p>而这里单向箭头，说明是同步总线。事实上，一般来说，<strong>CPU和存储器之间都是采用同步的</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212175521345.png" alt="image-20211212175521345"></p>
+<p>黄色箭头代表两个含义：</p>
+<ol>
+<li>
+<p>控制PC传输地址，从而取指令</p>
+</li>
+<li>
+<p><strong>当指令取完后、指令执行前</strong>（一般是<strong>要取到IR中后才加1</strong>，即在<strong>取指周期的最后</strong>加1，否则不知道+1是加多少），而不是指令执行完，控制PC+1。但其实也不一定，<strong>如下，PC+1可以和其他的一起执行</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220107160454915.png" alt="image-20220107160454915"></p>
+</li>
+</ol>
+<h4 id="间址周期-2">间址周期</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212175802748.png" alt="image-20211212175802748"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212175852485.png" alt="image-20211212175852485"></p>
+<p>注意：<strong>间址周期取回来到MBR的只是有效地址EA，而通过有效地址EA去取操作数的过程是在执行周期里的</strong></p>
+<h4 id="中断周期">中断周期</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212180314902.png" alt="image-20211212180314902"></p>
+<p>这里数据线都是指向存储器的，表明<strong>写操作</strong>，同时PC连到MBR，因此这里想要做的是对<strong>PC进行保存（PC这时候存的是下一条指令的地址）</strong>，从而能够在中断之后能够准确的<strong>返回</strong></p>
+<p>中断中由<strong>控制器去告诉MAR地址</strong>，即PC要存储在存储器的哪一个位置，这个地址<strong>很可能是栈的指针</strong>，中断也是过程调用</p>
+<p><strong>（在取指过程中由PC告诉MAR，在间址过程中由MBR告诉MAR）</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212181013832.png" alt="image-20211212181013832"></p>
+<h2 id="指令流水线">指令流水线</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212195915496.png" alt="image-20211212195915496"></p>
+<p>流水线可以让每个部件各司其职，只做它要做的单一的事，提高效率，<strong>节省时间</strong></p>
+<p><strong>CPU就像一个生产线</strong>，如果各个步骤的任务分配不够好，比如不同步骤所需时间不同，那么就会造成资源的浪费，如矿泉水的生产，不同步骤时间不同，那么时间短的就会闲着。</p>
+<p><strong>因此对CPU生产线上的步骤进行阶段划分：</strong></p>
+<h3 id="两阶段方法">两阶段方法</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212200713610.png" alt="image-20211212200713610"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212200819371.png" alt="image-20211212200819371"></p>
+<p>取指令要访问内存，执行指令也可能要访问内存，可能会造成访存冲突</p>
+<ul>
+<li><strong>取指令的等待</strong>是执行的时间比取指令的时间长，所以要等待</li>
+<li><strong>执行阶段的等待</strong>是可能执行的是跳转指令，所以取指令在执行期间取好的指令就要<strong>作废</strong>，要<strong>根据新的地址去取指令</strong>，此时执行阶段要等待</li>
+</ul>
+<h3 id="六阶段方法">六阶段方法</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212201501405.png" alt="image-20211212201501405"></p>
+<p>六个阶段的所需时间<strong>几乎相等</strong>，因此如下可以把每个阶段<strong>所需时间当作一个时间单位</strong></p>
+<p><strong>注意在EI阶段就会把目的操作数写入目的位置（主要是CPU内的寄存器），而如果是要写入主存的，才在WO阶段写，就和上面的FO一样，对于寄存器中的值不需要取，取的是主存中的操作数</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212201648969.png" alt="image-20211212201648969"></p>
+<p>如同生产矿泉水的流水线</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212201926683.png" alt="image-20211212201926683"></p>
+<ul>
+<li>为了简化流水线的设计，可以假定每个指令都是6个阶段，如果没有某个阶段，不执行即可（如果为特殊指令设计不同阶段，那么是非常不划算的）</li>
+<li>阶段之间<strong>不一定全都能并行，如对内存的访问，会产生访存冲突</strong></li>
+<li>几乎相等，仍然是有差别时间，那么会导致一定的等待，所以<strong>时间单位应该以最长的时间的为准</strong>，保证每个阶段在这个时间单位内都能执行完</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212203056479.png" alt="image-20211212203056479"></p>
+<p><strong>限制</strong>：在两阶段中跳转指令会使得已经取得的下一条指令失效。而在六阶段中会使得上面<strong>红框中执行了一半的指令的全部失效</strong></p>
+<p><strong>注意</strong>：上面的<strong>最后一个指令的WO的同时，下面的FI也在执行</strong>，这是因为跳转指令<strong>不需要写存储器</strong>，而是在EI执行指令的过程中就把PC寄存器的值给改变了，<strong>所以在EI后面一个单位时间会执行正确的FI</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212203319302.png" alt="image-20211212203319302"></p>
+<p>和跳转一样，中断也会使得指令失效，如上图中的<strong>排空流水线</strong>，这里多了一个无条件转移，<strong>那么在无条件转移把PC值修改后的一个单位时间内的FI才是有效的，中间的流水线全部失效</strong>，但已经在执行的指令的后续阶段是不受影响的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212203406279.png" alt="image-20211212203406279"></p>
+<p>绿色框是导致<strong>空闲</strong>的区域，而红色框内的执行是<strong>无效</strong>的，同理指令13的EI修改了PC，所以下面一个单位时间的I15才是有效的，中间的全部失效，但I13剩下的阶段正常进行</p>
+<h3 id="流水线的性能">流水线的性能</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212203637784.png" alt="image-20211212203637784"></p>
+<p>这里的<strong>t即单位时间</strong>，应当为各阶段中花费时间最大的时间，加上两阶段切换的时间</p>
+<p>锁存时间是在<strong>两个阶段之间切换的时间</strong>，<code>就像接力赛，接力棒由前一个人放到桌子上，下一个人再去桌子上拿，这样是最稳妥安全的。</code></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212204131466.png" alt="image-20211212204131466"></p>
+<p>T<sub>k,n</sub>是<strong>最理想</strong>的情况，第一条指令执行需要kt，后面的每多一条指令，总时间只增加1t，所以是$[k+(n-1)]t$</p>
+<p><strong>加速比</strong>是指<strong>没有使用流水线和使用了流水线的时间之比</strong>，是一个大于1的数（所以才叫加速比）</p>
+<p><strong>注意</strong>：其中分子没有使用流水线是<strong>固定的就是</strong>$nkt$，n条指令，每个需要kt时间，而分母使用了流水线的可能会有<strong>跳转</strong>的情况，会<strong>导致时间的改变</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212204913493.png" alt="image-20211212204913493"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212204955419.png" alt="image-20211212204955419"></p>
+<p>当<strong>流水线中的阶段增多时，刚开始是会加快执行速度</strong>，但不是越多越好，当阶段太多，<strong>锁存延时会增加，增大开销</strong>。同时阶段越多，对<strong>硬件的使用冲突就会越大</strong>，需要更为复杂的控制逻辑</p>
+<h2 id="冒险（Hazard）">冒险（Hazard）</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212192410033.png" alt="image-20211212192410033"></p>
+<h3 id="结构冒险">结构冒险</h3>
+<p><strong>硬件资源冲突</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212192529705.png" alt="image-20211212192529705"></p>
+<p>分时使用如在时钟的上升沿和下降沿分给不同指令使用</p>
+<h3 id="数据冒险">数据冒险</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212192825027.png" alt="image-20211212192825027"></p>
+<p>第一条指令中r1寄存器被更新，但根据指令的周期，后面的若干条指令中获得的r1寄存器都是未更新的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212193228583.png" alt="image-20211212193228583"></p>
+<p>用<strong>软件</strong>nop指令让这3个时钟周期啥也不干，直到r1被成功更新后再执行后续指令，从而不需要改动硬件</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212193309257.png" alt="image-20211212193309257"></p>
+<p>插入气泡——即<strong>硬件</strong>通过<strong>阻塞</strong>阻止可能出问题的指令的执行，因此需要判断哪些指令相关，怎么去阻塞的问题，虽然没有加nop指令，但在判断处理过程中也会有<strong>时间开销</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212193513871.png" alt="image-20211212193513871"></p>
+<p><strong>把需要的结果从中间就取过来，而不必去等指令的完全执行。</strong></p>
+<blockquote>
+<p>如r1要存放的新数据在经过ALU时即已经产生，只是结果没有更新到所在的r1寄存器中。此时第二条指令可以把这个结果取过来直接用，而不必等待第一条指令完全执行完。因为ALU不会同时被两条指令占用，第一条用完ALU，才会给第二条使用，因此上面的取中间结果是可行的</p>
+</blockquote>
+<p>这就是<strong>转发/旁路</strong>。<strong>当后面要用到的数据是<code>前面算出来的</code>经过ALU即可得到时，这时候旁路很有效</strong>，当不是时，旁路无法解决，如下</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212194118012.png" alt="image-20211212194118012"></p>
+<p>r1寄存器此时要从内存中加载数据，而下面sub r1就要用这个数据进行alu计算，但数据还没有从内存中读取过来，所以必须<strong>要等待到从内存中取到数据</strong>才行，根据转发机制，<strong>同样不必等待这个数据加载到r1即可取到</strong>。即上面的红线的</p>
+<p>解决办法就是<strong>交换指令的顺序</strong>，如右，lw b 和lw c到两个寄存器中，当执行add时，还没加载好，所以要等待。因此可以通过把下面的一条不相关的指令换上来，这样可以<strong>把等待的时间变成执行后面指令的时间</strong>。<strong>总体执行时间会缩短</strong></p>
+<h3 id="控制冒险">控制冒险</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212194833356.png" alt="image-20211212194833356"></p>
+<p>当指令的执行顺序被改变，那么就会出现一部分的指令执行白处理了，原因就是取错了。</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212195029198.png" alt="image-20211212195029198"></p>
+<p>即把跳转指令之后的指令和跳转到的指令都取过来，<strong>因为不知道这个跳转指令是不是真的要跳转（如多个条件跳转指令），所以就不能确定到底是执行后面的指令还是执行跳转指令中的指令</strong></p>
+<p>所以把两个都取过来，两条流水线处理，那么就保证了流水线的正常运行，即使有一条是失效的，那么不管它即可，另外一条在按照流水线正常运行</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212195049933.png" alt="image-20211212195049933"></p>
+<p>预测会不会发生转移，<strong>如果预测会发生转移，那么就直接取跳转指令中指出的指令，而不去取跳转指令后面的指令。</strong></p>
+<p><code>如果预测失败了，那么就造成了流水线中已经执行的部分指令的失效；反之如果预测成功了，那么就避免了指令的失效，从而提高了流水线的效率</code></p>
+<p>静态预测是和当前状态没有关系的，不会去根据刚刚处理的历史来改变，<strong>仅仅是按照规则</strong></p>
+<h4 id="动态预测">动态预测</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212195529046.png" alt="image-20211212195529046"></p>
+<p>根据状态来动态预测</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212195749976.png" alt="image-20211212195749976"></p>
+<p>遇到条件分支，看是不是第一次遇到，如果是就加入表中，如果发生过，看前面的预测是怎么样的，然后根据现在的状态来调整</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/15%20%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F%E5%92%8C%E6%B5%81%E6%B0%B4%E7%BA%BF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/" rel="tag">计算机组织结构</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/16%20%E6%8E%A7%E5%88%B6%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            16 控制器
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/14%20%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">14 指令系统</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

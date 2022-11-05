@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>9 高速缓冲存储器（Cache） |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-COA计组/9 高速缓冲存储器（Cache）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  9 高速缓冲存储器（Cache）
+</h1>
+ 
+
+      
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/9%20%E9%AB%98%E9%80%9F%E7%BC%93%E5%86%B2%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%88Cache%EF%BC%89/" class="article-date">
+  <time datetime="2022-08-26T14:02:17.000Z" itemprop="datePublished">2022-08-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/">计算机组织结构</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
+<h1>9 高速缓冲存储器（Cache）</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028134654827.png" alt="image-20211028134654827"></p>
+<span id="more"></span>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028134803191.png" alt="image-20211028134803191"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028134847367.png" alt="image-20211028134847367"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028135033591.png" alt="image-20211028135033591"></p>
+<p>大部分是集成在CPU内部的，存放的还是主存内的信息，是主存内部分信息的副本</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028141114903.png" alt="image-20211028141114903"></p>
+<p>如果不在cache中，那么会将<strong>包含这个字的固定大小的块</strong>读入cache，然后<strong>再从cache中把这个字传给CPU</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028141432926.png" alt="image-20211028141432926"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028141818855.png" alt="image-20211028141818855"></p>
+<p>cache中除了<strong>要存内容，还得存这个内容的位置</strong>，因为CPU是通过位置来访问主存中的内容的，而不关心其中的内容。</p>
+<p>cache不是存放了完整的位置，<strong>而是通过tags标记</strong>来对应内容在内存中的位置</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028142420549.png" alt="image-20211028142420549"></p>
+<p>如果大部分时间都是未命中，那么使用cache后反而时间会更慢，而事实上cache很好的处理了内存墙问题，因此大部分情况应当是命中的</p>
+<p>这是由于程序访问的局部性原理，<strong>即CPU总是会频繁的访问相同位置或者是相邻位置的内容</strong>：</p>
+<ul>
+<li>时间局部性：在相对短时间内，重复访问相同位置的信息</li>
+<li>空间局部性：在相对短时间内，会访问相邻存储位置的数据
+<ul>
+<li>顺序局部性：相邻位置的按顺序的，如访问数组</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028142834398.png" alt="image-20211028142834398"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028144013339.png" alt="image-20211028144013339"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028144140819.png" alt="image-20211028144140819"></p>
+<p>注意这个块是<strong>事先就在内存中划分好了（哪一部分属于哪个块都是确定的）</strong>，要哪个字时，只要把这个字的所在块搬过去，而不是临时从这个字开始再划分块</p>
+<p>所以只要想要访问的字所属的块在cache中，那么这个字就在cache中，因此只要对每个块做一个标记（块号）就可以知道有没有命中</p>
+<p><strong>cache中每一行是一个块，记录了块的标记和块中的K个字</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211028145432136.png" alt="image-20211028145432136"></p>
+<p>T<sub>A</sub>的两个式子，是<strong>两种不同的理解</strong>，第一行是分为命中和未命中来理解，第二行是分成check检查阶段和到主存取数据阶段来理解的，<strong>一般第二行使用更多</strong></p>
+<p>Tc很快，Tm相对慢，因此Tc/Tm是比较小的值，所以p是相对很小时就能满足条件。但事实上这个条件虽然小也很难满足，因为cache容量远小于主存容量，p实际上按概率来算应该是cache的容量/主存容量，是非常小的，但之所以能满足，就是<strong>因为前面提到的局部性原理</strong></p>
+<h1>Cache的设计要素</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211030133530602.png" alt="image-20211030133530602"></p>
+<h2 id="一、cache容量">一、cache容量</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211030133602704.png" alt="image-20211030133602704"></p>
+<p>cache容量不是越大越好，也不是越小越好。</p>
+<ul>
+<li>因为内存是以地址来寻找的，所以直接解码地址就能找到要的信息，而cache则是通过遍历来找的（遍历块的标号），所以如果cache很大的话，会导致遍历检查的时间增加，增大了T<sub>c</sub>。</li>
+<li>如果cache很小的话，则可能出现从内存中复制的新的块把原来cache中的块覆盖后，又需要原来的块中的内容，因此又需要从内存中复制到cache，浪费时间</li>
+</ul>
+<h2 id="二、映射功能">二、映射功能</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211030134508748.png" alt="image-20211030134508748"></p>
+<p>cache中记录的是块号，块号要能反映地址</p>
+<p>块内地址：如果一个块内有K个字节，那么地址的后log<sub>2</sub>K位表示块内地址</p>
+<p>而cache中分辨不同块的标记可以直接使用块号来作为标记，但这样会造成一些浪费（块号不是我们想要的信息），<strong>因此就要去想怎么尽可能缩短标记的长度</strong></p>
+<h3 id="1-直接映射"><strong>1.直接映射</strong></h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211104160957975.png" alt="image-20211104160957975"></p>
+<p>比如0~7块只能放到第一行，8~15块只能放到第二行，因此如果加载了第2个块，想再加载第3个块，那么第3个块会把第二个覆盖</p>
+<p>如上图$i=jmodC$是间隔的把块规定放到同一行，而不是上面的连续的几个块都只能在一个行中，显然下面这种更合理，因为局部性原理，访问相邻块的概率更大，<strong>因此间隔的放，可以把连续的块都加载到cache中，而不会出现上面的覆盖情况</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105091155893.png" alt="image-20211105091155893"></p>
+<p>映射到同一行的块号（二进制表示）的后$log_2C$位都是一样的</p>
+<p>因此只要比较块号的前面$log_2M-log_2C$位即可（M是块的数量，C是cache中行的数量）<strong>相当于把C个块当作一个组，只要记录这个组的地址即可</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105091937397.png" alt="image-20211105091937397"></p>
+<p>再看主存中一个具体的字节，它在主存的地址可以被分成三个部分：</p>
+<ul>
+<li>块内地址（用于块内寻址）</li>
+<li>块映射到cache的行号</li>
+<li>若干个块分为一个组对应的标号，用于区分映射到相同行的不同块，记录为cache标号</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105092857092.png" alt="image-20211105092857092"></p>
+<ul>
+<li><strong>优点</strong>：因为块映射到cache中的行的位置是固定的，因此检查时，只要去找这一行中有没有要的数据即可，而不必全部搜索一遍，<strong>所以T<sub>c</sub>是固定的，不会因cache容量增大而使得T<sub>c</sub>变大</strong></li>
+<li><strong>缺点</strong>：抖动现象：如果要重复访问的两个块刚好映射到同一行，就会降低命中率，<strong>当两个块比较相邻（才可能被重复访问）时并被映射到同一行，说明cache比较小，即行数比较少</strong>时会出现这种情况。</li>
+<li>因此<strong>直接映射适合大容量cache使用</strong></li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105093628480.png" alt="image-20211105093628480"></p>
+<ol>
+<li>根据内存地址的块地址去找cache对应行</li>
+<li>再比较cache标记和主存地址的块标记是否相等</li>
+<li>相等就命中，命中就再根据主存地址的块内地址到cache取对应字节</li>
+</ol>
+<h3 id="2-关联映射">2.关联映射</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105094020890.png" alt="image-20211105094020890"></p>
+<p>关联映射中的标记<strong>必须是块号</strong>，所以长度只能是$log_2M$，不像直接映射中有规律，可以缩短。<strong>关联映射是可以按一定规则放的，只要有空位就能放</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105094456359.png" alt="image-20211105094456359"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105094539163.png" alt="image-20211105094539163"></p>
+<ul>
+<li><strong>优点</strong>：在cache比较小时<strong>不会出现抖动</strong>，想加载哪些块都可，不会出现反复加载，除非cache行数不够了</li>
+<li><strong>缺点</strong>：怎么规定放块实现比较复杂，同时检查时要<strong>平均检查$\frac{1}{2}$的cache，在cache很大时开销太大</strong></li>
+<li>因此<strong>关联映射适合容量小的cache</strong></li>
+</ul>
+<h3 id="3-组关联映射（介于前面两种方法之间）">3.组关联映射（介于前面两种方法之间）</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105100521745.png" alt="image-20211105100521745"></p>
+<p><strong>K是指每组里面包含的行数</strong>，<strong>S是组数</strong></p>
+<p><strong>即将cache分成不同的组，一个块只能映射到对应的组中，但在这个组中可以放在任意一行</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105100934013.png" alt="image-20211105100934013"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105102834862.png" alt="image-20211105102834862"></p>
+<p>标记中不需要存全部块号，因为组号是固定的，只要$log_2M-log_2S$位即可</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105110048821.png" alt="image-20211105110048821"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105110041424.png" alt="image-20211105110041424"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105110328246.png" alt="image-20211105110328246"></p>
+<p>**关联度：**一个块映射到cache中可能存放的位置个数</p>
+<p><strong>关联度越低，命中率越低，检查是否命中的时间越短，标记所占的额外空间开销越小</strong></p>
+<h2 id="三、替换算法">三、替换算法</h2>
+<p><strong>目的：将最不可能被使用的行替换掉，尽可能增大命中率</strong></p>
+<p><strong>替换算法使用硬件来实现，因为替换需要非常快的速度</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105111310863.png" alt="image-20211105111310863"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105111503677.png" alt="image-20211105111503677"></p>
+<h3 id="1-最近最少使用算法（LRU）">1.最近最少使用算法（LRU）</h3>
+<p><em><strong>假设前提相当于看文件被修改过到现在的时间</strong></em></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105111643511.png" alt="image-20211105111643511"></p>
+<p><strong>需要限定路的数目</strong>，多路会很复杂，在模拟中可以通过设置时间戳的方式来记录最近使用的时间，要替换时最早的那个就是最近最少使用的</p>
+<h3 id="2-先进先出算法（FIFO）">2.先进先出算法（FIFO）</h3>
+<p><em><strong>假设前提相当于看文件被创建到现在的时间</strong></em></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105112007246.png" alt="image-20211105112007246"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105113453795.png" alt="image-20211105113453795"></p>
+<p><strong>无需限定路的数目</strong>，只要循环轮下来即可</p>
+<p>最开始初始化是应该把每一行的use位设为0，因为相当于替换哪行都可以。</p>
+<p><strong>替换时把被替换的行设为1，把它的下一行设为0</strong>（如果是最开始，那么它的下一行本来就是0），如果被替换的是最后一行，那么把第一行设为0，这样循环，<strong>可以保证一个组中至少存在一个use位为0的行</strong>，从而用新数据去替换这一行</p>
+<h3 id="3-最不经常使用算法（LFU）">3.最不经常使用算法（LFU）</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105113541410.png" alt="image-20211105113541410"></p>
+<h3 id="4-随机替换算法（Random）">4.随机替换算法（Random）</h3>
+<p><em><strong>能到cache中的的块都是使用率较高的，否则不会进到cache中，所以不再去区分cache中块的使用率</strong></em></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105113638088.png" alt="image-20211105113638088"></p>
+<p>性能只比其他区分cache中块优先级的差一点点，但实现起来相对简单很多</p>
+<h2 id="四、写策略">四、写策略</h2>
+<p>写数据时，CPU同样会<strong>优先修改cache中的数据</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105114158557.png" alt="image-20211105114158557"></p>
+<p><strong>对cache的修改不需要直接同步到内存中</strong>，因为之后CPU读的还是cache中的内容，因此只要存在cache中即可；<strong>只有在cache中这个块要被替换时，才要把修改同步到内存</strong>，否则这个修改就丢失了</p>
+<h3 id="1-写直达">1.写直达</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105114613288.png" alt="image-20211105114613288"></p>
+<p>对于多CPU共享一个内存的情况，实时同步数据是必要的</p>
+<h3 id="2-写回法">2.写回法</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105114926754.png" alt="image-20211105114926754"></p>
+<p>缺点就是如果这个块被修改但没有被替换，<strong>那么它不会写回主存同步修改</strong>，而I/O模块对主存如打印时就得不到最新的数据了，只能增加设计：<strong>在打印时把所有cache中脏位为1的都同步到主存</strong></p>
+<h2 id="五、行大小">五、行大小</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105115851686.png" alt="image-20211105115851686"></p>
+<h2 id="六、cache数目">六、cache数目</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105184945853.png" alt="image-20211105184945853"></p>
+<p>L2容量比L1更大，L2从内存中取了数据，L1从L2中取了数据，同样找数据时也是先在L1中找，如果未命中，再去L2中找</p>
+<p><font color=#ff000>为什么不只使用大容量的L2，而是加入了L1?</font></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105185556019.png" alt="image-20211105185556019"></p>
+<p><strong>分立</strong>：对指令和数据分别用不同的cache</p>
+<h2 id="总结">总结</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211105185857351.png" alt="image-20211105185857351"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/9%20%E9%AB%98%E9%80%9F%E7%BC%93%E5%86%B2%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%88Cache%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/" rel="tag">计算机组织结构</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/10%20%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            10 外部存储器
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/8%20%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">8 内部存储器</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

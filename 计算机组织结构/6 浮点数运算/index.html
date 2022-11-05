@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>tags |  wbl-z&#39;s Blog</title>
+      <title>6 浮点数运算 |  wbl-z&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/logo.png" />
@@ -64,13 +64,200 @@ var _hmt = _hmt || [];
       
     <main class="content on">
       <section class="outer">
+  <article
+  id="post-COA计组/6 浮点数运算"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  6 浮点数运算
+</h1>
+ 
+
+      
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/6%20%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97/" class="article-date">
+  <time datetime="2022-08-26T14:02:14.000Z" itemprop="datePublished">2022-08-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/">计算机组织结构</a>
+  </div>
   
-    <h1 class="page-type-title">标签</h1>
-    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/" rel="tag">计算机组织结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">82</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
   
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
+<h5 align="center">©author:zzb</h5>
+<div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
+<h1>6 浮点数运算</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106111044394.png" alt="image-20220106111044394"></p>
+<span id="more"></span>
+<h2 id="加法和减法">加法和减法</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106111118500.png" alt="image-20220106111118500"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106111144297.png" alt="image-20220106111144297"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106111200885.png" alt="image-20220106111200885"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106111738061.png" alt="image-20220106111738061"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106111922628.png" alt="image-20220106111922628"></p>
+<h2 id="乘法">乘法</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106112054244.png" alt="image-20220106112054244"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106112148801.png" alt="image-20220106112148801"></p>
+<p>这里是原码乘法，因此右移补0，注意原码乘法中符号位不参与运算，而是<strong>通过异或得到结果的符号位</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106113144292.png" alt="image-20220106113144292"></p>
+<h2 id="除法">除法</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106113216775.png" alt="image-20220106113216775"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106113328635.png" alt="image-20220106113328635"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106113715022.png" alt="image-20220106113715022"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106113744626.png" alt="image-20220106113744626"></p>
+<h2 id="总结">总结</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106113854572.png" alt="image-20220106113854572"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/6%20%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/" rel="tag">计算机组织结构</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/7%20%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BC%96%E7%A0%81%E7%9A%84%E5%8D%81%E8%BF%9B%E5%88%B6%E6%95%B0%E8%BF%90%E7%AE%97/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            7 二进制编码的十进制数运算
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/5%20%E6%95%B4%E6%95%B0%E8%BF%90%E7%AE%97/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">5 整数运算</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
-
-
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -228,6 +415,22 @@ var _hmt = _hmt || [];
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

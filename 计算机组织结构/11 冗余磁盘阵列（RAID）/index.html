@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>4 数据校验码 |  wbl-z&#39;s Blog</title>
+      <title>11 冗余磁盘阵列（RAID） |  wbl-z&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/logo.png" />
@@ -65,7 +65,7 @@ var _hmt = _hmt || [];
     <main class="content on">
       <section class="outer">
   <article
-  id="post-4 数据校验码"
+  id="post-COA计组/11 冗余磁盘阵列（RAID）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -76,19 +76,24 @@ var _hmt = _hmt || [];
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  4 数据校验码
+  11 冗余磁盘阵列（RAID）
 </h1>
  
 
       
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
     </header>
      
     <div class="article-meta">
-      <a href="/%E8%AE%A1%E7%BB%84/4%20%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E7%A0%81/" class="article-date">
-  <time datetime="2022-08-26T14:02:10.000Z" itemprop="datePublished">2022-08-26</time>
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/11%20%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%EF%BC%88RAID%EF%BC%89/" class="article-date">
+  <time datetime="2022-08-26T14:02:19.000Z" itemprop="datePublished">2022-08-26</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%BB%84/">计组</a>
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/">计算机组织结构</a>
   </div>
   
 <div class="word_count">
@@ -96,7 +101,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -105,7 +110,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">4 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -123,70 +128,112 @@ var _hmt = _hmt || [];
   <h4 align="center">图片来源：南京大学软件学院COA课程PPT</h4>
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
-
-
-<h1 id="4-数据校验码"><a href="#4-数据校验码" class="headerlink" title="4 数据校验码"></a>4 数据校验码</h1><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105193631099.png" alt="image-20220105193631099"></p>
+<h1>11 冗余磁盘阵列（RAID）</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124201947610.png" alt="image-20211124201947610"></p>
 <span id="more"></span>
-
-<h2 id="差错error"><a href="#差错error" class="headerlink" title="差错error"></a>差错error</h2><p>以存储为例：</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124202340250.png" alt="image-20211124202340250"></p>
+<p>目的：</p>
 <ul>
-<li>硬故障：永久性物理故障</li>
-<li>软故障：随机非破坏性事件，改变了某些内容，但没有损坏机器</li>
+<li>增加容量</li>
+<li>数据分散在多个磁盘上，并行提高数据传输速率</li>
+<li>纠错</li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105195420473.png" alt="image-20220105195420473"></p>
-<h2 id="纠错error-correction"><a href="#纠错error-correction" class="headerlink" title="纠错error correction"></a>纠错error correction</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925101417978.png" alt="image-20210925101417978"></p>
-<p>注意，C’’不是和C去比较，<strong>因为既然D有可能出现差错变成D’，那么与之相应的校验码C也可能差错</strong>，因此，取出来的不是C，而是C‘，是将用D’生成的C‘’去和取出来的C‘比较</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925102425592.png" alt="image-20210925102425592"></p>
-<p>一旦D存进存储器&#x2F;网络，那么原来的D就消失了，取出来的就是D’。（<em>如果能保证存进去和取出来的是一样的，那么也就不存在纠错</em>，<strong>事实上，这是无法保证的</strong>）</p>
-<h2 id="奇偶校验码"><a href="#奇偶校验码" class="headerlink" title="奇偶校验码"></a>奇偶校验码</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925103619330.png" alt="image-20210925103619330"></p>
-<p>奇校验码：如果有奇数个1，那么C&#x3D;0，否则为1</p>
-<p>偶校验码：如果有偶数个1，那么C&#x3D;0，否则为1</p>
-<p>（理解：<strong>把原来的数据和这个校验码拼在一起时应当还是和校验码名字中的奇偶一致</strong>，所以奇校验码当1为奇数，C&#x3D;0，那么拼在一起还是奇数个）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925110201147.png" alt="image-20210925110201147"></p>
-<p>当数据D中<strong>出错的位数为偶数</strong>时，那么1的个数的奇偶性仍然是不变的，因此校验码不变</p>
-<p><strong>因此奇偶校验码适用于较短的数据进行检错</strong>，这样出现<strong>多位错的概率相对较小</strong>，检错的效果较好（当然还是会有可能出现多位错误，但概率很小）</p>
-<p>代价很低，<strong>只需要1位</strong>即可</p>
-<blockquote>
-<p><strong>发现错误比发现后纠正更难</strong>，因为如果发现了，那么纠正也就是把0变成1，1变成0就好了，相对找到错误更为简单</p>
-</blockquote>
-<h2 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925111310238.png" alt="image-20210925111310238"></p>
-<p>分组的时候要求任何两位所属的组的情况都是不一样的，同时一位数据可能会属于若干个小组（<strong>至少两个组</strong>，与下面的故障字规则一致，否则如果只一个组的话，会和校验码出错冲突）</p>
-<p><font color=#FF0000><strong>前提假设：最多一位发生错误</strong></font></p>
-<p>奇偶校验码是海明码的基础</p>
-<p>利用的原理就是校验码出错的几个所在小组中公共的那一位就是出错的位，这样就<strong>能够定位到错误</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925112636796.png" alt="image-20210925112636796"></p>
-<p>因为K位校验码可以表示2^K种情形，而出错的情形为M+K+1，因此可以求出K的最小值</p>
-<p>由表格可见，随着数据位的增加，最小校验码的位数增加较少，所占比例较小</p>
-<p>但是不能通过把M的位数设成很大，来使得校验码的的位数相对少，<strong>因为如果数据位数很大，则只发生一位错误的假设就不成立了</strong></p>
-<p>因此要实现一个<strong>平衡</strong>：<strong>海明码有效且所占比例较少</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925113559485.png" alt="image-20210925113559485"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925114223953.png" alt="image-20210925114223953"></p>
-<p><strong>先把故障字分配给每一位数据位故障，然后再进行分组，把这一个Dn放到故障字中数值为1的那一位所对应的组中</strong>，如上，D8对应故障字1100，那么D8应当分到C1和C2组中去</p>
-<p>故障字从0001开始分配，因为0000已经用于表示没有发生故障</p>
-<p>这里C的计算用的是偶校验（当然奇校验也行）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925115343889.png" alt="image-20210925115343889"></p>
-<p>注意：<strong>存储时是按上面表格的顺序来存储的</strong>，而不是D8D7……D1C4……C1（<em>上图蓝色的表示校验码，黑色表示数据</em>）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211219093628238.png" alt="image-20211219093628238"></p>
-<p><strong>将计算出的C‘’与C‘异或，那么就可以得到故障字</strong>，从而定位到出错的是哪一位</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120406447.png" alt="image-20210925120406447"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120449107.png" alt="image-20210925120449107"></p>
-<blockquote>
-<p>主存的实际容量比用户可以使用的容量要<strong>大</strong>，因为对于存储的数据，<strong>也是可能会发生错误的</strong>，因此需要去添加纠错码，如磁盘中就有纠错区，之后的区域才是数据区等</p>
-</blockquote>
-<p><strong>加强版的海明码</strong></p>
-<hr>
-<h2 id="循环冗余校验"><a href="#循环冗余校验" class="headerlink" title="循环冗余校验"></a>循环冗余校验</h2><p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120653073.png" alt="image-20210925120653073"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120852514.png" alt="image-20210925120852514"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925121203909.png" alt="image-20210925121203909"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211219095317053.png" alt="image-20211219095317053"></p>
+<p><strong>逻辑上是一个磁盘，物理上是多个的</strong>，同时<strong>数据是分布在多个物理磁盘</strong>上的，这样才能多个磁盘并行工作来提高效率</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124202714276.png" alt="image-20211124202714276"></p>
+<h2 id="条带化">条带化</h2>
+<h3 id="RAID-0">RAID 0</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124202853383.png" alt="image-20211124202853383"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124203104344.png" alt="image-20211124203104344"></p>
+<p><strong>条带化即把一个磁盘/一个组（如后面的10，01，50）分散成多个条带放到不同的磁盘上</strong></p>
+<p><strong>优点：</strong></p>
 <ul>
-<li>当<strong>余数位数与除数位数相同</strong>时，才进行异或运算（模二除法），<strong>即与除数对齐的第一位为1时才异或并上商为1，否则不进行异或直把除数右移并上商为0</strong>了，直到被除数最后一位</li>
+<li><strong>大I/O数据传输速率快</strong>，每个物理硬盘都可以传输，所以对于<strong>大</strong>的数据块，可以被拆分成多个部分来传输</li>
+<li><strong>小I/O响应速度快</strong>，如果是一个硬盘，那么一次只能响应一个请求，而对于多个分布在不同物理磁盘上<strong>小</strong>的数据块，RAID 0则可以同时响应</li>
 </ul>
-<p>如果这两个 CRC结果不一致，则说明发送中出现了差错，接收方计算机可要求发送方计算机重新发送该数据</p>
-<p>CRC 算法检验的检错能力极强，且检测成本较低</p>
-<p>因而，CRC 成为计算机信息通信领域最为普遍的校验方式</p>
-<hr>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925121237083.png" alt="image-20210925121237083"></p>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>数据可用性低</strong>，多个磁盘，出现错误的概率大</li>
+<li><strong>没有冗余检验</strong></li>
+</ul>
+<h2 id="镜像">镜像</h2>
+<h3 id="RAID-1">RAID 1</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124203828637.png" alt="image-20211124203828637"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124204604960.png" alt="image-20211124204604960"></p>
+<p>深色的是冗余盘，简单地把原来的数据进行了拷贝</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li><strong>数据可用性很高</strong>，如果一个盘坏了，还能找到一个一模一样的盘</li>
+<li><strong>大I/O传输读比单盘快，而写的速度与单盘差不多</strong>，因为同时要写两个盘，受限于速度慢的磁盘</li>
+<li><strong>小I/O响应速度比单盘快一倍</strong>，即使两个请求位于同一个盘上，也能同时响应，因为有备份，而RAID0则只能在位于不同盘时同时响应</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>价格昂贵</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124205124993.png" alt="image-20211124205124993"></p>
+<p><strong>只用于关键数据，重要数据的保存</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124205533673.png" alt="image-20211124205533673"></p>
+<p>RAID 01是先进行条带化，再备份分组，如果disk0坏了，那么整个组都不能用了，即disk2和disk1不能联动</p>
+<p>RAID 10是先进行备份分组，再进行条带化，这样一组中坏了一个也不要紧，比如disk0坏了，还可以，disk1和disk2联动</p>
+<p><strong>所以RAID 10的容错率更高</strong></p>
+<h1>？</h1>
+<h2 id="并行存取——解决单次大I-O传输">并行存取——解决单次大I/O传输</h2>
+<h3 id="RAID-2">RAID 2</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124210109478.png" alt="image-20211124210109478"></p>
+<ul>
+<li>不论是大的还是小的I/O请求，要求<strong>所有磁盘都参与</strong>请求的执行。</li>
+<li>每个磁盘的轴<strong>同步旋转，磁头始终处于同一位置</strong></li>
+<li><strong>数据条带很小如一个字节或字</strong>，这样才能让所有磁盘都调动起来，注意这里条带同样是满了才到下一个条带，而不是一个条带用一点，另一个条带用一点，因此要让条带很容易的被装满</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124210453301.png" alt="image-20211124210453301"></p>
+<p><strong>冗余盘用来存储校验码——海明码</strong>，</p>
+<p>4个bit需要3个bit的校验位（8个需要4个），所以4个硬盘需要3个硬盘来校验，并且<strong>校验码就存放在数据对应的位置</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124211014816.png" alt="image-20211124211014816"></p>
+<p>对于经常出错的情况意义很大，而磁盘事实上本身就有CRC，所以出错概率是很小的，所以RAID 2在这种情况下意义不大。</p>
+<p><strong>事实上，RAID 2已经被弃用了</strong></p>
+<h3 id="RAID-3">RAID 3</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124211227554.png" alt="image-20211124211227554"></p>
+<p>RAID 中讲冗余，<strong>是为了防止磁盘坏了</strong>，而不是为了防止磁盘出错，关于出错是在纠错中强调的。</p>
+<p>出错是可以正常读，错误的位混在数据中，而磁盘坏了这一位就丢失了，不可读了，所以这个是<strong>可以定位错误的</strong>，<strong>因此也可以重构（修复）磁盘坏了的数据</strong>。</p>
+<p>如上是偶检验修复损坏的b<sub>0</sub>，奇校验需要多异或一个1，<strong>原理是两边同时异或一个数字，等式不变，所以在校验码计算式子的两边同时异或b<sub>0</sub>和p(b)即可</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124211948352.png" alt="image-20211124211948352"></p>
+<p>这样的并行存取就是为了大的I/O处理的速度更快，保证任何一次都有所有的磁盘参与进来</p>
+<p>但面对多个I/O请求时，由于对于每个I/O请求，所有硬盘都要参与，所以面对多个时，<strong>一次只能响应一个请求</strong></p>
+<h2 id="独立存取（实际上即RAID-0加上了校验码）">独立存取（实际上即RAID 0加上了校验码）</h2>
+<h3 id="RAID-4">RAID 4</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124212431965.png" alt="image-20211124212431965"></p>
+<p>采用较大的数据条带，各个磁盘的操作是独立的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124212959982.png" alt="image-20211124212959982"></p>
+<p>每次写时，不但要修改数据，还要修改校验位，对于小的I/O写请求，会产生写损失，而在RAID 3中则没有影响，因为条带小，每次都一定要修改校验位，并且直接用写入的数据修改即可，无需取出原有数据。</p>
+<ul>
+<li>此外经过异或计算，可以发现如上公式，因此如果仅修改<strong>很小的数据如1位</strong>，<strong>修改校验位</strong>，<strong>只需要从原来的数据中取出P(B)和B<sub>i</sub>（要被修改的数据的原来数据）即可（<em>原理和之前的RAID 3一样，p(b）异或b<sub>i</sub>=剩下所有数据的异或</em>），B‘是指经过修改的数据</strong></li>
+<li>而如果是<strong>整个数据都要修改掉</strong>，则原来的数据已经不重要了，直接用新的数据生成校验码即可</li>
+<li>因此综上，<strong>在修改大的I/O时，写损失少，而修改小的I/O时，要从原来数据中再读出来后再修改</strong>，这个读的过程造成很多损失</li>
+</ul>
+<p>只要涉及写操作，一定要涉及校验盘，所有没法做到各个盘的写是独立的，<strong>校验盘会成为瓶颈</strong></p>
+<p><strong>RAID 4同样被弃用</strong>，它在设计上有缺陷，即上面所述，在读取操作和一次写操作时都没什么问题，但小I/O存取有瓶颈</p>
+<h3 id="RAID-5">RAID 5</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124214232259.png" alt="image-20211124214232259"></p>
+<p>把校验盘拆散到各个磁盘上，即分布式，<strong>这样不会因为校验盘一个盘产生瓶颈</strong></p>
+<p>RAID 5 <strong>只能坏一块盘</strong>，和前面的一样，在坏一块时可以用其他的来恢复，但坏更多盘时则不能恢复</p>
+<p><em><em>当一块数据被修改时，与它同一行、与它的校验块同一个磁盘（列）的数据都不能进行修改、这个不能修改的磁盘上有的所有的校验块对应的那一行也都不能修改</em>（因为一行中块的修改的修改必须要修改校验块）</em>**</p>
+<p>因此，一个块的修改仍然会约束很多的块，没有那么的独立</p>
+<p><strong>两读两写</strong>是指读数据和读校验用于计算新的校验，两写是指写数据和写校验位。</p>
+<p>最好的情况就是同时读出两个，同时再写回去，最坏的自然就是两读和两写分开来</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124215744728.png" alt="image-20211124215744728"></p>
+<p>RAID 50的<strong>性能更高，且能坏的盘更多</strong>，只要不是一组内坏多个都能运行(即可以不同组分别坏)，但<strong>容量利用率更低，冗余所需空间更多</strong>（因为每一组都生成了校验码）</p>
+<h3 id="RAID-6">RAID 6</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124215940852.png" alt="image-20211124215940852"></p>
+<p>使用了两个校验码，允许坏两个磁盘，但不能坏三个</p>
+<p>但每次写都要影响两个校验码</p>
+<h2 id="RAID比较">RAID比较</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124220232811.png" alt="image-20211124220232811"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124220339171.png" alt="image-20211124220339171"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124220441586.png" alt="image-20211124220441586"></p>
+<p><strong>RAID 0 和 RAID 3适用于高吞吐量的应用</strong></p>
+<p><strong>RAID 1适合要求高可用性的应用</strong></p>
+<p><strong>RAID 5是用途最多的，如数据库服务器，各种网络服务器等</strong></p>
+<p><strong>RAID 6 适合丢失数据严重的应用</strong></p>
  
       <!-- reward -->
       
@@ -201,7 +248,7 @@ var _hmt = _hmt || [];
           <i class="ri-copyright-line"></i>
           <strong>版权声明： </strong>
           
-          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
           
         </li>
       </ul>
@@ -251,12 +298,12 @@ var _hmt = _hmt || [];
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%BB%84/4%20%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E7%A0%81/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/11%20%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%EF%BC%88RAID%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag">计组</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/" rel="tag">计算机组织结构</a></li></ul>
 
     </footer>
   </div>
@@ -264,19 +311,19 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E8%AE%A1%E7%BB%84/3%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/12%20%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            3 数据的机器级表示
+            12 虚拟存储器
           
         </div>
       </a>
     
     
-      <a href="/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/10%20%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">嵌入式复习提纲</div>
+        <div class="article-nav-title">10 外部存储器</div>
       </a>
     
   </nav>

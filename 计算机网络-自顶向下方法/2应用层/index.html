@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>2应用层 |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-计算机网络自顶向下方法/2应用层"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  2应用层
+</h1>
+ 
+
+      
+    <div class="article-author"  style="text-align: center ;font-size:20px" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-date">
+  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">28 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1>2应用层</h1>
+<h2 id="2-1应用层原理">2.1应用层原理</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408083459526.png" alt="image-20220408083459526"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408083559286.png" alt="image-20220408083559286"></p>
+<p>应用层的协议是最多的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408083923954.png" alt="image-20220408083923954"></p>
+<p>网络应用在端系统中部署</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408084212167.png" alt="image-20220408084212167"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408085603973.png" alt="image-20220408085603973"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408085709771.png" alt="image-20220408085709771"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408090057554.png" alt="image-20220408090057554"></p>
+<p>即时通讯，如QQ等</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408090255651.png" alt="image-20220408090255651"></p>
+<p>客户端进程是主动的，服务器进程是被动的</p>
+<p>P2P的会话中也有C和S之分</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408090837148.png" alt="image-20220408090837148"></p>
+<p>应用进程需要解决：<strong>标识</strong>（将自己和其他应用进程区分开）和<strong>寻址</strong>（让对方能够找到自己）</p>
+<p>层间服务的<strong>地点</strong>（SAP）和<strong>形式</strong>（原语）</p>
+<h4 id="问题一">问题一</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408091321745.png" alt="image-20220408091321745"></p>
+<p>要标识和寻址一个应用进程，需要<strong>3</strong>个要素：<strong>主机IP</strong>，<strong>使用TCP还是UDP</strong>，<strong>TCP/UDP的端口号</strong></p>
+<p>本质上是由<strong>端口号来区分不同的应用进程</strong>，TCP/UDP均为<strong>16bit</strong>的端口号</p>
+<p>用IP和port标识端节点 <em>end point</em> 本质上主机进程的通信由2个端节点构成</p>
+<h4 id="问题二">问题二</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408091806498.png" alt="image-20220408091806498"></p>
+<p>层间接口需要携带的<strong>3</strong>个信息：<strong>内容即SDU</strong>，<strong>谁传的（IP+port）</strong>【<em>否则就不能由对方传回来了</em>】，<strong>传给谁（IP+port）</strong></p>
+<p>TCP/UDP实体封装源和目的的端口号和数据，进一步交给IP实体来封装源IP和目标IP</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408092728670.png" alt="image-20220408092728670"></p>
+<p>采用<strong>套接字  socket</strong>减少层间传输的信息量，避免在一次连接过程中频繁地封装谁传的/传给谁的信息</p>
+<p>socket就是一个<strong>整数</strong>，代表了源IP，源端口，目标IP，目标端口的<strong>四元组(TCP)</strong>。在<strong>UDP</strong>中是源IP，源端口号的<strong>二元组</strong>。<strong>代表了会话session关系</strong>，而不仅仅是主机的标识，一个进程和多个不同的进程进行连接有不同的socket<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408095149125.png" alt="image-20220408095149125"></p>
+<p><strong>socket是本地的标识，对方并不知道</strong>，是本地OS管理的4元组，为了<strong>便于管理</strong>而引入的</p>
+<h5 id="TCP-socket">TCP socket</h5>
+<p>便于<strong>应用层和传输层的约定</strong>【<em>其他层不知道，对方更不知道</em>】，<strong>建立连接时操作系统返回一个socket整数</strong><br>
+所以发送时应用层的应用进程只要使用这个socket整数，OS根据socket表就知道上面的四元组，也即在传输层可以得到对应的四元组，<strong>使得穿过层间的信息量最少【只需两个：socket和SDU】，而不必在应用进程中每次都指定四元组</strong><br>
+收的时候根据收到的四元组可以根据建立起的socket的表找到对应的socket，再找到哪个应用进程创建了这个socket，从而把数据发给相应的应用进程</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408094330596.png" alt="image-20220408094330596"></p>
+<h5 id="UDP-socket">UDP socket</h5>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408095556687.png" alt="image-20220408095556687"></p>
+<p>UDP每次的报文都是独立的，可能上次发给A，下次就发给B</p>
+<p>UDP socket<strong>只代表本地IP和本地端口</strong>，<strong>不代表会话关系</strong>，因为UDP是无连接的</p>
+<p>因此发送报文时应用层的应用进程传给传输层的UDP实体需要<strong>三个信息：UDP socket、目标IP和端口、SDU</strong><br>
+同理在接收报文时传输层要将对方的IP和port传给对应的应用进程，让其知道是谁传来的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408100429128.png" alt="image-20220408100429128"></p>
+<h4 id="问题三">问题三</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408110805050.png" alt="image-20220408110805050"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408120454787.png" alt="image-20220408120454787"></p>
+<p><strong>实体是指和网络交互有关的，实现协议的软硬件部分</strong>，而其他部分就不是网络中讲的实体了，如应用程序的应用协议是我们说的实体，但其他部分IO处理等就不是了，如html不是协议的一部分</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408140107691.png" alt="image-20220408140107691"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408140738102.png" alt="image-20220408140738102"></p>
+<p>UDP似乎什么服务都不能提供，那能不能直接用IP协议呢，当然是不能的，UDP能够区分出进程：</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408141012843.png" alt="image-20220408141012843"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408141737019.png" alt="image-20220408141737019"></p>
+<blockquote>
+<p><strong>SSL <em>Secure Sockets Layer</em></strong> 安全套接字协议及其继任者传输层安全（<em><strong>Transport Layer Security，TLS</strong></em>）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层与应用层之间对网络连接进行加密</p>
+</blockquote>
+<p>SSL在TCP上实现，位于<strong>应用层</strong>，应用采用SSL库如<strong>https</strong>中的s就是指SSL  <em>Hyper Text Transfer Protocol over Secure Socket Layer</em></p>
+<h2 id="2-2-Web-and-HTTP">2.2 Web and HTTP</h2>
+<p>web是一种应用，http是支持web应用的协议</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408143534573.png" alt="image-20220408143534573"></p>
+<p>web网页本身是对象，网页中嵌了对象，但不是对象本身，而是对象的链接，任何对象都可以<strong>由URL唯一标识</strong> <em>uniform resource locator</em>统一资源定位系统</p>
+<p>如果支持匿名访问，那么用户名口令可以省略</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408144657478.png" alt="image-20220408144657478"></p>
+<p>客户端是浏览器，服务端是服务器</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408144925175.png" alt="image-20220408144925175"></p>
+<p>服务器应用层会有一个特殊的socket <strong>wait socket守护socket</strong>，守护在80端口，当有其他web客户端与服务器建立请求时会产生新的socket，服务器可以并发和多个web客户端连接，这种是<strong>连接socket</strong></p>
+<p>浏览器得到html文件后 会将其画出来，其中的图片等资源会通过URL又去请求不同的其他服务器，得到后插入。<strong>得到资源后TCP连接就会关闭</strong></p>
+<p>HTTP是<strong>无状态</strong>的，即<strong>不维护客户的任何信息</strong>，仅仅是建立连接，关闭连接，在此之前和在结束之后，服务器不会有客户的任何信息，<strong>相当于没有记忆</strong></p>
+<h3 id="HTTP连接">HTTP连接</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408151025542.png" alt="image-20220408151025542"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408151753283.png" alt="image-20220408151753283"></p>
+<p>请求报文很短，传输时间一般可以忽略不计，但返回的对象资源需要传输时间*【注意这个不是传播时间，传播时间还是有的，局域网忽略不计】*</p>
+<p><strong>HTTP 1.0</strong>默认非持久连接，每次请求返回对象资源后就会关闭连接，如果客户在这个服务器上有多个请求，那么要多次TCP连接</p>
+<p><strong>HTTP 1.1</strong>默认持久连接，在返回对象资源后连接不会关闭，如果还有请求可以直接使用之前建立的连接下载（<em>可以在报文的首部行中设置connection : close来关闭</em>）</p>
+<h4 id="非持久连接">非持久连接</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408152047623.png" alt="image-20220408152047623"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408152055260.png" alt="image-20220408152055260"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408153030709.png" alt="image-20220408153030709"></p>
+<p><strong>往返时间RTT</strong> <em>round-trip time</em></p>
+<p>所以一次http请求需要<strong>2RTT+对象的传输时间</strong></p>
+<h4 id="持久连接">持久连接</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408153908013.png" alt="image-20220408153908013"></p>
+<p>需要在一个服务器上请求多个对象</p>
+<p><strong>非流水线方式</strong>：一次请求得到一个对象回来后，然后再发出第二个请求</p>
+<p><strong>流水线方式</strong>：客户端不等待对象回来，而是发出第一个请求后再发出第二个请求，之后对象依次回来。<strong>HTTP 1.1默认方式</strong></p>
+<h3 id="HTTP请求报文">HTTP请求报文</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408154045220.png" alt="image-20220408154045220"></p>
+<p><strong>请求报文</strong>和<strong>响应报文</strong>两种</p>
+<p>两种报文<strong>都是ASCII码可读的</strong>，都是用ASCII编码的【<em>是早期为了便于调试而采取的措施</em>】</p>
+<p>请求报文格式：</p>
+<ul>
+<li>
+<p><strong>请求行/命令行</strong>：<strong>GET</strong>(获取HTML head和body)、<strong>POST</strong>(上传)、<strong>HEAD</strong>(获取头，只需要HTML文件的head，不要body，一般是搜索引擎来建立索引的)</p>
+<p>HTTP 1.1增加了<strong>PUT</strong>和<strong>DELETE</strong></p>
+<p>PUT用来改资源，Post用来增资源</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36183935/article/details/80570062">HTTP中GET，POST和PUT的区别</a></p>
+</li>
+<li>
+<p><strong>首部行</strong></p>
+</li>
+<li>
+<p>(一个额外回车换行)</p>
+<p>在请求行和首部行的每一行都是有回车换行的 CR LF 【<strong><em>Carriage Return</em> 对应\r 回车 <em>Linefeed</em>  对应\n 换行</strong>】</p>
+</li>
+<li>
+<p><strong>可能的实体行</strong></p>
+</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408155225160.png" alt="image-20220408155225160"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408155922625.png" alt="image-20220408155922625"></p>
+<p>提交表单信息：</p>
+<ul>
+<li>post：将表单放在实体部分</li>
+<li>get：将表单信息放在URL中上载，即?后表示参数，参数名=参数值，不同参数用&amp;隔开</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408160309903.png" alt="image-20220408160309903"></p>
+<h3 id="HTTP响应报文">HTTP响应报文</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408162825032.png" alt="image-20220408162825032"></p>
+<p>响应报文格式：</p>
+<ul>
+<li>
+<p>状态行：协议版本，状态码，状态信息(对状态码的解释，如OK)</p>
+</li>
+<li>
+<p>首部行：包含Last-Modified 记录修改时间，从而保证后面所讲的缓存能够与服务器内容保持一致</p>
+<p><strong>HTTP需要自己维护报文的界限</strong>，因为<strong>TCP是以字节流</strong>的形式传输的（<strong>UDP是报文形式</strong>），因此报文的字节数很重要</p>
+</li>
+<li>
+<p>(一个额外的\r \n)</p>
+</li>
+<li>
+<p>数据</p>
+</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408163445614.png" alt="image-20220408163445614"></p>
+<h3 id="Cookies">Cookies</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408164117892.png" alt="image-20220408164117892"></p>
+<p><strong>Cookies弥补了HTTP无状态带来的一些问题</strong></p>
+<p>客户端第一次请求后，服务端在响应报文的头部加上一个cookies并保存在服务器的数据库中，客户端收到cookies由浏览器保管*(至于怎么保存，协议不管，协议只规范cookies这个传输过程)*，下次客户端发送请求时，会在请求报文的头部加上cookies，服务端对比cookies就能确定请求的客户端是谁了</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408165507430.png" alt="image-20220408165507430"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408165702704.png" alt="image-20220408165702704"></p>
+<h3 id="Web-Cache-代理服务器proxy-server">Web Cache 代理服务器proxy server</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408165937799.png" alt="image-20220408165937799"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408170249449.png" alt="image-20220408170249449"></p>
+<p>因为热点总是被更多的人访问，所以缓存是很有效的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408171051613.png" alt="image-20220408171051613"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408170857524.png" alt="image-20220408170857524"></p>
+<p>排队延迟计算公式</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408171422030.png" alt="image-20220408171422030"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408171436894.png" alt="image-20220408171436894"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408172032549.png" alt="image-20220408172032549"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408172101286.png" alt="image-20220408172101286"></p>
+<p>但有风险，可能服务器中发生改变，但缓存中没变，因此proxy server会使用Conditional GET向服务器发送请求，并在头部加入了**If-modified-since: <date>**的条件如果没有修改，那么服务器返回304 Not Modified表示没有修改；如果修改了，那么就和GET命令完全一样，将对象返回给proxy server 200 OK</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408173037727.png" alt="image-20220408173037727"></p>
+<h2 id="2-3-FTP">2.3 FTP</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408173248267.png" alt="image-20220408173248267"></p>
+<p>早期的文件分发方式</p>
+<p>客户端和<strong>服务器的21号端口</strong>建立TCP连接，这个连接称为<strong>控制连接</strong>，完成用户认证之后客户端可以向服务器发出一系列指令，如list等</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408174001802.png" alt="image-20220408174001802"></p>
+<p>当客户端发出下载命令时，服务器会<strong>主动</strong>和<strong>客户端的20号端口</strong>建立TCP连接，称为<strong>数据连接</strong></p>
+<p>控制和数据传输在分别<strong>两个连接</strong>上进行，把控制连接称为<strong>带外</strong>(out of band)，带内即数据连接</p>
+<p>FTP是<strong>有状态的</strong>，需要维护用户信息</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408174530084.png" alt="image-20220408174530084"></p>
+<p>命令以ASCII文本形式传输</p>
+<h2 id="2-4-E-Mail">2.4 E-Mail</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410155542417.png" alt="image-20220410155542417"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410160144318.png" alt="image-20220410160144318"></p>
+<p>三个主要组成部分：</p>
+<ul>
+<li>
+<p><strong>用户代理</strong> <em>user agent</em>：写邮件的软件，因此这个软件就是邮件应用的代理（如web应用的代理是浏览器）</p>
+</li>
+<li>
+<p><strong>邮件服务器</strong> <em>mail servers</em>：守护在<strong>25号端口</strong></p>
+<p>包含</p>
+<ul>
+<li><strong>邮箱</strong>(<em>mailbox</em> contains incoming messages for user。<em>注意是保存发给用户的邮件，而不是发出去的邮件</em>)</li>
+<li><strong>报文队列</strong> <em>message queue</em> contains outgoing (to be sent) mail messages</li>
+</ul>
+</li>
+<li>
+<p><strong>协议</strong>：</p>
+<p>发送协议：SMTP</p>
+<p>拉取协议：POP3，IMAP，HTTP</p>
+</li>
+</ul>
+<p><strong>过程</strong>：用户代理将邮件发给邮件服务器**（使用SMTP）<strong>，在邮件服务器的队列中，然后邮件服务器按照队列顺序逐个将邮件发送给对应的邮件服务器</strong>（使用SMTP）<strong>，对应的邮件服务器收到邮件后存储在对应用户的邮箱mailbox中，该用户通过它的用户代理从它在邮件服务器的邮箱中拉取邮件</strong>（使用POP3等）**，在用户代理上呈现</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410161707703.png" alt="image-20220410161707703"></p>
+<h3 id="SMTP">SMTP</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410161352910.png" alt="image-20220410161352910"></p>
+<p><strong>SMTP 简单邮件传输协议</strong> <em>Simple Mail Transfer Protocol</em></p>
+<p>所有<strong>报文请求和响应以及邮件本身的内容</strong>都必须是<strong>7位ASCII码</strong>，即高位为0的可打印字符，不允许超过ASCII码的范围【<em>这是最原始的形式，但不能满足传输中文，附件的要求，因此下面有MIME</em>】</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410162038066.png" alt="image-20220410162038066"></p>
+<p>如果client发完一个邮件后，<strong>还有到达这个服务器的邮件，那么会继续发</strong>，直达client没有要发给它的邮件了，那么发出QUIT命令终止</p>
+<p><em>在一次连接中可以发很多的邮件，而不是连接一次仅发送一个</em></p>
+<p>因为都是ASCII码，所以外面可以手动输入上面的过程来模拟用户代理发送邮件</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44848479/article/details/122907746">使用telnet程序连接qq smtp协议邮箱服务器发送邮件</a></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410165723409.png" alt="image-20220410165723409"></p>
+<ul>
+<li>HTTP<strong>一个响应报文仅一个对象</strong>，即比如客户群向服务器请求一个html文件，那么html文件就是这个对象，html中的每个图片对象不会包含在其中，只会包含一个URL</li>
+<li>SMTP<strong>则会将多个对象包含在一个报文中</strong>，比如<strong>发送附件有10张图片，一个录音等</strong>，都是封装在一个报文中发送的</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410170222763.png" alt="image-20220410170222763"></p>
+<ul>
+<li>
+<p>首部行：如to、from、subject(即title)、cc(即抄送)</p>
+<p><strong>注意不是</strong>MAIL FROM, RCPT TO的<strong>命令</strong></p>
+</li>
+<li>
+<p>主体</p>
+</li>
+</ul>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410170711930.png" alt="image-20220410170711930"></p>
+<p><strong>MIME 多媒体邮件拓展</strong> <em>multimedia mail extension</em></p>
+<p>使用<strong>base64编码</strong>，将不能用ASCII表示的文本用ASCII表示出来，<strong>从而拓展了可以传输的内容</strong>，这边base64编码，对方再解码即可</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410171204330.png" alt="image-20220410171204330"></p>
+<p>可以直接使用HTTP来下载邮件（HTTP本身就能上载和下载）</p>
+<h3 id="POP3">POP3</h3>
+<p><strong>邮局访问协议</strong> <em>Post Office Protocol</em></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410171606952.png" alt="image-20220410171606952"></p>
+<p>list后显示邮件编号和字节大小</p>
+<h3 id="IMAP">IMAP</h3>
+<p><strong>互联网邮件访问协议</strong> <em>Internet Mail Access Protocol</em></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410171822319.png" alt="image-20220410171822319"></p>
+<p>比POP3更复杂，允许用户在服务器上建立目录来管理邮件，因此需要<strong>保留用户状态</strong></p>
+<p>而POP3没有这样的功能，因此是<strong>无状态的</strong></p>
+<h2 id="2-5-DNS">2.5 DNS</h2>
+<p>域名解析系统/域名服务器 <em>Domain Name System</em></p>
+<p>DNS不是给人使用的应用，而是给其他应用使用的应用，<strong>主要实现域名到IP地址的转换</strong>，还有<strong>其他的功能</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410172711786.png" alt="image-20220410172711786"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410173230795.png" alt="image-20220410173230795"></p>
+<p>域名用平面化的命名很容易重复，因此应该使用层次化的命名</p>
+<p>使用一台设备解析域名是不可行的，因此分布式的维护和解析域名（多个服务器）</p>
+<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410173420630.png" alt="image-20220410173420630"  />
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410173544614.png" alt="image-20220410173544614"></p>
+<p>DNS运行在<strong>UDP的53号端口</strong>，很强的<strong>事务性</strong>，询问域名-IP，响应即可，没必要建立连接，且报文长度不超过 UDP 的 512 B 限制</p>
+<p><strong>互联网的很多核心功能是在网络边缘的端系统上的应用层的应用进程实现的，如DNS</strong></p>
+<p>DNS：</p>
+<ul>
+<li>
+<p>域名到IP地址的转换（主要）</p>
+</li>
+<li>
+<p>主机别名到规范名字的转换</p>
+<p><a target="_blank" rel="noopener" href="http://xn--www-eo8e.baidu.com">如www.baidu.com</a>，这个名字即为别名，不可能只有一台服务器维护百度网站，背后是一堆的服务器，<strong>因此需要将这个别名转化成具体哪个服务器的规范命名</strong>，所以转换得到的IP地址是这个服务器的IP地址【<strong>别名→规范名字→IP</strong>】</p>
+</li>
+<li>
+<p>邮件服务器别名到规范名字的转换</p>
+</li>
+<li>
+<p><strong>负载均衡</strong> <em>load distribution</em> 在主机别名到规范命名时选择负载较小的服务器</p>
+</li>
+</ul>
+<h3 id="问题一-2">问题一</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410174759148.png" alt="image-20220410174759148"></p>
+<p>对<strong>主机</strong>命名从<strong>树叶</strong>往树根走，每过一层加一个dot.区分</p>
+<p>对<strong>域</strong>命名从<strong>树枝</strong>往上走，每过一层加一个dot.区分</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410175414882.png" alt="image-20220410175414882"></p>
+<p>如果只有一个root，那么万一宕机了，那么全部都不能使用，因此一共有13个根域名服务器，可以从最近的开始root往下找，如果宕机了，可以换成别的root。【事实上有上百台根域名服务器，由 13 个机构维护，逻辑上是 13 个根域名服务器】</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410180009812.png" alt="image-20220410180009812"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410180000350.png" alt="image-20220410180000350"></p>
+<p>域的划分是逻辑的，网络的划分是物理的</p>
+<h3 id="问题二-2">问题二</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410191550308.png" alt="image-20220410191550308"></p>
+<p>根据情况划分区域，尽可能均衡，zone和zone之间是<strong>互不相交的</strong></p>
+<p>对于一个区域所属的名字服务器，<strong>这个名字服务器中的信息是权威的</strong>，但在其他区域内，就不是权威的了（<em>下面介绍为什么在其他区域也能发挥作用</em>）</p>
+<blockquote>
+<p><strong>域名服务器可以划分为以下四种不同的类型:</strong></p>
+<ul>
+<li><strong>根域名服务器</strong> 根域名服务器是最高层次的域名服务器。每个根域名服务器都知道所有的顶级域名服务器的域名及其IP地址。因特网上共有13个不同IP地址的根域名服务器。当本地域名服务器向根域名服务器发出查询请求时，路由器就把查询请求报文转发到离这个DNS客户最近的一个根域名服务器。这就加快了DNS的查询过程，同时也更合理地利用了因特网的资源。</li>
+<li><strong>顶级域名服务器</strong> 这些域名服务器负责管理在该顶级域名服务器注册的所有二级域名。当收到DNS查询请求时就给出相应的回答（可能是最后的结果，也可能是下一级权限域名服务器的IP地址)。</li>
+<li><strong>权限域名服务器</strong> 这些域名服务器负责管理某个区的域名。每一个主机的域名都必须在某个权限域名服务器处注册登记。因此权限域名服务器知道其管辖的域名与IP地址的映射关系。另外，权限域名服务器还知道其下级域名服务器的地址。</li>
+<li><strong>本地域名服务器</strong> 本地域名服务器不属于上述的域名服务器的等级结构。当一个主机发出DNS请求报文时，这个报文就首先被送往该主机的本地域名服务器。本地域名服务器起着代理的作用，会将该报文转发到上述的域名服务器的等级结构中。本地域名服务器离用户较近，一般不超过几个路由器的距离，也有可能就在同一个局域网中。本地域名服务器的IP地址需要直接配置在需要域名解析的主机中。</li>
+</ul>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410191932022.png" alt="image-20220410191932022"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410192148807.png" alt="image-20220410192148807"></p>
+<p><strong>TLD</strong> <em>Top-level Domain</em></p>
+<blockquote>
+<p>例如太平洋岛国图瓦卢的顶级域名是tv，因此将其卖给了电视公司，所以不再是国家级顶级域名</p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410192534380.png" alt="image-20220410192534380"></p>
+<p>资源记录 <em>resource records</em></p>
+<p>TTL 生存时间 <strong>对于权威记录，那么为无限大</strong>，而如果是在别的区域名字服务器中的记录，即非权威，是<strong>缓存</strong>在这里的，<strong>为的是提高性能和速度</strong>，<strong>默认生存时间为2天</strong>，2天后就会把记录<strong>删除</strong>，<strong>为的是保持和权威服务器的一致性</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410193236576.png" alt="image-20220410193236576"></p>
+<p><strong>NS即上层域中要保存其子域的指针</strong>，保存了子域所属的权威服务器的<strong>域名</strong>，因此要访问这个DNS服务器，还需要有一条TYPE=A的记录来得到这个服务器的IP地址</p>
+<p><strong>除了A以外的TYPE都是得到名字</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410193746954.png" alt="image-20220410193746954"></p>
+<p>一台主机要上网需要<strong>4个信息</strong>：</p>
+<p>①IP ②子网掩码 ③default gateway默认网关 ④local name server DNS服务器</p>
+<p>这些信息是自动分配或者手动分配的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410194430915.png" alt="image-20220410194430915"></p>
+<p>其实可以指定任意一台DNS作为local name server ，但local name server 一般设置比较近的/位于同一个子网的，速度更快</p>
+<blockquote>
+<p>本地域名服务器起着代理的作用，会将该报文转发到域名服务器的等级结构中。本地域名服务器离用户较近，一般不超过几个路由器的距离，也有可能就在同一个局域网中。本地域名服务器的IP地址需要直接配置在需要域名解析的主机中。</p>
+</blockquote>
+<h4 id="名字解析过程">名字解析过程</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410194515330.png" alt="image-20220410194515330"></p>
+<p><strong>递归查询</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410194710644.png" alt="image-20220410194710644"></p>
+<p>当不在区域内/缓存中没有时，local name server 联系13个根名字服务器中的一个，<strong>让根服务器代替本地DNS从根往下找，当然根服务器也让下一级服务器返回它查到的结果，递归下去，最后由根服务器返回得到的结果给本地DNS</strong>，但这样根服务器压力很大，从它这个引申出一大堆递归【<em>就像递归消耗很大一样</em>】</p>
+<p><strong>迭代查询</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410195001066.png" alt="image-20220410195001066"></p>
+<p>还是先问根名字服务器，但根服务器不知道的话，只是给出下一级服务器的地址，让本地DNS去问它，<strong>然后由本地服务器去逐个询问</strong>，<strong>最终由权威服务器告诉本地DNS</strong></p>
+<p>如果得到了这个域名-IP映射，本地DNS会<strong>缓存</strong>下来默认两天</p>
+<blockquote>
+<p>不但在本地域名服务器中需要高速缓存，在用户主机中也很需要。</p>
+</blockquote>
+<blockquote>
+<p>通常采用以下模式：<strong>从请求主机到本地域名服务器的查询是递归查询，而其余的查询是迭代查询。</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>DNS解析</strong>：浏览器缓存——》系统hosts文件——》本地DNS解析器缓存——》本地域名服务器（本地配置区域资源、本地域名服务器缓存)——》根域名服务器——》主域名服务器——》下一级域名域名服务器 客户端——》本地域名服务器（递归查询) 本地域名服务器—》DNS服务器的交互查询是迭代查询</p>
+</blockquote>
+<h4 id="DNS协议、报文">DNS协议、报文</h4>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410195705289.png" alt="image-20220410195705289"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410200048667.png" alt="image-20220410200048667"></p>
+<p><strong>ID号可以使得查询过程流水线化</strong>，如果没有ID号，那么必须等上次查询完成才能发出下次的查询</p>
+<p><strong>DNS查询和响应的报文格式一样</strong>，根据flags判断是查询还是响应</p>
+<h3 id="问题三-2">问题三</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410200216555.png" alt="image-20220410200216555"></p>
+<p>增加一个域需要增加两条信息：①该域的域名和其DNS名字的对应关系 ②该DNS名字和DNS的IP的对应关系</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410200741964.png" alt="image-20220410200741964"></p>
+<p>DNS比较健壮</p>
+<h3 id="nslook">nslook</h3>
+<p>在 cmd 中使用 nslook 程序可以进行域名解析，此外解析会<strong>自动在输入的域名后面加上当前 DNS 的域名</strong>，因此如下</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220509120525161.png" alt="image-20220509120525161"></p>
+<p>如果不是当前域名下的网站，那么会逐个向上查询，根据请求可以看到，这里使用的是递归查询，所有结果都由 DNS 返回给主机</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220509120551574.png" alt="image-20220509120551574"></p>
+<h2 id="2-5-P2P应用">2.5 P2P应用</h2>
+<p>一类P2P应用</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411082154789.png" alt="image-20220411082154789"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411082655420.png" alt="image-20220411082655420"></p>
+<p>当N很小时，服务器的能力很强，客户端的下载速度是瓶颈，随着N增加，服务器成为瓶颈，时间线性增加</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411083256812.png" alt="image-20220411083256812"></p>
+<p>流媒体也是类似的，因此一个视频看的人越多反而越流畅<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhanghan18333611647/article/details/52135694">传统媒体—&gt;流媒体—&gt;加P2P的流媒体的演变之路</a></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411083133701.png" alt="image-20220411083133701"></p>
+<h3 id="P2P的管理模式">P2P的管理模式</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411084856104.png" alt="image-20220411084856104"></p>
+<h4 id="非结构化P2P">非结构化P2P</h4>
+<p>peer和peer之间的有相互的TCP关系，则两者之间有一条边，这个边是应用层上逻辑的，事实上两个主机之间可能会经过很多的路由器。<strong>节点和节点之间边的关系是任意的，构成的overlay 覆盖网是任意的，称为非结构化</strong></p>
+<h5 id="集中式目录">集中式目录</h5>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085017807.png" alt="image-20220411085017807"></p>
+<p>目录服务器维护了哪些IP在线；哪些IP具有哪些资源</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085234213.png" alt="image-20220411085234213"></p>
+<h5 id="完全分布式">完全分布式</h5>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085435407.png" alt="image-20220411085435407"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085920889.png" alt="image-20220411085920889"></p>
+<p>一个主机向与之逻辑上连接的<strong>所有主机发出查询</strong>（假定已经构成了覆盖网），然后一传十，十传百的形式泛洪flooding查询。</p>
+<p>会使用TTL来限制泛洪的跳数；或者记录自己已经查询过了，避免回环</p>
+<p><strong>覆盖网的构建</strong>：在下载Gnutella软件时会有一个表，其中是很可能在线的节点，本主机向这些节点发送ping，如果这些节点中有在线的，再向它的所有邻居发送ping，和上面的泛洪一样，所有收到ping的节点以pong回应，本主机只要选择若干个节点建立TCP连接当作邻居即可。</p>
+<p>当一个节点退出时，只要向其邻居发送即可，这些邻居各自再去找一个新的邻居以维持邻居树目</p>
+<h5 id="混合体">混合体</h5>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411090925779.png" alt="image-20220411090925779"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411091340324.png" alt="image-20220411091340324"></p>
+<p><strong>hash</strong>作为文件的唯一标识</p>
+<h4 id="DHT-分布式散列表-（结构化）P2P">DHT(分布式散列表)（结构化）P2P</h4>
+<p>节点与节点之间是可以构成环，树的关系，是有结构的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411095558203.png" alt="image-20220411095558203"></p>
+<p>如环状：每个节点将其IP地址做哈希，根据hash值从小到大首位相连（逻辑），然后文件也同样做哈希，约定好如上面hash值为6~88的文件存储在hash为88的peer节点中。这样的P2P网络模式有效减少了资源定位的开销，提高了P2P 网络的可扩展性</p>
+<h3 id="BitTorrent">BitTorrent</h3>
+<p><strong>非结构化</strong>P2P，可以看作混合体式</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411091702522.png" alt="image-20220411091702522"></p>
+<p>把文件分成若干个<strong>256KB的块</strong></p>
+<p><strong>BT工作原理</strong>：在文件网站/搜索引擎中下载torrent文件，其中包含了对应文件的Tracker Server，然后向Tracker Server发出请求，它会分配一些peer节点的列表给请求客户端，从而请求客户端加入洪流，互通有无：<em>拿出自己多余的东西给对方，与之进行交换，以得到自己所缺少的东西</em></p>
+<p><strong>Torrent洪流</strong>：相当于一个小组</p>
+<p><strong>BitMap</strong>标识一个文件的块的拥有情况，比如10表示拥有这个文件的第一个块，但没有第二个块。通过<strong>bitmap交换</strong>就可以知道相互之间的块的拥有情况</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411092252498.png" alt="image-20220411092252498"></p>
+<p>新加入Torrent的节点随机的向其他的节点请求块，因为此时什么都没有，bitmap都是0，<strong>当达到4个1后</strong>，<strong>优先请求稀缺的块</strong>，即在洪流中持有该块的节点数目很少的块。<strong>这样可以让稀缺的块逐渐不稀缺，有利于集体利益</strong></p>
+<p>并且有一个策略：如果作为服务方，会优先向为我提供服务最好的节点提供服务，是一种你对我好，我对你好的模式</p>
+<p>因此新加入的节点得到稀缺块后，别人向他请求的会更多，那么根据策略，他得到别人服务的机会会更大，<strong>这样就可以将集体的利益转化成个人利益</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411093708760.png" alt="image-20220411093708760"></p>
+<p>因为请求的节点数大于能服务的节点数，所以需要排队，Alice每隔30s随机选择一个节点，而不是根据之前周期该节点对Alice提供的服务进行评估优先选择。<strong>这样优化疏通可能可以导致如下的情况</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411094037836.png" alt="image-20220411094037836"></p>
+<h2 id="2-7-CDN">2.7 CDN</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412130235338.png" alt="image-20220412130235338"></p>
+<h3 id="DASH-基于HTTP的动态自适应流">DASH 基于HTTP的动态自适应流</h3>
+<p>可以看出 <strong>HTTP 可不仅仅只用于 web，还可以用于文件的上下载、音视频的播放</strong>。<strong>HTTP 就是一个传输协议，和应用无关。</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412131542549.png" alt="image-20220412131542549"></p>
+<p>将每个块编码于不同的码率，形成多个内容相同，码率不同的块，分别独立存储，提前部署，可能分布于不同服务器，可以是源服务器，或者缓存服务器</p>
+<p>所有的这些块（不同内容/不同码率）用<strong>告示文件 <em>manifest file</em></strong>记录它们的URL、码率、时长等信息</p>
+<p>客户端根据带宽和缓冲区的情况动态地决定请求什么样的块，什么编码速率的块</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412132003989.png" alt="image-20220412132003989"></p>
+<p><strong>DASH 解决了不同客户端、不同网络情况的需求问题</strong></p>
+<h3 id="CDN">CDN</h3>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412132624437.png" alt="image-20220412132624437"></p>
+<p><strong>CDN解决的是单个服务器向大量用户提供服务的质量低的问题</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412132817469.png" alt="image-20220412132817469"></p>
+<p><strong>ICP需要买CDN运营商的服务</strong>，从而提高他们为用户提高的服务质量</p>
+<p><strong>内容加速服务：<strong>CDN运营商部署了很多的缓存节点，客户端不需要向源服务器请求，而是可以在中间</strong>域名解析重定向</strong>到离它最近，服务质量最好的缓存节点</p>
+<p>显然，前提是ICP要提前将内容部署在缓存节点中，但选择哪些内容部署，是一个策略问题（根据二八定律，一般选择热门的内容部署）</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412134021517.png" alt="image-20220412134021517"></p>
+<p>CDN运营商部署缓存节点的方式：</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412134147448.png" alt="image-20220412134147448"></p>
+<ul>
+<li>
+<p><strong>enter deep，将</strong> <strong>CDN</strong> <strong>服务器深入到许多接入网。</strong> 就是在很多的 local ISP 的范围内部署了很多的缓存节点，把一些内容预先部署到这一缓存节点当中。</p>
+<p>这种部署方式更接近用户，节点数量多、离用户近，用户请求资源时跳数更少，网络带宽大。</p>
+<p>但是因为部署的节点非常靠下，所以需要部署非常多的节点，这些节点管理起来很困难。</p>
+</li>
+<li>
+<p><strong>bring home，</strong> <strong>部署在少数(10个左右)关键位置节点上</strong>，比如将服务器簇安装于 POP （网络服务提供点 Point of presence）附近，离若干一级 ISP POP 较近的位置。就是在一些上层的 ISP，有很多的数据中心机房的关键节点，然后我选的位置离那些关键数据中心机房比较近。</p>
+<p>这样的话，只要我卡住这些关键的位置，也可以向用户提供一些好的服务。但相比于enter deep服务稍弱</p>
+</li>
+</ul>
+<p><strong>CDN位于应用层提供服务 over the top</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412165604792.png" alt="image-20220412165604792"></p>
+<ol>
+<li>
+<p>客户端要访问URL上的视频</p>
+<p><strong>【如果采用了DASH】</strong> <strong>：先要获取告示文件</strong>（如下面的网飞的例子中），然后去<strong>动态逐个请求每个块</strong>，比如一个块的地址在源服务器并且缓存在了CDN中，那么和上图的流程一样</p>
+<p><strong>【如果不考虑DASH】</strong>：那么就相当于ICP把整个视频缓存在了CDN服务器中，客户端直接去根据上图流程访问到CDN服务器上的视频</p>
+</li>
+<li>
+<p>客户端向local DNS请求域名解析</p>
+</li>
+<li>
+<p>local DNS再去请求权威名字服务器的域名解析</p>
+<p>权威名字服务器知道哪些内容需要加速，因此可以将这个url的解析<strong>重定向</strong>，返回一个新的域名地址【即视频位于的CDN缓存服务器的URL】给local DNS</p>
+</li>
+<li>
+<p>local DNS再去解析这个域名地址，如果没有缓存，那么同理要请求CDN运营商的权威名字服务器，然后得到CDN服务器的IP</p>
+</li>
+<li>
+<p>local DNS将IP返回给客户端，客户端去请求这个IP即可</p>
+</li>
+</ol>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412170509774.png" alt="image-20220412170509774"></p>
+<h2 id="2-8-TCP-socket编程">2.8 TCP socket编程</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132013178.png" alt="image-20220413132013178"></p>
+<p>应用进程只需要借助socket传和收即可，是逻辑是上的传输，不必关心真正是怎么传输的</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132249795.png" alt="image-20220413132249795"></p>
+<p>字节流保证是可靠的，但不保证报文和报文之间的界限</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132447084.png" alt="image-20220413132447084"></p>
+<p><strong>创建-捆绑-等待</strong></p>
+<p>阻塞式即如果没有发送过来的用户连接，那么函数就在这里阻塞，不往下走</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132959115.png" alt="image-20220413132959115"></p>
+<p>sockaddr_in是代表了一个端节点</p>
+<p>这个数据结构不仅可以用于ip的通讯，也可以用于ipx的通讯，<strong>所以是地址簇</strong></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413133403809.png" alt="image-20220413133403809"></p>
+<p>IP地址位于h_addr_list[0]</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413133459987.png" alt="image-20220413133459987"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413134829762.png" alt="image-20220413134829762"></p>
+<p>sad就是sockaddr_in结构体</p>
+<p>客户端不需要bind，而服务器需要bind，如果不绑定，那么客户端不知道去找谁，但客户端OS会隐含地bind</p>
+<p>当client connect【将socket表项的对方IP，port填充好】后会向server发TCP连接建立请求，client阻塞在这，server收到信息解除阻塞，返回一个新的值，即connection socket，在socket表中填充了socket，双方的IP和port，当server返回连接确认信息后，client也解除阻塞，这样就真正建立起了连接</p>
+<p>close后，对应表项就会被删除</p>
+<p><strong>多个进程可以使用同一个端口</strong>，如welcome socket和connection socket使用的都是80端口</p>
+<blockquote>
+<p>一个进程监听端口，经验告诉我们，如果多次启动一个进程会报错：“Address already in use!&quot;。这<strong>是由于bind函数导致的</strong>，由于该端口号已经被第一个进程监听了。有哪些方法可以实现多个进程监听同一个端口呢？</p>
+<p>fork：只要在绑定端口号（bind函数）之后，监听端口号之前（listen函数），用fork（）函数生成子进程，这样子进程就可以克隆父进程，达到监听同一个端口的目的，而且还相互竞争，提高程序效率。</p>
+</blockquote>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413140334193.png" alt="image-20220413140334193"></p>
+<p>main的参数传入服务器的域名和port</p>
+<p>这里没有bind，是OS隐式bind，随机选取一个暂时没有用到的端口号bind，所以上面的sockaddr_in中代表的是服务器的端节点IP+port</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413140805502.png" alt="image-20220413140805502"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413140914413.png" alt="image-20220413140914413"></p>
+<p>cad存放client的端节点，sad存放自己的</p>
+<p>main的参数只需传入自己的port即可</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413141425906.png" alt="image-20220413141425906"></p>
+<p>中间省略了将clientSentence转换成全部大写的并存储在capitalizedSentence里面的代码【<em>这个服务器执行的是将client传入的句子转换成大写返回的过程</em>】</p>
+<blockquote>
+<p>htons是将整型变量从主机字节顺序转变成网络字节顺序， 就是整数在地址空间存储方式变为高位字节存放在内存的低地址处。</p>
+<p>网络字节顺序是TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释，网络字节顺序采用big-endian排序方式。</p>
+</blockquote>
+<p><strong>listen</strong>是把在为一个client服务的过程中又来了一个请求，那么把新的加到队列中，下次循环就从队列中取出一个服务，队列的长度为10 ，超过10就拒绝服务</p>
+<h2 id="2-9-UDP-socket">2.9 UDP socket</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413144944222.png" alt="image-20220413144944222"></p>
+<p>UDP的PDU为数据报datagram，IP的无连接也叫datagram，因此需要结合上下文理解具体指哪个</p>
+<p>client同样是隐式bind</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413151951336.png" alt="image-20220413151951336"></p>
+<p>也没有welcome和connection之分</p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152123534.png" alt="image-20220413152123534"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152247442.png" alt="image-20220413152247442"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152253881.png" alt="image-20220413152253881"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152323322.png" alt="image-20220413152323322"></p>
+<h2 id="2-10-小结">2.10 小结</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152416540.png" alt="image-20220413152416540"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152527103.png" alt="image-20220413152527103"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            5 网络层-控制平面
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/6%20%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">6 链路层和局域网</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
