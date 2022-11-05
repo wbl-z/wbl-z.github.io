@@ -162,7 +162,7 @@ var _hmt = _hmt || [];
       </div>
       <div class="outer">
         <article
-  id="post-计算机网络自顶向下方法/2应用层"
+  id="post-计算机网络自顶向下方法/1概述"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -173,8 +173,8 @@ var _hmt = _hmt || [];
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/"
-    >2应用层</a> 
+  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/1%E6%A6%82%E8%BF%B0/"
+    >1概述</a> 
 </h2>
  
 
@@ -187,7 +187,7 @@ var _hmt = _hmt || [];
     </header>
      
     <div class="article-meta">
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-date">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/1%E6%A6%82%E8%BF%B0/" class="article-date">
   <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
 </a> 
   <div class="article-category">
@@ -198,483 +198,14 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>2应用层</h1>
-<h2 id="2-1应用层原理">2.1应用层原理</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408083459526.png" alt="image-20220408083459526"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408083559286.png" alt="image-20220408083559286"></p>
-<p>应用层的协议是最多的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408083923954.png" alt="image-20220408083923954"></p>
-<p>网络应用在端系统中部署</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408084212167.png" alt="image-20220408084212167"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408085603973.png" alt="image-20220408085603973"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408085709771.png" alt="image-20220408085709771"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408090057554.png" alt="image-20220408090057554"></p>
-<p>即时通讯，如QQ等</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408090255651.png" alt="image-20220408090255651"></p>
-<p>客户端进程是主动的，服务器进程是被动的</p>
-<p>P2P的会话中也有C和S之分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408090837148.png" alt="image-20220408090837148"></p>
-<p>应用进程需要解决：<strong>标识</strong>（将自己和其他应用进程区分开）和<strong>寻址</strong>（让对方能够找到自己）</p>
-<p>层间服务的<strong>地点</strong>（SAP）和<strong>形式</strong>（原语）</p>
-<h4 id="问题一">问题一</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408091321745.png" alt="image-20220408091321745"></p>
-<p>要标识和寻址一个应用进程，需要<strong>3</strong>个要素：<strong>主机IP</strong>，<strong>使用TCP还是UDP</strong>，<strong>TCP/UDP的端口号</strong></p>
-<p>本质上是由<strong>端口号来区分不同的应用进程</strong>，TCP/UDP均为<strong>16bit</strong>的端口号</p>
-<p>用IP和port标识端节点 <em>end point</em> 本质上主机进程的通信由2个端节点构成</p>
-<h4 id="问题二">问题二</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408091806498.png" alt="image-20220408091806498"></p>
-<p>层间接口需要携带的<strong>3</strong>个信息：<strong>内容即SDU</strong>，<strong>谁传的（IP+port）</strong>【<em>否则就不能由对方传回来了</em>】，<strong>传给谁（IP+port）</strong></p>
-<p>TCP/UDP实体封装源和目的的端口号和数据，进一步交给IP实体来封装源IP和目标IP</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408092728670.png" alt="image-20220408092728670"></p>
-<p>采用<strong>套接字  socket</strong>减少层间传输的信息量，避免在一次连接过程中频繁地封装谁传的/传给谁的信息</p>
-<p>socket就是一个<strong>整数</strong>，代表了源IP，源端口，目标IP，目标端口的<strong>四元组(TCP)</strong>。在<strong>UDP</strong>中是源IP，源端口号的<strong>二元组</strong>。<strong>代表了会话session关系</strong>，而不仅仅是主机的标识，一个进程和多个不同的进程进行连接有不同的socket<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408095149125.png" alt="image-20220408095149125"></p>
-<p><strong>socket是本地的标识，对方并不知道</strong>，是本地OS管理的4元组，为了<strong>便于管理</strong>而引入的</p>
-<h5 id="TCP-socket">TCP socket</h5>
-<p>便于<strong>应用层和传输层的约定</strong>【<em>其他层不知道，对方更不知道</em>】，<strong>建立连接时操作系统返回一个socket整数</strong><br>
-所以发送时应用层的应用进程只要使用这个socket整数，OS根据socket表就知道上面的四元组，也即在传输层可以得到对应的四元组，<strong>使得穿过层间的信息量最少【只需两个：socket和SDU】，而不必在应用进程中每次都指定四元组</strong><br>
-收的时候根据收到的四元组可以根据建立起的socket的表找到对应的socket，再找到哪个应用进程创建了这个socket，从而把数据发给相应的应用进程</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408094330596.png" alt="image-20220408094330596"></p>
-<h5 id="UDP-socket">UDP socket</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408095556687.png" alt="image-20220408095556687"></p>
-<p>UDP每次的报文都是独立的，可能上次发给A，下次就发给B</p>
-<p>UDP socket<strong>只代表本地IP和本地端口</strong>，<strong>不代表会话关系</strong>，因为UDP是无连接的</p>
-<p>因此发送报文时应用层的应用进程传给传输层的UDP实体需要<strong>三个信息：UDP socket、目标IP和端口、SDU</strong><br>
-同理在接收报文时传输层要将对方的IP和port传给对应的应用进程，让其知道是谁传来的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408100429128.png" alt="image-20220408100429128"></p>
-<h4 id="问题三">问题三</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408110805050.png" alt="image-20220408110805050"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408120454787.png" alt="image-20220408120454787"></p>
-<p><strong>实体是指和网络交互有关的，实现协议的软硬件部分</strong>，而其他部分就不是网络中讲的实体了，如应用程序的应用协议是我们说的实体，但其他部分IO处理等就不是了，如html不是协议的一部分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408140107691.png" alt="image-20220408140107691"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408140738102.png" alt="image-20220408140738102"></p>
-<p>UDP似乎什么服务都不能提供，那能不能直接用IP协议呢，当然是不能的，UDP能够区分出进程：</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408141012843.png" alt="image-20220408141012843"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408141737019.png" alt="image-20220408141737019"></p>
-<blockquote>
-<p><strong>SSL <em>Secure Sockets Layer</em></strong> 安全套接字协议及其继任者传输层安全（<em><strong>Transport Layer Security，TLS</strong></em>）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层与应用层之间对网络连接进行加密</p>
-</blockquote>
-<p>SSL在TCP上实现，位于<strong>应用层</strong>，应用采用SSL库如<strong>https</strong>中的s就是指SSL  <em>Hyper Text Transfer Protocol over Secure Socket Layer</em></p>
-<h2 id="2-2-Web-and-HTTP">2.2 Web and HTTP</h2>
-<p>web是一种应用，http是支持web应用的协议</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408143534573.png" alt="image-20220408143534573"></p>
-<p>web网页本身是对象，网页中嵌了对象，但不是对象本身，而是对象的链接，任何对象都可以<strong>由URL唯一标识</strong> <em>uniform resource locator</em>统一资源定位系统</p>
-<p>如果支持匿名访问，那么用户名口令可以省略</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408144657478.png" alt="image-20220408144657478"></p>
-<p>客户端是浏览器，服务端是服务器</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408144925175.png" alt="image-20220408144925175"></p>
-<p>服务器应用层会有一个特殊的socket <strong>wait socket守护socket</strong>，守护在80端口，当有其他web客户端与服务器建立请求时会产生新的socket，服务器可以并发和多个web客户端连接，这种是<strong>连接socket</strong></p>
-<p>浏览器得到html文件后 会将其画出来，其中的图片等资源会通过URL又去请求不同的其他服务器，得到后插入。<strong>得到资源后TCP连接就会关闭</strong></p>
-<p>HTTP是<strong>无状态</strong>的，即<strong>不维护客户的任何信息</strong>，仅仅是建立连接，关闭连接，在此之前和在结束之后，服务器不会有客户的任何信息，<strong>相当于没有记忆</strong></p>
-<h3 id="HTTP连接">HTTP连接</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408151025542.png" alt="image-20220408151025542"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408151753283.png" alt="image-20220408151753283"></p>
-<p>请求报文很短，传输时间一般可以忽略不计，但返回的对象资源需要传输时间*【注意这个不是传播时间，传播时间还是有的，局域网忽略不计】*</p>
-<p><strong>HTTP 1.0</strong>默认非持久连接，每次请求返回对象资源后就会关闭连接，如果客户在这个服务器上有多个请求，那么要多次TCP连接</p>
-<p><strong>HTTP 1.1</strong>默认持久连接，在返回对象资源后连接不会关闭，如果还有请求可以直接使用之前建立的连接下载（<em>可以在报文的首部行中设置connection : close来关闭</em>）</p>
-<h4 id="非持久连接">非持久连接</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408152047623.png" alt="image-20220408152047623"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408152055260.png" alt="image-20220408152055260"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408153030709.png" alt="image-20220408153030709"></p>
-<p><strong>往返时间RTT</strong> <em>round-trip time</em></p>
-<p>所以一次http请求需要<strong>2RTT+对象的传输时间</strong></p>
-<h4 id="持久连接">持久连接</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408153908013.png" alt="image-20220408153908013"></p>
-<p>需要在一个服务器上请求多个对象</p>
-<p><strong>非流水线方式</strong>：一次请求得到一个对象回来后，然后再发出第二个请求</p>
-<p><strong>流水线方式</strong>：客户端不等待对象回来，而是发出第一个请求后再发出第二个请求，之后对象依次回来。<strong>HTTP 1.1默认方式</strong></p>
-<h3 id="HTTP请求报文">HTTP请求报文</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408154045220.png" alt="image-20220408154045220"></p>
-<p><strong>请求报文</strong>和<strong>响应报文</strong>两种</p>
-<p>两种报文<strong>都是ASCII码可读的</strong>，都是用ASCII编码的【<em>是早期为了便于调试而采取的措施</em>】</p>
-<p>请求报文格式：</p>
-<ul>
-<li>
-<p><strong>请求行/命令行</strong>：<strong>GET</strong>(获取HTML head和body)、<strong>POST</strong>(上传)、<strong>HEAD</strong>(获取头，只需要HTML文件的head，不要body，一般是搜索引擎来建立索引的)</p>
-<p>HTTP 1.1增加了<strong>PUT</strong>和<strong>DELETE</strong></p>
-<p>PUT用来改资源，Post用来增资源</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36183935/article/details/80570062">HTTP中GET，POST和PUT的区别</a></p>
-</li>
-<li>
-<p><strong>首部行</strong></p>
-</li>
-<li>
-<p>(一个额外回车换行)</p>
-<p>在请求行和首部行的每一行都是有回车换行的 CR LF 【<strong><em>Carriage Return</em> 对应\r 回车 <em>Linefeed</em>  对应\n 换行</strong>】</p>
-</li>
-<li>
-<p><strong>可能的实体行</strong></p>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408155225160.png" alt="image-20220408155225160"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408155922625.png" alt="image-20220408155922625"></p>
-<p>提交表单信息：</p>
-<ul>
-<li>post：将表单放在实体部分</li>
-<li>get：将表单信息放在URL中上载，即?后表示参数，参数名=参数值，不同参数用&amp;隔开</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408160309903.png" alt="image-20220408160309903"></p>
-<h3 id="HTTP响应报文">HTTP响应报文</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408162825032.png" alt="image-20220408162825032"></p>
-<p>响应报文格式：</p>
-<ul>
-<li>
-<p>状态行：协议版本，状态码，状态信息(对状态码的解释，如OK)</p>
-</li>
-<li>
-<p>首部行：包含Last-Modified 记录修改时间，从而保证后面所讲的缓存能够与服务器内容保持一致</p>
-<p><strong>HTTP需要自己维护报文的界限</strong>，因为<strong>TCP是以字节流</strong>的形式传输的（<strong>UDP是报文形式</strong>），因此报文的字节数很重要</p>
-</li>
-<li>
-<p>(一个额外的\r \n)</p>
-</li>
-<li>
-<p>数据</p>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408163445614.png" alt="image-20220408163445614"></p>
-<h3 id="Cookies">Cookies</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408164117892.png" alt="image-20220408164117892"></p>
-<p><strong>Cookies弥补了HTTP无状态带来的一些问题</strong></p>
-<p>客户端第一次请求后，服务端在响应报文的头部加上一个cookies并保存在服务器的数据库中，客户端收到cookies由浏览器保管*(至于怎么保存，协议不管，协议只规范cookies这个传输过程)*，下次客户端发送请求时，会在请求报文的头部加上cookies，服务端对比cookies就能确定请求的客户端是谁了</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408165507430.png" alt="image-20220408165507430"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408165702704.png" alt="image-20220408165702704"></p>
-<h3 id="Web-Cache-代理服务器proxy-server">Web Cache 代理服务器proxy server</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408165937799.png" alt="image-20220408165937799"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408170249449.png" alt="image-20220408170249449"></p>
-<p>因为热点总是被更多的人访问，所以缓存是很有效的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408171051613.png" alt="image-20220408171051613"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408170857524.png" alt="image-20220408170857524"></p>
-<p>排队延迟计算公式</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408171422030.png" alt="image-20220408171422030"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408171436894.png" alt="image-20220408171436894"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408172032549.png" alt="image-20220408172032549"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408172101286.png" alt="image-20220408172101286"></p>
-<p>但有风险，可能服务器中发生改变，但缓存中没变，因此proxy server会使用Conditional GET向服务器发送请求，并在头部加入了**If-modified-since: <date>**的条件如果没有修改，那么服务器返回304 Not Modified表示没有修改；如果修改了，那么就和GET命令完全一样，将对象返回给proxy server 200 OK</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408173037727.png" alt="image-20220408173037727"></p>
-<h2 id="2-3-FTP">2.3 FTP</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408173248267.png" alt="image-20220408173248267"></p>
-<p>早期的文件分发方式</p>
-<p>客户端和<strong>服务器的21号端口</strong>建立TCP连接，这个连接称为<strong>控制连接</strong>，完成用户认证之后客户端可以向服务器发出一系列指令，如list等</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408174001802.png" alt="image-20220408174001802"></p>
-<p>当客户端发出下载命令时，服务器会<strong>主动</strong>和<strong>客户端的20号端口</strong>建立TCP连接，称为<strong>数据连接</strong></p>
-<p>控制和数据传输在分别<strong>两个连接</strong>上进行，把控制连接称为<strong>带外</strong>(out of band)，带内即数据连接</p>
-<p>FTP是<strong>有状态的</strong>，需要维护用户信息</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220408174530084.png" alt="image-20220408174530084"></p>
-<p>命令以ASCII文本形式传输</p>
-<h2 id="2-4-E-Mail">2.4 E-Mail</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410155542417.png" alt="image-20220410155542417"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410160144318.png" alt="image-20220410160144318"></p>
-<p>三个主要组成部分：</p>
-<ul>
-<li>
-<p><strong>用户代理</strong> <em>user agent</em>：写邮件的软件，因此这个软件就是邮件应用的代理（如web应用的代理是浏览器）</p>
-</li>
-<li>
-<p><strong>邮件服务器</strong> <em>mail servers</em>：守护在<strong>25号端口</strong></p>
-<p>包含</p>
-<ul>
-<li><strong>邮箱</strong>(<em>mailbox</em> contains incoming messages for user。<em>注意是保存发给用户的邮件，而不是发出去的邮件</em>)</li>
-<li><strong>报文队列</strong> <em>message queue</em> contains outgoing (to be sent) mail messages</li>
-</ul>
-</li>
-<li>
-<p><strong>协议</strong>：</p>
-<p>发送协议：SMTP</p>
-<p>拉取协议：POP3，IMAP，HTTP</p>
-</li>
-</ul>
-<p><strong>过程</strong>：用户代理将邮件发给邮件服务器**（使用SMTP）<strong>，在邮件服务器的队列中，然后邮件服务器按照队列顺序逐个将邮件发送给对应的邮件服务器</strong>（使用SMTP）<strong>，对应的邮件服务器收到邮件后存储在对应用户的邮箱mailbox中，该用户通过它的用户代理从它在邮件服务器的邮箱中拉取邮件</strong>（使用POP3等）**，在用户代理上呈现</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410161707703.png" alt="image-20220410161707703"></p>
-<h3 id="SMTP">SMTP</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410161352910.png" alt="image-20220410161352910"></p>
-<p><strong>SMTP 简单邮件传输协议</strong> <em>Simple Mail Transfer Protocol</em></p>
-<p>所有<strong>报文请求和响应以及邮件本身的内容</strong>都必须是<strong>7位ASCII码</strong>，即高位为0的可打印字符，不允许超过ASCII码的范围【<em>这是最原始的形式，但不能满足传输中文，附件的要求，因此下面有MIME</em>】</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410162038066.png" alt="image-20220410162038066"></p>
-<p>如果client发完一个邮件后，<strong>还有到达这个服务器的邮件，那么会继续发</strong>，直达client没有要发给它的邮件了，那么发出QUIT命令终止</p>
-<p><em>在一次连接中可以发很多的邮件，而不是连接一次仅发送一个</em></p>
-<p>因为都是ASCII码，所以外面可以手动输入上面的过程来模拟用户代理发送邮件</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44848479/article/details/122907746">使用telnet程序连接qq smtp协议邮箱服务器发送邮件</a></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410165723409.png" alt="image-20220410165723409"></p>
-<ul>
-<li>HTTP<strong>一个响应报文仅一个对象</strong>，即比如客户群向服务器请求一个html文件，那么html文件就是这个对象，html中的每个图片对象不会包含在其中，只会包含一个URL</li>
-<li>SMTP<strong>则会将多个对象包含在一个报文中</strong>，比如<strong>发送附件有10张图片，一个录音等</strong>，都是封装在一个报文中发送的</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410170222763.png" alt="image-20220410170222763"></p>
-<ul>
-<li>
-<p>首部行：如to、from、subject(即title)、cc(即抄送)</p>
-<p><strong>注意不是</strong>MAIL FROM, RCPT TO的<strong>命令</strong></p>
-</li>
-<li>
-<p>主体</p>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410170711930.png" alt="image-20220410170711930"></p>
-<p><strong>MIME 多媒体邮件拓展</strong> <em>multimedia mail extension</em></p>
-<p>使用<strong>base64编码</strong>，将不能用ASCII表示的文本用ASCII表示出来，<strong>从而拓展了可以传输的内容</strong>，这边base64编码，对方再解码即可</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410171204330.png" alt="image-20220410171204330"></p>
-<p>可以直接使用HTTP来下载邮件（HTTP本身就能上载和下载）</p>
-<h3 id="POP3">POP3</h3>
-<p><strong>邮局访问协议</strong> <em>Post Office Protocol</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410171606952.png" alt="image-20220410171606952"></p>
-<p>list后显示邮件编号和字节大小</p>
-<h3 id="IMAP">IMAP</h3>
-<p><strong>互联网邮件访问协议</strong> <em>Internet Mail Access Protocol</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410171822319.png" alt="image-20220410171822319"></p>
-<p>比POP3更复杂，允许用户在服务器上建立目录来管理邮件，因此需要<strong>保留用户状态</strong></p>
-<p>而POP3没有这样的功能，因此是<strong>无状态的</strong></p>
-<h2 id="2-5-DNS">2.5 DNS</h2>
-<p>域名解析系统/域名服务器 <em>Domain Name System</em></p>
-<p>DNS不是给人使用的应用，而是给其他应用使用的应用，<strong>主要实现域名到IP地址的转换</strong>，还有<strong>其他的功能</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410172711786.png" alt="image-20220410172711786"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410173230795.png" alt="image-20220410173230795"></p>
-<p>域名用平面化的命名很容易重复，因此应该使用层次化的命名</p>
-<p>使用一台设备解析域名是不可行的，因此分布式的维护和解析域名（多个服务器）</p>
-<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410173420630.png" alt="image-20220410173420630"  />
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410173544614.png" alt="image-20220410173544614"></p>
-<p>DNS运行在<strong>UDP的53号端口</strong>，很强的<strong>事务性</strong>，询问域名-IP，响应即可，没必要建立连接，且报文长度不超过 UDP 的 512 B 限制</p>
-<p><strong>互联网的很多核心功能是在网络边缘的端系统上的应用层的应用进程实现的，如DNS</strong></p>
-<p>DNS：</p>
-<ul>
-<li>
-<p>域名到IP地址的转换（主要）</p>
-</li>
-<li>
-<p>主机别名到规范名字的转换</p>
-<p><a target="_blank" rel="noopener" href="http://xn--www-eo8e.baidu.com">如www.baidu.com</a>，这个名字即为别名，不可能只有一台服务器维护百度网站，背后是一堆的服务器，<strong>因此需要将这个别名转化成具体哪个服务器的规范命名</strong>，所以转换得到的IP地址是这个服务器的IP地址【<strong>别名→规范名字→IP</strong>】</p>
-</li>
-<li>
-<p>邮件服务器别名到规范名字的转换</p>
-</li>
-<li>
-<p><strong>负载均衡</strong> <em>load distribution</em> 在主机别名到规范命名时选择负载较小的服务器</p>
-</li>
-</ul>
-<h3 id="问题一-2">问题一</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410174759148.png" alt="image-20220410174759148"></p>
-<p>对<strong>主机</strong>命名从<strong>树叶</strong>往树根走，每过一层加一个dot.区分</p>
-<p>对<strong>域</strong>命名从<strong>树枝</strong>往上走，每过一层加一个dot.区分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410175414882.png" alt="image-20220410175414882"></p>
-<p>如果只有一个root，那么万一宕机了，那么全部都不能使用，因此一共有13个根域名服务器，可以从最近的开始root往下找，如果宕机了，可以换成别的root。【事实上有上百台根域名服务器，由 13 个机构维护，逻辑上是 13 个根域名服务器】</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410180009812.png" alt="image-20220410180009812"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410180000350.png" alt="image-20220410180000350"></p>
-<p>域的划分是逻辑的，网络的划分是物理的</p>
-<h3 id="问题二-2">问题二</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410191550308.png" alt="image-20220410191550308"></p>
-<p>根据情况划分区域，尽可能均衡，zone和zone之间是<strong>互不相交的</strong></p>
-<p>对于一个区域所属的名字服务器，<strong>这个名字服务器中的信息是权威的</strong>，但在其他区域内，就不是权威的了（<em>下面介绍为什么在其他区域也能发挥作用</em>）</p>
-<blockquote>
-<p><strong>域名服务器可以划分为以下四种不同的类型:</strong></p>
-<ul>
-<li><strong>根域名服务器</strong> 根域名服务器是最高层次的域名服务器。每个根域名服务器都知道所有的顶级域名服务器的域名及其IP地址。因特网上共有13个不同IP地址的根域名服务器。当本地域名服务器向根域名服务器发出查询请求时，路由器就把查询请求报文转发到离这个DNS客户最近的一个根域名服务器。这就加快了DNS的查询过程，同时也更合理地利用了因特网的资源。</li>
-<li><strong>顶级域名服务器</strong> 这些域名服务器负责管理在该顶级域名服务器注册的所有二级域名。当收到DNS查询请求时就给出相应的回答（可能是最后的结果，也可能是下一级权限域名服务器的IP地址)。</li>
-<li><strong>权限域名服务器</strong> 这些域名服务器负责管理某个区的域名。每一个主机的域名都必须在某个权限域名服务器处注册登记。因此权限域名服务器知道其管辖的域名与IP地址的映射关系。另外，权限域名服务器还知道其下级域名服务器的地址。</li>
-<li><strong>本地域名服务器</strong> 本地域名服务器不属于上述的域名服务器的等级结构。当一个主机发出DNS请求报文时，这个报文就首先被送往该主机的本地域名服务器。本地域名服务器起着代理的作用，会将该报文转发到上述的域名服务器的等级结构中。本地域名服务器离用户较近，一般不超过几个路由器的距离，也有可能就在同一个局域网中。本地域名服务器的IP地址需要直接配置在需要域名解析的主机中。</li>
-</ul>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410191932022.png" alt="image-20220410191932022"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410192148807.png" alt="image-20220410192148807"></p>
-<p><strong>TLD</strong> <em>Top-level Domain</em></p>
-<blockquote>
-<p>例如太平洋岛国图瓦卢的顶级域名是tv，因此将其卖给了电视公司，所以不再是国家级顶级域名</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410192534380.png" alt="image-20220410192534380"></p>
-<p>资源记录 <em>resource records</em></p>
-<p>TTL 生存时间 <strong>对于权威记录，那么为无限大</strong>，而如果是在别的区域名字服务器中的记录，即非权威，是<strong>缓存</strong>在这里的，<strong>为的是提高性能和速度</strong>，<strong>默认生存时间为2天</strong>，2天后就会把记录<strong>删除</strong>，<strong>为的是保持和权威服务器的一致性</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410193236576.png" alt="image-20220410193236576"></p>
-<p><strong>NS即上层域中要保存其子域的指针</strong>，保存了子域所属的权威服务器的<strong>域名</strong>，因此要访问这个DNS服务器，还需要有一条TYPE=A的记录来得到这个服务器的IP地址</p>
-<p><strong>除了A以外的TYPE都是得到名字</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410193746954.png" alt="image-20220410193746954"></p>
-<p>一台主机要上网需要<strong>4个信息</strong>：</p>
-<p>①IP ②子网掩码 ③default gateway默认网关 ④local name server DNS服务器</p>
-<p>这些信息是自动分配或者手动分配的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410194430915.png" alt="image-20220410194430915"></p>
-<p>其实可以指定任意一台DNS作为local name server ，但local name server 一般设置比较近的/位于同一个子网的，速度更快</p>
-<blockquote>
-<p>本地域名服务器起着代理的作用，会将该报文转发到域名服务器的等级结构中。本地域名服务器离用户较近，一般不超过几个路由器的距离，也有可能就在同一个局域网中。本地域名服务器的IP地址需要直接配置在需要域名解析的主机中。</p>
-</blockquote>
-<h4 id="名字解析过程">名字解析过程</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410194515330.png" alt="image-20220410194515330"></p>
-<p><strong>递归查询</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410194710644.png" alt="image-20220410194710644"></p>
-<p>当不在区域内/缓存中没有时，local name server 联系13个根名字服务器中的一个，<strong>让根服务器代替本地DNS从根往下找，当然根服务器也让下一级服务器返回它查到的结果，递归下去，最后由根服务器返回得到的结果给本地DNS</strong>，但这样根服务器压力很大，从它这个引申出一大堆递归【<em>就像递归消耗很大一样</em>】</p>
-<p><strong>迭代查询</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410195001066.png" alt="image-20220410195001066"></p>
-<p>还是先问根名字服务器，但根服务器不知道的话，只是给出下一级服务器的地址，让本地DNS去问它，<strong>然后由本地服务器去逐个询问</strong>，<strong>最终由权威服务器告诉本地DNS</strong></p>
-<p>如果得到了这个域名-IP映射，本地DNS会<strong>缓存</strong>下来默认两天</p>
-<blockquote>
-<p>不但在本地域名服务器中需要高速缓存，在用户主机中也很需要。</p>
-</blockquote>
-<blockquote>
-<p>通常采用以下模式：<strong>从请求主机到本地域名服务器的查询是递归查询，而其余的查询是迭代查询。</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>DNS解析</strong>：浏览器缓存——》系统hosts文件——》本地DNS解析器缓存——》本地域名服务器（本地配置区域资源、本地域名服务器缓存)——》根域名服务器——》主域名服务器——》下一级域名域名服务器 客户端——》本地域名服务器（递归查询) 本地域名服务器—》DNS服务器的交互查询是迭代查询</p>
-</blockquote>
-<h4 id="DNS协议、报文">DNS协议、报文</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410195705289.png" alt="image-20220410195705289"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410200048667.png" alt="image-20220410200048667"></p>
-<p><strong>ID号可以使得查询过程流水线化</strong>，如果没有ID号，那么必须等上次查询完成才能发出下次的查询</p>
-<p><strong>DNS查询和响应的报文格式一样</strong>，根据flags判断是查询还是响应</p>
-<h3 id="问题三-2">问题三</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410200216555.png" alt="image-20220410200216555"></p>
-<p>增加一个域需要增加两条信息：①该域的域名和其DNS名字的对应关系 ②该DNS名字和DNS的IP的对应关系</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220410200741964.png" alt="image-20220410200741964"></p>
-<p>DNS比较健壮</p>
-<h3 id="nslook">nslook</h3>
-<p>在 cmd 中使用 nslook 程序可以进行域名解析，此外解析会<strong>自动在输入的域名后面加上当前 DNS 的域名</strong>，因此如下</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220509120525161.png" alt="image-20220509120525161"></p>
-<p>如果不是当前域名下的网站，那么会逐个向上查询，根据请求可以看到，这里使用的是递归查询，所有结果都由 DNS 返回给主机</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220509120551574.png" alt="image-20220509120551574"></p>
-<h2 id="2-5-P2P应用">2.5 P2P应用</h2>
-<p>一类P2P应用</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411082154789.png" alt="image-20220411082154789"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411082655420.png" alt="image-20220411082655420"></p>
-<p>当N很小时，服务器的能力很强，客户端的下载速度是瓶颈，随着N增加，服务器成为瓶颈，时间线性增加</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411083256812.png" alt="image-20220411083256812"></p>
-<p>流媒体也是类似的，因此一个视频看的人越多反而越流畅<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhanghan18333611647/article/details/52135694">传统媒体—&gt;流媒体—&gt;加P2P的流媒体的演变之路</a></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411083133701.png" alt="image-20220411083133701"></p>
-<h3 id="P2P的管理模式">P2P的管理模式</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411084856104.png" alt="image-20220411084856104"></p>
-<h4 id="非结构化P2P">非结构化P2P</h4>
-<p>peer和peer之间的有相互的TCP关系，则两者之间有一条边，这个边是应用层上逻辑的，事实上两个主机之间可能会经过很多的路由器。<strong>节点和节点之间边的关系是任意的，构成的overlay 覆盖网是任意的，称为非结构化</strong></p>
-<h5 id="集中式目录">集中式目录</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085017807.png" alt="image-20220411085017807"></p>
-<p>目录服务器维护了哪些IP在线；哪些IP具有哪些资源</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085234213.png" alt="image-20220411085234213"></p>
-<h5 id="完全分布式">完全分布式</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085435407.png" alt="image-20220411085435407"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411085920889.png" alt="image-20220411085920889"></p>
-<p>一个主机向与之逻辑上连接的<strong>所有主机发出查询</strong>（假定已经构成了覆盖网），然后一传十，十传百的形式泛洪flooding查询。</p>
-<p>会使用TTL来限制泛洪的跳数；或者记录自己已经查询过了，避免回环</p>
-<p><strong>覆盖网的构建</strong>：在下载Gnutella软件时会有一个表，其中是很可能在线的节点，本主机向这些节点发送ping，如果这些节点中有在线的，再向它的所有邻居发送ping，和上面的泛洪一样，所有收到ping的节点以pong回应，本主机只要选择若干个节点建立TCP连接当作邻居即可。</p>
-<p>当一个节点退出时，只要向其邻居发送即可，这些邻居各自再去找一个新的邻居以维持邻居树目</p>
-<h5 id="混合体">混合体</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411090925779.png" alt="image-20220411090925779"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411091340324.png" alt="image-20220411091340324"></p>
-<p><strong>hash</strong>作为文件的唯一标识</p>
-<h4 id="DHT-分布式散列表-（结构化）P2P">DHT(分布式散列表)（结构化）P2P</h4>
-<p>节点与节点之间是可以构成环，树的关系，是有结构的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411095558203.png" alt="image-20220411095558203"></p>
-<p>如环状：每个节点将其IP地址做哈希，根据hash值从小到大首位相连（逻辑），然后文件也同样做哈希，约定好如上面hash值为6~88的文件存储在hash为88的peer节点中。这样的P2P网络模式有效减少了资源定位的开销，提高了P2P 网络的可扩展性</p>
-<h3 id="BitTorrent">BitTorrent</h3>
-<p><strong>非结构化</strong>P2P，可以看作混合体式</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411091702522.png" alt="image-20220411091702522"></p>
-<p>把文件分成若干个<strong>256KB的块</strong></p>
-<p><strong>BT工作原理</strong>：在文件网站/搜索引擎中下载torrent文件，其中包含了对应文件的Tracker Server，然后向Tracker Server发出请求，它会分配一些peer节点的列表给请求客户端，从而请求客户端加入洪流，互通有无：<em>拿出自己多余的东西给对方，与之进行交换，以得到自己所缺少的东西</em></p>
-<p><strong>Torrent洪流</strong>：相当于一个小组</p>
-<p><strong>BitMap</strong>标识一个文件的块的拥有情况，比如10表示拥有这个文件的第一个块，但没有第二个块。通过<strong>bitmap交换</strong>就可以知道相互之间的块的拥有情况</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411092252498.png" alt="image-20220411092252498"></p>
-<p>新加入Torrent的节点随机的向其他的节点请求块，因为此时什么都没有，bitmap都是0，<strong>当达到4个1后</strong>，<strong>优先请求稀缺的块</strong>，即在洪流中持有该块的节点数目很少的块。<strong>这样可以让稀缺的块逐渐不稀缺，有利于集体利益</strong></p>
-<p>并且有一个策略：如果作为服务方，会优先向为我提供服务最好的节点提供服务，是一种你对我好，我对你好的模式</p>
-<p>因此新加入的节点得到稀缺块后，别人向他请求的会更多，那么根据策略，他得到别人服务的机会会更大，<strong>这样就可以将集体的利益转化成个人利益</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411093708760.png" alt="image-20220411093708760"></p>
-<p>因为请求的节点数大于能服务的节点数，所以需要排队，Alice每隔30s随机选择一个节点，而不是根据之前周期该节点对Alice提供的服务进行评估优先选择。<strong>这样优化疏通可能可以导致如下的情况</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220411094037836.png" alt="image-20220411094037836"></p>
-<h2 id="2-7-CDN">2.7 CDN</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412130235338.png" alt="image-20220412130235338"></p>
-<h3 id="DASH-基于HTTP的动态自适应流">DASH 基于HTTP的动态自适应流</h3>
-<p>可以看出 <strong>HTTP 可不仅仅只用于 web，还可以用于文件的上下载、音视频的播放</strong>。<strong>HTTP 就是一个传输协议，和应用无关。</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412131542549.png" alt="image-20220412131542549"></p>
-<p>将每个块编码于不同的码率，形成多个内容相同，码率不同的块，分别独立存储，提前部署，可能分布于不同服务器，可以是源服务器，或者缓存服务器</p>
-<p>所有的这些块（不同内容/不同码率）用<strong>告示文件 <em>manifest file</em></strong>记录它们的URL、码率、时长等信息</p>
-<p>客户端根据带宽和缓冲区的情况动态地决定请求什么样的块，什么编码速率的块</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412132003989.png" alt="image-20220412132003989"></p>
-<p><strong>DASH 解决了不同客户端、不同网络情况的需求问题</strong></p>
-<h3 id="CDN">CDN</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412132624437.png" alt="image-20220412132624437"></p>
-<p><strong>CDN解决的是单个服务器向大量用户提供服务的质量低的问题</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412132817469.png" alt="image-20220412132817469"></p>
-<p><strong>ICP需要买CDN运营商的服务</strong>，从而提高他们为用户提高的服务质量</p>
-<p><strong>内容加速服务：<strong>CDN运营商部署了很多的缓存节点，客户端不需要向源服务器请求，而是可以在中间</strong>域名解析重定向</strong>到离它最近，服务质量最好的缓存节点</p>
-<p>显然，前提是ICP要提前将内容部署在缓存节点中，但选择哪些内容部署，是一个策略问题（根据二八定律，一般选择热门的内容部署）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412134021517.png" alt="image-20220412134021517"></p>
-<p>CDN运营商部署缓存节点的方式：</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412134147448.png" alt="image-20220412134147448"></p>
-<ul>
-<li>
-<p><strong>enter deep，将</strong> <strong>CDN</strong> <strong>服务器深入到许多接入网。</strong> 就是在很多的 local ISP 的范围内部署了很多的缓存节点，把一些内容预先部署到这一缓存节点当中。</p>
-<p>这种部署方式更接近用户，节点数量多、离用户近，用户请求资源时跳数更少，网络带宽大。</p>
-<p>但是因为部署的节点非常靠下，所以需要部署非常多的节点，这些节点管理起来很困难。</p>
-</li>
-<li>
-<p><strong>bring home，</strong> <strong>部署在少数(10个左右)关键位置节点上</strong>，比如将服务器簇安装于 POP （网络服务提供点 Point of presence）附近，离若干一级 ISP POP 较近的位置。就是在一些上层的 ISP，有很多的数据中心机房的关键节点，然后我选的位置离那些关键数据中心机房比较近。</p>
-<p>这样的话，只要我卡住这些关键的位置，也可以向用户提供一些好的服务。但相比于enter deep服务稍弱</p>
-</li>
-</ul>
-<p><strong>CDN位于应用层提供服务 over the top</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412165604792.png" alt="image-20220412165604792"></p>
-<ol>
-<li>
-<p>客户端要访问URL上的视频</p>
-<p><strong>【如果采用了DASH】</strong> <strong>：先要获取告示文件</strong>（如下面的网飞的例子中），然后去<strong>动态逐个请求每个块</strong>，比如一个块的地址在源服务器并且缓存在了CDN中，那么和上图的流程一样</p>
-<p><strong>【如果不考虑DASH】</strong>：那么就相当于ICP把整个视频缓存在了CDN服务器中，客户端直接去根据上图流程访问到CDN服务器上的视频</p>
-</li>
-<li>
-<p>客户端向local DNS请求域名解析</p>
-</li>
-<li>
-<p>local DNS再去请求权威名字服务器的域名解析</p>
-<p>权威名字服务器知道哪些内容需要加速，因此可以将这个url的解析<strong>重定向</strong>，返回一个新的域名地址【即视频位于的CDN缓存服务器的URL】给local DNS</p>
-</li>
-<li>
-<p>local DNS再去解析这个域名地址，如果没有缓存，那么同理要请求CDN运营商的权威名字服务器，然后得到CDN服务器的IP</p>
-</li>
-<li>
-<p>local DNS将IP返回给客户端，客户端去请求这个IP即可</p>
-</li>
-</ol>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220412170509774.png" alt="image-20220412170509774"></p>
-<h2 id="2-8-TCP-socket编程">2.8 TCP socket编程</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132013178.png" alt="image-20220413132013178"></p>
-<p>应用进程只需要借助socket传和收即可，是逻辑是上的传输，不必关心真正是怎么传输的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132249795.png" alt="image-20220413132249795"></p>
-<p>字节流保证是可靠的，但不保证报文和报文之间的界限</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132447084.png" alt="image-20220413132447084"></p>
-<p><strong>创建-捆绑-等待</strong></p>
-<p>阻塞式即如果没有发送过来的用户连接，那么函数就在这里阻塞，不往下走</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413132959115.png" alt="image-20220413132959115"></p>
-<p>sockaddr_in是代表了一个端节点</p>
-<p>这个数据结构不仅可以用于ip的通讯，也可以用于ipx的通讯，<strong>所以是地址簇</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413133403809.png" alt="image-20220413133403809"></p>
-<p>IP地址位于h_addr_list[0]</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413133459987.png" alt="image-20220413133459987"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413134829762.png" alt="image-20220413134829762"></p>
-<p>sad就是sockaddr_in结构体</p>
-<p>客户端不需要bind，而服务器需要bind，如果不绑定，那么客户端不知道去找谁，但客户端OS会隐含地bind</p>
-<p>当client connect【将socket表项的对方IP，port填充好】后会向server发TCP连接建立请求，client阻塞在这，server收到信息解除阻塞，返回一个新的值，即connection socket，在socket表中填充了socket，双方的IP和port，当server返回连接确认信息后，client也解除阻塞，这样就真正建立起了连接</p>
-<p>close后，对应表项就会被删除</p>
-<p><strong>多个进程可以使用同一个端口</strong>，如welcome socket和connection socket使用的都是80端口</p>
-<blockquote>
-<p>一个进程监听端口，经验告诉我们，如果多次启动一个进程会报错：“Address already in use!&quot;。这<strong>是由于bind函数导致的</strong>，由于该端口号已经被第一个进程监听了。有哪些方法可以实现多个进程监听同一个端口呢？</p>
-<p>fork：只要在绑定端口号（bind函数）之后，监听端口号之前（listen函数），用fork（）函数生成子进程，这样子进程就可以克隆父进程，达到监听同一个端口的目的，而且还相互竞争，提高程序效率。</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413140334193.png" alt="image-20220413140334193"></p>
-<p>main的参数传入服务器的域名和port</p>
-<p>这里没有bind，是OS隐式bind，随机选取一个暂时没有用到的端口号bind，所以上面的sockaddr_in中代表的是服务器的端节点IP+port</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413140805502.png" alt="image-20220413140805502"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413140914413.png" alt="image-20220413140914413"></p>
-<p>cad存放client的端节点，sad存放自己的</p>
-<p>main的参数只需传入自己的port即可</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413141425906.png" alt="image-20220413141425906"></p>
-<p>中间省略了将clientSentence转换成全部大写的并存储在capitalizedSentence里面的代码【<em>这个服务器执行的是将client传入的句子转换成大写返回的过程</em>】</p>
-<blockquote>
-<p>htons是将整型变量从主机字节顺序转变成网络字节顺序， 就是整数在地址空间存储方式变为高位字节存放在内存的低地址处。</p>
-<p>网络字节顺序是TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释，网络字节顺序采用big-endian排序方式。</p>
-</blockquote>
-<p><strong>listen</strong>是把在为一个client服务的过程中又来了一个请求，那么把新的加到队列中，下次循环就从队列中取出一个服务，队列的长度为10 ，超过10就拒绝服务</p>
-<h2 id="2-9-UDP-socket">2.9 UDP socket</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413144944222.png" alt="image-20220413144944222"></p>
-<p>UDP的PDU为数据报datagram，IP的无连接也叫datagram，因此需要结合上下文理解具体指哪个</p>
-<p>client同样是隐式bind</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413151951336.png" alt="image-20220413151951336"></p>
-<p>也没有welcome和connection之分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152123534.png" alt="image-20220413152123534"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152247442.png" alt="image-20220413152247442"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152253881.png" alt="image-20220413152253881"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152323322.png" alt="image-20220413152323322"></p>
-<h2 id="2-10-小结">2.10 小结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152416540.png" alt="image-20220413152416540"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220413152527103.png" alt="image-20220413152527103"></p>
- 
+  
+        <h1>1.概论</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220309163725161.png" alt="image-20220309163725161"></p> 
+        
+      <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/1%E6%A6%82%E8%BF%B0/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -736,1131 +267,14 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>4 网络层-数据平面</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429111116397.png" alt="image-20220429111116397"></p>
-<h2 id="4-1-导论">4.1 导论</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429111936600.png" alt="image-20220429111936600"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429112347623.png" alt="image-20220429112347623"></p>
-<p><strong>转发</strong>——数据平面，决定从哪个端口入，从哪个端口出，是局部功能</p>
-<p><strong>路由</strong>——控制平面，决定分组该怎么走，是全局功能</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429112447141.png" alt="image-20220429112447141"></p>
-<p>转发和路由分别有传统方式的 SDN 方式，因此共有四种组合</p>
-<p>传统方式是数据平面和控制平面<strong>强耦合</strong>在一起，在一个路由器上一起实现，并且控制平面的路由表是分布式地在不同的路由器各自计算的【因此要修改非常难】</p>
-<p>传统方式：<strong>控制平面算出路由表，数据平面根据路由表和分组的目标 IP 地址进行转发</strong> <strong>不可编程</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429113624038.png" alt="image-20220429113624038"></p>
-<blockquote>
-<p>SDN 根据多个字段而不是仅仅根据 IP 可以有多个动作：转发、block、泛洪、修改字段，<strong>因此是可编程的</strong></p>
-<p>流表是网络操作系统(一个服务器)算出来，通过南向接口交给分组交换设备，分组交换设备把流表装载上之后就可以根据流表进行多个字段的匹配。<strong>因此控制平面是集中式的</strong></p>
-<p><strong>这里的路由器叫做分组交换机</strong></p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429114444557.png" alt="image-20220429114444557"></p>
-<p><strong>网络服务模型</strong>（<em>network service model</em>）定义了分组在发送与接收端系统之间的<strong>端到端运输特性</strong>。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429115302243.png" alt="image-20220429115302243"></p>
-<p><strong>（可见 IP 网络是尽力而为的，即什么都不保证。尽力而为服务看起来是根本无服务的一种委婉说法）</strong></p>
-<p>主机到主机的网络层连接不仅仅体现在端主机之上，而且体现在中间路径上经过的所有交换节点</p>
-<p><strong>TCP / IP 网络中 IP 网络层向上层提供的服务（不存在连接建立）：</strong> 路由表由控制平面产生，交给 IP 协议，根据路由表对到来的分组进行转发，实现数据平面的功能</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429115117104.png" alt="image-20220429115117104"></p>
-<p>对有一些网络，要提供连接建立的功能</p>
-<h2 id="4-2-路由器组成">4.2 路由器组成</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429120911015.png" alt="image-20220429120911015"></p>
-<p>任何一个端口都可以既输入又输出混合在一起的，没有独立的输入/输出端口</p>
-<p>每个端口有 3 个方框，分别为物理层，链路层，网络层。路由表要交给每个端口的网络层</p>
-<blockquote>
-<p>指的是路由器的物理输入和输出接口，这完全 不同于第2、3章中所讨论的与网络应用程序和套接字相关联的软件端口</p>
-</blockquote>
-<h3 id="输入端口">输入端口</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430093745617.png" alt="image-20220430093745617"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430094051788.png" alt="image-20220430094051788"></p>
-<p>当出现多个输入端口转到相同输出端口时，需要排队，因此会导致交换速率小于输入速率，所以需要排队</p>
-<p><strong>队头阻塞</strong> <strong>HOL blocking</strong>  <em>head of the line blocking</em> ：队列的首个packet由于它的目的端口正忙而被延迟转发，导致后面的packets被blocked</p>
-<h3 id="交换结构">交换结构</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430104949033.png" alt="image-20220430104949033"></p>
-<p>交换速率应当是 N 倍于输入线路的输入速率（ N 为输入端口数量）</p>
-<p><strong>通过内存交换</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430105129633.png" alt="image-20220430105129633"></p>
-<p>通过 bus 两次</p>
-<p><strong>通过总线交换</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430105514365.png" alt="image-20220430105514365"></p>
-<p>分组通过 bus 时要加上输出端口的地址，输出端口发现是自己的端口，那么就将其从这个端口输出</p>
-<p><strong>通过互联网络交换</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430105713225.png" alt="image-20220430105713225"></p>
-<p>同时可以<strong>转发多个分组</strong></p>
-<h3 id="输出端口">输出端口</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110116587.png" alt="image-20220430110116587"></p>
-<p>队列中的分组发送顺序不一定是 FIFO 的，可以采用一些调度规则，实现按优先级发送</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110458097.png" alt="image-20220430110458097"></p>
-<p>输入和输出端口都有可能导致分组的丢弃</p>
-<h3 id="调度机制">调度机制</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110602462.png" alt="image-20220430110602462"></p>
-<p>通常默认是 FIFO</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110730870.png" alt="image-20220430110730870"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430110923709.png" alt="image-20220430110923709"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430111048050.png" alt="image-20220430111048050"></p>
-<h2 id="4-3-Internet-Protocol">4.3 Internet Protocol</h2>
-<p>所有网络从IP 角度看都是 IP 网络，<strong>IP 是 over everything 的</strong>，IP 是在各种物理网络上运行的。<strong>能够成功的兼容不同的物理网络【不同的链路协议】让不同的链路协议可以组合在一起，在网络层都是 IP 协议，在链路层的不同跳上则是不同类型的链路协议</strong>，IP 的提出就是为了让当时不同类型的网络能够相互兼容地运行</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430111344286.png" alt="image-20220430111344286"></p>
-<p><strong>IP 协议</strong>根据分组头部的 DA 字段匹配路由表，<strong>实现数据平面的转发功能</strong></p>
-<h3 id="IP-数据报格式">IP 数据报格式</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430111703747.png" alt="image-20220430111703747"></p>
-<p><strong>20 B 的头部</strong> + 可能的 option 【由 head len 字段记录头部总长】+ data</p>
-<ul>
-<li><strong>版本号</strong>：在 IPv4 为 4【4 bit】</li>
-<li><strong>首部长度</strong> head len 的单位是 4 B ，因此如果head len = 5 ，那么表示 4*5 = 20 B 【4 bit】</li>
-<li><strong>区分服务</strong>: 用来区分不同的数据报，以便按优先级获得更好的服务,但实际上一直没被用过【8 bit】</li>
-<li><strong>总长度</strong>：IP 报头+数据的长度【16 bit】</li>
-<li><strong>标识</strong> identification：在IP软件在存储器中维持着一个计数器，每产生一个数据报，计数器就+1，并将此值赋值给标识字段。当IP数据报长度超过 MTU 而必须进行分片，这个标识字段的值就被复制到所有的数据报片的标识字段中。相同的标识字段的值使分片后的各个数据报片最后的能正确地重装成为原来的数据。【16 bit】</li>
-<li><strong>标志</strong> flag：目前只有两位有意义【3 bit】
-<ul>
-<li>标志字段中的<strong>最低位为MF</strong> <em>more fragments</em>。MF=1即表示后面“还有分片”的数据报。MF=0表示的是这个数据报的最后一个。</li>
-<li>标志字段中的<strong>中间一位记为DF</strong> <em>don’t fragment</em>，当DF记为1时，表示的是“不能分片”。</li>
-<li>最高位：<em>reversed bit</em></li>
-</ul>
-</li>
-<li><strong>片偏移</strong>：某片在原分组中的相对位置，便于后续接收时正确地重组。<strong>片偏移以8字节为单位</strong>。这就是说，<strong>每个分片长度一定是8字节的整数倍。</strong>【13 bit】</li>
-<li><strong>生存时间</strong> ：数据报能在因特网中经过的路由器的最大数值是<strong>255</strong>【8 bit】</li>
-<li><strong>上层协议</strong> protocol：指出此数据携带的数据是使用何种协议，以便让目的 IP 层知道将数据部分上交到哪个处理过程。如TCP，UDP**[17]**等等【8 bit】</li>
-<li><strong>首部检验和</strong>：检验头部是否正确【16 bit】</li>
-<li><strong>源IP地址</strong>：【32 bit】</li>
-<li><strong>目的IP地址</strong>：【32 bit】</li>
-</ul>
-<h3 id="分片和重组">分片和重组</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430142315368.png" alt="image-20220430142315368"></p>
-<p>以太网对数据帧的长度都有一个限制，即 <strong>最大传输单元 MTU</strong> <em>Maximum Transmission Unit</em> 为<strong>1500 B</strong></p>
-<p>因此需要将大的 IP 数据报/包分片，但不能直接分片，要拷贝头部信息</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430142132152.png" alt="image-20220430142132152"></p>
-<p>每一个片的载荷/数据部分【不包括头部】都一定是 8 B 的倍数，如上的 1480 B</p>
-<p>每一片都具有<strong>相同的标识</strong>【用于确定哪些是一个组的】，但不同的偏移量，偏移量记录的是<strong>分片的数据部分在原来的数据部分的偏移量【均不涉及头部】</strong></p>
-<p><strong>重组一定只在最终的目标主机上进行</strong>，减少对中间路由器的压力，同时，不同的片可能走不同的路径，也无法在中间路径上全部重组</p>
-<p><strong>如果有某分片丢失了</strong>，那么所有该标识的分片都会被目标主机丢弃，如果上层是 TCP，那么超时重发。因此分片会增加丢失的概率，导致重发增加，效率降低，因此不建议切分 IP 数据报。</p>
-<blockquote>
-<p>TCP协议为了减少IP报被切分的概率，双方主机在握手阶段会交换自己的MSS</p>
-<p>MSS是TCP层交互给IP层最大分段大小，不包含TCP报头，只包含数据所以TCP为了减少被切分的概率，就确定一个MSS限制每一次交互给IP层的数据大小。MSS数据大小去掉IP报头和TCP报头，IP报头和TCP报头都是20个字节（不考虑扩展项）。因此：<strong>MSS数据大小=MTU-20-20</strong>（MTU默认值是1500个字节，也可以是其它值）。</p>
-<p><strong>所以双方主机在建立连接的时候会交换自己的MSS大小值</strong>，最终大小<strong>取决于双方主机的较小值</strong>，如果一台主机的MSS是1200个字节，另一台主机的MSS是1300个字节，所以双方主机MSS都取1200个字节，那么双方通信的时候TCP层面发送的数据都是1200个字节。<br>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/sjp11/article/details/124170051">https://blog.csdn.net/sjp11/article/details/124170051</a></p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430142925705.png" alt="image-20220430142925705"></p>
-<h3 id="IP-编址">IP 编址</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430143913198.png" alt="image-20220430143913198"></p>
-<p><strong>IP 地址用来标识接口</strong>，如主机，IP 地址不是用来标识主机，而是标识主机连接的那个接口/点的，一个主机也可以有多个接口，包含多个 IP</p>
-<h4 id="子网">子网</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430144422811.png" alt="image-20220430144422811"></p>
-<p>IP 地址：</p>
-<ul>
-<li>子网部分（高位 bit）</li>
-<li>主机部分（低位 bit）</li>
-</ul>
-<p>一个子网内部的主机的到达<strong>在 IP 层面一跳可达</strong>，<strong>不需要借助路由器，可以借助交换机即可</strong></p>
-<blockquote>
-<p>链路层：在长途链路中采用点到点的连接，减少绕路；在局域网中采用多点连接即多个设备连到交换机上，经过交换机到达其他点</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430144733795.png" alt="image-20220430144733795"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430145144550.png" alt="image-20220430145144550"></p>
-<p>如上，有 <strong>6</strong> 个子网</p>
-<h4 id="IP-地址分类">IP 地址分类</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430145244700.png" alt="image-20220430145244700"></p>
-<ul>
-<li>
-<p>A 类地址：<strong>最高地址为0</strong>，2<sup>7</sup>-2 = 126 个网络，<strong>注意减 2 是因为全 0 和全 1 的网络不使用</strong>，每个网络有 2<sup>24</sup>-2 个主机</p>
-</li>
-<li>
-<p>B 类地址：<strong>最高地址为 10</strong>，2<sup>14</sup>-2 个网络，2<sup>16</sup>-2 个主机</p>
-</li>
-<li>
-<p>C 类地址：<strong>最高地址为 110</strong>，2<sup>21</sup>-2 个网络，2<sup>8</sup>-2个 主机</p>
-<p>ABC 类地址均为单播地址，D类地址为组播地址<a target="_blank" rel="noopener" href="https://m.elecfans.com/article/1163386.html">单播与组播、广播及任播有什么区别-电子发烧友网 (elecfans.com)</a></p>
-<blockquote>
-<p>组播解决了单播和广播方式效率低的问题，组播路由器借助组播路由协议为组播数据包建立树型路由，被传递的信息在尽可能远的分叉路口才开始复制和分发。</p>
-</blockquote>
-</li>
-<li>
-<p>D 类地址：<strong>最高地址为 1110</strong>，2<sup>28</sup>-2 个，D类地址不能出现在IP报文的<strong>源IP地址</strong>字段。</p>
-</li>
-<li>
-<p>E 类地址：<strong>最高地址为 11110</strong>，为未来预留的</p>
-</li>
-</ul>
-<p>互联网的路由是**以网络为单位【而不是一个 IP 地址一个表项】**来路由信息的发布和计算的，<strong>一个子网在路由器中就是一个表项</strong></p>
-<p>而且如上面的子网图中，可以将 3 个子网<strong>聚集</strong>成一条<strong>向外发布</strong> <em>【即这些子网从更短的掩码或者从外部来看，也可以看作一个子网，因此只要是这些子网【即根据更短的掩码】的数据报，都发给这个路由器即可，接下来往哪个子网发，这个路由器会知道】</em>，进一步减少在广域网中路由表表项的数目和计算的代价</p>
-<h4 id="特殊-IP-地址">特殊 IP 地址</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430152710393.png" alt="image-20220430152710393"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430154658524.png" alt="image-20220430154658524"></p>
-<ul>
-<li>
-<p><strong>网络地址</strong>：{<Network-number>，<Host-number>}={<Network-number>，0} 该地址用于标识网络，不能分配给主机，因此不能作为数据的源地址和目的地址。</p>
-</li>
-<li>
-<p><strong>直接广播地址</strong>：{<Network-number>，<Host-number>}={<Network-number>, -1} 向某个网络上所有的主机发送报文。<strong>直接广播地址只能作为目的地址。</strong></p>
-</li>
-<li>
-<p><strong>受限广播地址</strong>：{<Network-number>，<Host-umber>}={-1, -1} 受限广播地址是在本网络内部进行广播的一种广播地址。TCP/IP规定，32比特全为“1”的IP地址用于本网络内的广播。**受限广播地址只能作为目的地址。 **</p>
-<blockquote>
-<p>直接广播要求发送方必须知道信宿网络的网络号。但有些主机在启动时，往往并不知道本网络的网络号，这时候如果想要向本网络广播，只能采用受限广播地址（Limited Broadcast Address）。 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv14336375">https://www.bilibili.com/read/cv14336375</a></p>
-</blockquote>
-</li>
-<li>
-<p><strong>回环地址</strong>：127开头，后面任意*【除了全0，全0表示网络地址和全1，全1表示该网络的广播地址】*到了 IP 层会直接返回</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430152840849.png" alt="image-20220430152840849"></p>
-</li>
-<li>
-<p><strong>0.0.0.0</strong>，特殊的源地址，表示的是网络上的所有主机，一般在写服务端程序绑定监听地址时常用此地址。</p>
-</li>
-</ul>
-<h4 id="专用-内网-IP-地址">专用(内网) IP 地址</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430154844277.png" alt="image-20220430154844277"></p>
-<p><strong>内网地址用于区分局部网络中的不同设备</strong></p>
-<p>路由器不对目标地址是内网地址的分组进行转发，即不能在公网中转发，只能在内网中使用</p>
-<blockquote>
-<p>因此 ping 上述的内网地址一定会超时，分组被丢弃。但 ping 除内网地址外的地址都是可以 ping 到的【也有可能超时，有些 IP 不能访问】，因为 IPv4 地址早已分配完了</p>
-</blockquote>
-<h4 id="CIDR">CIDR</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430155530440.png" alt="image-20220430155530440"></p>
-<p>B 类地址主机太多，C 类地址主机太少，因此都不太合适，所以产生了<strong>无类域间路由</strong>，不分类，可以任意划分前多少个 bit 为网络号，这样就可以控制主机数目适中。</p>
-<p>但这样看到 IP 地址时就不能像按类划分那样看前面几位就能确定前面多少位是网络号了，<strong>因此需要将 IP 与子网掩码与操作，即可得到网络号</strong></p>
-<h3 id="转发">转发</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430160426352.png" alt="image-20220430160426352"></p>
-<p>对于到来的 IP 数据报中的目标地址，需要对每一个表项进行掩码与并和对应的网络号对比，相同则从这个端口转发出去</p>
-<h3 id="如何获得-IP-地址">如何获得 IP 地址</h3>
-<h4 id="主机如何获得-IP-地址">主机如何获得 IP 地址</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430160854594.png" alt="image-20220430160854594"></p>
-<p>需要配置4个信息：<strong>IP、子网掩码、默认网关、local DNS</strong></p>
-<h5 id="DHCP">DHCP</h5>
-<p><em>Dynamic Host Configuration Protocol</em> 动态主机配置协议</p>
-<p><strong>DHCP 是基于 UDP 的应用</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430161109899.png" alt="image-20220430161109899"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430161402186.png" alt="image-20220430161402186"></p>
-<p>自动申请IP地址的过程：</p>
-<ol>
-<li>
-<p>主机**广播请求【全1的 IP 广播】**寻找能够提供IP地址的DHCP服务器</p>
-<p>【DHCP 请求报文👉目的端口 <strong>67</strong> （DHCP服务器）和源端口 <strong>68</strong> （DHCP客户）的UDP报文段👉有广播 IP 目的地址（<strong>255.255.255.255</strong>）和源 IP 地址 <strong>0. 0. 0. 0</strong> 的 IP 数据报👉有目的 MAC 地址 <strong>FF : FF : FF : FF : FF : FF</strong> 和 源 MAC 地址的以太网帧】</p>
-</li>
-<li>
-<p>服务器收到请求后，查看自己是否有可提供的IP地址（需要事先在DHCP服务器上配置地址池和可以提供的IP地址范围）。如果有，就回应可以提供的IP地址和可使用的时间（通常叫租期）</p>
-</li>
-<li>
-<p>主机收到服务器回应的消息后，知道可以使用这个IP地址和租期，会发送确认请求</p>
-</li>
-<li>
-<p>服务器收到来自主机的请求，再 ACK</p>
-</li>
-</ol>
-<p>为什么需要再发一次 request 呢？</p>
-<p>因为<strong>可能有多个</strong> DHCP 服务器，主机只需要选择一个 DHCP 提供的 IP 即可【一般第一个】，因此要告诉其余的 DHCP 服务器，不需要它们分配的 IP 了</p>
-<h4 id="机构如何获得-IP-地址池">机构如何获得 IP 地址池</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430162535943.png" alt="image-20220430162535943"></p>
-<p>通过将 ISP 的网络号增加几位，如上增加 3 位，则前 20 位为网络号，后 3 位为子网号【<em>可以分配给 8 个机构</em>】，再后面为主机号，这样就能从 ISP  获取一个 IP 地址池</p>
-<h5 id="层次编址：可以路由聚集">层次编址：可以路由聚集</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430163526208.png" alt="image-20220430163526208"></p>
-<p>路由器 IP0 向前面的路由器 IPx 发布通告，凡是通过掩码（23）得到是 IP0 的，那么下一跳 <em>hop</em> 都是 IP0 路由器，IPx 需要转发到连接 IP0 的接口。</p>
-<p>其他的同理，因此上图左下可见 IPx 的路由表。</p>
-<p>而对于 IPx 它要把路由表信息发布给更前面的路由器 IPw，可以把路由表中每一条都转发，只不过在 IPw 中相应 IP 的下一跳会变成 IPx，但这样会导致越往上，路由表越大。</p>
-<p>因此这里可以<strong>路由聚集</strong>，显然 IP0~IP3 都是从 IPx 划分出来的子网，因此 IPx 可以向 IPw 发布这样的信息，凡是掩码（20） 得到是 IPx 的都转发到 IPx路由器，等报文到了 IPx 中，它根据自己的路由表可以将其进行进一步的转发</p>
-<p><strong>要可以聚集才能聚集，如果不是由一个大的划分成小的，那么必须一条一条的发布通告</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430164719591.png" alt="image-20220430164719591"></p>
-<p>当 IP1 被分到另外一个 ISP时，原来的 ISP 的路由器 IPx <strong>即使有空洞</strong>，即并不是掩码（20）后为 IPx 的都应该转发给它，IP1 就不是，但为了减少表项数目，<strong>仍然可以进行路由聚集</strong>。在 IPy 中 IP1 不能聚集，因此需要单条地发布给上层 IPw。</p>
-<p><em><em>因此在路由表项匹配时，可能会出现多个能够匹配的表项</em>【如上 IPw 的第一和第二条都能匹配 200.23.18.1】*，要选择其中匹配长度最长的表项作为转发</em>*</p>
-<h4 id="ISP-如何获取-IP-地址池">ISP 如何获取 IP 地址池</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430162425118.png" alt="image-20220430162425118"></p>
-<p>ISP 则可以从 ICANN <em>Internet Corporation for Assigned Names and Numbers</em> 获取 IP 地址池</p>
-<h3 id="NAT">NAT</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430165900248.png" alt="image-20220430165900248"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430170049881.png" alt="image-20220430170049881"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430170418853.png" alt="image-20220430170418853"></p>
-<p>内网可以访问到外网，但外网不能主动访问到内网，需要内网穿透</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430171112883.png" alt="image-20220430171112883"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430171153839.png" alt="image-20220430171153839"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430171830343.png" alt="image-20220430171830343"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430172053958.png" alt="image-20220430172053958"></p>
-<p>如 Skype</p>
-<h3 id="IPv6">IPv6</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430172244401.png" alt="image-20220430172244401"></p>
-<p>IPv4 的问题</p>
-<ul>
-<li>每到一个路由器，<strong>TTL要减去 1，因此首部校验和也要作相应的改变</strong>，会加重路由器负担</li>
-<li>会产生分片</li>
-<li>IPv4 的头部没有机制对 <strong>QoS</strong> <em>Quality of Service</em>，<strong>服务质量</strong> 的支持，即是尽力而为的</li>
-</ul>
-<blockquote>
-<p>IPv5是一个<strong>实验性的</strong>资源预留协议，被称为因特网流协议(ST)，目的是提供服务质量-QOS。</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/383008986">为什么有IPv4、IPv6，却没有IPv5？IPv10又是什么新鲜物种？ - 知乎 (zhihu.com)</a></p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430173422178.png" alt="image-20220430173422178"></p>
-<p>头部固定 40 B，options被 next header 标识，放在 data 部分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430173733458.png" alt="image-20220430173733458"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430174322411.png" alt="image-20220430174322411"></p>
-<p>只能<strong>平滑过渡</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220430174346683.png" alt="image-20220430174346683"></p>
-<h2 id="4-4-通用转发和-SDN【了解】">4.4 通用转发和 SDN【了解】</h2>
-<h3 id="传统方式的弊端">传统方式的弊端</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501153930425.png" alt="image-20220501153930425"></p>
-<p>传统方式：<strong>垂直集成</strong>：每个路由器既实现数据平面的功能又实现控制平面的功能。路由表粘合两个平面</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501153802620.png" alt="image-20220501153802620"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154014259.png" alt="image-20220501154014259"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501155022133.png" alt="image-20220501155022133"></p>
-<p>而在 SDN 中很容易实现，因为 SDN 可以匹配多个字段，而不是传统的仅仅为 DA 字段，因此可以区分出不同的主机通信等，实现流量分路</p>
-<h3 id="SDN-2005">SDN ~2005</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154124348.png" alt="image-20220501154124348"></p>
-<p><strong>CA</strong> <em>control agent</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154429238.png" alt="image-20220501154429238"></p>
-<p>注意：这里的分组交换机就是路由器，不是链路层的交换机</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501154625154.png" alt="image-20220501154625154"></p>
-<p>这里所说的<strong>网络操作系统</strong>是指 <strong>SDN 下的远程控制器</strong>，不是指 windows 等【SDN 控制器在<strong>逻辑上是集中的</strong>，但为了可拓展性、性能等也可以采用分布式实现】</p>
-<p>SDN 体系结构的 <strong>4 个关键特征</strong>：</p>
-<ol>
-<li>
-<p>通用“flow-based”<strong>基于流</strong>的匹配+行动</p>
-</li>
-<li>
-<p>控制平面和数据平面分离</p>
-</li>
-<li>
-<p>控制平面功能在数据交换设备外实现，由两个组件组成：一个 SDN 控制器或网络 OS；若干的网络控制应用</p>
-</li>
-<li>
-<p>可编程控制：在远程控制器之上以网络应用的形式【<em>如防火墙、负载均衡等</em>】实现各种网络功能，<strong>SDN 控制器通过北向接口 API 和网络控制应用交互</strong></p>
-<p>编程的结果形成流表，控制器通过<strong>南向接口 API （如 OpenFlow 标准）<strong>下发给</strong>分组交换机</strong>，南向接口同时支持分组交换机将自身的状态上报给 SDN 控制器</p>
-<p>OpenFlow协议运行在<strong>TCP</strong>之上，<strong>使用6653的默认端口号</strong></p>
-</li>
-</ol>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160327162.png" alt="image-20220501160327162"></p>
-<p>在SDN中<strong>数据平面交换机</strong>，<strong>SDN控制器</strong>和<strong>网络控制应用程序</strong>是分离的实体。因此可以由不同的厂商来生产，有利于竞争和更良好的业态</p>
-<h3 id="OpenFlow">OpenFlow</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160357280.png" alt="image-20220501160357280"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160508718.png" alt="image-20220501160508718"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160546054.png" alt="image-20220501160546054"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160641579.png" alt="image-20220501160641579"></p>
-<p>如上，可以根据 MAC 进行转发，起到了交换机的作用</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160719695.png" alt="image-20220501160719695"></p>
-<p><strong>几乎所有的网络设备</strong>都能通过<strong>匹配不同的流表+行动</strong>来实现</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501160940364.png" alt="image-20220501160940364"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
   
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
-  id="post-计算机网络自顶向下方法/3 传输层"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
+        <h1>4 网络层-数据平面</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220429111116397.png" alt="image-20220429111116397"></p> 
+        
+      <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/4%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2/"
+        >阅读更多&gt;&gt;</a
+      >
        
-<h2 itemprop="name">
-  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/"
-    >3 传输层</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： zzb
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/" class="article-date">
-  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1>3 传输层</h1>
-<h2 id="3-1-概述和传输层服务">3.1 概述和传输层服务</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414110728006.png" alt="image-20220414110728006"></p>
-<p>传输层加强了网络层的服务，但有些服务是可以加强的，有些服务是不能加强的，如<strong>延时和带宽</strong>是不能加强的，取决于网络层</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414111155619.png" alt="image-20220414111155619"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414111518603.png" alt="image-20220414111518603"></p>
-<h2 id="3-2-多路复用和解复用">3.2 多路复用和解复用</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414111650739.png" alt="image-20220414111650739"></p>
-<p>复用/解复用技术:</p>
-<p><strong>将多条运输连接上的数据汇集到一条网络连接上传输</strong>。本来逻辑上是有多个进程之间的通讯线路的，但通过复用（标识两者之间）只需要一条线路即可，在目标端对所有的信息解复用，分发给不同的应用进程</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414112948542.png" alt="image-20220414112948542"></p>
-<ul>
-<li>因此套接字仅为本主机的IP和端口，因此即使源IP和端口不同，目标相同，那么都将定位到相同的socket</li>
-<li>但TCP捆绑4元组，只要有一个不一样，就是不同的socket</li>
-</ul>
-<h2 id="3-3-无连接传输：UDP">3.3 无连接传输：UDP</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414113438493.png" alt="image-20220414113438493"></p>
-<p>仅仅在IP上增加了复用和解复用功能</p>
-<p>事务性：一次往返就结束</p>
-<p>要在UDP上提供可靠传输，既利用UDP的高效，又要可靠，那么<strong>只能在应用层增加可靠性</strong><br>
-<em>(没有第三种协议，因为TCP、UDP能够支持85%以上的应用，再增加会出现协调等问题)</em></p>
-<h3 id="UDP-报文格式">UDP 报文格式</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414114016128.png" alt="image-20220414114016128"></p>
-<p><img src="https://img-blog.csdnimg.cn/20200420235146636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE0Mjc5Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><strong>数据报</strong>：无连接的，<strong>每个数据单元都是独立发送的</strong></p>
-<p><strong>校验和</strong>是验证报文传输过程中有没有出错，如果发现校验不对，那么这个<strong>UDP报文会被丢弃</strong></p>
-<blockquote>
-<p>在计算校验和的时候，<strong>需要在UDP数据报之前增加12字节的伪首部</strong>，伪首部并不是UDP真正的首部。<strong>只是在计算校验和，临时添加</strong>在UDP数据报的前面，得到一个临时的UDP数据报。校验和就是按照这个临时的UDP数据报计算的。伪首部既不向下传送也不向上递交，而仅仅是为了计算校验和。这样的校验和，既检查了UDP数据报，又对IP数据报的源IP地址和目的IP地址进行了检验。</p>
-</blockquote>
-<p><strong>UDP报文的头部小，固定的8个字节的头部，如上，64 bit</strong>。<strong>载荷即有效传输的数据部分占比大</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414115052105.png" alt="image-20220414115052105"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414115737846.png" alt="image-20220414115737846"></p>
-<p>将报文段（<strong>包含数据和头部，甚至有一些IP的伪头部</strong>）切分成<strong>若干个16 bit</strong>，将所有的16 bit数字<strong>加起来</strong>，注意求和时高位有进位需要<strong>进位回滚</strong>（<em>将进到更高位的1加到最低位上去</em>）。最后和再取反码，得到校验和。</p>
-<p>收到数据报校验时，计算出所有的和，<strong>然后再加上校验和，得到全1，0xFFFF</strong>，那么说明没有出错（可能有残存错误）</p>
-<h2 id="3-4-RDT-可靠数据传输原理">3.4 RDT 可靠数据传输原理</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415114523805.png" alt="image-20220415114523805"></p>
-<p>RDT在有些网络中在网络层实现，通常是由TCP在传输层实现</p>
-<p>要向上层应用提供可靠的服务，但是所依赖的下层服务却是不可靠的 (best effort)。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415114859805.png" alt="image-20220415114859805"></p>
-<p><strong>渐进地开发RDT</strong>：先假设下层是完全可靠的，再逐个去掉假设，变成不可靠的，从而处理这个不可靠，再将其变成可靠，逐个进行，直到所有假设都去掉</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415115209087.png" alt="image-20220415115209087"></p>
-<h3 id="RDT-1-0">RDT 1.0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415115526494.png" alt="image-20220415115526494"></p>
-<p>仅仅是封装和解封装即可</p>
-<h3 id="RDT-2-0">RDT 2.0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415115721842.png" alt="image-20220415115721842"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415120013739.png" alt="image-20220415120013739"></p>
-<p>使用<strong>校验和</strong> <em>checksum</em>来检验错误</p>
-<ul>
-<li>发送方要编码检错，接收方要解码校验</li>
-<li>接收方要告诉发送方，是<strong>正确的ACK <em>Acknowledgment</em></strong>，还是<strong>错误的NAK  <em>Negative Acknowledgment</em></strong></li>
-<li>发送方要保存副本，ACK则无需处理，等待上层有没有新的调用，NAK则重新发送副本（<strong>检错重传</strong>）</li>
-</ul>
-<h3 id="RDT-2-1">RDT 2.1</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415121524024.png" alt="image-20220415121524024"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415121855666.png" alt="image-20220415121855666"></p>
-<p>但是<strong>显然ACK/NAK也是可能出错的</strong>【<em>这个信息同样是需要校验的，校验和</em>】，因此发送方可能无法判断接收方返回的信息是什么</p>
-<ul>
-<li>因此对发送的packet<strong>编号0和1</strong>【在01之间切换即可】，发送方先发送p<sub>0</sub></li>
-<li>接收方返回的信息ACK出错了，<strong>发送方无法识别，则发送方认为是NAK，再发一次p<sub>0</sub></strong></li>
-<li>接收方本来在等待编号1，但收到<strong>相同编号的内容</strong>，因此知道是ACK发送失败，因此将收到的<strong>重复信息丢弃</strong>，但仍然<strong>再返回ACK确认</strong></li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415122203332.png" alt="image-20220415122203332"></p>
-<p><strong>停止等待协议 <em>stop-and-wait protocol</em></strong> ：每发送完一个分组就停止发送，等待对方的确认。在收到确认后再发送下一个分组。</p>
-<h3 id="RDT-2-2">RDT 2.2</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415170654967.png" alt="image-20220415170654967"></p>
-<p><strong>取消NAK</strong>，而是对<strong>ACK编号</strong>，使用<strong>前一个分组</strong>（即最后一个正确接收的分组）的<strong>ACK作为该分组的NAK</strong></p>
-<p>这样可以为后续一次发送多个分组做好准备</p>
-<p>同理ACK传输错误和上面RDT 2.1一样处理即可</p>
-<h3 id="RDT-3-0">RDT 3.0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415172035771.png" alt="image-20220415172035771"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415173250336.png" alt="image-20220415173250336"></p>
-<p>增加了分组可能丢失的情况</p>
-<p><strong>超时重传机制</strong>：重传时间一般设置为<strong>比正常一个往返稍长一点的时间</strong>，一旦超过这个时间，一般就能确定分组丢失，然后重传即可</p>
-<ul>
-<li><strong>数据链路层的timeout一般是确定的</strong>，因为就是在两个节点之间传输</li>
-<li><strong>而传输层的timeout是自适应的</strong>，即需要根据情况调整，因为中间可能跨越的节点数目会变化</li>
-</ul>
-<p>如果是ACK丢失了，那么重传会导致数据重复问题，但接收方可以根据分组序号知道重复，从而丢弃即可</p>
-<blockquote>
-<p>在上面的有限状态机图中，右上角可以看到如果收到的ACK乱码/与发出的编码不匹配，说明需要重发，但这样是空，即不做处理，原因是想通过超时来处理，因为没有收到正确的，最终会导致超时，从而重发</p>
-</blockquote>
-<p><strong>设置一个合律的timeout很重要</strong>，如果设置时间太短了，也<strong>能正常工作</strong>，但会导致分组的发送和应答<strong>重复</strong>，<strong>效率低</strong>，如下</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415173911741.png" alt="image-20220415173911741"></p>
-<p>RDT 3.0对于停止等待协议是<strong>完备的</strong>，可以处理所有的情况</p>
-<h3 id="停止等待协议的问题">停止等待协议的问题</h3>
-<p><strong>但停止等待协议的效率很低</strong>，特别是在<strong>信道容量（同时能容纳的“车“的数量，等于TR，<em>R是带宽，T是信道从头到尾传输的时间</em>）很大时</strong>，就像告诉公路很长，其中同一时间可以容纳很多车辆前后排列，但如果一次仅仅一辆车在行驶，行驶出高速公路后再让下一辆车上高速，显然效率太低了</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415174936461.png" alt="image-20220415174936461"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415175324810.png" alt="image-20220415175324810"></p>
-<p><strong>传输时间=分组长度/链路带宽</strong></p>
-<p>可见，传输时间远小于往返延迟RTT，因此时间利用率很低<strong>0.027%</strong>，只有传输时间是在忙的，其他时间都是空闲的，等待信息的返回</p>
-<p><strong>有效吞吐=带宽*时间利用率=270kbps</strong>，相当于1Gbps的链路只用到了270kbps</p>
-<h3 id="流水线协议">流水线协议</h3>
-<p><strong>流水线协议 <em>pipeline protocol</em></strong> ：一次发送多个未经确认的分组</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415180455259.png" alt="image-20220415180455259"></p>
-<h4 id="滑动窗口协议">滑动窗口协议</h4>
-<p><em>Sliding-window protocol</em></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>发送窗口大小</th>
-<th>接收窗口</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>停止等待协议</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>流水线协议——GBN</td>
-<td>&gt;1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>流水线协议——SR</td>
-<td>&gt;1</td>
-<td>&gt;1</td>
-</tr>
-</tbody>
-</table>
-<h4 id="发送窗口">发送窗口</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415180604097.png" alt="image-20220415180604097"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415181334075.png" alt="image-20220415181334075"></p>
-<p><strong>发送窗口是发送缓冲区的子集，是指发送但未确认的分组</strong><br>
-上层应用可以继续将要发送的分组存放在发送缓冲区，当发送后发送窗口的<strong>前沿便移动一格</strong>，最大可以到发送缓冲区的大小</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415181718493.png" alt="image-20220415181718493"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415195728321.png" alt="image-20220415195728321"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415195859092.png" alt="image-20220415195859092"></p>
-<h4 id="接收窗口">接收窗口</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415201457064.png" alt="image-20220415201457064"></p>
-<p><strong>接收窗口=接收缓冲区</strong></p>
-<p>【<strong>SR和GBN原理一样，都是序号最小的到来才移动，并且窗口中要包含到来的分组序号才会接收并返回ACK，否则丢弃</strong>】</p>
-<h5 id="Go-Back-N">Go-Back-N</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415200400877.png" alt="image-20220415200400877"></p>
-<p>GBN接收窗口大小是1，0，1分别到来，然后接收方分别接收<strong>解封装，并将数据data交给上层</strong>，再返回ACK<sub>0</sub>，ACK<sub>1</sub>，<strong>接收窗口向右移动</strong>，但如果下一个到来的是3而不是2，说明乱序，那么接收方会把3号分组丢弃，然后<strong>发送顺序到来的序号最大的分组的确认</strong>【<em><strong>累计确认</strong>，表明这个序号及以前的分组已经接收</em>】即ACK<sub>1</sub>，接下来又来了4号分组，同样丢弃并且返回ACK<sub>1</sub></p>
-<h5 id="Selective-repeat">Selective repeat</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415200308739.png" alt="image-20220415200308739"></p>
-<p>SR中滑动窗口大于1，比如上面为5，先到了0，那么接收窗口右移一格，包含12345，然后返回ACK<sub>0</sub>，顺序到来1，接收窗口再右移一格，包含23456，返回ACK<sub>1</sub>，但接下来到来3，说明乱序，但由于接收窗口中可以包含3，说明可以接收3，那么会返回ACK<sub>3</sub>【<em><strong>非累计确认</strong>，仅仅是这个分组的</em><em>独立确认</em>**】，但接收窗口不移动，仍然包含23456，接下来到来4，返回ACK<sub>4</sub>,，接收窗口仍不移动，只有接收窗口中序号最小的到来才会导致移动。<strong>如果</strong>这时候来了2，会返回ACK<sub>2</sub>，因为此时234都到了，那么<strong>接收方会将234一起有序的交给上层</strong>（<em>要<strong>有序</strong>交给上层，因此在<strong>乱序时要缓存</strong></em>），并且接受窗口右移3格</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415201858858.png" alt="image-20220415201858858"></p>
-<h4 id="异常情况">异常情况</h4>
-<h5 id="Go-Back-N-重发N">Go-Back-N 重发N</h5>
-<p>出现了前面的2号没有收到，收到3时接收方返回ACK<sub>1</sub>，那么发送方的<strong>发送窗口不能移动</strong><br>
-【<em>但是注意，如果此时发送窗口&lt;发送缓冲区，那么<strong>发送缓冲区内的分组是可以被发送的</strong>，被发送后进入发送窗口</em>。<em>同理如果缓冲区中的分组未满，那么上层是可以将新的分组放到发送缓冲区的</em>】那么<strong>2号分组的计时器会超时timeout</strong>，因此发送方需要将<strong>发送窗口</strong>（即已发送但未确认的分组）<strong>全部再顺序发送一遍</strong>【因为GBN中2号分组没到，那么后面的所有分组都会被丢弃】</p>
-<p>【注意：GBN中只有一个计时器，即在滑动窗口<strong>大小从0变成1时启动一个计时器</strong>，同时也只需要<strong>对最小序号的分组计时</strong>即可。当收到最小序号的ACK时，那么会把<strong>计时器重置，发送窗口右移动</strong>；如果收到ACK后，窗口大小变成0，那么关闭计时器；在超时重发时也会重置计时器】👉详见下面的FSM</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205342634.png" alt="image-20220415205342634"></p>
-<h5 id="Selective-repeat-选择性重发">Selective repeat 选择性重发</h5>
-<p>出现了前面2号分组没收到的情况，但34号分组已经收到，<strong>那么2号分组会超时timeout，那么2号分组会被单独重发</strong>，但34号分组的计时器因为收到了确认ACK，所以不会被重发但注意发送方的<strong>发送窗口仍然是不能移动的</strong>，因为2没有被确认，<strong>2被确认后，发送窗口同样移动3格</strong></p>
-<p>【注意：SR的<strong>每一个分组</strong>发送后都会有一个计时器<strong>分别计时</strong>，因此较为复杂】</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205709242.png" alt="image-20220415205709242"></p>
-<hr>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415204005412.png" alt="image-20220415204005412"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415204834260.png" alt="image-20220415204834260"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205133761.png" alt="image-20220415205133761"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205831311.png" alt="image-20220415205831311"></p>
-<h4 id="思考题">思考题</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415210649113.png" alt="image-20220415210649113"></p>
-<p>对于SR，会出现如上图b的情况，因此在最坏的情况下即发送方发出的所有报文均被接收方接收，但ACK报文全部没有返回【关键是最小序号的ACK没有返回到发送方】，这时发送窗口不变，接收窗口右移发送窗口的大小，一旦超过了报文的序号，那么就会出现问题，一段的序号0的报文发给了下一段0的报文</p>
-<p><strong>因此要求的是N<sub>S</sub>+N<sub>R</sub>≤2<sup>n</sup>（其中序列号为0~2<sup>n</sup>-1）</strong><br>
-[因此如果<strong>SR中两个窗口大小一样</strong>的话，<strong>每个最大只能是2<sup>n</sup>/2=2<sup>n-1</sup></strong>；<strong>GBN中N<sub>R</sub>=1，因此发送窗口最大为2<sup>n</sup>-1</strong>]</p>
-<h2 id="3-5-面向连接的传输：TCP">3.5 面向连接的传输：TCP</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422094901539.png" alt="image-20220422094901539"></p>
-<p><strong>MSS</strong> <em>maximum segment size</em> **最大报文段大小 **</p>
-<p>MSS是TCP层交互给IP层最大分段大小，不包含TCP报头，只包含数据。</p>
-<p>对于以太网，数据的MTU最大传输单元是1500B，因此应用进程的数据太大是无法被链路层的帧封装的，所以需要拆分。</p>
-<p>应用进程的数据到了TCP实体后要根据MSS划分成不同的报文段，并且在每一个前面加上TCP头部</p>
-<p><strong>全双工</strong>（<em>Full Duplex</em>）全双工指可以同时（瞬时）进行信号的<strong>双向传输</strong>（A→B且B→A）。指A→B的同时B→A，是瞬时同步的。</p>
-<blockquote>
-<p>单工就是在只允许甲方向乙方传送信息</p>
-</blockquote>
-<h3 id="TCP报文段结构">TCP报文段结构</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422142240682.png" alt="image-20220422142240682"></p>
-<p>TCP头部长度<strong>至少20 B</strong>，但还有一些可选项以一起构成头部，其中的<strong>首部长度</strong>就记录了头部的长度，用以区分出数据部分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422143005451.png" alt="image-20220422143005451"></p>
-<ul>
-<li>
-<p><strong>序号</strong>指的是一个TCP数据报的数据部分的第一个字节在整个字节流中的偏移量，字节为单位。</p>
-<p>即指的是segment中第一个字节的在整个字节流中的编号，<strong>而不是segment的编号</strong></p>
-<p>此外序号通常不是从0开始，而是开始建立TCP连接时，<strong>双方随机选择序列号</strong>。防止被攻击者猜到，或与其他冲突，所以设置随机</p>
-</li>
-<li>
-<p><strong>确认号</strong>是指确认n-1及以前的字节，比如ACK 555，那么就表示554及之前的都已经收到了，期待555，<em>类似GBN</em>，也是<strong>累计确认</strong>：该序列号之前的所有字节均已被正确接收到</p>
-</li>
-</ul>
-<p>Q：接收方如何处理乱序到达的Segment？</p>
-<p>A：TCP规范中没有规定，由TCP的实现者做出决定，<strong>可以缓存，也可以直接抛弃</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422143513814.png" alt="image-20220422143513814"></p>
-<h3 id="TCP往返延迟RTT和超时">TCP往返延迟RTT和超时</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422143750280.png" alt="image-20220422143750280"></p>
-<p>动态自适应地改变计时器的时间</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422144241845.png" alt="image-20220422144241845"></p>
-<p>1-α&lt;1，因此随着测量的增加，前面的SampleRTT对平均值的影响会越来越小，而逐步过渡到后面的SampleRTT</p>
-<p>$EstimatedRTT= (1- \alpha)<em>EstimatedRTT+\alpha</em>SampleRTT$</p>
-<p>右边的平均RTT是指之前计算出来的平均RTT</p>
-<p><strong>推荐值α=0.125</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422144637496.png" alt="image-20220422144637496"></p>
-<p>计算平均值的同时计算<strong>SampleRTT偏离平均值的平均情况</strong>，类似一种方差，称为安全边界时间DevRTT</p>
-<p>$DevRTT= (1-\beta)<em>DevRTT+\beta</em>|SampleRTT-EstimatedRTT|$</p>
-<p><strong>推荐值β=0.25</strong></p>
-<p>最终得到合适的超时时间间隔为平均RTT+<strong>4倍</strong>的安全边界</p>
-<p>$TimeoutInterval = EstimateRTT+4*DevRTT$</p>
-<h3 id="TCP可靠数据传输">TCP可靠数据传输</h3>
-<p><strong>TCP采用pipe-line 是GBN和SR的混合体</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422145815666.png" alt="image-20220422145815666"></p>
-<p>RDT:</p>
-<ul>
-<li><strong>流水线机制</strong></li>
-<li><strong>累计确认</strong>：是对这个字节的期待</li>
-<li><strong>TCP使用单一重传定时器</strong>：仅一个计时器</li>
-</ul>
-<p>触发重传：</p>
-<ul>
-<li>
-<p><strong>超时</strong>：只发生最早的那个未确认的段，即发生超时的这个段</p>
-<p>【超时定时器是比较保守的，在4倍偏差，因此如果超时，可以有极大的把握确定报文丢失】</p>
-</li>
-<li>
-<p><strong>重复的ACK</strong>：收到了<strong>1个正确</strong>ACK，然后又收到<strong>3个冗余</strong>的重复ACK，那么重传，而此时超时定时器还没超时，因此称为<strong>快速重传</strong></p>
-</li>
-</ul>
-<h4 id="简化的TCP-不考虑重复ACK-流量控制-拥塞控制">简化的TCP:不考虑重复ACK,流量控制,拥塞控制</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151122843.png" alt="image-20220422151122843"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151356578.png" alt="image-20220422151356578"></p>
-<p>NextSeqNum相当于滑动窗口的前沿</p>
-<p>SendBase相当于滑动窗口的后沿。</p>
-<p>只不过TCP中的窗口<strong>以字节为单位</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151826809.png" alt="image-20220422151826809"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151903338.png" alt="image-20220422151903338"></p>
-<p><strong>累计确认</strong>，因此即使ACK=100没到，也没关系，ACK=120就能代表ACK=100</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422152059304.png" alt="image-20220422152059304"></p>
-<ol>
-<li>
-<p>到了一个报文段后等待500 ms，如果第二个报文段在500 ms没来，那么发送第一个的ACK</p>
-</li>
-<li>
-<p>如果上面等待过程中<strong>第二个连续</strong>的报文段到达，立即发送第二个报文段的累计确认，<strong>同时确认两个报文段</strong></p>
-</li>
-<li>
-<p><strong>乱序到达</strong>，需要的一个报文段比如第一个字节位置为y<sub>0</sub>，而到达了第一个字节大于y<sub>0</sub>的，说明乱序，<strong>立即发送重复的ACK=y<sub>0</sub>，表示对y<sub>0</sub>的期待，让发送方重发</strong></p>
-</li>
-<li>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422152825411.png" alt="image-20220422152825411">如果在3的情况中，到达了能够完全补充gap，即y<sub>0</sub>到乱序报文起始处的报文，那么立即发送乱序到达的报文的后面一个字节的的位置ACK，累计确认</p>
-<p>如果是部分补齐，如上，在立即发送部分补齐的报文的后一个字节的ACK，让发送方快点补齐</p>
-</li>
-</ol>
-<h4 id="快速重传">快速重传</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422153256354.png" alt="image-20220422153256354"></p>
-<p><strong>快速重传</strong>：在定时器超时之前重传</p>
-<p>收到1个正确ACK后又收到<strong>3个</strong>重复ACK，那么说明丢失的可能性非常大，需要重传</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422153708762.png" alt="image-20220422153708762"></p>
-<blockquote>
-<p>Q：为什么是三次？</p>
-<p>A：因为无法判断是因为乱序还是丢失，重传1到2次更可能是乱序，3次及以上更可能是因为丢失</p>
-</blockquote>
-<h3 id="TCP流量控制">TCP流量控制</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154219979.png" alt="image-20220422154219979"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154228603.png" alt="image-20220422154228603"></p>
-<p><strong>接收buffer</strong>通常默认为<strong>4096</strong></p>
-<p>接收方返回ACK时在receive window中记录其空闲的buffer的大小，从而发送方会<strong>限制其发送缓冲区中未确认的字节个数≤receive window值</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154354055.png" alt="image-20220422154354055"></p>
-<p><strong>piggyback捎带技术</strong>，即发送方和接收方是随时变化的，客户端发送数据给服务器，服务器也会发送数据给客户端，所以如果发送一次对方要返回一个确认，然后又发送数据回来，会比较麻烦，因此可以将确认放在数据中一起发送回来，即捎带</p>
-<h3 id="TCP连接管理">TCP连接管理</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154951753.png" alt="image-20220422154951753"></p>
-<p><strong>连接建立的本质</strong>：知道和要对方通信，准备好资源，控制变量做置位（特别是连接的初始序号#seq，对方的receive buffer的大小）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422155548014.png" alt="image-20220422155548014"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422155913681.png" alt="image-20220422155913681"></p>
-<p>二次连接不可行</p>
-<h4 id="三次握手">三次握手</h4>
-<p><strong>理论上3次是最少需要的</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422162117847.png" alt="image-20220422162117847"></p>
-<ol>
-<li>
-<p>Client发送连接建立请求SYN=1并携带它将要从序号为x处开始传Seq=x</p>
-</li>
-<li>
-<p><strong>服务器会分配缓存</strong></p>
-<p>server需要对这个信息进行ACK，ACKNum=x+1【期望x+1及之后的数据】</p>
-</li>
-<li>
-<p>然后server需要SYN=1并将自己从序号为y处开始传Seq=y告诉client</p>
-<p><strong>这两个信息2，3可以合并在一起</strong>SYN&amp;ACK**(piggyback)**</p>
-</li>
-<li>
-<p>然后client对server的y进行确认ACKNum=y+1【期望y+1及之后的数据】</p>
-<p><strong>这个ACK通常会和第一次数据传递放在一起</strong></p>
-</li>
-</ol>
-<blockquote>
-<p>Q：会不会在三次握手的第二步服务器就会分配资源？</p>
-<p>A：会分配，会保留一段时间直到确认这个ACK不会再建立了（SYN泛洪攻击，DDoS）</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422161237312.png" alt="image-20220422161237312"></p>
-<ol>
-<li>第一种情况，因为需要3次握手，因此不会存在半连接</li>
-<li>第二种情况，因为不会存在半连接，所以连接不存在，延迟到达的data会被丢弃</li>
-<li>此外第三种情况：假设客户端使用555端口与服务器80端口建立连接，在第二种情况的基础上，如果data卡了很久才到达服务器，而此时正好客户端又用555端口和服务器80端口建立连接了，那么连接存在，且收到数据。
-<ul>
-<li><strong>如果序号都是从0开始的话</strong>，那么这个老数据会被当成当前需要的数据，<strong>而产生错误</strong>。</li>
-<li>因此<strong>每次选择随机的开始序号</strong>，可以避免老的滞留的数据对连接的影响，比如老数据从x开始，而新的开始序号是x+1，那么老的数据肯定会被抛弃，因为都不在连接的序号范围内(≥x+1)</li>
-<li>当然有可能随机选择的序号正好又包含老数据，但概率极小，那这就没有办法了👉”<strong>网络不能解决所有问题</strong>“</li>
-</ul>
-</li>
-</ol>
-<h4 id="四次挥手">四次挥手</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422162647488.png" alt="image-20220422162647488"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422162755541.png" alt="image-20220422162755541"></p>
-<p><strong>对称释放，并不完美</strong></p>
-<p>四次挥手是由于 TCP 的<strong>半关闭</strong>（half-close）特性，TCP 提供了<strong>连接的一端在结束它的发送后还能接收来自另一端数据的能力</strong></p>
-<p>[<strong>结束发送指的是不再发送数据，但可以对对方的请求作出应答</strong>]</p>
-<p>TCP 连接的释放需要发送四个包（执行四个步骤），因此称为四次挥手(Four-way handshake)，<strong>客户端或服务端均可主动发起挥手动作</strong>。</p>
-<p><img src="https://pics7.baidu.com/feed/8435e5dde71190ef08c7447eca4fb81efdfa602b.jpeg?token=74e81457ce3c2f49b48814839e548194&amp;s=5EA83C6229C6E0CA5A7454CA0000E0B1" alt="img"></p>
-<p><strong>1）第一次挥手</strong>：客户端发送一个 FIN 报文（请求连接终止：FIN = 1），报文中会指定一个序列号 seq = u。并<strong>停止再发送数据，主动关闭 TCP 连接</strong>。此时客户端处于 FIN_WAIT1 状态，等待服务端的确认。</p>
-<blockquote>
-<p>FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认；</p>
-</blockquote>
-<p><strong>2）第二次挥手</strong>：服务端收到 FIN 之后，会发送 ACK 报文，且把客户端的序号值 +1 作为 ACK 报文的序列号值，表明已经收到客户端的报文了，此时服务端处于 CLOSE_WAIT状态。</p>
-<blockquote>
-<p>CLOSE-WAIT - 等待从本地用户发来的连接中断请求；</p>
-</blockquote>
-<p><strong>此时的 TCP 处于半关闭状态，客户端到服务端的连接释放</strong>。客户端收到服务端的确认后，进入FIN_WAIT2（终止等待 2）状态，等待服务端发出的连接释放报文段。</p>
-<blockquote>
-<p>FIN-WAIT-2 - 从远程TCP等待连接中断请求；</p>
-</blockquote>
-<p><strong>3）第三次挥手</strong>：如果服务端也想断开连接了（没有要向客户端发出的数据），和客户端的第一次挥手一样，发送 FIN 报文，且指定一个序列号。此时服务端处于 LAST_ACK 的状态，等待客户端的确认。</p>
-<blockquote>
-<p>LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认；</p>
-</blockquote>
-<p><strong>4）第四次挥手</strong>：客户端收到 FIN 之后，一样发送一个 ACK 报文作为应答（ack = w+1），且把服务端的序列值 +1 作为自己 ACK 报文的序号值（seq=u+1），此时客户端处于 <strong>TIME_WAIT</strong> <strong>（时间等待）状态</strong>。</p>
-<blockquote>
-<p>TIME-WAIT - 等待足够的时间以确保远程TCP接收到连接中断请求的确认；</p>
-</blockquote>
-<p>注意 ：这个时候由服务端到客户端的 TCP 连接并未释放掉，<strong>需要经过时间等待计时器设置的时间 2MSL（一个报文的来回时间） 后才会进入</strong> <strong>CLOSED</strong> <strong>状态</strong>（这样做的目的是确保服务端收到自己的 ACK 报文。如果服务端在规定时间内没有收到客户端发来的 ACK 报文的话，<strong>服务端会重新发送 FIN 报文给客户端</strong>，客户端再次收到 FIN 报文之后，就知道之前的 ACK 报文丢失了，然后再次发送 ACK 报文给服务端）。**服务端收到 ACK 报文之后，就关闭连接了，处于 CLOSED 状态。**因此服务器到客户端的连接关闭，整个 TCP 连接关闭</p>
-<blockquote>
-<p><strong>两次挥手就可以释放一端到另一端的 TCP 连接，完全释放连接一共需要四次挥手</strong>。</p>
-<p>举个例子：A 和 B 打电话，通话即将结束后，A 说 “我没啥要说的了”，B 回答 “我知道了”，于是 A 向 B 的连接释放了。但是 B 可能还会有要说的话，于是 B 可能又巴拉巴拉说了一通，最后 B 说“我说完了”，A 回答“知道了”，于是 B 向 A 的连接释放了，这样整个通话就结束了。</p>
-</blockquote>
-<h2 id="3-6-拥塞控制原理">3.6 拥塞控制原理</h2>
-<h3 id="拥塞的原因-代价">拥塞的原因/代价</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425205612515.png" alt="image-20220425205612515"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425210620116.png" alt="image-20220425210620116"></p>
-<p>无限大的缓存，则报文不会丢失</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425210802389.png" alt="image-20220425210802389"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425210939064.png" alt="image-20220425210939064"></p>
-<p>掌握路由器空闲空间，代价太大</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211229636.png" alt="image-20220425211229636"></p>
-<p>当网络拥塞时，会出现超时重传，丢失重传等，因此此时想要达到更高的传输速率，输入的带宽要增大，比如为了能每秒传输100个分组，那么输入到链路的分组数目会大于100个</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211410601.png" alt="image-20220425211410601"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211614033.png" alt="image-20220425211614033"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211804919.png" alt="image-20220425211804919"></p>
-<p>当分组经过了很多路由器，但在后面的一个路由器被抛弃了，那么它在前面所做的努力都会被浪费，这在网络拥塞时更加可惜，因为资源有限，有限的资源还被浪费了</p>
-<h3 id="拥塞控制方法">拥塞控制方法</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211920911.png" alt="image-20220425211920911"></p>
-<h4 id="ATM-采用网络辅助的拥塞控制">ATM 采用网络辅助的拥塞控制</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425214145348.png" alt="image-20220425214145348"></p>
-<p><strong>ATM</strong> <em>Asynchronous Transfer Mode</em> 异步传输模式。具有分组交换和电路交换的优点，对应于OSI协议参考模型的第2层。</p>
-<p>数据交换的单位是<strong>信元</strong>，可以认为是小分组，<strong>53B，5B的头部，48B的载荷</strong>，因此存储转发的时间非常短即可完成。</p>
-<p>在电路交换中，每个节点花费1bit的存储时间，在分组交换中每个节点花费一个分组的存储时间，而在 ATM 中信元比 1bit 大，比一个分组小，只花费53B的存储时间。<strong>所以网络调度很容易，兼具两种交换网络的特性</strong></p>
-<p>ATM 网络具有很多模式，如 <strong>ABR</strong> <em>available bit rate</em> <strong>弹性服务</strong>：如果网络轻载，那么用户可以使用网络的可用带宽，但当网络拥塞时，用户只能使用网络承诺的带宽，不能超过如1 Mbps</p>
-<p>发送方在发送数据信元中<strong>间隔插入</strong>资源管理信元 <strong>RM</strong> ，其中的 bit 被交换机设置：</p>
-<ul>
-<li><strong>NI bit</strong> : <em>no increase in rate</em> 轻微拥塞时</li>
-<li><strong>CI bit</strong> : <em>congesting indication</em> 拥塞提升
-<ul>
-<li>也可能交换机将 RM 信元前面的数据信元的 <strong>EFCI bit</strong> <em>Explicit Forward Congestion Indication</em>  <code>显性前向拥塞指示</code> 置为1，那么将由接收端把 RM 信元的 CI bit 置1</li>
-</ul>
-</li>
-<li><strong>ER</strong> 2 Byte : <em>explicit rate</em> 记录两个主机通讯过程中的交换机所能支持的最小带宽[<em>每经过一个就看是否更小，更小就修改，更大则不改</em>]，因此发送方根据最小带宽发送，就不会发送拥塞</li>
-</ul>
-<p>接收端不修改 RM 信元，并将其返回给发送方，从而发送方可用知道网络状况，控制发送速率</p>
-<h2 id="3-7-TCP-拥塞控制">3.7 TCP 拥塞控制</h2>
-<h4 id="TCP-采用端到端的拥塞控制">TCP 采用端到端的拥塞控制</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426080902560.png" alt="image-20220426080902560"></p>
-<p>端系统自己感知拥塞，网络核心负担低</p>
-<h3 id="如何检测拥塞">如何检测拥塞</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426081045830.png" alt="image-20220426081045830"></p>
-<p><strong>超时即认为是拥塞</strong></p>
-<ul>
-<li><strong>网络拥塞</strong>，段被丢弃：概率大，判断正确</li>
-<li><strong>段出错</strong>，段被丢弃： 概率小，判断错误，但概率小，对整个影响不大</li>
-</ul>
-<p>出现**3次重复的冗余 **ACK <strong>即认为轻微拥塞</strong>，即出现丢失，但还有一定传输能力(<em>后面3个段都到达了，此时还没超时，因为超时时间比较保守，加上4倍偏差</em>)</p>
-<ul>
-<li>第一个 ACK 正确</li>
-<li>后续 1~2 个 ACK ，会被认为是乱序，<strong>乱序的可能性更大</strong></li>
-<li>出现第 3 个 ACK ，<strong>大概率是段丢失</strong></li>
-</ul>
-<h3 id="速率控制方法">速率控制方法</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426082135576.png" alt="image-20220426082135576"></p>
-<p>$rate = \frac{CongWin}{RTT} Byte/sec$</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091116543.png" alt="image-20220426091116543"></p>
-<p>MSS 是最大报文长度</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091444944.png" alt="image-20220426091444944"></p>
-<p>保证发送窗口是<strong>拥塞窗口和对方接收窗口的最小值</strong>，从而同时满足拥塞控制和流量控制</p>
-<h4 id="策略">策略</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091628679.png" alt="image-20220426091628679"></p>
-<p><strong>SS</strong> <em>slow start</em> 慢启动</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091752613.png" alt="image-20220426091752613"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091901163.png" alt="image-20220426091901163"></p>
-<p>每收到一个 ACK，拥塞窗口加 1 == 下一次的拥塞窗口是上一次的两倍</p>
-<p><strong>初始速率很慢，但是快速攀升</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426092734182.png" alt="image-20220426092734182"></p>
-<ul>
-<li><strong>AI</strong> <em>Additive Increase</em> <strong>加性增</strong>：到达 SS 的阈值后，每个RTT将 CongWin 增大一个 MSS 线性地探测-----<strong>拥塞避免阶段</strong></li>
-<li><strong>MD</strong> <em>Multiplicative Decrease</em> <strong>乘性减</strong>：
-<ul>
-<li>当<strong>发送超时</strong>后，将 CongWin 降为 1 MSS，开始 SS 并将 CongWin / 2 作为 SS 倍增的阈值。</li>
-<li>当<strong>收到 3 个冗余 ACK</strong> 时，直接将<strong>阈值降为 CongWin / 2，并将 CongWin 设置为 阈值 + 3</strong>【<em>+3是因为返回 3 个 ACK 所以后面有三个已经确认了</em>】，然后直接线性增加 1【<em>此时 CongWin &gt; 阈值</em>】，而无需从 1 开始 SS。</li>
-<li>当收到重复 ACK 时，什么都不做，<strong>只是对重复的个数进行计数</strong>，为上面的情况做好准备</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426093527640.png" alt="image-20220426093527640"></p>
-<h3 id="TCP-吞吐量">TCP 吞吐量</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426094855058.png" alt="image-20220426094855058"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426094628828.png" alt="image-20220426094628828"></p>
-<p>不考虑 SS 阶段，因为指数增加，时间可以忽略不计</p>
-<p>因此平均吞吐量为 <strong>0.75 W / RTT</strong></p>
-<h3 id="TCP-公平性">TCP 公平性</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426095036146.png" alt="image-20220426095036146"></p>
-<p>TCP 是公平的，<strong>均分瓶颈带宽</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165108114.png" alt="image-20220426165108114"></p>
-<p>以两个连接 1 和 2 共享链路为例：</p>
-<p>短时间是可能超过斜线的，因为路由器存在缓存，但长期是不可能的，分组会被抛弃。</p>
-<p>当检测到拥塞后（这里不看 SS 只看拥塞避免阶段，SS 时间很短），两者都会回到斜线内部，然后 45° 地增加带宽(即两者都逐步增加1 MSS[假设两者的 MSS 是一样的])，<strong>最终可以达到两者均分带宽</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165337244.png" alt="image-20220426165337244"></p>
-<p>上述两种情况就体现了一定的不公平性，还有一种情况，如果 AA’ 的 MSS 小于 BB’ 的 MSS 那么最终两者也无法达到均分带宽</p>
-<p><strong>因此 TCP 的公平是大致上的公平</strong></p>
-<h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165814628.png" alt="image-20220426165814628"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165945346.png" alt="image-20220426165945346"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
-  id="post-计算机网络自顶向下方法/5 网络层-控制平面"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/"
-    >5 网络层-控制平面</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： zzb
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/" class="article-date">
-  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1>5 网络层-控制平面</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501163220684.png" alt="image-20220501163220684"></p>
-<h2 id="5-1-导论">5.1 导论</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501163321330.png" alt="image-20220501163321330"></p>
-<h2 id="5-2-路由选择算法">5.2 路由选择算法</h2>
-<p><strong>路由可以看作是子网到子网的路由</strong>【<em>因此就是找到路由器到其他路由器的较好路径（到了这个路由器就到了这个子网）</em>】，<strong>而不是主机到主机的路由</strong>，因为可以想象 IPv4 那么 40 亿多个主机，要确定其中两个主机的最佳路由路径，很困难。</p>
-<p>事实上，对于不在一个子网的主机的<strong>第一跳</strong>一定是发送给这个子网的网关，<strong>最后一跳</strong>一定是由目标子网的网关发送给目标主机</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501164618299.png" alt="image-20220501164618299"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501164659310.png" alt="image-20220501164659310"></p>
-<h3 id="原则">原则</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501165222896.png" alt="image-20220501165222896"></p>
-<p>汇集树：sink tree 这个节点到其他所有路由器的最优路径形成的树</p>
-<p><strong>路由选择算法就是要为所有的路由器找到并使用汇集树</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501165607293.png" alt="image-20220501165607293"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501165721998.png" alt="image-20220501165721998"></p>
-<h3 id="分类">分类</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501170151575.png" alt="image-20220501170151575"></p>
-<ul>
-<li>全局/分布式</li>
-<li>静态/动态：非自适应/自适应</li>
-</ul>
-<h3 id="link-state-全局算法">link state-全局算法</h3>
-<p>链路状态算法：<strong>即Dijkstra 算法</strong></p>
-<p>贪心算法</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501170746624.png" alt="image-20220501170746624"></p>
-<ol>
-<li>获得整个网络拓扑</li>
-<li>使用Dijkstra 算法获得到达其他路由器的最短路径</li>
-</ol>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501171117187.png" alt="image-20220501171117187"></p>
-<p>扩散即泛洪 <em>flooding</em> 让所有的路由器都能得到这个链路状态分组 LS。大家都这么做，所有可以让每个路由器都能得到其他所有节点的状况</p>
-<p><strong>迭代算法即 Floyed 算法 所有顶点的最短路径(非负权值)</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501172715884.png" alt="image-20220501172715884"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501172724932.png" alt="image-20220501172724932"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501172829106.png" alt="image-20220501172829106"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501172900437.png" alt="image-20220501172900437"></p>
-<p>一个节点 A 收到来自其他节点 B 的泛洪分组，那么要给这个节点发送 ACK 确认，同时将这个分组发送给 A 的其他的邻居 C D E……并期待它们的确认，如果没有收到确认，那么会 A 会一直重复发这个泛洪分组</p>
-<p><strong>因此泛洪是可靠的</strong>，能够保证所有的节点都得到这个分组的信息</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501173145193.png" alt="image-20220501173145193"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501174900775.png" alt="image-20220501174900775"></p>
-<h3 id="distance-vector-分布式算法">distance vector-分布式算法</h3>
-<p>即 Bellman-Ford 算法</p>
-<p>动态规划</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501175221942.png" alt="image-20220501175221942"></p>
-<p>距离矢量中要记录</p>
-<ol>
-<li>目标节点</li>
-<li>到达目标节点路径上的下一跳</li>
-<li>到达目标节点所需要的 cost</li>
-</ol>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501180228299.png" alt="image-20220501180228299"></p>
-<p>和邻居交换距离矢量，再加上自己到邻居的代价，即可得到到达目标的最低代价</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501180410731.png" alt="image-20220501180410731"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501180516601.png" alt="image-20220501180516601"></p>
-<p><strong>定期测量；定期交换</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501180819621.png" alt="image-20220501180819621"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501181100156.png" alt="image-20220501181100156"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501181731171.png" alt="image-20220501181731171"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501182023121.png" alt="image-20220501182023121"></p>
-<ul>
-<li>自己到邻居的代价改变了，<strong>要重新计算</strong></li>
-<li>邻居给自己的到达目标节点的代价改变了，邻居重新发给自己了，<strong>要重新计算</strong></li>
-<li>自己的 DV 更新改变后要通知其他的邻居</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501182434262.png" alt="image-20220501182434262"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501182718158.png" alt="image-20220501182718158"></p>
-<p>特点：</p>
-<ul>
-<li>
-<p>好消息传得快</p>
-</li>
-<li>
-<p>坏消息传的慢，需要很多次迭代才能发现不可达</p>
-<ul>
-<li>
-<p>解决办法</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501195112398.png" alt="image-20220501195112398"></p>
-<p>因为 C 要通过 B 才能到达 A，所以当 B 向 C 请求到达 A 时，C 应当告诉 B 为 INF。但告诉 D 时 C 会告诉 D 自己是可达的，这样就形成了水平分裂，<strong>C 的左右两边的信息不一样</strong></p>
-</li>
-<li>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501200139928.png" alt="image-20220501200139928"></p>
-<p>但水平分裂在<strong>环状的网络拓扑中效果不好</strong>，可以<strong>缓解</strong>传得慢【C 立即知道不可达】，<strong>但不能解决</strong>【A，B 需要很长时间才能发现】</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501200647260.png" alt="image-20220501200647260"></p>
-<h3 id="LS-和-DV-的比较">LS 和 DV 的比较</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501201342351.png" alt="image-20220501201342351"></p>
-<p>上面的<strong>振荡</strong>是指可能上个时间选择这条路径，这个时间因为这条路径拥塞，所以换了一条，下个时间因为拥塞用换回来</p>
-<h2 id="5-3-自治系统内部的路由选择协议-内部网关协议">5.3 自治系统内部的路由选择协议-内部网关协议</h2>
-<p>前面介绍的是抽象的算法，接下来是具体的协议，协议来实现算法</p>
-<h3 id="RIP-适合小网">RIP-适合小网</h3>
-<p><em>Routing Information Protocol</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501201958125.png" alt="image-20220501201958125"></p>
-<p>基于 DV 算法</p>
-<ul>
-<li>每条链路的 cost = 1，<strong>最大跳数为 15</strong>，如果跳数超过 15，即当作不可达</li>
-<li>通告 advertisements：
-<ol>
-<li>邻居定期<strong>每隔 30 s</strong>，则交换通告</li>
-<li><strong>如果对方请求</strong>，那么可以直接发送通告</li>
-</ol>
-</li>
-<li>每个通告<strong>最多通告 25 个目标网络的 DV</strong>，因此<strong>适合小网的自治</strong></li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501202834977.png" alt="image-20220501202834977"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501202845156.png" alt="image-20220501202845156"></p>
-<p>毒性逆转就是水平分裂</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501203009738.png" alt="image-20220501203009738"></p>
-<p>网络层的功能借助应用进程来实现，为了实现这个功能，还借助了传输层的 UDP</p>
-<h3 id="OSPF-适合大网">OSPF-适合大网</h3>
-<p><strong>开放最短路径优先</strong> <em>Open Shortest Path First</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501203154282.png" alt="image-20220501203154282"></p>
-<p>基于 LS 算法</p>
-<p>直接在 IP 数据报上传送 OSPF 报文，不需要借助传输层协议</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501203457611.png" alt="image-20220501203457611"></p>
-<p><strong>允许根据多个代价（跳数、延迟等）来计算最优</strong></p>
-<p>在<strong>大型网络</strong>中支持<strong>层次性 OSPF</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501203810484.png" alt="image-20220501203810484"></p>
-<p>分成多个 Area 分组<strong>只在一个 area 内进行泛洪</strong>，不会扩散到外面。area 之间来进行通信需要先交给骨干 area，由骨干 area 交给其他 area 其他 area 再在内部交给目标子网对应的路由器</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501204152339.png" alt="image-20220501204152339"></p>
-<h2 id="5-4-ISP-之间的路由选择">5.4 ISP 之间的路由选择</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504151614606.png" alt="image-20220504151614606"></p>
-<p>前面讲的 RIP OSPF 等都是一个自治区内的路由选择，也就是一个平面内的路由。</p>
-<p>但对于全球这么大的网络，显然用这些方法是非常困难的：<strong>规模问题、管理问题、安全问题</strong></p>
-<p><strong>自治系统 AS</strong>  <em>Autonomous System</em></p>
-<p>因此采用层次性路由，分为两层：</p>
-<ol>
-<li>将网络划分成一个个的自治区域【<em>规模小，使用之前的路由协议可以轻松解决</em>】，<strong>自治区域内使用内部网关协议</strong> <em>intra-AS routing protocol</em>，且没有要求使用哪种协议，可以是 RIP 也可以是 OSPF 或者是其他的私有的协议</li>
-<li>自治区之间的路由：一个自治区在这个层面上只表现为一个点或者若干个很少的点，<strong>使用外部网关协议</strong> <em>inter-As routing protocol</em></li>
-</ol>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504152817951.png" alt="image-20220504152817951"></p>
-<h3 id="BGP">BGP</h3>
-<p><em>Border Gateway Protocol</em> <strong>边际网关协议</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504153644839.png" alt="image-20220504153644839"></p>
-<p>不是由组织制定的，而是大家约定俗成的，因此称为<strong>事实上的标准</strong></p>
-<p>内部网关协议可以任意，但边际网关协议一定的一样的，不然不同的 AS 无法通信</p>
-<blockquote>
-<p>对于每个AS，每台路由器要么是一台网关路由器（gateway router），要么是一台内部路由器（internal router）。网关路由器位于AS边缘，直接连接到其他AS的路由器。内部路由器仅连接自己AS中的主机和路由器。</p>
-</blockquote>
-<ul>
-<li>
-<p><strong>eBGP</strong> <em>exterior BGP</em> 网关路由器从其他相邻的网关路由器得到他们收集来的自己所在的 AS 的可达信息</p>
-<p>如下的 1c 把自己子网的可达信息告诉 2a 后，2a 内都得到这个信息，那么 2c 就可以把这个信息进行 re-advertisement，将其<strong>转发</strong>给 3a【<code>但注意加增加一跳信息，即3a 要达到 AS1 需要通过 AS2</code>】，所以 3a 就可以知道 AS1 中的可达信息了，同时 2c 也会把<strong>自己</strong> AS2 的可达信息告诉 3a</p>
-</li>
-<li>
-<p><strong>iBGP</strong> <em>interior BGP</em> 网关路由器将上面得到的子网可达信息传遍 AS 内部的所有路由器。告诉内部路由器，到到某个子网通过我这个网关路由器就可以到</p>
-<p>但注意下面的虚线不一定是物理链路，而是 TCP 连接，通过 TCP 传递子网可达信息，那么 TCP 怎么路由呢？自然是通过内部网关协议即可</p>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504154409486.png" alt="image-20220504154409486"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504155855608.png" alt="image-20220504155855608"></p>
-<p><strong>基于改进的 DV 算法</strong>，不仅仅包含距离（即多少跳）还包含路径，因此可以检查出其中的环路，避免无穷计算问题，收敛速度更快</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504155255097.png" alt="image-20220504155255097"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504160748484.png" alt="image-20220504160748484"></p>
-<p>每对路由器通过使用<strong>179端口的半永久TCP</strong>连接交换路由选择信息。</p>
-<p><strong>使用 TCP 协议交换 BGP 报文</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504155608413.png" alt="image-20220504155608413"></p>
-<p><strong>基于策略的路由</strong>，不像内部网关协议，毫无保留的通告，在不同 AS 之间的通告会基于一定的策略，<strong>有多条路径可选择时，也会基于策略进行选择一条</strong>，不一定就以跳数作为标准，还有其他的考虑因素【<code>内部网关协议注重性能，外部网关协议关注策略</code>】</p>
-<p>两个重要的属性是AS-PATH和NEXT-HOP。NEXT-HOP是AS-PATH<strong>起始的路由器接口的IP地址。</strong></p>
-<h4 id="BGP-路由选择">BGP 路由选择</h4>
-<h5 id="1-热土豆路由选择（hot-potato-routing）">1.热土豆路由选择（hot potato routing）</h5>
-<p>选择到开始该路由的多个NEXT-HOP路由器中具有最小开销的那条路径。</p>
-<p>热土豆的思想：<strong>尽可能快地将分组送出其AS（最低开销）</strong>，而不担心其AS外部到目的地的余下部分的开销。热土豆路由选择是<strong>自私</strong>的算法。<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504163224165.png" alt="image-20220504163224165"></p>
-<h5 id="2-路由选择算法">2.路由选择算法</h5>
-<p>实践中BGP使用一种比热土豆选择更为复杂的算法，进入BGP路由选择算法的输入是到某前缀的所有路由的集合，如果只有一条这样的路由就选择该路由，<strong>否则依次按照一些消除规则直到剩下一条路由。</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504161212598.png" alt="image-20220504161212598"></p>
-<p>因此去往其他 AS 内的可达信息是由内部网关协议【<code>决定通过哪些 interface 放出数据可以到达网关</code>】和外部网关协议【<code>决定怎么到外部子网</code>】一起决定的</p>
-<h2 id="5-5-SDN-控制平面">5.5 SDN 控制平面</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504165114192.png" alt="image-20220504165114192"></p>
-<p>SDN 控制器：</p>
-<ul>
-<li><code>网络控制应用界面层</code>：控制器通过**“北向”接口**与网络控制应用程序交互。</li>
-<li><code>网络范围状态管理层</code>：网络的主机，链路，交换机和其他SDN控制设备的<strong>最新状态信息，以及各种受控设备的流表。</strong></li>
-<li><code>通信层</code>：SDN控制器和受控网络设备之间的<strong>通信</strong>。现在被称为<strong>控制器的“南向”接口</strong>。<strong>OpenFlow</strong>就是一种提供这种功能的特定协议。</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504165445283.png" alt="image-20220504165445283"></p>
-<p>采用 TCP 交换报文</p>
-<p>3 种类型：</p>
-<ul>
-<li>控制器–&gt;分组交换机</li>
-<li>控制器&lt;–分组交换机</li>
-<li>控制器&lt;–&gt;分组交换机</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504165938040.png" alt="image-20220504165938040"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504170140801.png" alt="image-20220504170140801"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504170244075.png" alt="image-20220504170244075"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504170304691.png" alt="image-20220504170304691"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504170331049.png" alt="image-20220504170331049"></p>
-<p>两种控制器 <strong>Open Daylight</strong> 和 <strong>ONOS</strong>。</p>
-<h2 id="5-6-ICMP">5.6 ICMP</h2>
-<p><em>Internet Control Message Protocol</em> <strong>因特网控制报文协议</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504173920723.png" alt="image-20220504173920723"></p>
-<h3 id="差错报告">差错报告</h3>
-<p>ICMP <strong>最典型</strong>的用途是<strong>差错报告</strong></p>
-<p>例如，当运行一个HTTP会话时，会遇到一些诸如“目的网络不可达”之类的错误报文。这种报文就来源于ICMP。在某个位置，IP路由器不能找到一条通往HTTP请求中所指定的主机的路径，该路由器就会向主机生成并发出一个ICMP报文以指示该错误。</p>
-<p><strong>ICMP通常被认为是IP的一部分，但从体系结构上讲它位于IP之上</strong>。当一台主机收到一个指明上层协议为ICMP的IP数据报时（上层协议编码为<strong>1</strong>）,它分解出该数据报的内容给ICMP,就像分解岀一个数据报的内容给TCP或UDP 一样。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220509114924343.png" alt="image-20220509114924343"></p>
-<p>ICMP报文有<strong>一个类型字段和一个编码字段</strong>，并且<strong>包含引起该ICMP报文首次生成的 IP 数据报的首部和 ICMP的前8个字节</strong>（以便发送方能确定引发该差错的数据报）。</p>
-<p>如下在返回的 11 0 ICMP 报文中包含了引起该 ICMP 报文的源报文的 IP 首部和 ICMP 内容的前 8 B</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220509114508097.png" alt="image-20220509114508097"></p>
-<h3 id="ping">ping</h3>
-<p>ping程序发送一个ICMP<strong>类型8编码0</strong>的报文到指定主机。目的主机发回一个<strong>类型0编码0</strong>的ICMP回显回答</p>
-<h3 id="Traceroute">Traceroute</h3>
-<p><strong>利用返回的 ICMP 报文来判断</strong>，通过发送 ping 报文来实现</p>
-<p>逐个增加 TTL 发送报文，同时为每个报文设定计时器，当 TTL 减为 0，路由器发送<strong>类型 11 编码 0</strong> 的 TTL 过期差错报告（包含这个路由器的名字和 IP 地址），因此可以得到往返时延。</p>
-<p>当到达目标主机时，由于目标主机和 ping 的目标地址相同，因此目标主机会返回类型 0 编码 0 的 ICMP 报文对 ping 进行响应，因此 tracert 就知道已经到达了，无需再发送</p>
-<p>（标准的 Traceroute 程序实际上<strong>用相同的TTL发送3 个一组的分组</strong>，因此 Traceroute 输出对每个TTL提供了 3个结果。）</p>
-<h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220504170703171.png" alt="image-20220504170703171"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
-  id="post-计算机网络自顶向下方法/readme"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/readme/"
-    >readme</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： zzb
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/readme/" class="article-date">
-  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>2022计算机网络-自顶向下笔记<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1JV411t7ow">课程链接</a></p>
-<p>笔记图片均来自课程PPT</p>
- 
       <!-- reward -->
       
     </div>
@@ -1922,387 +336,155 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>6 链路层和局域网</h1>
+  
+        <h1>6 链路层和局域网</h1>
 <p><strong>一般网卡实现了链路层和物理层的功能</strong>，它们是紧密捆绑的</p>
 <p>标题并不是说广域网没有链路层，而是因为广域网的链路层相比于局域网很简单</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505164505842.png" alt="image-20220505164505842"></p>
-<h2 id="6-1-引论和服务">6.1 引论和服务</h2>
-<h3 id="网络连接形式">网络连接形式</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505193511923.png" alt="image-20220505193511923"></p>
-<ul>
-<li>
-<p><strong>点到点</strong>的链路是指两个路由器之间<strong>有链路相连</strong>，A 通过这条链路<strong>就是发给 B</strong>，不可能到其他地方去，就是封装和解封装的过程，因此比较简单，同理 B 就是发给 A。<strong>一般用于广域网</strong>，如海底电缆、拨号接入【家里面的 ADSL 连接到运营商的 modem 池也是点到点的，因为这条线路被一个人占用，其他人不能用】</p>
-<ul>
-<li>广域网带宽大，延迟大，因此信道容量大，因此容易碰撞冲突，不适合用多点连接</li>
-</ul>
-</li>
-<li>
-<p><strong>多点连接</strong>指多个设备连到交换机上，经过交换机到达其他点。存在<strong>寻址和媒介访问控制问题[在 WAN 中没有]</strong>，要区分不同的网卡( MAC )，处理多个设备发出的报文。<strong>一般用于局域网</strong></p>
-<ul>
-<li>
-<p><strong>共享型介质</strong>：用同轴电缆将多个设备连接在一起，报文发送到电缆上，其他设备都能收到<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505193231365.png" alt="image-20220505193231365"></p>
-</li>
-<li>
-<p><strong>网络交换机</strong>：所有设备与网络交换机连接，通过网络交换机来转发</p>
-<p>如教室中的 <strong>AP</strong> 无线访问接入点 <em>WirelessAccessPoint</em></p>
-<blockquote>
-<p>AP 就相当于有线网络的集线器，它能够把各个无线客户端连接起来，<strong>该单元内的所有无线信号都要通过它才能进行交换</strong>。AP 是无线局域网基本模式中必不可少的设备</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="导论">导论</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505194239517.png" alt="image-20220505194239517"></p>
-<p><strong>链路层的功能：一个节点把帧通过链路传到另一个相邻的节点</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505195052877.png" alt="image-20220505195052877"></p>
-<h3 id="服务">服务</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505195836892.png" alt="image-20220505195836892"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505200634302.png" alt="image-20220505200634302"></p>
-<ul>
-<li>成帧</li>
-<li>链路接入【发送帧之前要获得信道的使用权】</li>
-<li>相邻两点之间完成可靠数据传输
-<ul>
-<li>出错率低的链路很少使用，避免了为了保证可靠所做的代价以太网直接有线链路连接，本身很可靠，因此不提供 RDT</li>
-<li>无线链路出错率高，RDT 是有必要的。<strong>如果</strong>在链路层<strong>这里不重传</strong>，那么<strong>只能靠源主机重传，这样的代价太大</strong>【这就是为什么在实现了传输层 RDT 时还要实现链路层的 RDT，即<strong>减少代价</strong>】</li>
-</ul>
-</li>
-<li>流量控制</li>
-<li>错误检测</li>
-<li>差错纠正</li>
-<li>半双工和全双工：像对讲机就是半双工，一次只能一个人讲话</li>
-</ul>
-<p>注意这些服务的链路层<strong>各种协议服务的总和</strong>，<strong>具体到某个协议</strong>时，这个协议提供的服务可能<strong>只是上面服务的一个子集</strong>【如以太网就不提供 RDT】</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505201034992.png" alt="image-20220505201034992"></p>
-<p>网卡；网络适配器；NIC <em>network interface card</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505201201045.png" alt="image-20220505201201045"></p>
-<h2 id="6-2-差错检测和纠正">6.2 差错检测和纠正</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505201458890.png" alt="image-20220505201458890"></p>
-<p><strong>EDC</strong> <em>error-detection-and-correction</em></p>
-<h3 id="奇偶校验">奇偶校验</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505201728300.png" alt="image-20220505201728300"></p>
-<h3 id="CheckSum">CheckSum</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505201853632.png" alt="image-20220505201853632"></p>
-<h3 id="CRC">CRC</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505202015191.png" alt="image-20220505202015191"></p>
-<p><em>Cyclic Redundancy Check</em></p>
-<ol>
-<li><strong>模二运算</strong>，位的加法不进位，减法不借位，<strong>就是异或运算</strong></li>
-<li><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505202606426.png" alt="image-20220505202606426">两种表示方式等价</li>
-<li><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505202732087.png" alt="image-20220505202732087">r 次方生成多项式，共 r+1 位</li>
-<li><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220506094959577.png" alt="image-20220506094959577">D 左移 R 位模二除 G 得到 R 位余数</li>
-<li>接收方使用 G 去除以 D+R 如果除尽，则说明没有出错，否则出错</li>
-</ol>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220506095814138.png" alt="image-20220506095814138"></p>
-<h2 id="6-3-多点访问协议">6.3 多点访问协议</h2>
-<p><strong>MAP</strong> <em>multiple access protocol</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220506200041149.png" alt="image-20220506200041149"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220506200152514.png" alt="image-20220506200152514"></p>
-<p><strong>多个站点，一个信道</strong>，在信道上发送数据信息、控制信息</p>
-<h3 id="MAC">MAC</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507104848735.png" alt="image-20220507104848735"></p>
-<p>从算法角度是 <strong>MAC</strong>，从协议角度是 <strong>MAP</strong></p>
-<p>可以分成三大类</p>
-<p>在理想情况下，对于速率为 R bps 的广播信 道，<strong>多路访问协议应该具有以下所希望的特点</strong></p>
-<ol>
-<li>当仅有一个节点发送数据时，该节点具有R bps 的吞吐量；</li>
-<li>当有 M 个节点发送数据时，每个节点吞吐量为 R/M bps 这<strong>不必要求 M 个节点中 的每一个节点总是有 R/M 的瞬间速率</strong>，而是每个节点在一些适当定义的时间间隔内应该有 R/M 的平均传输速率。</li>
-<li>协议是分散的；这就是说<strong>不会因某主节点故障而使整个系统崩溃</strong>。</li>
-<li>协议是<strong>简单的</strong>，使实现不昂贵。</li>
-</ol>
-<h4 id="1-信道划分协议">1.信道划分协议</h4>
-<p><em>channel partitioning protocol</em></p>
-<p><strong>低负载的时候，只有部分几个划分被利用了，利用率低；高负载大多数划分都被利用了，因此利用率高</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507105107496.png" alt="image-20220507105107496"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507105144286.png" alt="image-20220507105144286"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507105556900.png" alt="image-20220507105556900"></p>
-<p>CDMA 采用编码来区分，不同的站点的编码之间是正交的，可以区分开，是第三代移动通信技术即 3G</p>
-<p>4G 5G 是频分时分等多种复杂技术综合使用</p>
-<h4 id="2-随机存取协议">2.随机存取协议</h4>
-<p><em>random access protocol</em></p>
-<p><strong>低负载时利用率高，高负载时冲突增加，利用率下降</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507105722306.png" alt="image-20220507105722306"></p>
-<p>协议规定：【有上百种此类型协议】</p>
-<ul>
-<li>如何检测冲突</li>
-<li>如何从冲突中恢复</li>
-</ul>
-<p><strong>以太网采用 CSMA/CD</strong></p>
-<p><strong>无线局域网 802.11 采用 CSMA/CA</strong></p>
-<blockquote>
-<p><strong>载波监听多路访问</strong> <strong>CSMA</strong> <em>Carrier Sense Multiple Access</em>：设备监听其它设备是否忙碌，只有在线路空闲时才发送。</p>
-<p><strong>冲突检测 CD</strong> <em>collision detect</em></p>
-<p><strong>冲突避免 CA</strong> <em>collision avoid</em></p>
-</blockquote>
-<h5 id="时隙-ALOHA">时隙 ALOHA</h5>
-<blockquote>
-<p>之所以是 ALOHA 是因为是在夏威夷发明的，ALOHA 在夏威夷语中是你好的意思</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507110447603.png" alt="image-20220507110447603"></p>
-<p>检测到碰撞时，大家都停止在这个时隙发送【会导致该时隙<strong>浪费</strong>】，而在随后的时隙<strong>以概率 p 重发</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507111032296.png" alt=""></p>
-<p><strong>需要节点对时隙时钟同步</strong>，后面介绍的协议均不需要同步</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507111241924.png" alt="image-20220507111241924"></p>
-<h5 id="纯-ALOHA">纯 ALOHA</h5>
-<p>事实上先于时隙 ALOHA 提出</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507111452838.png" alt="image-20220507111452838"></p>
-<p>这里的所有帧的长度也是一样的，因此每个帧的传输时间是一样的。<strong>因此称为帧时</strong></p>
-<p>因此要求在 t<sub>0</sub>-1~t<sub>0</sub>+1的范围内都没有其他节点发送的概率</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507111816241.png" alt="image-20220507111816241"></p>
-<h5 id="CSMA">CSMA</h5>
-<p><strong>CS：在传输前监听有没有冲突，发送后不监听</strong></p>
-<p>只能<strong>尽可能减少</strong>，但<strong>不能避免冲突</strong></p>
-<p><strong>节点通过局部的 sense 来判断 channel 的全局使用情况</strong>，即通过听到了其他节点发送的信号，才能知道当前信道被使用，但如果其他节点的信号在路上还没有到达该节点，那么将监听不到，因此该节点也会发送信号【<em>因此如果节点间的距离越远，就越有可能发送冲突，因为不能及时检测到</em>】，发送冲突。如下</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507112739174.png" alt="image-20220507112739174"></p>
-<h5 id="CSMA-CD">CSMA/CD</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507112909094.png" alt="image-20220507112909094"></p>
-<p><strong>CD：边发送边监听</strong></p>
-<p>检测到冲突就停止传输，减少了对信道的浪费</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507113244422.png" alt="image-20220507113244422"></p>
-<p><strong>以太网</strong>使用</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507113350871.png" alt="image-20220507113350871"></p>
-<p><strong>位时：发送一个 bit 位的时间</strong></p>
-<p><strong>强化冲突</strong>：检测到的站点要发 Jam，其他收到Jam 的也要发，从而强化信号，让所有站点都能知道</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508142649572.png" alt="image-20220508142649572"></p>
-<p><strong>二进制指数退避算法</strong> <em>exponential backoff</em>：发送冲突时，进入退避状态，<strong>分布式</strong>在一个范围内选择值，如果两个冲突的适配器<strong>选择了不同的值，那么就可以避免冲突</strong>。如果持续失败，那么每次范围<strong>扩大两倍</strong>，两个适配器<strong>选择同一个值的概率指数下降，因此冲突概率指数下降</strong>，但因为范围大，<strong>等待时间也会变大</strong>。其中的 <strong>K 最大为 10</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507114842201.png" alt="image-20220507114842201"></p>
-<ul>
-<li>当传播时延接近0时，效率接近1。碰撞的节点将立即中止而不会浪费信道。</li>
-<li>传输帧时间变成无穷大时效率为 1 是因为这个帧的传输一直占用信道，其他节点一直等待，也就不存在冲突了</li>
-</ul>
-<h5 id="CSMA-CA">CSMA/CA</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507115348328.png" alt="image-20220507115348328"></p>
-<p>不像有线介质，无线网络中信号衰减严重，设备间干扰严重，因此<strong>自身信号远远大于其他节点的信号</strong>，不能进行冲突检测</p>
-<p>即使冲突检测，如下面的 A C 之间阻隔了，因为检测时 A C 不能相互检测到，因此不会冲突，但如果它们同时发送给 B，那么就导致了冲突；此外如果检测到冲突，但信号非常弱，对当前的传输影响几乎没有，那么即使冲突也可以成功。<strong>因此 WLAN 中是否检测到冲突和成功没有直接关系</strong>，检测了也没有用【<em>在 <strong>LAN</strong> 中没有检测到冲突和成功几乎是对应的关系，因此也<strong>不需要 ACK</strong></em>】</p>
-<blockquote>
-<p>注意这里的情况有个限制，不碰撞=成功，要求帧的长度要 ≥ 2 τ，τ是两个最远的节点之间数据传输的时间，2 τ 就是一个来回。考虑一个极端情况，在 A 发送后，信号传递到 B，但还差一点才传到 B 时，B 可以发送，那么立即会引起冲突，B 的冲突信号传递到 A 需要 τ 的时间，如果 A 的帧比 2 τ 短，那么冲突信号还没到那么就发送结束了，A 会认为没有碰撞，那么成功了，而事实上是失败的，因为有 B 的信息干扰了。因此在以太网中如果帧的长度比较短，那么会有填充码字段，用来保证长度是 ≥ 2 τ 的</p>
-<p>信号在以太网传播1km大约需要5us，即信号传播速率实际约为2x10 A 8m/s。以太网最大端到端长度约为5km，单程传播时延为25us，争用期的一半(即25.6us) 必须大于该值。</p>
-<p>对于10M以太网，发送速率为10Mb/s，在争用期(端到端往返传播时延)可发送</p>
-<p>512bit，即64字节，因此以太网规定了最短，帧长64字节，若发送数据非常少，那么必须加入- -些填充字节，使得帧长不小于64字节。</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507120118538.png" alt="image-20220507120118538"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507121655784.png" alt="image-20220507121655784"></p>
-<p>检测到忙碌，<strong>事前就随机选择一个回退值</strong>，并在<strong>检测到信道空闲时递减值</strong>[信道忙时不减值]，<strong>从而避免后面有可能避免的冲突</strong></p>
-<p>因为不能做 CD，因此<strong>需要有 ACK</strong> 来保证传输的成功</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507122230068.png" alt="image-20220507122230068"></p>
-<p>使用了 CA 也<strong>无法完全避免冲突</strong>，如下</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507122532616.png" alt="image-20220507122532616"></p>
-<p><strong>协议可选项：预约帧</strong>：可以完全避免冲突，一般用于长数据帧的传输，避免被冲突打断</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507123042018.png" alt="image-20220507123042018"></p>
-<h5 id="线缆接入网络">线缆接入网络</h5>
-<p><strong>有线电缆数据服务接口规范</strong> <strong>DOCSIS</strong> <em>Data Over Cable Service Interface Specifications</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507141127462.png" alt="image-20220507141127462"></p>
-<p><strong>电缆数据机终端系统 CMTS</strong> <em>Cable Modem Temination System</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220507142431441.png" alt="image-20220507142431441"></p>
-<ul>
-<li>使用 FDM 将上行和下行划分成多个频率信道，上行和下行在不同的频率上发送</li>
-<li>下行不存在竞争，只有一个 CMTS，它发送的信息所有节点都能收到，节点通过比较地址来接收数据</li>
-<li>上行信道通过 TDM 划分时隙：
-<ul>
-<li>有一组<strong>专门用于发送时隙请求帧的时隙</strong>，节点需要向 CMTS 发送时隙请求，<strong>请求是独立随机的，这里是会产生碰撞的</strong>。【但不检测碰撞】</li>
-<li>CMTS 在下行信道上发送 MAP 报文指定哪个节点可以在哪个指定的时间间隔内发送。如果请求的节点<strong>没有</strong>收到下行报文种对请求分配的<strong>响应</strong>，那么节点就知道<strong>发送碰撞</strong>了。<strong>使用二进制指数退避算法</strong></li>
-<li>对于其他用于分配的时隙，因为节点是在<strong>各自时隙上发送信息的，因此不会产生冲突</strong>。</li>
-</ul>
-</li>
-</ul>
-<p>因此这种 MAP 分类在信道划分/随机存取中都可以，<strong>可以认为是几种 MAP 的综合</strong></p>
-<h4 id="3-轮流-MAC-协议">3.轮流 MAC 协议</h4>
-<p><em>taking-turns protocol</em></p>
-<p><strong>高负载和低负载的利用率都很高</strong>【<em>但高负载和低负载的利用率没有对应的前面两种方式高，因为有一定的消耗</em>】，但过于复杂，使用得很少。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508093809110.png" alt="image-20220508093809110"></p>
-<h5 id="轮询-集中式">轮询-集中式</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508093900481.png" alt="image-20220508093900481"></p>
-<p>由主节点一个个询问节点要不要传输数据</p>
-<p>主节点首先向节点1发送一个报文，告诉它（节点1） 能够传输的帧的最多数量。在节点1传输了某些帧后，主节点告诉节点2它（节点2）能够传输的帧的最多数量。</p>
-<ul>
-<li>等待问题</li>
-<li>主节点故障问题</li>
-</ul>
-<h5 id="令牌传递-分布式">令牌传递-分布式</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508094106210.png" alt="image-20220508094106210"></p>
-<p>令牌：特殊的帧</p>
-<p>当一个节点收到令牌时，仅当它有一些帧要发送时，它才持有这个令牌，发送完最大数目的帧数后，又将令牌转交给下一个节点；否则，它立即向下一个节点转发该令牌。</p>
-<p>谁发的，最终要由其接收</p>
-<ul>
-<li>节点忘记释放令牌问题</li>
-<li>令牌丢失问题</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508094533196.png" alt="image-20220508094533196"></p>
-<h2 id="6-4-LANS-局域网技术">6.4 LANS 局域网技术</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508112252694.png" alt="image-20220508112252694"></p>
-<ul>
-<li>
-<p><strong>IP 地址是分层的，便于路由聚集、计算，减少路由表数量；</strong></p>
-</li>
-<li>
-<p><strong>MAC 地址是平面的</strong><br>
-<strong>48 位</strong> MAC 地址/链路层地址/局域网地址：<strong>用于区分一个物理网络内部的不同网卡/节点，从而将数据封装成帧发送</strong></p>
-<p>前3个字节代表网络硬件制造商的编号，后3个字节代表该制造商所制造的某个网络产品(如网卡)的系列号</p>
-</li>
-<li>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508112953182.png" alt="image-20220508112953182"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508113255757.png" alt="image-20220508113255757"></p>
-</li>
-</ul>
-<p>根据 IP 找到下一跳，再修改目标 MAC 地址为下一跳的 MAC 地址。才能使用链路层的网卡去发送到对应的节点</p>
-<p>从网络层的角度看，最后一跳就是一跳，从一个 IP 到下一个 IP，但从链路层来看，最后一跳可能还要经过多个交换机才能到达</p>
-<p><strong>全 1 的 MAC 地址是广播地址，交换机应该将其转发给局域网内的所有节点</strong></p>
-<h3 id="ARP">ARP</h3>
-<p><strong>地址解析协议</strong> <em>Address Resolution Protocol</em></p>
-<p><strong>网络层的服务，只涉及网络层和数据链路层</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508113448792.png" alt="image-20220508113448792"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508113745090.png" alt="image-20220508113745090"></p>
-<p><strong>原理</strong>：ARP <strong>即查即用</strong>，A 需要查询目标 B 的 MAC 地址时就广播一个包含 B 的 IP 地址的 ARP 查询包，其中源 MAC 地址是 A 的，目标 MAC 地址是全 1 的广播地址，B 收到对比 IP 后就将自己的 MAC 地址作为源 MAC 地址发送应答帧给 A，并记录发送方 MAC 地址，如果对比后发现不是自己的 IP，那么<strong>会丢弃</strong>，且会<strong>记录</strong>下对应的发送方 IP 的MAC地址。。</p>
-<p>A 保存这个 IP : MAC 映射时间为 <strong>20 min</strong>，超时就删除</p>
-<h4 id="例子">例子</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508114342550.png" alt="image-20220508114342550"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508114502765.png" alt="image-20220508114502765"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508114813292.png" alt="image-20220508114813292"></p>
-<p>源 IP 和目标 IP 都不发生改变</p>
-<p>但 源 MAC 和目标 MAC 在每一段中都是改变的</p>
-<h3 id="以太网">以太网</h3>
-<p>最主流的 LAN 技术</p>
-<blockquote>
-<p>以太网对本地区域联网的重要性就像因特网对全球联网所具有的地位那样。</p>
-</blockquote>
-<blockquote>
-<p>鲍勃·麦卡夫 Bob Metcalfe 以太网之父</p>
-</blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508114936272.png" alt="image-20220508114936272"></p>
-<p>节点都连接到同轴电缆上，两端有终结器用于吸引信号，防止信号反射回去，影响 CSMA/CD</p>
-<h4 id="拓扑结构">拓扑结构</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508121936688.png" alt="image-20220508121936688"></p>
-<p><strong>发展：总线→星形</strong></p>
-<ol>
-<li><strong>同轴电缆</strong>，2 Mbps。但如果电缆损坏一部分，那么所有节点都不能使用，会有反射影响 CSMA/CD</li>
-<li><strong>使用集线器 HUB</strong></li>
-<li><strong>交换机 switch</strong></li>
-</ol>
-<h4 id="以太网帧结构">以太网帧结构</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508122149754.png" alt="image-20220508122149754"></p>
-<ul>
-<li>
-<p><strong>前导码/前同步码 Preamble</strong>【<strong>8 B</strong>】：前 7 个字节是 10101010，后 1 个字节是 10101011</p>
-<blockquote>
-<p>前同步码字段的前 7 字节用于“唤醒”接收适配器，并且将<strong>它们的时钟和发送方的时钟同步。</strong></p>
-<p>为什么这些时钟会不同步呢？</p>
-<p>记住适配器的目的是根据以太局域网类型的不同，分别以 10 Mbps、100 Mbps或者 1 Gbps 的速率传输帧。然而网卡不会以精确的额定速率传输帧；相对于额定速率总有一些<strong>漂移</strong>，局域网上的其他适配器不会预先知道这种漂移的。<strong>接收适配器只需通过锁定前同步码的前7字节的比特的速率，就能够锁定适配器A的时钟。<strong>前同步码的第 8 个字节的最后两个比特（第一个出现的</strong>两个连续的 1</strong>）警告接收适配器数据要到来了。</p>
-</blockquote>
-</li>
-<li>
-<p><strong>目标 MAC 地址</strong>【<strong>6 B</strong>】：网卡接收：</p>
-<ol>
-<li>目标 MAC 地址是自己地址的，<strong>非混杂模式</strong>，此时网卡只接受来自网络端口的目的地址指向自己的数据。<strong>其他丢弃</strong></li>
-<li>目标 MAC 地址是全 1 的广播地址</li>
-<li>其他的不是上面两种情况的 MAC，把网卡设置成<strong>混杂模式</strong>，能够接收所有经过它的数据流，而不论其目的地址是否是它。因此抓包软件就是使用的混杂模式</li>
-</ol>
-</li>
-<li>
-<p><strong>源 MAC 地址【6 B】</strong></p>
-</li>
-<li>
-<p><strong>类型 TYPE【2 B】</strong>：标识上层的网络协议是什么，如 type = 0x0806 时会将帧交给 ARP 协议</p>
-</li>
-<li>
-<p><strong>数据/载荷</strong>【<strong>46 ~ 1500 B</strong>】：这个字段承载了 IP数据报。以太网的<strong>最大传输单元 （MTU）是1500字节</strong>。这意味着如果<strong>IP数据报超过了 1500字节【包括头部】</strong>，则主机必须将该数据报分片。数据字段的<strong>最小长度是46字节</strong>。这意味着如 果IP数据报小于46字节，数据报必须被<strong>填充到46字节</strong>。</p>
-</li>
-<li>
-<p><strong>CRC【4 B】</strong>：放在最后，因此可以边发边生成，发完数据直接发送 CRC 即可</p>
-</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508141755780.png" alt="image-20220508141755780"></p>
-<p>因为有形介质本身比较可靠了，如果上层是 UDP，那么就不会重传了，对方的应用层会看到 gap，有内容丢失了</p>
-<p>而如果是 TCP 则会引起重传，但以太网并不知道它在传输一个之前的数据，因为它并不关注</p>
-<blockquote>
-<p>缺乏可靠的传输有助于使得以太网简单和便宜</p>
-</blockquote>
-<h4 id="802-3-以太网标准">802.3 以太网标准</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508142223948.png" alt="image-20220508142223948"></p>
-<p>很多的以太网标准：<em>是链路层也是物理层的规范</em></p>
-<ul>
-<li><strong>相同</strong>的 MAC 协议和帧结构</li>
-<li><strong>不同</strong>的速率、不同的物理层标准、不同的物理层媒介</li>
-</ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508142924466.png" alt="image-20220508142924466"></p>
-<p>100 Mbps 为 fast Ethernet</p>
-<p>T 指双绞线</p>
-<p>节点与 HUB 的最大距离是 100 m</p>
-<h4 id="曼彻斯特编码">曼彻斯特编码</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508143329585.png" alt="image-20220508143329585"></p>
-<p>曼彻斯特编码是一种<strong>自同步</strong>的编码方式，即<strong>时钟同步信号就隐藏在数据波形中</strong>。该跳变既可作为时钟信号，又可作为数据信号</p>
-<blockquote>
-<p>如果不是这样，比如传输全为 1 的数据，那么波形电位永远是 1，接收方如果不知道时钟频率，将不知道这里面有多少个 1</p>
-</blockquote>
-<p>跳变是为了能够将时钟信号抽取出来，跳变的方向代表传输的数据。<strong>因此一段信号可以将时钟信号和数据信号同时传输</strong></p>
-<p>接收方只要按照这个时钟来接收数据即可</p>
-<blockquote>
-<p>每位中间的电平转换既表示了数据代码，也作为定时信号使用</p>
-<p>由于曼彻斯特码在每个时钟位都必须有一次变化，因此，其编码的效率仅可达到50%左右</p>
-</blockquote>
-<h4 id="4b5b-编码">4b5b 编码</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508144507843.png" alt="image-20220508144507843"></p>
-<p><strong>用 5 个bit 去代表 4 个 bit</strong>，使得波形不会一直不变，一定是错落有致的，因此可以从中提取时钟信号，而又不像上面的编码方式那样，每个  bit 都包含时钟信号，提高效率到 80%</p>
-<h4 id="8b10b-编码">8b10b 编码</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508144541326.png" alt="image-20220508144541326"></p>
-<p>千兆以太网中使用 8b10b 编码</p>
-<h3 id="网络交换设备">网络交换设备</h3>
-<h4 id="集线器-HUB">集线器 HUB</h4>
-<p>所有节点接到 HUB 的端口上，HUB 将信号往所有端口转发。<strong>HUB 还可以级联</strong>。所有通过 HUB 连接在一起的都在<strong>一个碰撞域</strong>【<em><strong>也称作网段 LAN segment</strong></em>】内，一次只能一个节点发送数据物理上是星形，但逻辑上是总线形的，在盒子里面是总线不能将不同速率的 HUB 连接在一起，将无法工作，如 10 Mbps 和 100 Mbps 不能连接在一起<br>
-<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508145523925.png" alt="image-20220508145523925"></p>
-<h4 id="交换机">交换机</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508151801903.png" alt="image-20220508151801903"></p>
-<p>实现一个端口到其他端口的转发【而不是所有端口】。一个主机连接交换机的一个端口，消除了 CSMA/CD 在高负载下的冲突问题，<strong>因为一个主机就一个端口【独享】，不同主机发到不同端口，不存在碰撞</strong>。<strong>解决了 CSMA/CD 高负载利用率低的问题</strong>。<em>这也是为什么以太网获得统治地位的原因，其他原因：带宽不断升级、价格低廉</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508152313976.png" alt="image-20220508152313976"></p>
-<p>是一个<strong>存储转发</strong>设备，把帧存下来，根据帧头的目标 MAC 地址决定往哪个端口发，<strong>在发送之前要根据 CSMA/CD 的机制接入到这个目标网段</strong>。【可以认为交换机<strong>每个端口都是一个网段</strong>【<em>隔离冲突域</em>】，因此某两个端口在发送接收的同时，其他端口也可以同时并发使用】</p>
-<p>任何输岀接口之一的速率可能暂时会超过该接口的链路容量。为了解决这个问题，交换机<strong>输出接口设有缓存</strong></p>
-<p>交换机将链路<strong>彼此隔离</strong>，因此不同带宽的链路可以同时接在交换机上</p>
-<p>因此如果主机与交换机<strong>直连</strong>，那么在发送前的监听就<strong>只是一个形式</strong>，交换机会协调转发，决不会向相同的接口转发多个帧，<strong>因此 CD 没有意义</strong>。即在基于交换机的以太局域网中，不会有碰撞，<strong>因此没有必要使用MAC协议了!</strong></p>
-<p>交换机同样可以级联</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508152405189.png" alt="image-20220508152405189"></p>
-<p><strong>即插即用，自学习交换表，无需人工配置</strong></p>
-<p>MAC 和端口地址不是一直捆绑，经过一定时间就删除（时戳），这种状态维护机制称为<strong>软状态维护机制</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508152822632.png" alt="image-20220508152822632"></p>
-<p>在有帧通过端口<strong>发送进来</strong>时，才根据<strong>源 MAC 学习 MAC : 端口</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508152915407.png" alt="image-20220508152915407"></p>
-<ul>
-<li>如果<strong>进来的端口</strong>和匹配目标 MAC 后要发<strong>出去的端口一致</strong>，那么就<strong>过滤</strong>掉，不转发【<em>原因是下层主机要发送到下层某个主机，经过下层级联的交换机泛洪，或者是下层的 HUB 向所有节点转发</em>】</li>
-<li>如果<strong>不知道</strong>目标 MAC 从哪个端口转发，表中还没有，那么就<strong>泛洪</strong>，向所有端口转发</li>
-</ul>
-<h5 id="交换机和路由器">交换机和路由器</h5>
-<p>通常，由<strong>几百台主机组成的小网络通常有几个局域网网段</strong>。对于这些<strong>小网络</strong>，<strong>交换机</strong>就足够了，因为它们不要求IP地址的任何配置就能使流量局部化并增加总计吞吐量。但是在由几千台主机组成的更大网络中，通常在网络中（除了交换机之外）还包括路由器。路由器提供了更健壮的流量隔离方式和对广播风暴的控制，并在网络的主机之间使用更“智能的”路由。</p>
-<p>如下可见一般是<strong>大量的交换机级联</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508153629425.png" alt="image-20220508153629425"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508154001654.png" alt="image-20220508154001654"></p>
-<p>交换机级联</p>
-<p>运行生成树算法，不能出现环</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508153813514.png" alt="image-20220508153813514"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508154315076.png" alt="image-20220508154315076"></p>
-<h3 id="VLANS-虚拟局域网">VLANS 虚拟局域网</h3>
-<p>局域网存在：问题</p>
-<ul>
-<li>缺乏流量隔离</li>
-<li>用户在不同局域网内移动需要改变物理布线</li>
-</ul>
-<p>能够通过支持虚拟局域网（Virtula Local Network, VLAN）的交换机来处理。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508195502445.png" alt="image-20220508195502445"></p>
-<p>原理：<strong>将交换机的端口划分成不同的组</strong>，来自一个端口的广播流量仅能到达这个组中的其他端口，而不会扩散到其他组，<strong>实现隔离</strong></p>
-<p>此时出现新的问题：两个系的之间不能发送信息了。</p>
-<p>解决办法：**将 VLAN 的一个端口和一个外部路由器相连。**从电子工程系发往计算机科学系的数据报将首先跨越 EE VLAN 到达路由器，然后由该路由器转发跨越 CS VLAN 到达 CS 主机</p>
-<h2 id="6-5-链路虚拟化-MPLS">6.5 链路虚拟化 MPLS</h2>
-<p>本科不涉及</p>
-<h2 id="6-6-数据中心网络">6.6 数据中心网络</h2>
-<p>DC Data Center</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508154744551.png" alt="image-20220508154744551"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508201210796.png" alt="image-20220508201210796"></p>
-<p>在数据中心内部, 外部请求首先被定向到一个<strong>负载均衡器（load balancer）</strong> 。负载均衡器的任务是向主机分发请求，以主机当前的负载作为函数来在主机之间<strong>均衡负载</strong>。</p>
-<p>由于负载均衡器<strong>基于分组的目的端口号</strong> （第四层）以及<strong>目的IP地址做决策</strong>，因此它们常被称为“<strong>第四层交换机</strong>”</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508205529567.png" alt="image-20220508205529567"></p>
-<p>用全连接拓扑可以改善等级拓扑中的主机间通讯带宽收到限制的问题，这里二层交换机之间通讯有多条路径可选</p>
-<h2 id="6-7-web-网页的请求历程">6.7 web 网页的请求历程</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508155333308.png" alt="image-20220508155333308"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508205857338.png" alt="image-20220508205857338"></p>
-<p>见书本</p>
-<h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220508160602559.png" alt="image-20220508160602559"></p>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220505164505842.png" alt="image-20220505164505842"></p> 
+        
+      <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/6%20%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/"
+        >阅读更多&gt;&gt;</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+      </div>
+    
+      <div class="space">
+      </div>
+      <div class="outer">
+        <article
+  id="post-计算机网络自顶向下方法/3 传输层"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/"
+    >3 传输层</a> 
+</h2>
  
+
+      
+    <div class="article-author" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/" class="article-date">
+  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  
+        <h1>3 传输层</h1>
+<h2 id="3-1-概述和传输层服务">3.1 概述和传输层服务</h2>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414110728006.png" alt="image-20220414110728006"></p> 
+        
+      <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/"
+        >阅读更多&gt;&gt;</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+      </div>
+    
+      <div class="space">
+      </div>
+      <div class="outer">
+        <article
+  id="post-计算机网络自顶向下方法/5 网络层-控制平面"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/"
+    >5 网络层-控制平面</a> 
+</h2>
+ 
+
+      
+    <div class="article-author" >
+        作者： zzb
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/" class="article-date">
+  <time datetime="2022-06-26T14:02:10.000Z" itemprop="datePublished">2022-06-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/">计算机网络-自顶向下方法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  
+        <h1>5 网络层-控制平面</h1>
+<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220501163220684.png" alt="image-20220501163220684"></p> 
+        
+      <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -2442,6 +624,12 @@ var _hmt = _hmt || [];
       <li class="nav-item">
           <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
               <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="mailto:1214345406@qq.com" target="_blank" class="my_link_li">
+              <img src="/images/envelope.png">
           </a>
       </li>
       
