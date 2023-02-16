@@ -129,10 +129,10 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>3 数据的机器级表示</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218090244930.png" alt="image-20211218090244930"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211218090244930.png" alt="image-20211218090244930"></p>
 <span id="more"></span>
 <h2 id="信息的二进制编码">信息的二进制编码</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210914164832038.png" alt="image-20210914164832038"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210914164832038.png" alt="image-20210914164832038"></p>
 <p>编码：用<strong>少量简单</strong>的<strong>基本符号</strong>对<strong>复杂多样</strong>的<strong>数据</strong>进行一定规律的组合。</p>
 <p>采用二进制的原因：</p>
 <ol>
@@ -142,31 +142,31 @@ var _hmt = _hmt || [];
 </ol>
 <p>用离散有限的数据去表示连续无限的数据，必然会产生偏差</p>
 <h2 id="整数的二进制表示">整数的二进制表示</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210914171400831.png" alt="image-20210914171400831"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210914171400831.png" alt="image-20210914171400831"></p>
 <p>对于<strong>无符号整数不存在各种码的问题</strong>。各种码是用来解决如何表示带符号数的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105164323076.png" alt="image-20220105164323076"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105164323076.png" alt="image-20220105164323076"></p>
 <p><strong>补码表示的数，不必关心其符号而可以直接相加</strong>，即对应机器不关心数据到底是无符号数还是带符号数</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105170903478.png" alt="image-20220105170903478"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105170903478.png" alt="image-20220105170903478"></p>
 <p>补码的最高位符号位，<strong>如果是0那么和无符号一样，如果是1，那么就需要-2<sup>n-1</sup>，才是真正的值</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171042276.png" alt="image-20220105171042276"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105171042276.png" alt="image-20220105171042276"></p>
 <p>补码移码都只有一个0，而原码和反码中有两个0</p>
 <blockquote>
 <p>反码跟原码是正数时，一样；负数时，反码就是原码符号位除外，其他位按位取反</p>
 </blockquote>
 <p><strong>当移码的偏置常数为2<sup>n-1</sup>时，移码和补码仅第一位不同</strong></p>
 <h2 id="浮点数的二进制数表示">浮点数的二进制数表示</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171706899.png" alt="image-20220105171706899"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105171859823.png" alt="image-20220105171859823"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172415066.png" alt="image-20220105172415066"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172521518.png" alt="image-20220105172521518"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105171706899.png" alt="image-20220105171706899"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105171859823.png" alt="image-20220105171859823"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105172415066.png" alt="image-20220105172415066"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105172521518.png" alt="image-20220105172521518"></p>
 <p><strong>精度和范围的大小是相互矛盾的</strong>，因为k位二进制数最多只能表示2<sup>k</sup>个数字，因此范围大精度就小</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105172626111.png" alt="image-20220105172626111"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105172626111.png" alt="image-20220105172626111"></p>
 <p>由上图可见，在两个阶码之间，能表示的数字个数为2<sup>23</sup>个，而随着阶码变大，<strong>这个区间变大，所以数字的精度会变小</strong>。</p>
 <p>非规格化数把阶码全0用于表示0~2<sup>-126</sup>之间的数字，和上面同理<strong>这个区间的长度是2<sup>-126</sup>-0=2<sup>-126</sup></strong>，<strong>而2<sup>-126</sup>~2<sup>-125</sup>之间的长度也是2<sup>-126</sup></strong>，因此在这<strong>两个区间内都可以均匀地表示2<sup>23</sup>个数字</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173227836.png" alt="image-20220105173227836"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173456901.png" alt="image-20220105173456901"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105173227836.png" alt="image-20220105173227836"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105173456901.png" alt="image-20220105173456901"></p>
 <h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105173947144.png" alt="image-20220105173947144"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105173947144.png" alt="image-20220105173947144"></p>
  
       <!-- reward -->
       

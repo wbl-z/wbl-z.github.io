@@ -129,9 +129,9 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>11 冗余磁盘阵列（RAID）</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124201947610.png" alt="image-20211124201947610"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124201947610.png" alt="image-20211124201947610"></p>
 <span id="more"></span>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124202340250.png" alt="image-20211124202340250"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124202340250.png" alt="image-20211124202340250"></p>
 <p>目的：</p>
 <ul>
 <li>增加容量</li>
@@ -139,11 +139,11 @@ var _hmt = _hmt || [];
 <li>纠错</li>
 </ul>
 <p><strong>逻辑上是一个磁盘，物理上是多个的</strong>，同时<strong>数据是分布在多个物理磁盘</strong>上的，这样才能多个磁盘并行工作来提高效率</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124202714276.png" alt="image-20211124202714276"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124202714276.png" alt="image-20211124202714276"></p>
 <h2 id="条带化">条带化</h2>
 <h3 id="RAID-0">RAID 0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124202853383.png" alt="image-20211124202853383"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124203104344.png" alt="image-20211124203104344"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124202853383.png" alt="image-20211124202853383"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124203104344.png" alt="image-20211124203104344"></p>
 <p><strong>条带化即把一个磁盘/一个组（如后面的10，01，50）分散成多个条带放到不同的磁盘上</strong></p>
 <p><strong>优点：</strong></p>
 <ul>
@@ -157,8 +157,8 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="镜像">镜像</h2>
 <h3 id="RAID-1">RAID 1</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124203828637.png" alt="image-20211124203828637"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124204604960.png" alt="image-20211124204604960"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124203828637.png" alt="image-20211124203828637"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124204604960.png" alt="image-20211124204604960"></p>
 <p>深色的是冗余盘，简单地把原来的数据进行了拷贝</p>
 <p><strong>优点：</strong></p>
 <ul>
@@ -170,40 +170,40 @@ var _hmt = _hmt || [];
 <ul>
 <li>价格昂贵</li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124205124993.png" alt="image-20211124205124993"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124205124993.png" alt="image-20211124205124993"></p>
 <p><strong>只用于关键数据，重要数据的保存</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124205533673.png" alt="image-20211124205533673"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124205533673.png" alt="image-20211124205533673"></p>
 <p>RAID 01是先进行条带化，再备份分组，如果disk0坏了，那么整个组都不能用了，即disk2和disk1不能联动</p>
 <p>RAID 10是先进行备份分组，再进行条带化，这样一组中坏了一个也不要紧，比如disk0坏了，还可以，disk1和disk2联动</p>
 <p><strong>所以RAID 10的容错率更高</strong></p>
 <h1>？</h1>
 <h2 id="并行存取——解决单次大I-O传输">并行存取——解决单次大I/O传输</h2>
 <h3 id="RAID-2">RAID 2</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124210109478.png" alt="image-20211124210109478"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124210109478.png" alt="image-20211124210109478"></p>
 <ul>
 <li>不论是大的还是小的I/O请求，要求<strong>所有磁盘都参与</strong>请求的执行。</li>
 <li>每个磁盘的轴<strong>同步旋转，磁头始终处于同一位置</strong></li>
 <li><strong>数据条带很小如一个字节或字</strong>，这样才能让所有磁盘都调动起来，注意这里条带同样是满了才到下一个条带，而不是一个条带用一点，另一个条带用一点，因此要让条带很容易的被装满</li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124210453301.png" alt="image-20211124210453301"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124210453301.png" alt="image-20211124210453301"></p>
 <p><strong>冗余盘用来存储校验码——海明码</strong>，</p>
 <p>4个bit需要3个bit的校验位（8个需要4个），所以4个硬盘需要3个硬盘来校验，并且<strong>校验码就存放在数据对应的位置</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124211014816.png" alt="image-20211124211014816"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124211014816.png" alt="image-20211124211014816"></p>
 <p>对于经常出错的情况意义很大，而磁盘事实上本身就有CRC，所以出错概率是很小的，所以RAID 2在这种情况下意义不大。</p>
 <p><strong>事实上，RAID 2已经被弃用了</strong></p>
 <h3 id="RAID-3">RAID 3</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124211227554.png" alt="image-20211124211227554"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124211227554.png" alt="image-20211124211227554"></p>
 <p>RAID 中讲冗余，<strong>是为了防止磁盘坏了</strong>，而不是为了防止磁盘出错，关于出错是在纠错中强调的。</p>
 <p>出错是可以正常读，错误的位混在数据中，而磁盘坏了这一位就丢失了，不可读了，所以这个是<strong>可以定位错误的</strong>，<strong>因此也可以重构（修复）磁盘坏了的数据</strong>。</p>
 <p>如上是偶检验修复损坏的b<sub>0</sub>，奇校验需要多异或一个1，<strong>原理是两边同时异或一个数字，等式不变，所以在校验码计算式子的两边同时异或b<sub>0</sub>和p(b)即可</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124211948352.png" alt="image-20211124211948352"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124211948352.png" alt="image-20211124211948352"></p>
 <p>这样的并行存取就是为了大的I/O处理的速度更快，保证任何一次都有所有的磁盘参与进来</p>
 <p>但面对多个I/O请求时，由于对于每个I/O请求，所有硬盘都要参与，所以面对多个时，<strong>一次只能响应一个请求</strong></p>
 <h2 id="独立存取（实际上即RAID-0加上了校验码）">独立存取（实际上即RAID 0加上了校验码）</h2>
 <h3 id="RAID-4">RAID 4</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124212431965.png" alt="image-20211124212431965"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124212431965.png" alt="image-20211124212431965"></p>
 <p>采用较大的数据条带，各个磁盘的操作是独立的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124212959982.png" alt="image-20211124212959982"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124212959982.png" alt="image-20211124212959982"></p>
 <p>每次写时，不但要修改数据，还要修改校验位，对于小的I/O写请求，会产生写损失，而在RAID 3中则没有影响，因为条带小，每次都一定要修改校验位，并且直接用写入的数据修改即可，无需取出原有数据。</p>
 <ul>
 <li>此外经过异或计算，可以发现如上公式，因此如果仅修改<strong>很小的数据如1位</strong>，<strong>修改校验位</strong>，<strong>只需要从原来的数据中取出P(B)和B<sub>i</sub>（要被修改的数据的原来数据）即可（<em>原理和之前的RAID 3一样，p(b）异或b<sub>i</sub>=剩下所有数据的异或</em>），B‘是指经过修改的数据</strong></li>
@@ -213,23 +213,23 @@ var _hmt = _hmt || [];
 <p>只要涉及写操作，一定要涉及校验盘，所有没法做到各个盘的写是独立的，<strong>校验盘会成为瓶颈</strong></p>
 <p><strong>RAID 4同样被弃用</strong>，它在设计上有缺陷，即上面所述，在读取操作和一次写操作时都没什么问题，但小I/O存取有瓶颈</p>
 <h3 id="RAID-5">RAID 5</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124214232259.png" alt="image-20211124214232259"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124214232259.png" alt="image-20211124214232259"></p>
 <p>把校验盘拆散到各个磁盘上，即分布式，<strong>这样不会因为校验盘一个盘产生瓶颈</strong></p>
 <p>RAID 5 <strong>只能坏一块盘</strong>，和前面的一样，在坏一块时可以用其他的来恢复，但坏更多盘时则不能恢复</p>
 <p><em><em>当一块数据被修改时，与它同一行、与它的校验块同一个磁盘（列）的数据都不能进行修改、这个不能修改的磁盘上有的所有的校验块对应的那一行也都不能修改</em>（因为一行中块的修改的修改必须要修改校验块）</em>**</p>
 <p>因此，一个块的修改仍然会约束很多的块，没有那么的独立</p>
 <p><strong>两读两写</strong>是指读数据和读校验用于计算新的校验，两写是指写数据和写校验位。</p>
 <p>最好的情况就是同时读出两个，同时再写回去，最坏的自然就是两读和两写分开来</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124215744728.png" alt="image-20211124215744728"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124215744728.png" alt="image-20211124215744728"></p>
 <p>RAID 50的<strong>性能更高，且能坏的盘更多</strong>，只要不是一组内坏多个都能运行(即可以不同组分别坏)，但<strong>容量利用率更低，冗余所需空间更多</strong>（因为每一组都生成了校验码）</p>
 <h3 id="RAID-6">RAID 6</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124215940852.png" alt="image-20211124215940852"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124215940852.png" alt="image-20211124215940852"></p>
 <p>使用了两个校验码，允许坏两个磁盘，但不能坏三个</p>
 <p>但每次写都要影响两个校验码</p>
 <h2 id="RAID比较">RAID比较</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124220232811.png" alt="image-20211124220232811"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124220339171.png" alt="image-20211124220339171"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124220441586.png" alt="image-20211124220441586"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124220232811.png" alt="image-20211124220232811"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124220339171.png" alt="image-20211124220339171"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124220441586.png" alt="image-20211124220441586"></p>
 <p><strong>RAID 0 和 RAID 3适用于高吞吐量的应用</strong></p>
 <p><strong>RAID 1适合要求高可用性的应用</strong></p>
 <p><strong>RAID 5是用途最多的，如数据库服务器，各种网络服务器等</strong></p>

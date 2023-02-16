@@ -129,66 +129,66 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>16 控制器</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220141451495.png" alt="image-20211220141451495"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220141451495.png" alt="image-20211220141451495"></p>
 <span id="more"></span>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220141603472.png" alt="image-20211220141603472"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220141603472.png" alt="image-20211220141603472"></p>
 <p>左边的图中粗的箭头表示控制信息，细的箭头表示数据的流动</p>
 <h2 id="寄存器分类">寄存器分类</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220141923575.png" alt="image-20211220141923575"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220141923575.png" alt="image-20211220141923575"></p>
 <p>两种的划分并不严格，有些寄存器具有两种特点</p>
 <h3 id="用户可见寄存器">用户可见寄存器</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220142121884.png" alt="image-20211220142121884"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220142121884.png" alt="image-20211220142121884"></p>
 <p><strong>条件码寄存器不是必须的</strong>，有些机器没有条件码寄存器</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220142440645.png" alt="image-20211220142440645"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220142440645.png" alt="image-20211220142440645"></p>
 <p>太多的寄存器不能显著减少存储器的访问：指的是当寄存器的数量多于一定数目时，对存储器访问的减少作用很小了，但带来了成本的上升，因此是不值得的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220142816292.png" alt="image-20211220142816292"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220142816292.png" alt="image-20211220142816292"></p>
 <p>子程序的调用会自动保存用户可见寄存器，这样子程序运行时就可以随意使用用户可见寄存器，而不用担心会对调用者的数据产生影响（<em>即可以理解是如call指令包括了对寄存器保存的指令</em>）</p>
 <p>但在子程序调用之外，想要保存相关的寄存器内容，就是程序员的任务了，需要编写相关的指令去保存（汇编）</p>
 <h3 id="控制和状态寄存器">控制和状态寄存器</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220143225326.png" alt="image-20211220143225326"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220143225326.png" alt="image-20211220143225326"></p>
 <p>从主存中读出的<strong>数据先到MBR，再通过MBR到通用寄存器</strong></p>
 <p>ALU可以<strong>对MBR和用户可见寄存器</strong>直接存取</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220143400782.png" alt="image-20211220143400782"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220143441675.png" alt="image-20211220143441675"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220143456971.png" alt="image-20211220143456971"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220143400782.png" alt="image-20211220143400782"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220143441675.png" alt="image-20211220143441675"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220143456971.png" alt="image-20211220143456971"></p>
 <p><strong>控制信息并不全部都是存放在寄存器中的</strong>，有相当一部分的控制信息是存放在主存中的，这样可以平衡成本（寄存器越多越贵）和速度（寄存器速度更快）</p>
 <h2 id="微操作">微操作</h2>
 <p>关于微操作的出现：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_40003796/article/details/126701654">CISC和RISC：为什么手机芯片都是ARM？</a></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220144658432.png" alt="image-20211220144658432"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220144733549.png" alt="image-20211220144733549"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220144658432.png" alt="image-20211220144658432"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220144733549.png" alt="image-20211220144733549"></p>
 <p><strong>涉及CPU寄存器操作的更小步骤，称为微操作</strong></p>
 <h3 id="取指周期">取指周期</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220144902430.png" alt="image-20211220144902430"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220144902430.png" alt="image-20211220144902430"></p>
 <p>第二步从主存中取指令的过程中也同时进行了PC+1（<strong>1是指一条指令的长度</strong>）的操作</p>
 <p>上面的<strong>t表示一个时间单位</strong>，即微操作要表示出**<font color=#ff00>做什么、发生在哪个时间单位</font>**两个内容</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220145504299.png" alt="image-20211220145504299"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220145504299.png" alt="image-20211220145504299"></p>
 <p>如上，PC+1的操作放到t2和放到t3均可以</p>
 <h3 id="微操作分组的原则">微操作分组的原则</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220145554405.png" alt="image-20211220145554405"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220145554405.png" alt="image-20211220145554405"></p>
 <ul>
 <li>事件的顺序必须是<strong>恰当的</strong></li>
 <li><strong>同一时间段</strong>内的微操作必须是<strong>无关的</strong>，可以同时进行的，即谁先谁后都一样，如上面的PC+1</li>
 <li>满足前两条的情况下，要让<strong>所用时间单位尽可能少</strong>，如上面的IR&lt;—(MBR)不能放到第四个时间单位t4，因为这样所花费的时间更多了，事实上3个时间单位就能完成</li>
 </ul>
 <h3 id="间址周期">间址周期</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220150048983.png" alt="image-20211220150048983"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220150048983.png" alt="image-20211220150048983"></p>
 <p><strong>注意</strong>：这里通过间接地址取回来的有效地址<strong>EA是用于修改指令寄存器中指令的里面的地址的</strong>，而<strong>不是直接放到MAR</strong>中，这样可以保证与不使用间址周期的状态一致，从而为执行周期做好准备，执行周期直接使用指令中的地址就可以得到正确的操作数，<strong>保证了兼容性</strong></p>
 <h3 id="执行周期">执行周期</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220150843375.png" alt="image-20211220150843375"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220150843375.png" alt="image-20211220150843375"></p>
 <p>BSA指令中：t1中把要保存PC的地址送到MAR，把PC的内容送到MBR，从而可以把MBR中的内容保存在MAR所存的地址中去。同时这两个微操作是不冲突的，因此放到一个时间单位中执行</p>
 <h3 id="中断周期">中断周期</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220151555675.png" alt="image-20211220151555675"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220151555675.png" alt="image-20211220151555675"></p>
 <p>两个时间单位即可完成</p>
 <h2 id="指令周期代码（ICC）">指令周期代码（ICC）</h2>
 <p>对于整个的指令、多条指令如何将不同的微操作联系起来？</p>
 <p>通过<strong>ICC来实现</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220152020014.png" alt="image-20211220152020014"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220152327430.png" alt="image-20211220152327430"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220152400973.png" alt="image-20211220152400973"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220152432604.png" alt="image-20211220152432604"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220152512047.png" alt="image-20211220152512047"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220152020014.png" alt="image-20211220152020014"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220152327430.png" alt="image-20211220152327430"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220152400973.png" alt="image-20211220152400973"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220152432604.png" alt="image-20211220152432604"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220152512047.png" alt="image-20211220152512047"></p>
 <h2 id="CPU内部总线">CPU内部总线</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220152617231.png" alt="image-20211220152617231"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220152617231.png" alt="image-20211220152617231"></p>
 <p>上面右图中的空心圆就表示门，由控制信号来决定这些门的开关</p>
 <p>这里的例子是一个加法指令，其中数据要先存放到一个Y寄存器中，<strong>Y寄存器起到暂存数据的作用，Y与ALU直接连接</strong>。</p>
 <p>注意：</p>
@@ -199,14 +199,14 @@ var _hmt = _hmt || [];
 <p><strong>因此，一个add M %eax的指令事实上包含了若干个微操作</strong></p>
 <hr>
 <h2 id="控制器">控制器</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220153912815.png" alt="image-20211220153912815"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220153912815.png" alt="image-20211220153912815"></p>
 <p>控制器的基本任务：</p>
 <ul>
 <li><strong>定序</strong></li>
 <li><strong>执行</strong></li>
 </ul>
 <h3 id="控制器的输入">控制器的输入</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220154436278.png" alt="image-20211220154436278"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220154436278.png" alt="image-20211220154436278"></p>
 <p>控制器的输入有四个：</p>
 <ul>
 <li>指令寄存器</li>
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 <li>来自控制总线的控制信号：一般情况下是控制器发出信号，在特定情况下，如控制器会收到中断请求</li>
 </ul>
 <h3 id="控制器的输出">控制器的输出</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220154808602.png" alt="image-20211220154808602"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220154808602.png" alt="image-20211220154808602"></p>
 <p>控制器输出控制信号：</p>
 <ul>
 <li>CPU内的控制信号</li>
@@ -223,47 +223,47 @@ var _hmt = _hmt || [];
 </ul>
 <p><strong>控制信号最终作为二进制输入量（即0和1）来控制各个逻辑门，如0即关闭门，1打开门</strong></p>
 <h4 id="控制信号示例：取指周期">控制信号示例：取指周期</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220155304109.png" alt="image-20211220155304109"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220155304109.png" alt="image-20211220155304109"></p>
 <h3 id="控制器的最小特性">控制器的最小特性</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220155827906.png" alt="image-20211220155827906"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220155827906.png" alt="image-20211220155827906"></p>
 <p><strong>最小特性意思是控制器在实现上应该尽可能的简洁</strong>，只需要知道是什么指令，逻辑运算结果的性质，无需知道要处理的是什么数据，也不需要知道结果是什么，只需要知道它们的部分性质（如是否为0，正还是负即可，比如条件转移指令中要不要跳转就要看标志信息）</p>
 <h3 id="控制器的实现">控制器的实现</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220160029056.png" alt="image-20211220160029056"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220160029056.png" alt="image-20211220160029056"></p>
 <h4 id="硬布线实现">硬布线实现</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220160211471.png" alt="image-20211220160211471"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220160620191.png" alt="image-20211220160620191"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220160211471.png" alt="image-20211220160211471"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220160620191.png" alt="image-20211220160620191"></p>
 <p>定时器在完成一个子周期（取指周期、间址周期等）后会清零，在下一次子周期继续T<sub>1</sub>，T<sub>2</sub>的计数</p>
 <p><strong>因此需要控制器在指令周期结束后通知定时器清零</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220173459074.png" alt="image-20211220173459074"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220173459074.png" alt="image-20211220173459074"></p>
 <p>为输出的控制信号设计<strong>利用控制器输入的布尔表达式</strong></p>
 <p>PQ的非表示0，+表示或，·表示与</p>
 <p><strong>随着输入和输出的逐渐复杂，布尔表达式会变得很庞大，用电路去实现会非常困难</strong></p>
 <h4 id="微程序实现">微程序实现</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220174705236.png" alt="image-20211220174705236"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220174705236.png" alt="image-20211220174705236"></p>
 <p><strong>微程序即固件，位于硬件和软件之间</strong></p>
 <p><strong>微指令：用一行微指令可以描述在一个时间内出现的一组微操作</strong>（因为可以同时进行，所以它们是互不干扰的，因此它们的控制字可以组合在一起）<strong>即微指令是t<sub>i</sub>内的所有微操作</strong></p>
 <p><strong>微指令即为一个控制字，微指令的执行就是把控制字通过控制器输出</strong></p>
 <p><strong>控制字</strong>：用一串01序列，每一位表示一根控制线，其中1表示控制线所连的门打开，0表示关闭，每个微操作对应的门的开闭是不同的，所以每个微操作可以对应一个控制字</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220175249145.png" alt="image-20211220175249145"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220175249145.png" alt="image-20211220175249145"></p>
 <p>把<strong>所有情况的控制字存储到控制器存储器</strong>中，使得每一个控制字都有自己的地址</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220175527795.png" alt="image-20211220175527795"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220175527795.png" alt="image-20211220175527795"></p>
 <p>在例程的最后会有一个<strong>分支或转移微指令</strong>，指出下面要到何处执行</p>
 <p>上面有一个执行周期例程，<strong>它的目的仅仅在于根据当前操作码指明哪个机器指令的例程将被执行</strong></p>
 <p>如上图，<strong>微程序是要存储所有可能指令的序列</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220180108834.png" alt="image-20211220180108834"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220180234225.png" alt="image-20211220180234225"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220180613466.png" alt="image-20211220180613466"></p>
-<p><strong><font color=#ff00>所有的微指令都存储在控制存储器中</font></strong><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220180731607.png" alt="image-20211220180731607"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220180108834.png" alt="image-20211220180108834"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220180234225.png" alt="image-20211220180234225"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220180613466.png" alt="image-20211220180613466"></p>
+<p><strong><font color=#ff00>所有的微指令都存储在控制存储器中</font></strong><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220180731607.png" alt="image-20211220180731607"></p>
 <p><strong>上面的流程发生在一个时钟单位内</strong></p>
 <p>控制缓冲寄存器的<strong>左半部分</strong>与控制器的控制线相连，发出控制信号，<strong>右半部分</strong>用于为定序逻辑提供下一条地址信息</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220180926089.png" alt="image-20211220180926089"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220181215826.png" alt="image-20211220181215826"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220180926089.png" alt="image-20211220180926089"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220181215826.png" alt="image-20211220181215826"></p>
 <ul>
 <li>由于微程序设计的易实现性，它已经成为CISC控制器的主要技术</li>
 <li>而对于RISC，由于指令格式简单，所以一般使用硬布线控制器</li>
 </ul>
 <h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220181456373.png" alt="image-20211220181456373"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220181456373.png" alt="image-20211220181456373"></p>
  
       <!-- reward -->
       

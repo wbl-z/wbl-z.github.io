@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>4 数据校验码</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105193631099.png" alt="image-20220105193631099"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105193631099.png" alt="image-20220105193631099"></p>
 <span id="more"></span>
 <h2 id="差错error">差错error</h2>
 <p>以存储为例：</p>
@@ -137,18 +137,18 @@ var _hmt = _hmt || [];
 <li>硬故障：永久性物理故障</li>
 <li>软故障：随机非破坏性事件，改变了某些内容，但没有损坏机器</li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220105195420473.png" alt="image-20220105195420473"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105195420473.png" alt="image-20220105195420473"></p>
 <h2 id="纠错error-correction">纠错error correction</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925101417978.png" alt="image-20210925101417978"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925101417978.png" alt="image-20210925101417978"></p>
 <p>注意，C’'不是和C去比较，<strong>因为既然D有可能出现差错变成D’，那么与之相应的校验码C也可能差错</strong>，因此，取出来的不是C，而是C‘，是将用D’生成的C‘’去和取出来的C‘比较</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925102425592.png" alt="image-20210925102425592"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925102425592.png" alt="image-20210925102425592"></p>
 <p>一旦D存进存储器/网络，那么原来的D就消失了，取出来的就是D’。（<em>如果能保证存进去和取出来的是一样的，那么也就不存在纠错</em>，<strong>事实上，这是无法保证的</strong>）</p>
 <h2 id="奇偶校验码">奇偶校验码</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925103619330.png" alt="image-20210925103619330"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925103619330.png" alt="image-20210925103619330"></p>
 <p>奇校验码：如果有奇数个1，那么C=0，否则为1</p>
 <p>偶校验码：如果有偶数个1，那么C=0，否则为1</p>
 <p>（理解：<strong>把原来的数据和这个校验码拼在一起时应当还是和校验码名字中的奇偶一致</strong>，所以奇校验码当1为奇数，C=0，那么拼在一起还是奇数个）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925110201147.png" alt="image-20210925110201147"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925110201147.png" alt="image-20210925110201147"></p>
 <p>当数据D中<strong>出错的位数为偶数</strong>时，那么1的个数的奇偶性仍然是不变的，因此校验码不变</p>
 <p><strong>因此奇偶校验码适用于较短的数据进行检错</strong>，这样出现<strong>多位错的概率相对较小</strong>，检错的效果较好（当然还是会有可能出现多位错误，但概率很小）</p>
 <p>代价很低，<strong>只需要1位</strong>即可</p>
@@ -156,37 +156,37 @@ var _hmt = _hmt || [];
 <p><strong>发现错误比发现后纠正更难</strong>，因为如果发现了，那么纠正也就是把0变成1，1变成0就好了，相对找到错误更为简单</p>
 </blockquote>
 <p>##　海明码</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925111310238.png" alt="image-20210925111310238"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925111310238.png" alt="image-20210925111310238"></p>
 <p>分组的时候要求任何两位所属的组的情况都是不一样的，同时一位数据可能会属于若干个小组（<strong>至少两个组</strong>，与下面的故障字规则一致，否则如果只一个组的话，会和校验码出错冲突）</p>
 <p><font color=#FF0000><strong>前提假设：最多一位发生错误</strong></font></p>
 <p>奇偶校验码是海明码的基础</p>
 <p>利用的原理就是校验码出错的几个所在小组中公共的那一位就是出错的位，这样就<strong>能够定位到错误</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925112636796.png" alt="image-20210925112636796"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925112636796.png" alt="image-20210925112636796"></p>
 <p>因为K位校验码可以表示2^K种情形，而出错的情形为M+K+1，因此可以求出K的最小值</p>
 <p>由表格可见，随着数据位的增加，最小校验码的位数增加较少，所占比例较小</p>
 <p>但是不能通过把M的位数设成很大，来使得校验码的的位数相对少，<strong>因为如果数据位数很大，则只发生一位错误的假设就不成立了</strong></p>
 <p>因此要实现一个<strong>平衡</strong>：<strong>海明码有效且所占比例较少</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925113559485.png" alt="image-20210925113559485"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925114223953.png" alt="image-20210925114223953"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925113559485.png" alt="image-20210925113559485"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925114223953.png" alt="image-20210925114223953"></p>
 <p><strong>先把故障字分配给每一位数据位故障，然后再进行分组，把这一个Dn放到故障字中数值为1的那一位所对应的组中</strong>，如上，D8对应故障字1100，那么D8应当分到C1和C2组中去</p>
 <p>故障字从0001开始分配，因为0000已经用于表示没有发生故障</p>
 <p>这里C的计算用的是偶校验（当然奇校验也行）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925115343889.png" alt="image-20210925115343889"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925115343889.png" alt="image-20210925115343889"></p>
 <p>注意：<strong>存储时是按上面表格的顺序来存储的</strong>，而不是D8D7……D1C4……C1（<em>上图蓝色的表示校验码，黑色表示数据</em>）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211219093628238.png" alt="image-20211219093628238"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211219093628238.png" alt="image-20211219093628238"></p>
 <p><strong>将计算出的C‘’与C‘异或，那么就可以得到故障字</strong>，从而定位到出错的是哪一位</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120406447.png" alt="image-20210925120406447"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120449107.png" alt="image-20210925120449107"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925120406447.png" alt="image-20210925120406447"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925120449107.png" alt="image-20210925120449107"></p>
 <blockquote>
 <p>主存的实际容量比用户可以使用的容量要<strong>大</strong>，因为对于存储的数据，<strong>也是可能会发生错误的</strong>，因此需要去添加纠错码，如磁盘中就有纠错区，之后的区域才是数据区等</p>
 </blockquote>
 <p><strong>加强版的海明码</strong></p>
 <hr>
 <h2 id="循环冗余校验">循环冗余校验</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120653073.png" alt="image-20210925120653073"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925120852514.png" alt="image-20210925120852514"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925121203909.png" alt="image-20210925121203909"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211219095317053.png" alt="image-20211219095317053"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925120653073.png" alt="image-20210925120653073"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925120852514.png" alt="image-20210925120852514"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925121203909.png" alt="image-20210925121203909"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211219095317053.png" alt="image-20211219095317053"></p>
 <ul>
 <li>当<strong>余数位数与除数位数相同</strong>时，才进行异或运算（模二除法），<strong>即与除数对齐的第一位为1时才异或并上商为1，否则不进行异或直把除数右移并上商为0</strong>了，直到被除数最后一位</li>
 </ul>
@@ -194,7 +194,7 @@ var _hmt = _hmt || [];
 <p>CRC 算法检验的检错能力极强，且检测成本较低</p>
 <p>因而，CRC 成为计算机信息通信领域最为普遍的校验方式</p>
 <hr>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210925121237083.png" alt="image-20210925121237083"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925121237083.png" alt="image-20210925121237083"></p>
  
       <!-- reward -->
       

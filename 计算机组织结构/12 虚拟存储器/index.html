@@ -129,26 +129,26 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>12.虚拟存储器</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129172949605.png" alt="image-20211129172949605"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129172949605.png" alt="image-20211129172949605"></p>
 <span id="more"></span>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129173241691.png" alt="image-20211129173241691"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129173241691.png" alt="image-20211129173241691"></p>
 <p><strong>系统软件并不是操作系统</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129173659417.png" alt="image-20211129173659417"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129173659417.png" alt="image-20211129173659417"></p>
 <p>实用程序一般是指程序的创建，文件管理等</p>
 <p>当然操作系统本身也是一个程序，自身还是需要占用资源的，同时又在分配计算机的资源</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129175001089.png" alt="image-20211129175001089"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129175239499.png" alt="image-20211129175239499"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129175001089.png" alt="image-20211129175001089"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129175239499.png" alt="image-20211129175239499"></p>
 <p>通过仅将当前需要的页调用主存，其他的页暂时放在外存上，可以让主存中尽可能多的包含更多的任务，提高CPU的利用率</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129175319015.png" alt="image-20211129175319015"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129183712793.png" alt="image-20211129183712793"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129175319015.png" alt="image-20211129175319015"><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129183712793.png" alt="image-20211129183712793"></p>
 <p>分区方式：（系统区占用的大小在不同分区方式中都是一样的，不同分区方式是针对用户分区的）</p>
 <ul>
 <li><strong>简单固定分区：<strong>把用户区划分成长度不等的固定长度的区域，给任务分配一个</strong>可用</strong>且可以<strong>容纳它</strong>的<strong>最小</strong>分区。<strong>注意一个分区只能放一个任务，不能多个任务一起放在一个分区，因此会非常浪费内存</strong></li>
 <li>**可变长分区：**根据任务需要的大小来分配内存，提高主存利用率，但时间长了之后，<strong>碎片会变多，这些碎片很难被利用</strong></li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129184112800.png" alt="image-20211129184112800"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129184112800.png" alt="image-20211129184112800"></p>
 <p><strong>利用页可以使得一个任务的不同页不需要用连续的页框来存储</strong>，注意这里是把一个任务的<strong>所有部分都分成页装进来</strong>（还不是下面的请求分页的思想）</p>
 <h2 id="虚拟内存">虚拟内存</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129191908177.png" alt="image-20211129191908177"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129191908177.png" alt="image-20211129191908177"></p>
 <p>任务越来越多，对内存的需求越来越大</p>
 <p>基本思想：</p>
 <ul>
@@ -161,10 +161,10 @@ var _hmt = _hmt || [];
 <li>可以在比物理内存还大的虚拟地址空间中编程</li>
 </ul>
 <h3 id="流程">流程</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129192341451.png" alt="image-20211129192341451"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129192341451.png" alt="image-20211129192341451"></p>
 <p><strong>所有使用的页面要载入到硬盘里，当前使用的页面载入到内存里</strong>，<strong>同时被替换且已经被修改的页重新存储到硬盘中，即写回法</strong></p>
 <h3 id="设计">设计</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129192616096.png" alt="image-20211129192616096"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129192616096.png" alt="image-20211129192616096"></p>
 <p>cache比主存快10倍，而主存比硬盘快100000倍，因此在cache中缺失来访问主存比在内存中缺失来访问硬盘的开销要小很多，所以要<strong>尽可能减少对硬盘的访问</strong></p>
 <ul>
 <li>增大页大小，一次能多加载些：如4KB</li>
@@ -172,35 +172,35 @@ var _hmt = _hmt || [];
 <li>采用写回法，减少对硬盘的访问</li>
 </ul>
 <h2 id="分页式虚拟存储器">分页式虚拟存储器</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129193003620.png" alt="image-20211129193003620"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129193003620.png" alt="image-20211129193003620"></p>
 <p>程序运行时，会生成一个<strong>页表</strong>，记录程序<strong>所有虚拟页</strong>的信息，<strong>页表同样也是存在内存里</strong></p>
 <h3 id="页表">页表</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129193703884.png" alt="image-20211129193703884"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129193703884.png" alt="image-20211129193703884"></p>
 <p>在页表中，<strong>虚拟页号是不用记录的</strong>，因为页表中是所有页的信息，数组的下标就代表了页的标号</p>
 <p>物理地址和虚拟地址的<strong>页内地址是一样的</strong>，所以只要替换虚拟页号就可以，一般来说，<strong>虚拟地址的长度会比物理地址的长度要长</strong></p>
 <h3 id="快表TLB">快表TLB</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129194533164.png" alt="image-20211129194533164"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129194533164.png" alt="image-20211129194533164"></p>
 <p>页表的使用增加了主存的访问，每次访存都要通过页表去得知这个虚拟地址所对应的物理地址是多少，而之前的cache就是要尽可能减少主存的访问</p>
 <p>而页表很大，不能全部放到cache中，<strong>所以把最活跃使用的几个页表项放到cache中，称为快表（TLB）</strong>，对应的主存中的页表就称为<strong>慢表</strong></p>
 <p>快表采取<strong>关联/组关联映射，增大命中率；替换方法采用随机替换法</strong></p>
 <h3 id="CPU访存过程">CPU访存过程</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129195949467.png" alt="image-20211129195949467"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129195949467.png" alt="image-20211129195949467"></p>
 <p><strong>如果在TLB中hit了，那么这个页一定已经被载入内存中了。</strong></p>
 <p>要出现TLB中命中但页没有被载入的情况，只有一种可能就是，TLB中有记录，但主存中对应的那一页被其他页给替换了，但这时新的页进来，那么TLB和页表自然也要更新，所以只要把刚刚被替换掉的那一页的记录也给替换掉即可。<strong>这样就可以保证TLB中的记录一定是已经被载入的</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129200701995.png" alt="image-20211129200701995"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129200701995.png" alt="image-20211129200701995"></p>
 <h3 id="缺失组合">缺失组合</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129201443716.png" alt="image-20211129201443716"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129201443716.png" alt="image-20211129201443716"></p>
 <p>第8种情况和上面的TLB命中必定载入同理，当一个页从主存中被替换出去后，<strong>cache中也会发生替换，那么这个新的数据自然是去把被替换掉的页的信息给替换掉最好</strong></p>
 <p><strong>TLB缺失可以由硬件处理也可以由软件处理</strong></p>
 <p><strong>缺页由软件处理，虚拟地址到物理地址的转换由硬件处理</strong></p>
 <h2 id="分段式虚拟存储器">分段式虚拟存储器</h2>
 <p>分页式可能会把数据分到不同的页，不利于保护和管理</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129204057971.png" alt="image-20211129204057971"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129204057971.png" alt="image-20211129204057971"></p>
 <p>分段式和前面的分区类似，但同样是把需要的段载入内存中去，而不是和前面的分区那样是全部载入。同样会出现<strong>碎片化的问题</strong></p>
 <h2 id="段页式虚拟存储器">段页式虚拟存储器</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129204431193.png" alt="image-20211129204431193"></p>
-<p>每一个段都有一个自己的页表<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220106215707945.png" alt="image-20220106215707945"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129204604663.png" alt="image-20211129204604663"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129204431193.png" alt="image-20211129204431193"></p>
+<p>每一个段都有一个自己的页表<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220106215707945.png" alt="image-20220106215707945"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129204604663.png" alt="image-20211129204604663"></p>
  
       <!-- reward -->
       

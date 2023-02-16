@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
        
   <h1>课程主要内容</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220307171343107.png" alt="image-20220307171343107"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220307171343107.png" alt="image-20220307171343107"></p>
 <blockquote>
 <p>每一章节分成两个部分：第一：这层的功能是什么，怎么实现这样的功能；第二：实例</p>
 </blockquote>
@@ -134,9 +134,9 @@ var _hmt = _hmt || [];
 <span id="more"></span>
 <p><strong>可靠性：不出错、不乱序、不重复、不丢失</strong></p>
 <p>有些应用对<strong>可靠性要求非常高</strong>，因此是基于TCP的协议。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220307171445852.png" alt="image-20220307171445852"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220307171445852.png" alt="image-20220307171445852"></p>
 <p>而有些实时的应用<strong>对可靠性要求不高，但是对实时性要求非常高</strong>。<em>如麦克风传输到功放上面，如果一部分的信息丢失了，事实上对语言的理解没有什么影响，因此是基于UDP的。还有事务性的应用（如DNS域名解析）也是采用UDP，如果是TCP那么需要上图的两个往返，而UDP只要一个往返，请求然后就传回来，速度更快，如果出错了，那么只要再请求一次</em></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220307172719349.png" alt="image-20220307172719349"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220307172719349.png" alt="image-20220307172719349"></p>
 <p><strong>应用层</strong>协议规定了远程的应用进程之间通讯应该遵守的协议。如客户端和服务端，只要遵守这样的协议，那么不同厂商的设备也能交互</p>
 <p><strong>传输层</strong>是在网络层提供的端到端的服务基础上来实现，提供在网络层主机到主机的基础上区分出并提供了进程到进程的服务，并且把IP提供的不可靠的服务通过TCP协议变成可靠的服务</p>
 <p><strong>网络层</strong>（IP）是提供的端到端（end to end <strong>E2E</strong>）、主机到主机的服务，基于数据链路层提供的点到点的服务实现。特点是<strong>尽力而为</strong>（best effort）的，即没有保障的</p>
@@ -145,7 +145,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>网络层的工作方式有两种</p>
 <ol>
-<li>传统方式：<strong>IP协议、路由协议</strong>。网络层<strong>基本功能</strong>是路由和转发，由路由协议交换路由信息，路由算法算出路由表，之后IP协议实体根据到来的分组的目标ip查路由表，找到合适的表项后，从相应的端口转发<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220307174255235.png" alt="image-20220307174255235">传统的方式不能增加新功能，只能按照写好的协议运行</li>
+<li>传统方式：<strong>IP协议、路由协议</strong>。网络层<strong>基本功能</strong>是路由和转发，由路由协议交换路由信息，路由算法算出路由表，之后IP协议实体根据到来的分组的目标ip查路由表，找到合适的表项后，从相应的端口转发<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220307174255235.png" alt="image-20220307174255235">传统的方式不能增加新功能，只能按照写好的协议运行</li>
 <li>SDN（软件定义网络Software Defined Network）方式：<strong>数据平面（交换机）和控制平面（网络操作系统）</strong>。不仅仅根据目标IP，还有很多其他字段。可编程，可以增加新功能</li>
 </ol>
 <p><strong>数据链路层</strong>提供的点到点（point to point <strong>P2P</strong>）的<strong>以帧为单位</strong>的服务，即相邻的网络设备之间的连接，如上图，端到端的服务中间需要经过很多个点，两两之间就是点到点的服务</p>

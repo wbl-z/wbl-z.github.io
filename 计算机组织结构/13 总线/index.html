@@ -129,70 +129,70 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>13 总线</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153248644.png" alt="image-20211207153248644"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207153248644.png" alt="image-20211207153248644"></p>
 <span id="more"></span>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153453753.png" alt="image-20211207153453753"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153523369.png" alt="image-20211207153523369"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153628700.png" alt="image-20211207153628700"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207153453753.png" alt="image-20211207153453753"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207153523369.png" alt="image-20211207153523369"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207153628700.png" alt="image-20211207153628700"></p>
 <p>总线包括<strong>芯片内部总线、系统总线、通信总线</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153843673.png" alt="image-20211207153843673"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207153843673.png" alt="image-20211207153843673"></p>
 <p>系统总线在不同位置不同场景下会有不同的含义，课程中主要把系统总线作为一个通用的概念，而不是特指某条总线</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154032467.png" alt="image-20211207154032467"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207154032467.png" alt="image-20211207154032467"></p>
 <p>地址不一定只能一次传输，事实上有时候是可以分成两次来传输地址的，这样就能扩展寻址空间，即寻址空间不是由地址线的宽度来决定的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154229952.png" alt="image-20211207154229952"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154449894.png" alt="image-20211207154449894"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207154229952.png" alt="image-20211207154229952"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207154449894.png" alt="image-20211207154449894"></p>
 <p><strong>当总线被使用时，其他设备不能抢占</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154524872.png" alt="image-20211207154524872"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207154524872.png" alt="image-20211207154524872"></p>
 <h2 id="用途">用途</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154644495.png" alt="image-20211207154644495"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207154644495.png" alt="image-20211207154644495"></p>
 <h2 id="仲裁">仲裁</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207154759597.png" alt="image-20211207154759597"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207154759597.png" alt="image-20211207154759597"></p>
 <p>要在<strong>优先级和公平性之间取得平衡</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207163212308.png" alt="image-20211207163212308"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207163212308.png" alt="image-20211207163212308"></p>
 <p>仲裁器是硬件设备，集中处理总线使用权</p>
 <h3 id="集中式">集中式</h3>
 <h4 id="链式查询">链式查询</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207163402586.png" alt="image-20211207163402586"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207163402586.png" alt="image-20211207163402586"></p>
 <p>允许信号从仲裁器下发，按优先级从高到底传递（<strong>串行</strong>），从而高优先级的设备如果要使用总线，则可以截取允许信号</p>
 <p>繁忙线与各个设备之间是<strong>双向箭头</strong>，因为各个设备要去监听看总线是否繁忙，如果繁忙则不能发起请求。同时得到允许的设备要去修改这条线的状态，使之变成繁忙</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207164628442.png" alt="image-20211207164628442"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207164628442.png" alt="image-20211207164628442"></p>
 <p>连接的设备<strong>越多</strong>，那么速度就会<strong>越慢</strong>，因为允许信号要经过每一个设备</p>
 <h4 id="计数器查询">计数器查询</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207164945819.png" alt="image-20211207164945819"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207164945819.png" alt="image-20211207164945819"></p>
 <p>至少要<strong>log<sub>2</sub>n</strong>根线，来区分不同的设备ID，可以灵活的调整优先级</p>
 <p>相当于一个个的报学号，可以按不同的顺序报，也可以从不同的位置开始报，从而来平衡优先级和公平性，先报到的可以使用总线</p>
 <p>如果一个响应后又从1开始计数，那么就和上面的链式查询效果一样的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207165624775.png" alt="image-20211207165624775"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207165624775.png" alt="image-20211207165624775"></p>
 <h4 id="独立请求">独立请求</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207165913987.png" alt="image-20211207165913987"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207165913987.png" alt="image-20211207165913987"></p>
 <p>仲裁器可以灵活使用不同的策略来分配总线</p>
 <p>但线路更多了</p>
 <p>不需要和前面一样要等待询问其他设备就可以请求总线，随时都发送请求，如果仲裁器通过了，就可以直接获得允许</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207171157206.png" alt="image-20211207171157206"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207171157206.png" alt="image-20211207171157206"></p>
 <h3 id="分布式">分布式</h3>
 <h4 id="自举式">自举式</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207171325430.png" alt="image-20211207171325430"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207171325430.png" alt="image-20211207171325430"></p>
 <p>设备<strong>只需要</strong>关心优先级比它高的设备是否需要使用总线，而<strong>无需</strong>去关心优先级比它低的设备是否需要总线</p>
 <p>因此<strong>高优先级需要关心的少</strong>，上面设备3的优先级最高，只需要关心是否总线忙即可</p>
 <p>而<strong>最低优先级的设备没有请求线</strong>，如上的设备0，因为没有其他设备需要去关心它的请求</p>
 <p>同样的当使用总线时要把总线设为忙</p>
 <p><strong>优先级很明显</strong></p>
 <h4 id="冲突检测">冲突检测</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207172059705.png" alt="image-20211207172059705"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207172059705.png" alt="image-20211207172059705"></p>
 <p><strong>公平性很明显</strong></p>
 <p>解决冲突要消耗一定的时间，效率会低一些</p>
 <h2 id="时序">时序</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207172448029.png" alt="image-20211207172448029"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207172448029.png" alt="image-20211207172448029"></p>
 <p><strong>总线事务</strong>是指在总线上完成一次数据的传递：是指根据<strong>一个地址，但数据可能会传输多次</strong></p>
 <h4 id="同步时序？？">同步时序？？</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207172655523.png" alt="image-20211207172655523"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207172655523.png" alt="image-20211207172655523"></p>
 <p>所有设备共用一个时钟，会导致快的设备要去迁就慢的设备(即要等待慢的设备，而不像下面的异步一样快的设备只要发出信号就可以去做其他事情)，也即快的设备的速度没法发挥出来。</p>
 <blockquote>
 <p>如时钟周期为50ns，存储器准备数据230ns，那么实际上仍然需要250ns才能完成数据的准备，因为必须在一个时钟周期开始才能进行下一步，所以即使存储器完成了准备，也需要等待时钟周期，而异步时序则当数据准备完成即可直接传输</p>
 </blockquote>
 <p>总线不能太长，如果总线很长，那么时钟信号会有较大的延迟</p>
 <h4 id="异步时序">异步时序</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207173006368.png" alt="image-20211207173006368"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207173006368.png" alt="image-20211207173006368"></p>
 <p>Ready信号说明已经准备好了，设备可以来取，Ack信号表明告诉对方已经取完了，对方可以把ready信号给拿走了</p>
 <p>信号都有上升沿和下降沿，分别表示把信号放到总线上和把信号从总线上拿走的过程</p>
 <p><strong>一次握手其实就是表明一个前后关系</strong></p>
@@ -201,58 +201,58 @@ var _hmt = _hmt || [];
 <li><strong>半互锁</strong>是用<strong>两次握手</strong>强调已经取完了之后Ready信号才能撤走，这是为了防止出现在取之前（并不是一出现Ready就去取，可能正在处理其他事务）就已经撤走了Ready，即撤早了，而无法取数据就一直处于等待的情况</li>
 <li><strong>全互锁</strong>是用<strong>三次握手</strong>强调只有Ready撤走后，才能撤走Ack，如果ready的设备正在处理其他事务，而另一个设备已经取好了，并撤走了Ack，那么设备就以为对方还没有取好，因此会一直处于Ready状态</li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207205114405.png" alt="image-20211207205114405"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207205114405.png" alt="image-20211207205114405"></p>
 <p>注意总共为<strong>7次握手</strong>，<strong>握手中即有数据传输的时间</strong>，所有的握手时间加起来即一次总线事务的时间，而不需要额外考虑数据传输。</p>
 <blockquote>
 <p>如1花费了40ns，即存储器得到ReadReq信号并读取了地址并设置了Ack信号花费40ns。此时存储器已经得到了地址信息，可以<strong>开始准备数据</strong>。</p>
-<p>数据准备阶段：在234中有3次握手，是为了保证顺序，当4结束时存储器把数据放到数据线上，因此这里花费的时间为<img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220107113225293.png" alt="image-20220107113225293">3次握手的时间和存储器准备这些数据的时间的<strong>最大值</strong>。</p>
+<p>数据准备阶段：在234中有3次握手，是为了保证顺序，当4结束时存储器把数据放到数据线上，因此这里花费的时间为<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220107113225293.png" alt="image-20220107113225293">3次握手的时间和存储器准备这些数据的时间的<strong>最大值</strong>。</p>
 <p>数据传输阶段：567则是通过3次握手，保证数据能传输到CPU中</p>
 <p>上面3个部分全部加起来就是一次总线事务的时间，数据量/时间即数据传输速率</p>
 </blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207205610699.png" alt="image-20211207205610699"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207205610699.png" alt="image-20211207205610699"></p>
 <p>速度快的设备在Ready后，就可以去忙别的事情了，而等慢的设备Ack后，快的设备再回来处理这件事，从而<strong>协调好不同速度的设备</strong></p>
 <p><strong>对噪声敏感</strong>是指设备可能把噪声误认为是信号，从而出现错误。因为异步信号的发送是没有固定的时间的，是<strong>很随意的</strong>，任何时间段都可以发出信号，所以会容易把偶然的噪声当作信号</p>
 <h4 id="半同步时序">半同步时序</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207205842375.png" alt="image-20211207205842375"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207205842375.png" alt="image-20211207205842375"></p>
 <p>固定在<strong>上升沿</strong>才能发出<strong>准备和响应信号</strong>，其他时间段的信号均为无效，从而减少噪声的影响</p>
 <h4 id="分离事务">分离事务</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207210148594.png" alt="image-20211207210148594"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207210148594.png" alt="image-20211207210148594"></p>
 <p>即把总线事务分成地址传过去和数据传过来两个过程，在得到地址后准备数据的过程中，可以把总线释放出来，给其他设备使用，等数据准备好了，再去申请总线</p>
 <p>提高了<strong>总线利用率</strong></p>
 <p>但这样会<strong>增加每个总线事务的时长</strong>，因为在数据准备好后再申请总线不一定立刻就能得到，可能需要等待一段时间</p>
 <h2 id="总线带宽和数据传输速率">总线带宽和数据传输速率</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207210713756.png" alt="image-20211207210713756"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207210713756.png" alt="image-20211207210713756"></p>
 <p>总线带宽是<strong>理想状态</strong>下的<strong>数据传输速率</strong>，不考虑<strong>地址传输</strong>和总线仲裁</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211038040.png" alt="image-20211207211038040"><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211207154.png" alt="image-20211207211207154"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207211038040.png" alt="image-20211207211038040"><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207211207154.png" alt="image-20211207211207154"></p>
 <p><strong>地址不算数据</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211252537.png" alt="image-20211207211252537"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207211252537.png" alt="image-20211207211252537"></p>
 <p>同步总线中一个时钟周期内只能做一件事情</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207211412513.png" alt="image-20211207211412513"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207211412513.png" alt="image-20211207211412513"></p>
 <p>计算数据传输速率只要计算传输一次4个或16个字即可，同时<strong>最后全部传完之后的空闲也要算进去，因为肯定还会有下一次总线事务，所以可以算入到每次传完后里面</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207212358935.png" alt="image-20211207212358935"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207212358935.png" alt="image-20211207212358935"></p>
 <p>这里每次总线事务都是可以理解是第一次访问内存，所以都需要花费200ns，只有像下面的一次传输一个块的，才是考虑后面的访cache速度快</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207212407122.png" alt="image-20211207212407122"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207212407122.png" alt="image-20211207212407122"></p>
 <h4 id="提高总线的数据传输率">提高总线的数据传输率</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211201211349.png" alt="image-20211211201211349"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211201211349.png" alt="image-20211211201211349"></p>
 <p>块传输可以<strong>减少地址传输的时间</strong>，同时<strong>减少了准备数据的时间</strong>，因为有cache的存在，所以第一次数据读取会比较慢，但后续的读取会很快</p>
 <h2 id="总线的层次结构">总线的层次结构</h2>
 <p>总线主要讨论<strong>CPU、主存、IO</strong>之间的连接和数据传输</p>
 <h4 id="单总线结构">单总线结构</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213440303.png" alt="image-20211211213440303"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211213440303.png" alt="image-20211211213440303"></p>
 <h4 id="双总线结构1">双总线结构1</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213600776.png" alt="image-20211211213600776"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211213600776.png" alt="image-20211211213600776"></p>
 <h4 id="双总线结构2">双总线结构2</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213732850.png" alt="image-20211211213732850"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211213732850.png" alt="image-20211211213732850"></p>
 <p>####　多总线结构１</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211213813963.png" alt="image-20211211213813963"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211213813963.png" alt="image-20211211213813963"></p>
 <p>这种情况是cache还设计在CPU外,与之分离的时候的总线结构,当cache合并到CPU中时,就是内部总线了,而不存在上面的本地总线</p>
 <h4 id="多总线结构2">多总线结构2</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211214009253.png" alt="image-20211211214009253"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211214009253.png" alt="image-20211211214009253"></p>
 <p><strong>从外部输入的数据可以直接存入主存，而不需要经过CPU</strong></p>
 <h4 id="多总线结构3">多总线结构3</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211214258764.png" alt="image-20211211214258764"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211214258764.png" alt="image-20211211214258764"></p>
 <h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211211214355193.png" alt="image-20211211214355193"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211211214355193.png" alt="image-20211211214355193"></p>
 <p><strong>总线的巨大缺点是一次只能有一个数据在总线上，如果多个，那么会出错</strong></p>
  
       <!-- reward -->

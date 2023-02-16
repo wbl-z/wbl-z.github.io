@@ -129,36 +129,36 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>5 整数运算</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218090925893.png" alt="image-20211218090925893"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211218090925893.png" alt="image-20211218090925893"></p>
 <span id="more"></span>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218090935971.png" alt="image-20211218090935971"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928164942515.png" alt="image-20210928164942515"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211218090935971.png" alt="image-20211218090935971"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928164942515.png" alt="image-20210928164942515"></p>
 <p><strong>异或门是不能多个一起输入的</strong>，只能两两。a⊕b = (¬a ∧ b) ∨ (a ∧¬b)，由此推断，非门的门延迟也为1ty</p>
 <p><strong>而与和或则可以多个一起输入</strong>，因为如或门，只要有一个1 ，那么结果就是1，与门，只要有一个0，那么结果都是0</p>
 <h2 id="串行进位加法器">串行进位加法器</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928165948285.png" alt="image-20210928165948285"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928170122630.png" alt="image-20210928170122630"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928165948285.png" alt="image-20210928165948285"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928170122630.png" alt="image-20210928170122630"></p>
 <p>之所以s=x⊕y⊕c，把x和y先做异或，是为了节省时间，因为c需要由前面的数据得到，如上，C<sub>n</sub>的延迟是2n ty，因此可以提前把x<sub>n</sub>⊕y<sub>n</sub>计算好，等C<sub>n-1</sub>计算好后再和C<sub>n-1</sub>异或，因此Sn的延迟为2(n-1)+3=2n+1</p>
 <p>（<strong>但第一和第二位除外，它们的延迟都是6</strong>，因为得到C<sub>1</sub>为2，而此时X<sub>2</sub>和Y<sub>3</sub>还没有异或就绪，所以仍然是S<sub>2</sub>的延迟仍是6。C<sub>2</sub>的延迟是4&gt;3，因此X<sub>3</sub>和Y<sub>3</sub>已经异或完成，在等C<sub>2</sub>）</p>
 <p>（<strong>所有的A<sub>i</sub>和B<sub>i</sub>是同时输入的，等到C<sub>i-1</sub>到来时，除了最低2位，A<sub>i</sub>和B<sub>i</sub>已经通过了异或门，因此这个3ty的时间延迟不算，而只用考虑与C<sub>i-1</sub>的异或</strong>）</p>
 <h2 id="全先行进位加法器">全先行进位加法器</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928172853824.png" alt="image-20210928172853824"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928172853824.png" alt="image-20210928172853824"></p>
 <p>把C都换掉代入，形成这些式子</p>
 <p>C<sub>i-1</sub>=1，P<sub>i</sub>=1则表示能把这个C<sub>i-1</sub>的1传递到C<sub>i</sub></p>
 <p>只有X<sub>i</sub>和Y<sub>i</sub>都是1，G<sub>i</sub>才为1，G<sub>i</sub>表示这位能不能自己生成1</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928173321855.png" alt="image-20210928173321855"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928173321855.png" alt="image-20210928173321855"></p>
 <p>第一步把P和G都计算出，需要1ty</p>
 <p>第二步根据式子把C全部计算出，因为式子中只有与和或，因此与可以一起进行，或可以一起进行，所以只要2ty</p>
 <p>在第一步和第二步进行的过程中，同时在进行第三步X⊕Y，刚好3ty，<strong>因此第一第二和第三步是同时进行的</strong></p>
 <p>所以第四步就是进行（X⊕Y）⊕C计算出S，需要3ty</p>
 <p>因此总共需要1+2+3=6ty</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928174916195.png" alt="image-20210928174916195"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928174916195.png" alt="image-20210928174916195"></p>
 <h2 id="部分先行进位加法器">部分先行进位加法器</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928174424653.png" alt="image-20210928174424653"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928174424653.png" alt="image-20210928174424653"></p>
 <p>每8位用CLA（全先行进位加法器），整体用串行进位加法器，在时间和空间内得到平衡</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20210928175133879.png" alt="image-20210928175133879"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210928175133879.png" alt="image-20210928175133879"></p>
 <p>最后的5是=2+3，第4个CLA要进行第二步2ty和第四步3ty，所以是5ty，当最后一个计算完成时，前面的已经计算完了，所以全部计算好了</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003094155887.png" alt="image-20211003094155887"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003094155887.png" alt="image-20211003094155887"></p>
 <p><strong>两个数加的补码是两个数补码的和</strong></p>
 <p>溢出的两种判定：</p>
 <ol>
@@ -166,56 +166,56 @@ var _hmt = _hmt || [];
 <li>Cn异或Cn-1</li>
 </ol>
 <h2 id="减法">减法</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003094430337.png" alt="image-20211003094430337"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003094430337.png" alt="image-20211003094430337"></p>
 <h2 id="乘法">乘法</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003095101641.png" alt="image-20211003095101641"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003095101641.png" alt="image-20211003095101641"></p>
 <p>计算机只能进行两两相加，因此<strong>每一步都把部分积求和</strong></p>
 <p>如下图，参与运算的是红色的部分，通过右移保证高4位是参与运算的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003095842388.png" alt="image-20211003095842388"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003101651095.png" alt="image-20211003101651095"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003095842388.png" alt="image-20211003095842388"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003101651095.png" alt="image-20211003101651095"></p>
 <p>刚开始积为n为0，在乘的过程中，部分积的长度会慢慢变长，最终变成2n</p>
 <p>但这样的话，2n位的右边n位会空着，会产生浪费，因此把右边n位用来存放乘数Y，这样Y的一位乘完后，右移空出来的位置就可以给积用，如上图，<strong>左边一半是乘积寄存器，右边一半是乘数寄存器</strong></p>
 <p><strong>加了之后再右移</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003101951588.png" alt="image-20211003101951588"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003102110215.png" alt="image-20211003102110215"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003101951588.png" alt="image-20211003101951588"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003102110215.png" alt="image-20211003102110215"></p>
 <p><strong>上面的乘法只适用于原码。</strong></p>
 <p>补码不能用于乘法，要用原码去乘，再把积用补码表示，<strong>但这样很麻烦，会消耗大量的计算资源</strong>。</p>
 <p>因此出现了布斯乘法，可以用于补码的乘法</p>
 <h3 id="布斯乘法">布斯乘法</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003102745966.png" alt="image-20211003102745966"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003102745966.png" alt="image-20211003102745966"></p>
 <p>在第四行中，为了保证式子的统一性，引入Y<sub>0</sub>=0</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003102848122.png" alt="image-20211003102848122"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003102848122.png" alt="image-20211003102848122"></p>
 <p>2的-1次方即右移一位，与原来的乘法不同的地方就在绿色框中，原来是Y<sub>i+1</sub>，现在是Y<sub>i</sub>-Y<sub>i+1</sub>（<strong>i从0开始，Y<sub>0</sub>=0</strong>），这样，<strong>就可以适用于补码的乘法运算了</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003103243188.png" alt="image-20211003103243188"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003103243188.png" alt="image-20211003103243188"></p>
 <p>因为是Y<sub>i</sub>-Y<sub>i+1</sub>，相比于原来多了一种可能性**+X，-X，+0**</p>
 <p>一共n位，所以要进行n次</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003103612562.png" alt="image-20211003103612562"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003103612562.png" alt="image-20211003103612562"></p>
 <p>因为这里可以处理<strong>补码整数，所以会出现负数的情况</strong>，如果右移补零那么会无论乘数如何，最后符号位总是0，即总是正数。而对于原来只能处理原码的情况，是不会出现负数的，因此始终是补零</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003104513678.png" alt="image-20211003104513678"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003104513678.png" alt="image-20211003104513678"></p>
 <p>因此在布斯乘法用于处理补码整数乘法时，右移应当是<strong>算术右移，符号拓展</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003104844369.png" alt="image-20211003104844369"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003104844369.png" alt="image-20211003104844369"></p>
 <h2 id="除法">除法</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003104912664.png" alt="image-20211003104912664"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003105359117.png" alt="image-20211003105359117"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003104912664.png" alt="image-20211003104912664"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003105359117.png" alt="image-20211003105359117"></p>
 <p>补充符号位直到<strong>除数最高位和余数的次高位对齐</strong></p>
 <p><strong>因此即拓展除数位数长度的符号</strong></p>
 <p>要把4位的被除数<strong>符号拓展成8位</strong>，因为最终结果商应当是4位的</p>
 <p>余数实际上是2n位，但只有低n位有用，因此余数只取低n位</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003105722654.png" alt="image-20211003105722654"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003105722654.png" alt="image-20211003105722654"></p>
 <h3 id="恢复余数除法">恢复余数除法</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003110508948.png" alt="image-20211003110508948"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003110508948.png" alt="image-20211003110508948"></p>
 <p>实际上只有n位参与运算，但为了实现移位操作，用了2n位，因此造成了浪费，同样可以类比乘法来充分利用空间</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003110809081.png" alt="image-20211003110809081"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003110809081.png" alt="image-20211003110809081"></p>
 <p><strong>把除数右移的操作，改成了余数左移的操作，左移右边空出来的就作为商</strong>，这样余数同样也只要四位即可</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003110958423.png" alt="image-20211003110958423"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003110958423.png" alt="image-20211003110958423"></p>
 <p>判断够不够减，是根据<strong>余数的左边四位</strong>来比较的</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003111354476.png" alt="image-20211003111354476"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003111354476.png" alt="image-20211003111354476"></p>
 <ul>
 <li><strong>余数减去除数后，余数符号不发生改变，那么就是够减的</strong></li>
 <li><strong><font color =#FF00>要使得余数的绝对值不断变小，并且符号不改变</font></strong></li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003111751337.png" alt="image-20211003111751337"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003113300997.png" alt="image-20211003113300997"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003111751337.png" alt="image-20211003111751337"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003113300997.png" alt="image-20211003113300997"></p>
 <p><strong>最后如果除数和被除数的符号不同，那么要将商变成相反数，即取反加一</strong></p>
 <p><strong>没有办法事先去判断够不够减，因此只能运算后看符号有没有变</strong>，因此对于机器来说，尝试运算后，发现不够减，<strong>那么要恢复余数</strong></p>
 <p>当商为4位时，达到所需精度，就运算完成，留下了余数</p>
@@ -229,7 +229,7 @@ var _hmt = _hmt || [];
 </ul>
 <h3 id="不恢复余数的除法">不恢复余数的除法</h3>
 <p>类似开车，当车偏离直线时，不会退回去变成直线，而是往右偏来纠正</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003113412552.png" alt="image-20211003113412552"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003113412552.png" alt="image-20211003113412552"></p>
 <ul>
 <li><strong>乘2是左移</strong></li>
 <li><strong>这里的余数R<sub>i</sub>是不论是否够减了，都减去Y得到的</strong></li>
@@ -240,21 +240,21 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <hr>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218230006824.png" alt="image-20211218230006824"></p>
-<p><strong><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003114022720.png" alt="image-20211003114022720"></strong></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211218230006824.png" alt="image-20211218230006824"></p>
+<p><strong><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003114022720.png" alt="image-20211003114022720"></strong></p>
 <p><strong>第一次没有左移，是多一位商放在后面</strong></p>
 <p>然后再看余数和除数符号是否相同</p>
 <p>同样运算n次</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003114435963.png" alt="image-20211003114435963"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211218231331207.png" alt="image-20211218231331207"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003114435963.png" alt="image-20211003114435963"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211218231331207.png" alt="image-20211218231331207"></p>
 <p>最后还需要对整除可能出现的问题进行判断（原因是如果发生整除，0的符号是0，会产生错误的判断）：</p>
 <ul>
 <li>如果余数+除数=0，说明多减去一个除数，所以商要-1，余数置0</li>
 <li>如果余数=除数，说明少减去一个除数，所以商要+1，余数置0</li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003171509243.png" alt="image-20211003171509243"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003115033240.png" alt="image-20211003115033240"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211003115057588.png" alt="image-20211003115057588"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003171509243.png" alt="image-20211003171509243"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003115033240.png" alt="image-20211003115033240"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003115057588.png" alt="image-20211003115057588"></p>
 <h2 id="原码加减法理解">原码加减法理解</h2>
 <ol>
 <li>

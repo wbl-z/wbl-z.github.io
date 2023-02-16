@@ -193,7 +193,8 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="JavaScript-使用opencv-js实现基于傅里叶变换的频域水印-隐水印">[JavaScript]使用opencv.js实现基于傅里叶变换的频域水印(隐水印)</h2>
+  
+        <h2 id="JavaScript-使用opencv-js实现基于傅里叶变换的频域水印-隐水印">[JavaScript]使用opencv.js实现基于傅里叶变换的频域水印(隐水印)</h2>
 <blockquote>
 <p>PS：查了多方资料，都没有提到用 <code>JavaScript</code> 来实现频域水印的教程，故经过笔者的实践，遂写一篇教程来简单介绍。</p>
 </blockquote>
@@ -202,57 +203,12 @@ var _hmt = _hmt || [];
 <p>数学原理可以参考如下回答：</p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/50735753"> 阿里巴巴公司根据截图查到泄露信息的具体员工的技术是什么？</a></p>
 </blockquote>
-<p>因此在自己实现频域水印时，我也是按照这样的方式来逐步实现：</p>
-<h3 id="1-傅里叶变换">1. 傅里叶变换</h3>
-<p>我基于 <code>opencv.js</code>（<code>opencv.js</code>是<code>opencv</code>编译到 <code>js</code> 的版本）在前端使用 <code>js</code> 来实现傅里叶变换：</p>
-<p>关于 <code>opencv</code> 的离散傅立叶变换各个步骤解释可以在下面的官方文档中找到，但不是 <code>js</code> 版本，因此不能用于 <code>js</code> ：</p>
-<p><a target="_blank" rel="noopener" href="https://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/discrete_fourier_transform/discrete_fourier_transform.html?highlight=fourier">离散傅立叶变换 — OpenCV 2.3.2 documentation</a></p>
-<p>而关于 <code>opencv.js</code> 的官方文档中有对图像进行傅里叶变换的示例代码，可以在 <code>js</code> 中使用，如下：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.opencv.org/3.4/dd/d02/tutorial_js_fourier_transform.html">OpenCV: Fourier Transform</a></p>
-<p>为了更清楚的介绍，这里展示傅里叶变换代码，在注释中进行每部分的介绍：</p>
-<p>【其中具体的方法调用请参考官方教程<a target="_blank" rel="noopener" href="https://docs.opencv.org/3.4/d5/d10/tutorial_js_root.html">OpenCV: OpenCV.js Tutorials</a>】</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读入图片</span></span><br><span class="line"><span class="keyword">let</span> src = cv.<span class="title function_">imread</span>(imgElement);</span><br><span class="line"><span class="comment">// 利用cvtColor将图片转成单通道的灰度图，傅里叶变换只能处理单通道，否则会报错</span></span><br><span class="line">cv.<span class="title function_">cvtColor</span>(src, src, cv.<span class="property">COLOR_RGBA2GRAY</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 获取傅里叶变换时最优的尺寸（调整尺寸可以使傅里叶变换的速度更快，即当图像的尺寸是2， 3，5的整数倍时，计算速度最快）</span></span><br><span class="line"><span class="keyword">let</span> optimalRows = cv.<span class="title function_">getOptimalDFTSize</span>(src.<span class="property">rows</span>);</span><br><span class="line"><span class="keyword">let</span> optimalCols = cv.<span class="title function_">getOptimalDFTSize</span>(src.<span class="property">cols</span>);</span><br><span class="line"><span class="keyword">let</span> s0 = cv.<span class="property">Scalar</span>.<span class="title function_">all</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">let</span> padded = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line"><span class="comment">// 填充图片，即上面的得到尺寸比原图大，需要用0填充增加的边缘部分的像素</span></span><br><span class="line">cv.<span class="title function_">copyMakeBorder</span>(src, padded, <span class="number">0</span>, optimalRows - src.<span class="property">rows</span>, <span class="number">0</span>, optimalCols - src.<span class="property">cols</span>, cv.<span class="property">BORDER_CONSTANT</span>, s0);</span><br><span class="line"><span class="comment">// 傅立叶变换的结果是复数，对原图像进行傅里叶变换后得到的是复数，因此为傅立叶变换的结果(实部和虚部)分配存储空间。并且由于频域值范围远远超过空间值范围(0~255)，因此要用float来存储，下面的cv.CV_32F就是opencv.js中的float宏</span></span><br><span class="line"><span class="keyword">let</span> plane0 = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line">padded.<span class="title function_">convertTo</span>(plane0, cv.<span class="property">CV_32F</span>);</span><br><span class="line"><span class="keyword">let</span> planes = <span class="keyword">new</span> cv.<span class="title class_">MatVector</span>();</span><br><span class="line"><span class="keyword">let</span> complexI = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line"><span class="keyword">let</span> plane1 = <span class="keyword">new</span> cv.<span class="property">Mat</span>.<span class="title function_">zeros</span>(padded.<span class="property">rows</span>, padded.<span class="property">cols</span>, cv.<span class="property">CV_32F</span>);</span><br><span class="line">planes.<span class="title function_">push_back</span>(plane0);</span><br><span class="line">planes.<span class="title function_">push_back</span>(plane1);</span><br><span class="line">cv.<span class="title function_">merge</span>(planes, complexI);</span><br><span class="line"><span class="comment">// 原地傅里叶变换，即变换后的结果仍存储在当前变量</span></span><br><span class="line">cv.<span class="title function_">dft</span>(complexI, complexI);</span><br><span class="line"><span class="comment">// 将复数转换为幅度。并且由于幅度值范围很大，不适合在屏幕上显示，因此进行对数处理</span></span><br><span class="line">cv.<span class="title function_">split</span>(complexI, planes);</span><br><span class="line">cv.<span class="title function_">magnitude</span>(planes.<span class="title function_">get</span>(<span class="number">0</span>), planes.<span class="title function_">get</span>(<span class="number">1</span>), planes.<span class="title function_">get</span>(<span class="number">0</span>));</span><br><span class="line"><span class="keyword">let</span> mag = planes.<span class="title function_">get</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">let</span> m1 = <span class="keyword">new</span> cv.<span class="property">Mat</span>.<span class="title function_">ones</span>(mag.<span class="property">rows</span>, mag.<span class="property">cols</span>, mag.<span class="title function_">type</span>());</span><br><span class="line">cv.<span class="title function_">add</span>(mag, m1, mag);</span><br><span class="line">cv.<span class="title function_">log</span>(mag, mag);</span><br><span class="line"><span class="comment">// 将最开始添加的像素剔除</span></span><br><span class="line"><span class="keyword">let</span> rect = <span class="keyword">new</span> cv.<span class="title class_">Rect</span>(<span class="number">0</span>, <span class="number">0</span>, mag.<span class="property">cols</span> &amp; -<span class="number">2</span>, mag.<span class="property">rows</span> &amp; -<span class="number">2</span>);</span><br><span class="line">mag = mag.<span class="title function_">roi</span>(rect);</span><br><span class="line"><span class="comment">// 重新按照象限来排列图片，使得亮部集中在中心</span></span><br><span class="line"><span class="keyword">let</span> cx = mag.<span class="property">cols</span> / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">let</span> cy = mag.<span class="property">rows</span> / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">let</span> tmp = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line"><span class="keyword">let</span> rect0 = <span class="keyword">new</span> cv.<span class="title class_">Rect</span>(<span class="number">0</span>, <span class="number">0</span>, cx, cy);</span><br><span class="line"><span class="keyword">let</span> rect1 = <span class="keyword">new</span> cv.<span class="title class_">Rect</span>(cx, <span class="number">0</span>, cx, cy);</span><br><span class="line"><span class="keyword">let</span> rect2 = <span class="keyword">new</span> cv.<span class="title class_">Rect</span>(<span class="number">0</span>, cy, cx, cy);</span><br><span class="line"><span class="keyword">let</span> rect3 = <span class="keyword">new</span> cv.<span class="title class_">Rect</span>(cx, cy, cx, cy);</span><br><span class="line"><span class="keyword">let</span> q0 = mag.<span class="title function_">roi</span>(rect0);</span><br><span class="line"><span class="keyword">let</span> q1 = mag.<span class="title function_">roi</span>(rect1);</span><br><span class="line"><span class="keyword">let</span> q2 = mag.<span class="title function_">roi</span>(rect2);</span><br><span class="line"><span class="keyword">let</span> q3 = mag.<span class="title function_">roi</span>(rect3);</span><br><span class="line"><span class="comment">// exchange 1 and 4 quadrants</span></span><br><span class="line">q0.<span class="title function_">copyTo</span>(tmp);</span><br><span class="line">q3.<span class="title function_">copyTo</span>(q0);</span><br><span class="line">tmp.<span class="title function_">copyTo</span>(q3);</span><br><span class="line"><span class="comment">// exchange 2 and 3 quadrants</span></span><br><span class="line">q1.<span class="title function_">copyTo</span>(tmp);</span><br><span class="line">q2.<span class="title function_">copyTo</span>(q1);</span><br><span class="line">tmp.<span class="title function_">copyTo</span>(q2);</span><br><span class="line"><span class="comment">// 归一化，把幅度值归一化到float 0~1的范围</span></span><br><span class="line">cv.<span class="title function_">normalize</span>(mag, mag, <span class="number">0</span>, <span class="number">1</span>, cv.<span class="property">NORM_MINMAX</span>);</span><br><span class="line"><span class="comment">// 展示傅里叶转换的频域结果图片（注：对于float类型的图片，opencv会将float0~1的范围映射到0~255，也即浮点数乘以255，从而展示出来）</span></span><br><span class="line">cv.<span class="title function_">imshow</span>(<span class="string">&quot;dstImg&quot;</span>, mag);</span><br></pre></td></tr></table></figure>
-<p>因此就得到了一张<strong>频域图</strong>，从上面的过程中可以看出得到的频域图是<strong>单通道的灰度图</strong>，展现出来的结果也确实是如此。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20221213161216004.png" alt="image-20221213161216004"></p>
-<h3 id="2-添加水印">2. 添加水印</h3>
-<p>给频域图添加水印很简单，相当于就是在图片上面加字即可。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> waterMask = <span class="string">&quot;wbl_z&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> scalar = <span class="keyword">new</span> cv.<span class="title class_">Scalar</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"><span class="keyword">let</span> point = <span class="keyword">new</span> cv.<span class="title class_">Point</span>(<span class="number">40</span>,<span class="number">40</span>);</span><br><span class="line"><span class="comment">// 在图中插入文字</span></span><br><span class="line">cv.<span class="title function_">putText</span>(complexI,waterMask,point,cv.<span class="property">FONT_HERSHEY_DUPLEX</span>,<span class="number">1.0</span>,scalar);<span class="comment">// 1.0是插入的字体的大小</span></span><br><span class="line">cv.<span class="title function_">flip</span>(complexI,complexI,-<span class="number">1</span>);<span class="comment">// 翻转操作，然后再加一次文字</span></span><br><span class="line">cv.<span class="title function_">putText</span>(complexI,waterMask,point,cv.<span class="property">FONT_HERSHEY_DUPLEX</span>,<span class="number">1.0</span>,scalar);</span><br><span class="line">cv.<span class="title function_">flip</span>(complexI,complexI,-<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20221213161716059.png" alt="image-20221213161716059"></p>
-<h3 id="3-逆傅里叶变换">3. 逆傅里叶变换</h3>
-<p>已经成功实现了傅里叶变换并且加上了水印，要得到加了频域水印的图片，那么只需要把频域图通过<strong>逆傅里叶变换</strong>转换回去即可。但<strong>关键</strong>就在这一步，会遇到<strong>很多的问题</strong>：</p>
-<h4 id="问题1">问题1</h4>
-<p>但是会发现查了很多资料，都没有关于 <code>opencv.js</code> 的逆傅里叶变换的介绍，在官方文档中也只有傅里叶变换的介绍，而没有逆傅里叶变换。</p>
-<p>查到在其他语言版本的 <code>opencv</code> 中是通过调用 <code>idft()</code> 这个函数来实现的，但在 <code>js</code> 中却会报错 <code>idft()</code> 未定义，也即 <code>opencv.js</code> 中不存在这个函数。</p>
-<h4 id="解决办法1">解决办法1</h4>
-<p>在经过长时间的搜索后，终于发现在 <code>opencv</code> 的源码中对于 <code>idft()</code> 的定义仅仅是调用了已有的 <code>dft()</code>，并且传入了一个参数来实现的（参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/gxiaoyaya/article/details/72460483">OpenCV中的DFT和iDFT的详细代码及注释</a>）。</p>
-<p>在进一步阅读官方文档后，我最终通过<strong>手动传入</strong> <code>opencv.js</code> 定义的两个宏 。<code>cv.DFT_REAL_OUTPUT | cv.DFT_INVERSE</code> 来了 <code>idft()</code> 的功能，并对结果进行了<strong>归一化</strong>。</p>
-<p>如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv.<span class="title function_">dft</span>(complexI, ifft, (cv.<span class="property">DFT_REAL_OUTPUT</span> | cv.<span class="property">DFT_INVERSE</span>));</span><br><span class="line">cv.<span class="title function_">normalize</span>(ifft, ifft, <span class="number">0</span>, <span class="number">1</span>, cv.<span class="property">NORM_MINMAX</span>);</span><br><span class="line">cv.<span class="title function_">imshow</span>(<span class="string">&quot;dstToOriginImg&quot;</span>, ifft);</span><br></pre></td></tr></table></figure>
-<p>展示到屏幕上的效果如下：</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20221213162913265.png" alt="image-20221213162913265"></p>
-<h4 id="问题2">问题2</h4>
-<p>在上面的图像中可以看到得到的加了水印后的图片是<strong>黑白</strong>的，而<strong>原图是彩色的</strong>，如果只能生成黑白的图片，那么这个水印加的也没有意义。</p>
-<p>因此如何让图片加频域水印后生成的图片是彩色很重要。</p>
-<p>所以得先了解上面傅里叶变换过程的原理和图片的显示原理：</p>
-<blockquote>
-<p>彩色的图片是 <code>RGB</code> 3 通道，每个像素由 3 个值来表示，三种颜色混合才展现成彩色（这里不考虑透明通道），在傅里叶变换中，首先将图片变成了灰度图，也即图片由原来三通道变成了单通道的图片，每个像素只由一个值 <code>0~255</code> 来表示，因为只有一个值，所以只能在亮度上有区别，值大的就亮，值小的就暗。</p>
-</blockquote>
-<p>在傅里叶变换最开始，我们就将图片变成灰度图了，逆傅里叶变换回来的图片同样是<strong>单通道的灰度图</strong>，显示出来自然就是黑白的。那么要让图片变成彩色，就要<strong>保留原图的色彩信息</strong>，而<strong>不能直接转成灰度图</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> src = cv.<span class="title function_">imread</span>(imgElement);</span><br><span class="line"><span class="comment">// 设置存储3种颜色的矩阵vector</span></span><br><span class="line"><span class="keyword">let</span> colors = <span class="keyword">new</span> cv.<span class="title class_">MatVector</span>();</span><br><span class="line"><span class="comment">// 分离图片的3个通道到vector中</span></span><br><span class="line">cv.<span class="title function_">split</span>(src,colors);</span><br><span class="line"><span class="comment">// 注意opencv是顺序是BGR，不是RGB，因此colors.get(0)是蓝色通道</span></span><br></pre></td></tr></table></figure>
-<p>得到三个颜色通道后，<strong>选择其中一个</strong>，这里选择<strong>蓝色通道B</strong>来进行后续傅里叶变换、添加水印，最后将 <strong>3 个通道合并在一起</strong>即可展示添加水印后的彩色图片了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 逆傅里叶变换 </span></span><br><span class="line"><span class="keyword">let</span> ifft = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line">cv.<span class="title function_">dft</span>(complexI, ifft, (cv.<span class="property">DFT_REAL_OUTPUT</span> | cv.<span class="property">DFT_INVERSE</span>));</span><br><span class="line">cv.<span class="title function_">normalize</span>(ifft, ifft, <span class="number">0</span>, <span class="number">1</span>, cv.<span class="property">NORM_MINMAX</span>);</span><br><span class="line"><span class="comment">// 下面把前面分离出来的颜色通道合并回去，否则图片会是灰色的</span></span><br><span class="line">ifft.<span class="title function_">convertTo</span>(B, cv.<span class="property">CV_8U</span>, <span class="number">255.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> toMerge = <span class="keyword">new</span> cv.<span class="title class_">MatVector</span>();</span><br><span class="line"><span class="comment">// 删除傅里叶变换最开始增加的padding</span></span><br><span class="line"><span class="keyword">let</span> res = B.<span class="title function_">roi</span>(<span class="keyword">new</span> cv.<span class="title class_">Rect</span>(<span class="number">0</span>, <span class="number">0</span>, imgCols, imgRows));</span><br><span class="line">toMerge.<span class="title function_">push_back</span>(res);</span><br><span class="line">toMerge.<span class="title function_">push_back</span>(G);</span><br><span class="line">toMerge.<span class="title function_">push_back</span>(R);</span><br><span class="line">cv.<span class="title function_">merge</span>(toMerge, res);</span><br><span class="line">cv.<span class="title function_">imshow</span>(<span class="string">&quot;dstToOriginImg&quot;</span>, res);</span><br></pre></td></tr></table></figure>
-<p><strong>特别注意：</strong><code>ifft.convertTo(B, cv.CV_8U, 255.0);</code> 这条语句非常重要，在傅里叶变换中提到了需要将颜色的 <code>0~255</code> 转换成 <code>float</code> 再进行傅里叶变换，因此逆傅里叶变换后得到的也是浮点数，需要使用 <code>convertTo</code> 转换回到 <code>8</code> 位无符号数，其中的 <code>cv.CV_8U</code> 就是 <code>opencv.js</code> 的 <code>8</code> 位无符号数的类型。并且一定要写 <code>alpha</code> 系数，即 <code>255.0</code>，如果不写那么会将 <code>0~1</code> 的浮点数都转成 <code>8</code> 位无符号数 <code>1</code>，而不是映射到 <code>0~255</code> 的范围</p>
-<p>【/(ㄒoㄒ)/，问就是在这里被坑了好久才发现】</p>
-<p>效果如下：</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20221213171236669.png" alt="image-20221213171236669"></p>
-<p>再查看加了频域水印的图片的频域图，检查是否成功添加了水印，结果如下，确实出现了水印</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20221213171335411.png" alt="image-20221213171335411"></p>
-<h3 id="总结">总结</h3>
-<p>仔细观察加了频域水印的图片，可以发现颜色和原图有些许<strong>偏差</strong>，特别是对于白色的图片很明显，其他颜色的图片则不会很明显：</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20221213173537292.png" alt="image-20221213173537292"></p>
-<p>并且在我的实践过程中仅仅使用了蓝色通道，而其他的两个通道以及透明通道都没有修改，想必肯定会有更合适的方法来<strong>均匀地用到多个通道</strong>，使得颜色偏差尽可能的小。</p>
-<p>欢迎大佬评论区指出更有效的处理办法！</p>
- 
+<p>因此在自己实现频域水印时，我也是按照这样的方式来逐步实现：</p> 
+        
+      <a class="article-more-link" href="/javascript/%E4%BD%BF%E7%94%A8opencv.js%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E9%A2%91%E5%9F%9F%E6%B0%B4%E5%8D%B0(%E9%9A%90%E6%B0%B4%E5%8D%B0)/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -386,7 +342,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>17 输入输出</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211222144030233.png" alt="image-20211222144030233"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222144030233.png" alt="image-20211222144030233"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/17%20%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"
         >阅读更多&gt;&gt;</a
@@ -458,7 +414,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>16 控制器</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211220141451495.png" alt="image-20211220141451495"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220141451495.png" alt="image-20211220141451495"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/16%20%E6%8E%A7%E5%88%B6%E5%99%A8/"
         >阅读更多&gt;&gt;</a
@@ -530,7 +486,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>15 指令周期和指令流水线</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212172556900.png" alt="image-20211212172556900"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212172556900.png" alt="image-20211212172556900"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/15%20%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F%E5%92%8C%E6%B5%81%E6%B0%B4%E7%BA%BF/"
         >阅读更多&gt;&gt;</a
@@ -602,7 +558,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>14 指令系统</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211212092749737.png" alt="image-20211212092749737"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212092749737.png" alt="image-20211212092749737"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/14%20%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/"
         >阅读更多&gt;&gt;</a
@@ -674,7 +630,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>13 总线</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211207153248644.png" alt="image-20211207153248644"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207153248644.png" alt="image-20211207153248644"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/13%20%E6%80%BB%E7%BA%BF/"
         >阅读更多&gt;&gt;</a
@@ -746,7 +702,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>12.虚拟存储器</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211129172949605.png" alt="image-20211129172949605"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129172949605.png" alt="image-20211129172949605"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/12%20%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/"
         >阅读更多&gt;&gt;</a
@@ -818,7 +774,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>11 冗余磁盘阵列（RAID）</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211124201947610.png" alt="image-20211124201947610"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124201947610.png" alt="image-20211124201947610"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/11%20%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%EF%BC%88RAID%EF%BC%89/"
         >阅读更多&gt;&gt;</a
@@ -890,7 +846,7 @@ var _hmt = _hmt || [];
 <h5 align="center">©author:zzb</h5>
 <div style="text-align: center"><a target="_blank" rel="noopener" href="https://github.com/wbl-z">Github主页</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51691879">CSDN主页</a></div> 
 <h1>10 外部存储器</h1>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20211114150452483.png" alt="image-20211114150452483"></p> 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211114150452483.png" alt="image-20211114150452483"></p> 
         
       <a class="article-more-link" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84/10%20%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/"
         >阅读更多&gt;&gt;</a

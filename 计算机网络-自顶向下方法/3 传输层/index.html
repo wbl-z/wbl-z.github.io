@@ -127,28 +127,28 @@ var _hmt = _hmt || [];
        
   <h1>3 传输层</h1>
 <h2 id="3-1-概述和传输层服务">3.1 概述和传输层服务</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414110728006.png" alt="image-20220414110728006"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414110728006.png" alt="image-20220414110728006"></p>
 <span id="more"></span>
 <p>传输层加强了网络层的服务，但有些服务是可以加强的，有些服务是不能加强的，如<strong>延时和带宽</strong>是不能加强的，取决于网络层</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414111155619.png" alt="image-20220414111155619"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414111518603.png" alt="image-20220414111518603"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414111155619.png" alt="image-20220414111155619"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414111518603.png" alt="image-20220414111518603"></p>
 <h2 id="3-2-多路复用和解复用">3.2 多路复用和解复用</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414111650739.png" alt="image-20220414111650739"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414111650739.png" alt="image-20220414111650739"></p>
 <p>复用/解复用技术:</p>
 <p><strong>将多条运输连接上的数据汇集到一条网络连接上传输</strong>。本来逻辑上是有多个进程之间的通讯线路的，但通过复用（标识两者之间）只需要一条线路即可，在目标端对所有的信息解复用，分发给不同的应用进程</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414112948542.png" alt="image-20220414112948542"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414112948542.png" alt="image-20220414112948542"></p>
 <ul>
 <li>因此套接字仅为本主机的IP和端口，因此即使源IP和端口不同，目标相同，那么都将定位到相同的socket</li>
 <li>但TCP捆绑4元组，只要有一个不一样，就是不同的socket</li>
 </ul>
 <h2 id="3-3-无连接传输：UDP">3.3 无连接传输：UDP</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414113438493.png" alt="image-20220414113438493"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414113438493.png" alt="image-20220414113438493"></p>
 <p>仅仅在IP上增加了复用和解复用功能</p>
 <p>事务性：一次往返就结束</p>
 <p>要在UDP上提供可靠传输，既利用UDP的高效，又要可靠，那么<strong>只能在应用层增加可靠性</strong><br>
 <em>(没有第三种协议，因为TCP、UDP能够支持85%以上的应用，再增加会出现协调等问题)</em></p>
 <h3 id="UDP-报文格式">UDP 报文格式</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414114016128.png" alt="image-20220414114016128"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414114016128.png" alt="image-20220414114016128"></p>
 <p><img src="https://img-blog.csdnimg.cn/20200420235146636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE0Mjc5Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p><strong>数据报</strong>：无连接的，<strong>每个数据单元都是独立发送的</strong></p>
 <p><strong>校验和</strong>是验证报文传输过程中有没有出错，如果发现校验不对，那么这个<strong>UDP报文会被丢弃</strong></p>
@@ -156,23 +156,23 @@ var _hmt = _hmt || [];
 <p>在计算校验和的时候，<strong>需要在UDP数据报之前增加12字节的伪首部</strong>，伪首部并不是UDP真正的首部。<strong>只是在计算校验和，临时添加</strong>在UDP数据报的前面，得到一个临时的UDP数据报。校验和就是按照这个临时的UDP数据报计算的。伪首部既不向下传送也不向上递交，而仅仅是为了计算校验和。这样的校验和，既检查了UDP数据报，又对IP数据报的源IP地址和目的IP地址进行了检验。</p>
 </blockquote>
 <p><strong>UDP报文的头部小，固定的8个字节的头部，如上，64 bit</strong>。<strong>载荷即有效传输的数据部分占比大</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414115052105.png" alt="image-20220414115052105"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220414115737846.png" alt="image-20220414115737846"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414115052105.png" alt="image-20220414115052105"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414115737846.png" alt="image-20220414115737846"></p>
 <p>将报文段（<strong>包含数据和头部，甚至有一些IP的伪头部</strong>）切分成<strong>若干个16 bit</strong>，将所有的16 bit数字<strong>加起来</strong>，注意求和时高位有进位需要<strong>进位回滚</strong>（<em>将进到更高位的1加到最低位上去</em>）。最后和再取反码，得到校验和。</p>
 <p>收到数据报校验时，计算出所有的和，<strong>然后再加上校验和，得到全1，0xFFFF</strong>，那么说明没有出错（可能有残存错误）</p>
 <h2 id="3-4-RDT-可靠数据传输原理">3.4 RDT 可靠数据传输原理</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415114523805.png" alt="image-20220415114523805"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415114523805.png" alt="image-20220415114523805"></p>
 <p>RDT在有些网络中在网络层实现，通常是由TCP在传输层实现</p>
 <p>要向上层应用提供可靠的服务，但是所依赖的下层服务却是不可靠的 (best effort)。</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415114859805.png" alt="image-20220415114859805"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415114859805.png" alt="image-20220415114859805"></p>
 <p><strong>渐进地开发RDT</strong>：先假设下层是完全可靠的，再逐个去掉假设，变成不可靠的，从而处理这个不可靠，再将其变成可靠，逐个进行，直到所有假设都去掉</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415115209087.png" alt="image-20220415115209087"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415115209087.png" alt="image-20220415115209087"></p>
 <h3 id="RDT-1-0">RDT 1.0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415115526494.png" alt="image-20220415115526494"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415115526494.png" alt="image-20220415115526494"></p>
 <p>仅仅是封装和解封装即可</p>
 <h3 id="RDT-2-0">RDT 2.0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415115721842.png" alt="image-20220415115721842"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415120013739.png" alt="image-20220415120013739"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415115721842.png" alt="image-20220415115721842"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415120013739.png" alt="image-20220415120013739"></p>
 <p>使用<strong>校验和</strong> <em>checksum</em>来检验错误</p>
 <ul>
 <li>发送方要编码检错，接收方要解码校验</li>
@@ -180,24 +180,24 @@ var _hmt = _hmt || [];
 <li>发送方要保存副本，ACK则无需处理，等待上层有没有新的调用，NAK则重新发送副本（<strong>检错重传</strong>）</li>
 </ul>
 <h3 id="RDT-2-1">RDT 2.1</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415121524024.png" alt="image-20220415121524024"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415121855666.png" alt="image-20220415121855666"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415121524024.png" alt="image-20220415121524024"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415121855666.png" alt="image-20220415121855666"></p>
 <p>但是<strong>显然ACK/NAK也是可能出错的</strong>【<em>这个信息同样是需要校验的，校验和</em>】，因此发送方可能无法判断接收方返回的信息是什么</p>
 <ul>
 <li>因此对发送的packet<strong>编号0和1</strong>【在01之间切换即可】，发送方先发送p<sub>0</sub></li>
 <li>接收方返回的信息ACK出错了，<strong>发送方无法识别，则发送方认为是NAK，再发一次p<sub>0</sub></strong></li>
 <li>接收方本来在等待编号1，但收到<strong>相同编号的内容</strong>，因此知道是ACK发送失败，因此将收到的<strong>重复信息丢弃</strong>，但仍然<strong>再返回ACK确认</strong></li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415122203332.png" alt="image-20220415122203332"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415122203332.png" alt="image-20220415122203332"></p>
 <p><strong>停止等待协议 <em>stop-and-wait protocol</em></strong> ：每发送完一个分组就停止发送，等待对方的确认。在收到确认后再发送下一个分组。</p>
 <h3 id="RDT-2-2">RDT 2.2</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415170654967.png" alt="image-20220415170654967"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415170654967.png" alt="image-20220415170654967"></p>
 <p><strong>取消NAK</strong>，而是对<strong>ACK编号</strong>，使用<strong>前一个分组</strong>（即最后一个正确接收的分组）的<strong>ACK作为该分组的NAK</strong></p>
 <p>这样可以为后续一次发送多个分组做好准备</p>
 <p>同理ACK传输错误和上面RDT 2.1一样处理即可</p>
 <h3 id="RDT-3-0">RDT 3.0</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415172035771.png" alt="image-20220415172035771"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415173250336.png" alt="image-20220415173250336"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415172035771.png" alt="image-20220415172035771"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415173250336.png" alt="image-20220415173250336"></p>
 <p>增加了分组可能丢失的情况</p>
 <p><strong>超时重传机制</strong>：重传时间一般设置为<strong>比正常一个往返稍长一点的时间</strong>，一旦超过这个时间，一般就能确定分组丢失，然后重传即可</p>
 <ul>
@@ -209,18 +209,18 @@ var _hmt = _hmt || [];
 <p>在上面的有限状态机图中，右上角可以看到如果收到的ACK乱码/与发出的编码不匹配，说明需要重发，但这样是空，即不做处理，原因是想通过超时来处理，因为没有收到正确的，最终会导致超时，从而重发</p>
 </blockquote>
 <p><strong>设置一个合律的timeout很重要</strong>，如果设置时间太短了，也<strong>能正常工作</strong>，但会导致分组的发送和应答<strong>重复</strong>，<strong>效率低</strong>，如下</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415173911741.png" alt="image-20220415173911741"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415173911741.png" alt="image-20220415173911741"></p>
 <p>RDT 3.0对于停止等待协议是<strong>完备的</strong>，可以处理所有的情况</p>
 <h3 id="停止等待协议的问题">停止等待协议的问题</h3>
 <p><strong>但停止等待协议的效率很低</strong>，特别是在<strong>信道容量（同时能容纳的“车“的数量，等于TR，<em>R是带宽，T是信道从头到尾传输的时间</em>）很大时</strong>，就像告诉公路很长，其中同一时间可以容纳很多车辆前后排列，但如果一次仅仅一辆车在行驶，行驶出高速公路后再让下一辆车上高速，显然效率太低了</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415174936461.png" alt="image-20220415174936461"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415175324810.png" alt="image-20220415175324810"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415174936461.png" alt="image-20220415174936461"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415175324810.png" alt="image-20220415175324810"></p>
 <p><strong>传输时间=分组长度/链路带宽</strong></p>
 <p>可见，传输时间远小于往返延迟RTT，因此时间利用率很低<strong>0.027%</strong>，只有传输时间是在忙的，其他时间都是空闲的，等待信息的返回</p>
 <p><strong>有效吞吐=带宽*时间利用率=270kbps</strong>，相当于1Gbps的链路只用到了270kbps</p>
 <h3 id="流水线协议">流水线协议</h3>
 <p><strong>流水线协议 <em>pipeline protocol</em></strong> ：一次发送多个未经确认的分组</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415180455259.png" alt="image-20220415180455259"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415180455259.png" alt="image-20220415180455259"></p>
 <h4 id="滑动窗口协议">滑动窗口协议</h4>
 <p><em>Sliding-window protocol</em></p>
 <table>
@@ -250,46 +250,46 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 <h4 id="发送窗口">发送窗口</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415180604097.png" alt="image-20220415180604097"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415181334075.png" alt="image-20220415181334075"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415180604097.png" alt="image-20220415180604097"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415181334075.png" alt="image-20220415181334075"></p>
 <p><strong>发送窗口是发送缓冲区的子集，是指发送但未确认的分组</strong><br>
 上层应用可以继续将要发送的分组存放在发送缓冲区，当发送后发送窗口的<strong>前沿便移动一格</strong>，最大可以到发送缓冲区的大小</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415181718493.png" alt="image-20220415181718493"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415195728321.png" alt="image-20220415195728321"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415195859092.png" alt="image-20220415195859092"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415181718493.png" alt="image-20220415181718493"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415195728321.png" alt="image-20220415195728321"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415195859092.png" alt="image-20220415195859092"></p>
 <h4 id="接收窗口">接收窗口</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415201457064.png" alt="image-20220415201457064"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415201457064.png" alt="image-20220415201457064"></p>
 <p><strong>接收窗口=接收缓冲区</strong></p>
 <p>【<strong>SR和GBN原理一样，都是序号最小的到来才移动，并且窗口中要包含到来的分组序号才会接收并返回ACK，否则丢弃</strong>】</p>
 <h5 id="Go-Back-N">Go-Back-N</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415200400877.png" alt="image-20220415200400877"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415200400877.png" alt="image-20220415200400877"></p>
 <p>GBN接收窗口大小是1，0，1分别到来，然后接收方分别接收<strong>解封装，并将数据data交给上层</strong>，再返回ACK<sub>0</sub>，ACK<sub>1</sub>，<strong>接收窗口向右移动</strong>，但如果下一个到来的是3而不是2，说明乱序，那么接收方会把3号分组丢弃，然后<strong>发送顺序到来的序号最大的分组的确认</strong>【<em><strong>累计确认</strong>，表明这个序号及以前的分组已经接收</em>】即ACK<sub>1</sub>，接下来又来了4号分组，同样丢弃并且返回ACK<sub>1</sub></p>
 <h5 id="Selective-repeat">Selective repeat</h5>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415200308739.png" alt="image-20220415200308739"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415200308739.png" alt="image-20220415200308739"></p>
 <p>SR中滑动窗口大于1，比如上面为5，先到了0，那么接收窗口右移一格，包含12345，然后返回ACK<sub>0</sub>，顺序到来1，接收窗口再右移一格，包含23456，返回ACK<sub>1</sub>，但接下来到来3，说明乱序，但由于接收窗口中可以包含3，说明可以接收3，那么会返回ACK<sub>3</sub>【<em><strong>非累计确认</strong>，仅仅是这个分组的</em><em>独立确认</em>**】，但接收窗口不移动，仍然包含23456，接下来到来4，返回ACK<sub>4</sub>,，接收窗口仍不移动，只有接收窗口中序号最小的到来才会导致移动。<strong>如果</strong>这时候来了2，会返回ACK<sub>2</sub>，因为此时234都到了，那么<strong>接收方会将234一起有序的交给上层</strong>（<em>要<strong>有序</strong>交给上层，因此在<strong>乱序时要缓存</strong></em>），并且接受窗口右移3格</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415201858858.png" alt="image-20220415201858858"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415201858858.png" alt="image-20220415201858858"></p>
 <h4 id="异常情况">异常情况</h4>
 <h5 id="Go-Back-N-重发N">Go-Back-N 重发N</h5>
 <p>出现了前面的2号没有收到，收到3时接收方返回ACK<sub>1</sub>，那么发送方的<strong>发送窗口不能移动</strong><br>
 【<em>但是注意，如果此时发送窗口&lt;发送缓冲区，那么<strong>发送缓冲区内的分组是可以被发送的</strong>，被发送后进入发送窗口</em>。<em>同理如果缓冲区中的分组未满，那么上层是可以将新的分组放到发送缓冲区的</em>】那么<strong>2号分组的计时器会超时timeout</strong>，因此发送方需要将<strong>发送窗口</strong>（即已发送但未确认的分组）<strong>全部再顺序发送一遍</strong>【因为GBN中2号分组没到，那么后面的所有分组都会被丢弃】</p>
 <p>【注意：GBN中只有一个计时器，即在滑动窗口<strong>大小从0变成1时启动一个计时器</strong>，同时也只需要<strong>对最小序号的分组计时</strong>即可。当收到最小序号的ACK时，那么会把<strong>计时器重置，发送窗口右移动</strong>；如果收到ACK后，窗口大小变成0，那么关闭计时器；在超时重发时也会重置计时器】👉详见下面的FSM</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205342634.png" alt="image-20220415205342634"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415205342634.png" alt="image-20220415205342634"></p>
 <h5 id="Selective-repeat-选择性重发">Selective repeat 选择性重发</h5>
 <p>出现了前面2号分组没收到的情况，但34号分组已经收到，<strong>那么2号分组会超时timeout，那么2号分组会被单独重发</strong>，但34号分组的计时器因为收到了确认ACK，所以不会被重发但注意发送方的<strong>发送窗口仍然是不能移动的</strong>，因为2没有被确认，<strong>2被确认后，发送窗口同样移动3格</strong></p>
 <p>【注意：SR的<strong>每一个分组</strong>发送后都会有一个计时器<strong>分别计时</strong>，因此较为复杂】</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205709242.png" alt="image-20220415205709242"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415205709242.png" alt="image-20220415205709242"></p>
 <hr>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415204005412.png" alt="image-20220415204005412"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415204834260.png" alt="image-20220415204834260"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205133761.png" alt="image-20220415205133761"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415205831311.png" alt="image-20220415205831311"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415204005412.png" alt="image-20220415204005412"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415204834260.png" alt="image-20220415204834260"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415205133761.png" alt="image-20220415205133761"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415205831311.png" alt="image-20220415205831311"></p>
 <h4 id="思考题">思考题</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220415210649113.png" alt="image-20220415210649113"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415210649113.png" alt="image-20220415210649113"></p>
 <p>对于SR，会出现如上图b的情况，因此在最坏的情况下即发送方发出的所有报文均被接收方接收，但ACK报文全部没有返回【关键是最小序号的ACK没有返回到发送方】，这时发送窗口不变，接收窗口右移发送窗口的大小，一旦超过了报文的序号，那么就会出现问题，一段的序号0的报文发给了下一段0的报文</p>
 <p><strong>因此要求的是N<sub>S</sub>+N<sub>R</sub>≤2<sup>n</sup>（其中序列号为0~2<sup>n</sup>-1）</strong><br>
 [因此如果<strong>SR中两个窗口大小一样</strong>的话，<strong>每个最大只能是2<sup>n</sup>/2=2<sup>n-1</sup></strong>；<strong>GBN中N<sub>R</sub>=1，因此发送窗口最大为2<sup>n</sup>-1</strong>]</p>
 <h2 id="3-5-面向连接的传输：TCP">3.5 面向连接的传输：TCP</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422094901539.png" alt="image-20220422094901539"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422094901539.png" alt="image-20220422094901539"></p>
 <p><strong>MSS</strong> <em>maximum segment size</em> **最大报文段大小 **</p>
 <p>MSS是TCP层交互给IP层最大分段大小，不包含TCP报头，只包含数据。</p>
 <p>对于以太网，数据的MTU最大传输单元是1500B，因此应用进程的数据太大是无法被链路层的帧封装的，所以需要拆分。</p>
@@ -299,9 +299,9 @@ var _hmt = _hmt || [];
 <p>单工就是在只允许甲方向乙方传送信息</p>
 </blockquote>
 <h3 id="TCP报文段结构">TCP报文段结构</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422142240682.png" alt="image-20220422142240682"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422142240682.png" alt="image-20220422142240682"></p>
 <p>TCP头部长度<strong>至少20 B</strong>，但还有一些可选项以一起构成头部，其中的<strong>首部长度</strong>就记录了头部的长度，用以区分出数据部分</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422143005451.png" alt="image-20220422143005451"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422143005451.png" alt="image-20220422143005451"></p>
 <ul>
 <li>
 <p><strong>序号</strong>指的是一个TCP数据报的数据部分的第一个字节在整个字节流中的偏移量，字节为单位。</p>
@@ -314,16 +314,16 @@ var _hmt = _hmt || [];
 </ul>
 <p>Q：接收方如何处理乱序到达的Segment？</p>
 <p>A：TCP规范中没有规定，由TCP的实现者做出决定，<strong>可以缓存，也可以直接抛弃</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422143513814.png" alt="image-20220422143513814"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422143513814.png" alt="image-20220422143513814"></p>
 <h3 id="TCP往返延迟RTT和超时">TCP往返延迟RTT和超时</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422143750280.png" alt="image-20220422143750280"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422143750280.png" alt="image-20220422143750280"></p>
 <p>动态自适应地改变计时器的时间</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422144241845.png" alt="image-20220422144241845"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422144241845.png" alt="image-20220422144241845"></p>
 <p>1-α&lt;1，因此随着测量的增加，前面的SampleRTT对平均值的影响会越来越小，而逐步过渡到后面的SampleRTT</p>
 <p>$EstimatedRTT= (1- \alpha)<em>EstimatedRTT+\alpha</em>SampleRTT$</p>
 <p>右边的平均RTT是指之前计算出来的平均RTT</p>
 <p><strong>推荐值α=0.125</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422144637496.png" alt="image-20220422144637496"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422144637496.png" alt="image-20220422144637496"></p>
 <p>计算平均值的同时计算<strong>SampleRTT偏离平均值的平均情况</strong>，类似一种方差，称为安全边界时间DevRTT</p>
 <p>$DevRTT= (1-\beta)<em>DevRTT+\beta</em>|SampleRTT-EstimatedRTT|$</p>
 <p><strong>推荐值β=0.25</strong></p>
@@ -331,7 +331,7 @@ var _hmt = _hmt || [];
 <p>$TimeoutInterval = EstimateRTT+4*DevRTT$</p>
 <h3 id="TCP可靠数据传输">TCP可靠数据传输</h3>
 <p><strong>TCP采用pipe-line 是GBN和SR的混合体</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422145815666.png" alt="image-20220422145815666"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422145815666.png" alt="image-20220422145815666"></p>
 <p>RDT:</p>
 <ul>
 <li><strong>流水线机制</strong></li>
@@ -349,15 +349,15 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="简化的TCP-不考虑重复ACK-流量控制-拥塞控制">简化的TCP:不考虑重复ACK,流量控制,拥塞控制</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151122843.png" alt="image-20220422151122843"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151356578.png" alt="image-20220422151356578"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422151122843.png" alt="image-20220422151122843"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422151356578.png" alt="image-20220422151356578"></p>
 <p>NextSeqNum相当于滑动窗口的前沿</p>
 <p>SendBase相当于滑动窗口的后沿。</p>
 <p>只不过TCP中的窗口<strong>以字节为单位</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151826809.png" alt="image-20220422151826809"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422151903338.png" alt="image-20220422151903338"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422151826809.png" alt="image-20220422151826809"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422151903338.png" alt="image-20220422151903338"></p>
 <p><strong>累计确认</strong>，因此即使ACK=100没到，也没关系，ACK=120就能代表ACK=100</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422152059304.png" alt="image-20220422152059304"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422152059304.png" alt="image-20220422152059304"></p>
 <ol>
 <li>
 <p>到了一个报文段后等待500 ms，如果第二个报文段在500 ms没来，那么发送第一个的ACK</p>
@@ -369,35 +369,35 @@ var _hmt = _hmt || [];
 <p><strong>乱序到达</strong>，需要的一个报文段比如第一个字节位置为y<sub>0</sub>，而到达了第一个字节大于y<sub>0</sub>的，说明乱序，<strong>立即发送重复的ACK=y<sub>0</sub>，表示对y<sub>0</sub>的期待，让发送方重发</strong></p>
 </li>
 <li>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422152825411.png" alt="image-20220422152825411">如果在3的情况中，到达了能够完全补充gap，即y<sub>0</sub>到乱序报文起始处的报文，那么立即发送乱序到达的报文的后面一个字节的的位置ACK，累计确认</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422152825411.png" alt="image-20220422152825411">如果在3的情况中，到达了能够完全补充gap，即y<sub>0</sub>到乱序报文起始处的报文，那么立即发送乱序到达的报文的后面一个字节的的位置ACK，累计确认</p>
 <p>如果是部分补齐，如上，在立即发送部分补齐的报文的后一个字节的ACK，让发送方快点补齐</p>
 </li>
 </ol>
 <h4 id="快速重传">快速重传</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422153256354.png" alt="image-20220422153256354"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422153256354.png" alt="image-20220422153256354"></p>
 <p><strong>快速重传</strong>：在定时器超时之前重传</p>
 <p>收到1个正确ACK后又收到<strong>3个</strong>重复ACK，那么说明丢失的可能性非常大，需要重传</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422153708762.png" alt="image-20220422153708762"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422153708762.png" alt="image-20220422153708762"></p>
 <blockquote>
 <p>Q：为什么是三次？</p>
 <p>A：因为无法判断是因为乱序还是丢失，重传1到2次更可能是乱序，3次及以上更可能是因为丢失</p>
 </blockquote>
 <h3 id="TCP流量控制">TCP流量控制</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154219979.png" alt="image-20220422154219979"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154228603.png" alt="image-20220422154228603"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422154219979.png" alt="image-20220422154219979"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422154228603.png" alt="image-20220422154228603"></p>
 <p><strong>接收buffer</strong>通常默认为<strong>4096</strong></p>
 <p>接收方返回ACK时在receive window中记录其空闲的buffer的大小，从而发送方会<strong>限制其发送缓冲区中未确认的字节个数≤receive window值</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154354055.png" alt="image-20220422154354055"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422154354055.png" alt="image-20220422154354055"></p>
 <p><strong>piggyback捎带技术</strong>，即发送方和接收方是随时变化的，客户端发送数据给服务器，服务器也会发送数据给客户端，所以如果发送一次对方要返回一个确认，然后又发送数据回来，会比较麻烦，因此可以将确认放在数据中一起发送回来，即捎带</p>
 <h3 id="TCP连接管理">TCP连接管理</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422154951753.png" alt="image-20220422154951753"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422154951753.png" alt="image-20220422154951753"></p>
 <p><strong>连接建立的本质</strong>：知道和要对方通信，准备好资源，控制变量做置位（特别是连接的初始序号#seq，对方的receive buffer的大小）</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422155548014.png" alt="image-20220422155548014"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422155913681.png" alt="image-20220422155913681"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422155548014.png" alt="image-20220422155548014"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422155913681.png" alt="image-20220422155913681"></p>
 <p>二次连接不可行</p>
 <h4 id="三次握手">三次握手</h4>
 <p><strong>理论上3次是最少需要的</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422162117847.png" alt="image-20220422162117847"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422162117847.png" alt="image-20220422162117847"></p>
 <ol>
 <li>
 <p>Client发送连接建立请求SYN=1并携带它将要从序号为x处开始传Seq=x</p>
@@ -419,7 +419,7 @@ var _hmt = _hmt || [];
 <p>Q：会不会在三次握手的第二步服务器就会分配资源？</p>
 <p>A：会分配，会保留一段时间直到确认这个ACK不会再建立了（SYN泛洪攻击，DDoS）</p>
 </blockquote>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422161237312.png" alt="image-20220422161237312"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422161237312.png" alt="image-20220422161237312"></p>
 <ol>
 <li>第一种情况，因为需要3次握手，因此不会存在半连接</li>
 <li>第二种情况，因为不会存在半连接，所以连接不存在，延迟到达的data会被丢弃</li>
@@ -432,8 +432,8 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <h4 id="四次挥手">四次挥手</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422162647488.png" alt="image-20220422162647488"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220422162755541.png" alt="image-20220422162755541"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422162647488.png" alt="image-20220422162647488"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422162755541.png" alt="image-20220422162755541"></p>
 <p><strong>对称释放，并不完美</strong></p>
 <p>四次挥手是由于 TCP 的<strong>半关闭</strong>（half-close）特性，TCP 提供了<strong>连接的一端在结束它的发送后还能接收来自另一端数据的能力</strong></p>
 <p>[<strong>结束发送指的是不再发送数据，但可以对对方的请求作出应答</strong>]</p>
@@ -466,22 +466,22 @@ var _hmt = _hmt || [];
 </blockquote>
 <h2 id="3-6-拥塞控制原理">3.6 拥塞控制原理</h2>
 <h3 id="拥塞的原因-代价">拥塞的原因/代价</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425205612515.png" alt="image-20220425205612515"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425210620116.png" alt="image-20220425210620116"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425205612515.png" alt="image-20220425205612515"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425210620116.png" alt="image-20220425210620116"></p>
 <p>无限大的缓存，则报文不会丢失</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425210802389.png" alt="image-20220425210802389"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425210939064.png" alt="image-20220425210939064"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425210802389.png" alt="image-20220425210802389"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425210939064.png" alt="image-20220425210939064"></p>
 <p>掌握路由器空闲空间，代价太大</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211229636.png" alt="image-20220425211229636"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425211229636.png" alt="image-20220425211229636"></p>
 <p>当网络拥塞时，会出现超时重传，丢失重传等，因此此时想要达到更高的传输速率，输入的带宽要增大，比如为了能每秒传输100个分组，那么输入到链路的分组数目会大于100个</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211410601.png" alt="image-20220425211410601"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211614033.png" alt="image-20220425211614033"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211804919.png" alt="image-20220425211804919"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425211410601.png" alt="image-20220425211410601"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425211614033.png" alt="image-20220425211614033"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425211804919.png" alt="image-20220425211804919"></p>
 <p>当分组经过了很多路由器，但在后面的一个路由器被抛弃了，那么它在前面所做的努力都会被浪费，这在网络拥塞时更加可惜，因为资源有限，有限的资源还被浪费了</p>
 <h3 id="拥塞控制方法">拥塞控制方法</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425211920911.png" alt="image-20220425211920911"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425211920911.png" alt="image-20220425211920911"></p>
 <h4 id="ATM-采用网络辅助的拥塞控制">ATM 采用网络辅助的拥塞控制</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220425214145348.png" alt="image-20220425214145348"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220425214145348.png" alt="image-20220425214145348"></p>
 <p><strong>ATM</strong> <em>Asynchronous Transfer Mode</em> 异步传输模式。具有分组交换和电路交换的优点，对应于OSI协议参考模型的第2层。</p>
 <p>数据交换的单位是<strong>信元</strong>，可以认为是小分组，<strong>53B，5B的头部，48B的载荷</strong>，因此存储转发的时间非常短即可完成。</p>
 <p>在电路交换中，每个节点花费1bit的存储时间，在分组交换中每个节点花费一个分组的存储时间，而在 ATM 中信元比 1bit 大，比一个分组小，只花费53B的存储时间。<strong>所以网络调度很容易，兼具两种交换网络的特性</strong></p>
@@ -499,10 +499,10 @@ var _hmt = _hmt || [];
 <p>接收端不修改 RM 信元，并将其返回给发送方，从而发送方可用知道网络状况，控制发送速率</p>
 <h2 id="3-7-TCP-拥塞控制">3.7 TCP 拥塞控制</h2>
 <h4 id="TCP-采用端到端的拥塞控制">TCP 采用端到端的拥塞控制</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426080902560.png" alt="image-20220426080902560"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426080902560.png" alt="image-20220426080902560"></p>
 <p>端系统自己感知拥塞，网络核心负担低</p>
 <h3 id="如何检测拥塞">如何检测拥塞</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426081045830.png" alt="image-20220426081045830"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426081045830.png" alt="image-20220426081045830"></p>
 <p><strong>超时即认为是拥塞</strong></p>
 <ul>
 <li><strong>网络拥塞</strong>，段被丢弃：概率大，判断正确</li>
@@ -515,20 +515,20 @@ var _hmt = _hmt || [];
 <li>出现第 3 个 ACK ，<strong>大概率是段丢失</strong></li>
 </ul>
 <h3 id="速率控制方法">速率控制方法</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426082135576.png" alt="image-20220426082135576"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426082135576.png" alt="image-20220426082135576"></p>
 <p>$rate = \frac{CongWin}{RTT} Byte/sec$</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091116543.png" alt="image-20220426091116543"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426091116543.png" alt="image-20220426091116543"></p>
 <p>MSS 是最大报文长度</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091444944.png" alt="image-20220426091444944"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426091444944.png" alt="image-20220426091444944"></p>
 <p>保证发送窗口是<strong>拥塞窗口和对方接收窗口的最小值</strong>，从而同时满足拥塞控制和流量控制</p>
 <h4 id="策略">策略</h4>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091628679.png" alt="image-20220426091628679"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426091628679.png" alt="image-20220426091628679"></p>
 <p><strong>SS</strong> <em>slow start</em> 慢启动</p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091752613.png" alt="image-20220426091752613"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426091901163.png" alt="image-20220426091901163"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426091752613.png" alt="image-20220426091752613"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426091901163.png" alt="image-20220426091901163"></p>
 <p>每收到一个 ACK，拥塞窗口加 1 == 下一次的拥塞窗口是上一次的两倍</p>
 <p><strong>初始速率很慢，但是快速攀升</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426092734182.png" alt="image-20220426092734182"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426092734182.png" alt="image-20220426092734182"></p>
 <ul>
 <li><strong>AI</strong> <em>Additive Increase</em> <strong>加性增</strong>：到达 SS 的阈值后，每个RTT将 CongWin 增大一个 MSS 线性地探测-----<strong>拥塞避免阶段</strong></li>
 <li><strong>MD</strong> <em>Multiplicative Decrease</em> <strong>乘性减</strong>：
@@ -539,25 +539,25 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426093527640.png" alt="image-20220426093527640"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426093527640.png" alt="image-20220426093527640"></p>
 <h3 id="TCP-吞吐量">TCP 吞吐量</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426094855058.png" alt="image-20220426094855058"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426094628828.png" alt="image-20220426094628828"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426094855058.png" alt="image-20220426094855058"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426094628828.png" alt="image-20220426094628828"></p>
 <p>不考虑 SS 阶段，因为指数增加，时间可以忽略不计</p>
 <p>因此平均吞吐量为 <strong>0.75 W / RTT</strong></p>
 <h3 id="TCP-公平性">TCP 公平性</h3>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426095036146.png" alt="image-20220426095036146"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426095036146.png" alt="image-20220426095036146"></p>
 <p>TCP 是公平的，<strong>均分瓶颈带宽</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165108114.png" alt="image-20220426165108114"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426165108114.png" alt="image-20220426165108114"></p>
 <p>以两个连接 1 和 2 共享链路为例：</p>
 <p>短时间是可能超过斜线的，因为路由器存在缓存，但长期是不可能的，分组会被抛弃。</p>
 <p>当检测到拥塞后（这里不看 SS 只看拥塞避免阶段，SS 时间很短），两者都会回到斜线内部，然后 45° 地增加带宽(即两者都逐步增加1 MSS[假设两者的 MSS 是一样的])，<strong>最终可以达到两者均分带宽</strong></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165337244.png" alt="image-20220426165337244"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426165337244.png" alt="image-20220426165337244"></p>
 <p>上述两种情况就体现了一定的不公平性，还有一种情况，如果 AA’ 的 MSS 小于 BB’ 的 MSS 那么最终两者也无法达到均分带宽</p>
 <p><strong>因此 TCP 的公平是大致上的公平</strong></p>
 <h2 id="总结">总结</h2>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165814628.png" alt="image-20220426165814628"></p>
-<p><img src="https://screen-shot.obs.cn-north-4.myhuaweicloud.com/image-20220426165945346.png" alt="image-20220426165945346"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426165814628.png" alt="image-20220426165814628"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426165945346.png" alt="image-20220426165945346"></p>
  
       <!-- reward -->
       
