@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>4.3 语法分析——Adaptive LL(∗) 语法分析算法 |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-编译原理/4.3  语法分析——Adaptive LL(∗) 语法分析算法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  4.3 语法分析——Adaptive LL(∗) 语法分析算法
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1>4.3  语法分析——Adaptive LL(∗) 语法分析算法</h1>
+<p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212193950896.png" alt="image-20221212193950896"></p>
+<p>（间接左递归：A→B，B→A，因此最终还是 A→A，不支持是因为工程上一般不会这么去写，且如果要改写，改写后的会非常复杂，因此干脆不支持了）</p>
+<h2 id="Antlr-4-处理直接左递归和优先级——优先级上升算法">Antlr 4 处理直接左递归和优先级——优先级上升算法</h2>
+<blockquote>
+<p>如果想在当前层的下一层展开，那么优先级要上升/更高。</p>
+</blockquote>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212194938861.png" alt="image-20221212194938861"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212194944130.png" alt="image-20221212194944130"></p>
+<p><code>antlr4 LRExpr -Xlog</code> 加上这个参数后，可以在 log 中看到 <code>Antlr4</code> 重写语法后的语法（<code>Antlr4</code> 会把上面这样左递归的文法(expr:expr)改写成非左递归的）</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212195251775.png" alt="image-20221212195251775"></p>
+<p>下面的转化成了上面的形式</p>
+<p>上面左递归的 expr 和 expr : (INT|ID)(*expr  | +expr )* 这样的非左递归的形式是等价的，也即上面改写后的形式。但是 <code>Antlr4</code>增加了：</p>
+<ul>
+<li>
+<p>expr 中的 int _p 就是定义了这 expr 的优先级（<code>Antlr4</code>规定的是写在上面的优先级最高，因此 <code>*</code> 的优先级最高是 5），在展开 expr 的时候都要带上优先级，比如上面写的 expr[5]，</p>
+</li>
+<li>
+<p>{4 &gt;= $p}? 就是 if 判断，如果传入的优先级比 4 小，那么就用当前的展开</p>
+</li>
+<li>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201104139.png" alt="image-20221212201104139"></p>
+</li>
+<li>
+<p>在 exp[4] 处发现不能展开，因此就回到上层，展开成下面的样子</p>
+</li>
+<li>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230221153924579.png" alt="image-20230221153924579"></p>
+<p><strong>优先级控制了是在这一层展开还是回到上一层去展开</strong>，比如这里的 4，就不能满足 + 的条件，因此不能在这一层展开，会回到上一层，也即 exp[4] 所在是层进行展开 2+3，这样就实现了加法的左结合。【()*就相当于 while 循环，当循环中的都不满足，那就结束本层的递归调用回到上一层】</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212203534294.png" alt="image-20221212203534294"></p>
+</li>
+<li>
+<p>因此<strong>关键</strong>就是展开后<strong>下一层递归传入的优先级</strong>是多少，在<strong>本层循环中的条件设置成多少</strong></p>
+</li>
+<li>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201611414.png" alt="image-20221212201611414"></p>
+</li>
+<li>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201743471.png" alt="image-20221212201743471"></p>
+</li>
+</ul>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201826603.png" alt="image-20221212201826603"></p>
+<p>括号的优先级更高，为什么不放到 +* 的上面呢，因此它<strong>不是左递归</strong>的，<strong>因此和 INT、ID所在的位置一样，会被优先处理</strong></p>
+<p>下面同理</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201954910.png" alt=""></p>
+<p>-expr 和 ID 是一组，因为不是左递归，剩下两个是一组，因此改写后是这样的形式：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212202030143.png" alt="image-20221212202030143"></p>
+<p>处理<strong>右结合</strong>的：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212203711516.png" alt="image-20221212203711516"></p>
+<p>对于 ^ 判断条件是 3，传入到下一层递归的参数也是 3，因此可以连续在下一层展开 ^，也即<strong>实现右结合</strong>，<strong>没有优先级上升</strong></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li><strong>处理左结合运算符，采用优先级上升</strong></li>
+<li><strong>处理右结合运算符，采用优先级不变</strong></li>
+</ul>
+<h2 id="Antlr-4-处理错误报告与恢复">Antlr 4 处理错误报告与恢复</h2>
+<p>原则：报错、<strong>恢复</strong>、继续分析</p>
+<p>在当前词法单元出错时：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204344328.png" alt="image-20221212204344328"></p>
+<ul>
+<li>
+<p>单词法符号移除：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204556589.png" alt="image-20221212204556589"></p>
+</li>
+<li>
+<p>单词法符号补全</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204631678.png" alt="image-20221212204631678"></p>
+</li>
+</ul>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204715719.png" alt="image-20221212204715719"></p>
+<p>group:1 表示选择第一个备选分支进行展开</p>
+<p><strong>FOLLOWING 是在运行这个文法时动态的集合</strong>【<em>相比于静态的 FOLLOW，动态可以有更多信息去利用，因此集合内的元素也更少更确定，比如已知是group:1，那么肯定不会期望 )</em>】。因为我们选择了 group 的第一个备选分支，因此我们知道，如果能从 expr 中恢复过来，我们期望的是 ]，因此跟在 expr 后面的是 ]，同理从 atom 恢复过来是期望后面的是 ^</p>
+<p><strong>因此整个流程</strong>就是，先看到 [，选择第一个备选分支，然后看到 ]，当作 expr 来处理，然后当作 atom 来处理，结果发现 atom 中没有与之匹配的终结符，<strong>因此出错。现在要恢复</strong>过来：先计算 FOLLOWING(expr,atom)={^,]}，因此读取后面的输入发现了 ]，就假装 atom 成功找到了它的下一个字符，回到 expr，因为 atom 成功，所以 expr 要匹配 ^，但确实 ]，同理计算，然后假装成功并返回到 group，并与 group 想要的 ] 匹配成功。</p>
+<h2 id="Adaptive-LL-∗-不做考试要求">Adaptive LL(∗) [不做考试要求]</h2>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212210317624.png" alt="image-20221212210317624"></p>
+<p>P表示的语言用正则表达式表示就是 S→a*bc | a*bd</p>
+<p>这个文法<strong>不是 LL(k)文法</strong>，因为不论 k 取多少，都不能唯一确定 S 要选取哪个备选分支，因为 A 可以产生任意多个 a、</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212214909916.png" alt="image-20221212214909916"></p>
+<p>在决策点，对于每个备选分支产生一个解析器，并行地看当前的输入是不是符合的，如果不是，那么这个解析器 die；如果有歧义【多个达到了一个相同的状态或者都到达了 EOF，即说明这几个解析器没有区分开，是歧义】，最后选择仍然存活的分支（如果有多个即存在歧义，那么选择其中的第一个）</p>
+<p><strong>三元组的含义</strong>分别是：（当前状态，当前分支，进入下一个非终结符后并完成后要返回的状态栈【即一个递归调用栈】）</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212220109822.png" alt="image-20221212220109822"></p>
+<p>注意：这里更准确的说法是，f<sub>1</sub> 里两个三元组的第二个分量都是 1，所以可以确定使用第 1 条产生式，与是否进入 P<sub>s</sub>’ 没有直接关系。这里是巧合。</p>
+<blockquote>
+<p>什么叫做通过move，通过闭包得到的状态</p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            4.1 语法分析——ANTLR 4 语法分析器
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.2%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E7%9A%84%20LL(1)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">4.2 语法分析——递归下降的 LL(1) 语法分析器</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2023
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://juejin.cn/user/13645532637448" target="_blank" class="my_link_li">
+              <img src="/images/%E6%8E%98%E9%87%91.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="mailto:1214345406@qq.com" target="_blank" class="my_link_li">
+              <img src="/images/envelope.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

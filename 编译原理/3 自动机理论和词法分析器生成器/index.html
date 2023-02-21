@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="技术，编程，代码，教程，Java" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>3 自动机理论和词法分析器生成器 |  wbl-z&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/logo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?edcb9d2dbc760f6eeab5900f9b363881";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-编译原理/3 自动机理论和词法分析器生成器"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  3 自动机理论和词法分析器生成器
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/3%20%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%90%86%E8%AE%BA%E5%92%8C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8/" class="article-date">
+  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1>3 自动机理论和词法分析器生成器</h1>
+<p>在上次课中已经能够根据模拟状态转换图完成一个词法分析器，因此解决<strong>如何将写好的正则表达式转换成状态转换图</strong>，即可完成一个自动的词法分析器生成器</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172202774.png" alt="image-20221122172202774"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172321107.png" alt="image-20221122172321107"></p>
+<p>本节课讲的是有限状态机，表达能力比较弱，但对于表达词法单元的规约是足够的</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172515902.png" alt="image-20221122172515902"></p>
+<p>NFA(<em>非确定有限状态自动机</em>) 自动机容易理解但不容易模拟，因此将 NFA 转换成 DFA，DFA 就很好模拟了，上次课的内容就是模拟 DFA(<em>确定有限状态自动机</em>)</p>
+<p>根据图的环形，DFA、NFA、RE 的表达能力是相同的，因为可以相互转化</p>
+<h2 id="NFA">NFA</h2>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122210834879.png" alt="image-20221122210834879"></p>
+<p><strong>非确定性：</strong></p>
+<ol>
+<li>对于相同的字符，行为可能是不确定的，比如上面的 a，可能仍在 0 状态，也可能转换到 1 状态</li>
+<li>对于不在字母表中的字符 ε【如空字符】，也能使状态发生改变</li>
+</ol>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122212427502.png" alt="image-20221122212427502"></p>
+<p>其中 3 为接受状态</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122212608404.png" alt="image-20221122212608404"></p>
+<p>一个正则表达式和一个自动机定义的语言是相同的，那么就说这两者等价</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122212942871.png" alt="image-20221122212942871"></p>
+<p>对于 aabb 最终可以是处于 0 状态或者是 3 状态，因为可以到达 3 即终止状态，因此可以接受</p>
+<p>注意如 1 状态没有 a 的出边则说明 1 不能接受 a 字符，根据上面的约定，即默认指向一个空状态。因此 ababab 是不能最终到 3 状态的，因此不可接受</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122213422611.png" alt="image-20221122213422611"></p>
+<h3 id="更多的例子：">更多的例子：</h3>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122213758656.png" alt="image-20221122213758656"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122213819192.png" alt="image-20221122213819192"></p>
+<h2 id="DFA">DFA</h2>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122214126878.png" alt="image-20221122214126878"></p>
+<p>相比于 NFA，消除了不确定性的两个因素</p>
+<p><strong>DFA 要求在每个状态上，对于 Σ 中的每一个字符都要有下一个转移状态</strong></p>
+<p>但在实际画的时候，如果不画转移，那么默认转移到死状态【<em>相当于把需要画出的很多个转移到死状态的边给省略了</em>】</p>
+<blockquote>
+<p>死状态是指不论什么字符，都始终在死状态，不会转移走</p>
+</blockquote>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122215313399.png" alt="image-20221122215313399"></p>
+<ul>
+<li>这个 DFA 描述的语言和上面 NFA 中的一样，但显然可以看出对于 DFA 想要写出它要描述的语言更难。</li>
+<li>但 DFA 的好处是，给定一个字符串，可以很容易的判断是不是符合的字符串</li>
+</ul>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122215959017.png" alt="image-20221122215959017"></p>
+<h2 id="RE-到-NFA-Thompson-构造法">RE 到 NFA Thompson 构造法</h2>
+<p>从 RE 到 NFA: Thompson 构造法</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221350876.png" alt="image-20221122221350876"></p>
+<p>即按照上面对正则表达式结构的定义来归纳将正则表达式转换成 NFA</p>
+<h3 id="归纳">归纳</h3>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221633881.png" alt="image-20221122221633881"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221642185.png" alt="image-20221122221642185"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221656640.png" alt="image-20221122221656640"></p>
+<p>加个括号不影响语言，因此直接等价</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222032856.png" alt="image-20221122222032856"></p>
+<p>对 s 和 t 加一个初始状态并用  ε 转移到 s 和 t的初始状态；同样的，增加终止状态，用 ε 从 s 和 t 的终止状态转移到这个终止状态</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222109645.png" alt="image-20221122222109645"></p>
+<p>将 s 的终止状态作为 t 的初始状态</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222150535.png" alt="image-20221122222150535"></p>
+<p>底下的 ε 表示 s 可以是 0 个；上面的 ε 表示 s 可以任意多个</p>
+<h3 id="复杂度">复杂度</h3>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222350735.png" alt="image-20221122222350735"></p>
+<p>3 表示构造出的 NFA 不会太复杂，最多只是原来正则表达式复杂度的两倍（因为上面的构造中最多就是添加一个初始状态和一个终止状态）</p>
+<h3 id="构造的例子">构造的例子</h3>
+<p>完成按照上面的构造方式就能成功构造出</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222712224.png" alt="image-20221122222712224"></p>
+<h2 id="NFA-到-DFA-子集构造法">NFA 到 DFA 子集构造法</h2>
+<p>思想：用 DFA 来模拟 NFA</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123170116496.png" alt="image-20221123170116496"></p>
+<p>模拟就需要模拟 NFA 的所有状态和状态转移</p>
+<ul>
+<li>上面 NFA 中的 0、1、2、4、7 都是可以通过 ε 来转移的，因此它们都是 DFA 中的初始状态</li>
+<li>因为是 DFA，因此要考虑所有的输入字符即 a 和 b，对于初始状态：
+<ul>
+<li>输入字符 a，可以转移到 3、8，而对于 3，又可以通过 ε 转移到 6、7，6 又可以通过 ε 转移到 1，进而通过 1 到 2、4，因此第二个状态包含 3、8、6、7、1、4、2</li>
+<li>同理，输入字符 b 可以到 5、4、7、1、2、4</li>
+</ul>
+</li>
+<li>一直下去，需要注意转移得到的状态是不是和已经有的状态子集相同，如果相同，则这个转移是回到自己</li>
+<li>如果构造的状态子集中包含至少一个 NFA 的终止状态，那么它就是 DFA 的终止状态</li>
+</ul>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123171451263.png" alt="image-20221123171451263"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123171456189.png" alt="image-20221123171456189"></p>
+<h3 id="公式化子集构造法">公式化子集构造法</h3>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172625988.png" alt="image-20221123172625988"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123171931706.png" alt="image-20221123171931706"></p>
+<ul>
+<li>ε 闭包也包含 s 自身，因为公式中的 ε 是 *，可以是 0 个 ε 转移</li>
+<li>move 是指，当前的 DFA 状态集合为 T，当看到 a 字符时，DFA 可以到达哪些状态【其实就是上面的不断找状态子集的过程】</li>
+</ul>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172039402.png" alt="image-20221123172039402"></p>
+<p>公式化上面的构造过程</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172106671.png" alt="image-20221123172106671"></p>
+<p>最坏情况下复杂度是指数级别的：如下例子，得到的 DFA 非常复杂</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172315437.png" alt="image-20221123172315437"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172326017.png" alt="image-20221123172326017"></p>
+<h2 id="DFA-最小化">DFA 最小化</h2>
+<p>通过子集构造法得到的 DFA 不一定是<strong>最简的</strong>，如下图上面的 DFA 的状态数就比用子集构造法得到的更少</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123174351307.png" alt="image-20221123174351307"></p>
+<p>DFA 最小化算法基本思想: <strong>等价的状态可以合并</strong></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123175738586.png" alt="image-20221123175738586"></p>
+<p>如下反例：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123175902674.png" alt="image-20221123175902674"></p>
+<p>采取相反的策略，先假设<strong>全部都等价</strong>，再根据不等价定义【<em>转移的状态都不同，那肯定是不等价的</em>】进行不等价的分裂：注意下面的不等价定义是存在 a，因此需要把每一个字母表中的都试一下，找到或者试完为止</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123181305524.png" alt="image-20221123181305524"></p>
+<ul>
+<li>先把 E 从其他状态中分裂出来，E 所在的集合只有 E 一个，因此不用再分裂，接下来对剩余状态进一步分裂</li>
+<li>D 通过 b 会到 E，而 ABC 通过 b 都还是到 ABCD 这个等价类，因此分裂出 D</li>
+<li>然后分裂出 B</li>
+<li>对于 A、C，不能分裂出来，因此 AC 就等价了，此时达到了不动点，不能再继续分裂了</li>
+</ul>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182148356.png" alt="image-20221123182148356"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182253383.png" alt="image-20221123182253383"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182606312.png" alt="image-20221123182606312"></p>
+<p>合并后一定是 DFA，否则就说明分裂不完全，还需要继续分裂</p>
+<p>合并后的初始状态是合并后包含初始状态的等价类，接受状态同理</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182820639.png" alt="image-20221123182820639"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201000573.png" alt="image-20221201201000573"></p>
+<h2 id="DFA-到-词法分析器">DFA 到 词法分析器</h2>
+<p>下面展示了从 RE =&gt; NFA =&gt; DFA =&gt; 词法分析器</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201719715.png" alt="image-20221201201719715"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201728844.png" alt="image-20221201201728844"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201734138.png" alt="image-20221201201734138"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201741539.png" alt="image-20221201201741539"></p>
+<p>**注意：**如果在 DFA 中的接受状态包含 NFA 中的多个接受状态，如上面的 68，都要确定到底是要接受其中的哪个，因为我们需要最前优先匹配，所以 68 这个状态应该接受 abb</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201202116272.png" alt="image-20221201202116272"></p>
+<p>**注意：**其中 68 对于输入 a 没有状态转移，默认是转移到一个死状态的，如果加上了死状态，那么在 68 接受到 a 时就会进入死状态，并且永远停留在死状态，这是不合理的，所以要消除死状态，让状态机在 68 接收到 a 时就停止</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201202333097.png" alt="image-20221201202333097"></p>
+<p>上面的模拟过程就是手写词法分析器中的要考虑的步骤。报错会忽略第 1 个字符，从第 2 个字符开始重新识别</p>
+<p>例子：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201202539258.png" alt="image-20221201202539258"></p>
+<p>对于 DFA 最小化，根据之前 DFA 最小化的方法，我们把 0137 和 7 作为一类，其他 4 个终止状态为一类。</p>
+<p>但如果这个 DFA 是用于生成词法分析器的，那么在一开始的时候不能把所有的终止状态分为一类，因为它们识别的是不同的词法单元。如下的 Π<sub>0</sub>。其中的空就是死状态，因为在之前已经提到，要保证这是一个 DFA，所以需要补齐没有转移的线条。</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208172013713.png" alt="image-20221208172013713"></p>
+<p>最小化的结果是 Π<sub>1</sub>，和原来一样，即原图就是一个最小化的 DFA 了。</p>
+<h2 id="DFA-到-RE">DFA 到 RE</h2>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208172421163.png" alt="image-20221208172421163"></p>
+<p>对于 DFA 要找到与之等价的 RE，它们表达的是一个语言</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208173122845.png" alt="image-20221208173122845"></p>
+<p>所有的路径的集合，就是这个语言，因此正则就是所有的路径的或</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208173355802.png" alt="image-20221208173355802"></p>
+<p>使用 floyed 算法找到所有的路径</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208174323606.png" alt="image-20221208174323606"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208174811492.png" alt="image-20221208174811492"></p>
+<p>上面的箭头上的是转移条件</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208174837335.png" alt="image-20221208174837335"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175002663.png" alt="image-20221208175002663"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175016382.png" alt="image-20221208175016382"></p>
+<p>过程：</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175340138.png" alt="image-20221208175340138"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175350339.png" alt="image-20221208175350339"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175357852.png" alt="image-20221208175357852"></p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175405165.png" alt="image-20221208175405165"></p>
+<p>只需要选择我们要的，即从初始状态到接受状态的结果，上面就是 R<sup>2</sup><sub>01</sub></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议，转载请注明出处。
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wbl-z.github.io/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/3%20%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%90%86%E8%AE%BA%E5%92%8C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/2%20%E6%89%8B%E5%86%99%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            2 手写词法分析器
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">4.1 语法分析——ANTLR 4 语法分析器</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2023
+        <i class="ri-heart-fill heart_icon"></i>  zzb
+      </li>
+    </ul>
+    <ul>
+      <li>
+        R<i class="ri-heart-fill heart_icon"></i>Z
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="wbl-z&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+    
+      <li class="nav-item">
+          <a href="https://github.com/wbl-z" target="_blank" class="my_link_li">
+              <img src="/images/github.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://blog.csdn.net/m0_51691879" target="_blank" class="my_link_li">
+              <img src="/images/csdn.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="https://juejin.cn/user/13645532637448" target="_blank" class="my_link_li">
+              <img src="/images/%E6%8E%98%E9%87%91.png">
+          </a>
+      </li>
+      
+      <li class="nav-item">
+          <a href="mailto:1214345406@qq.com" target="_blank" class="my_link_li">
+              <img src="/images/envelope.png">
+          </a>
+      </li>
+      
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
