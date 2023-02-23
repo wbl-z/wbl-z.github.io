@@ -124,6 +124,7 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108200242191.png" alt=""></p>
 <p>父节点需要为子节点传递跳转指令的目标标签，以继承属性的形式传递给子节点</p>
 <p>如上面的例子中，<strong>B 是条件语句需要生成跳转指令</strong>，但 B 不知道该跳转到什么标签，如果 B 是 true，应该跳转到 S<sub>1</sub> 标签，而 S<sub>1</sub> 是 S 才知道的，因此由 S 传递给 B；如果 B 是 false，那么应该跳转到 S 后面的语句的标签，但 S 也不知道到底是什么标签，但 P 知道，因此需要由  p 传递给 B。</p>
+<span id="more"></span>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108204811522.png" alt="image-20230108204811522"></p>
 <h2 id="1-表达式的中间代码翻译">1. 表达式的中间代码翻译</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108204931249.png" alt="image-20230108204931249"></p>

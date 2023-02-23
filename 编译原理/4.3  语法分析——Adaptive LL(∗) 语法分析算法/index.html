@@ -124,6 +124,7 @@ var _hmt = _hmt || [];
 <p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212193950896.png" alt="image-20221212193950896"></p>
 <p>（间接左递归：A→B，B→A，因此最终还是 A→A，不支持是因为工程上一般不会这么去写，且如果要改写，改写后的会非常复杂，因此干脆不支持了）</p>
+<span id="more"></span>
 <h2 id="Antlr-4-处理直接左递归和优先级——优先级上升算法">Antlr 4 处理直接左递归和优先级——优先级上升算法</h2>
 <blockquote>
 <p>如果想在当前层的下一层展开，那么优先级要上升/更高。</p>

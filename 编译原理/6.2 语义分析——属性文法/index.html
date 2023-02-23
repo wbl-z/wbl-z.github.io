@@ -128,6 +128,7 @@ var _hmt = _hmt || [];
 <p>上下文无关文法重要的原因在于它们拥有足够强的表达力来表示大多数<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">程序设计语言</a>的语法；实际上，几乎所有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">程序设计语言</a>都是通过上下文无关文法来定义的。另一方面，上下文无关文法又足够简单，使得我们可以构造有效的分析算法来检验一个给定字串是否是由某个上下文无关文法产生的。例子可以参见LR 分析器和LL 分析器。</p>
 </blockquote>
 <p><strong>属性文法：为上下文无关文法赋予语义</strong></p>
+<span id="more"></span>
 <p>上下文无关文法是不含任何语义的，其中的语义是我们赋给它的，比如对于一个 ID，想知道它的类型，那么就赋于它一个类型属性</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221201244045.png" alt="image-20221221201244045"></p>
 <p>上下文无关文法在表达语法方面是足够的，但在表达语义方面是不够的，<strong>要表达语义，那么需要使用到上下文相关文法</strong>，比如一个变量我们要求先声明才能使用，即这个变量依赖于之前它有没有被声明。</p>

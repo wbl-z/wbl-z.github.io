@@ -193,103 +193,20 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>1 词法分析</h1>
+  
+        <h1>1 词法分析</h1>
 <p>语法分析器会按需向词法分析器索要token</p>
 <p>输入一个字符串，要输出词法单元流。</p>
 <p>但仅仅是字符串是不够的，还需要一个隐含的且是最重要的输入：<strong>词法单元（Token）的规约</strong></p>
 <blockquote>
 <p>需要有一个语言来描述每次词法单元的结构，比如要从字符串中识别出ID，那必须要知道这个ID的结构才行。词法单元（Token）的规约就是完成这样的工作</p>
 </blockquote>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114153952664.png" alt="image-20221114153952664"></p>
-<h3 id="词法分析器的设计方法">词法分析器的设计方法</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114155150098.png" alt="image-20221114155150098"></p>
-<h4 id="使用词法分析器生成器">使用词法分析器生成器</h4>
-<p>给<code>Antlr</code>输入词法单元的规约（<code>.g4文件</code>），<code>Antlr</code>作为词法分析器生成器就可以生成一个词法分析器算法，比如 <code>Lexer.java</code> (也支持生成其他语言的)</p>
-<p>对于 <code>Lexer.java</code>，编译执行后，就可以输入字符串，从而输出字符流(string of  token)</p>
-<p>因此 <code>Antlr</code> 帮我们完成了生成词法分析器的过程，我们只需要写一个 <code>.g4</code> 文件来描述每一个词法单元的结构是什么样子的</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114160241918.png" alt="image-20221114160241918"></p>
-<h4 id="手写词法分析器">手写词法分析器</h4>
-<p>即上面的过程中的 <code>.java</code> 文件的生成需要我们自己来完成或者说需要我们自己编写词法分析器的源代码</p>
-<h4 id="自动化词法分析器">自动化词法分析器</h4>
-<p>相当于写一个 <code>Antlr</code>，因为在词法分析器的生成过程中，很多步骤都是机械化的，其实可以使用自动化来实现</p>
-<hr>
-<p>在生产环境中通常选择手写词法分析器，自由度更大，效率可能更高，且便于控制复杂度，如 <code>gcc</code> （左边为 <code>C</code> 语言的词法分析器，右边为 <code>C++</code> 的词法分析器）</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114155555537.png" alt="image-20221114155555537"></p>
-<p>目前如 <code>Antlr</code> 这类的词法分析器生成器生成的词法分析器已经能够和手写相媲美，因此使用第一种方式也是没有问题的</p>
-<h2 id="代码">代码</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114160842879.png" alt="image-20221114160842879"></p>
-<p>第一行 <code>grammar SimpleExpr</code>，需要和该 <code>.g4</code> 文件的名字一样</p>
-<p><code>prog</code> （program）描述用这个语言写成的程序的最高层的语法结构，称为语法规则名 。在 <code>.g4</code> 文件中语法规则名要求以小写字母开头</p>
-<p><code>stat</code> （statement）表示语句</p>
-<p>因此第 4 行表示这个语言写成的程序是由 0 个或多个语句构成的（当然此时语句还没定义）</p>
-<p>【*的语法和正则表达式一样】</p>
-<p>后面的 <code>EOF</code> 的含义是一个程序前面必须是由 0 个或多个语句构成的，紧接着最后就是文件结束符了，<strong>不能有其他的非语句内容</strong>【如果不加 <code>EOF</code>，那么最后可以有非语句的内容，而仍然被编译器认为是正确的】</p>
-<hr>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114162602684.png" alt="image-20221114162602684"></p>
-<p>ID 已经不能再用语法来表示了，它是一个词法单元了，词法单元需要用大写字母开头，一般全部写成大写</p>
-<p>if 也是词法单元，但比较特殊，是一个字面量，意思是 if 自己就作为词法单元的一类，而 ID 则包含很多的类型。【+ * 同理】</p>
-<blockquote>
-<p><code>Antlr</code> 通过将字面量隐式的表示成词法单元，如 Token0 ： ‘if’，并将这些隐式的词法单元写在我们自己定义的词法单元的前面，优先级都比显式的词法单元高，这样当发现 if 时会优先匹配前面的词法单元，而不是把它认为是一个 ID</p>
-</blockquote>
-<p>但是隐式的表示有时会让我们产生误解，不利于后续的处理，因此通常都将这些字面量显式地表示出来，使用 <code>alt+insert</code> 快捷键即可生成</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114205120222.png" alt="image-20221114205120222"></p>
-<p>这里的 <code>EQUAL</code> 改成 <code>ASSIGN</code> 表示赋值更好</p>
-<hr>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114162929446.png" alt="image-20221114162929446"></p>
-<p>（）表示子规则</p>
-<p>两行的顺序很重要，它代表了运算的优先级</p>
-<hr>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114163452458.png" alt="image-20221114163452458"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114163641822.png" alt="image-20221114163641822"></p>
-<p>其中 LETTER 和 DIGIT 不属于 Token，只是在定义更复杂的 Token 时的辅助的规则。因此我们要区分它们，即在前面加上 <code>fragment</code>，从而避免识别这两者为 Token</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114163809516.png" alt="image-20221114163809516"></p>
-<hr>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114164145811.png" alt="image-20221114164145811"></p>
-<hr>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114164256307.png" alt="image-20221114164256307"></p>
-<p>WS white space</p>
-<p>用 <code>-&gt; skip</code> 表示识别到 WS 就将其跳过</p>
-<hr>
-<p>到目前为止，就定义了我们这个语言的词法结构</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114164639689.png" alt="image-20221114164639689"></p>
-<p>叶子节点就识别出了所有的词法单元</p>
-<p>树的层次结构对应小写字母开头的语法规则</p>
-<h4 id="增加更多的语法：">增加更多的语法：</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114172956075.png" alt="image-20221114172956075"></p>
-<p>单行注释：以 <code>//</code> 开头，必定以 <code>\n</code> 结尾，中的 <code>.</code> 表示通配符，匹配任意字符 0 个或多个</p>
-<p>注意写 <code>*</code> 和 <code>+</code> 会导致<strong>贪婪的匹配</strong>，容易出现把// 后面所有的行都当作注释</p>
-<p>在 <code>*</code> 后面加上<code>?</code> 即可实现<strong>非贪婪或最小匹配</strong>。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114174530312.png" alt="image-20221114174530312"></p>
-<h2 id="其他语法">其他语法</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114205329844.png" alt="image-20221114205329844"></p>
-<p>使用 <code>@header&#123;&#125;</code>，写在这里面的内容会复制到 <code>java</code> 代码里面</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114205932043.png" alt="image-20221114205932043"></p>
-<p>可以把词法单元单独的作为一个文件，与前面的语法单元（prog，stat，expr等）分开放，但需要在开始第一行加上 <code>lexer</code></p>
-<p>同时在语法文件中要 <code>import</code> 词法</p>
-<p>这样的好处是，可能不同的语言对语法定义不同，但对词法定义是相同，就可以<strong>直接复用</strong></p>
-<h2 id="理论">理论</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114210123710.png" alt="image-20221114210123710"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114210528559.png" alt="image-20221114210528559"></p>
-<p>语言就是某种能够识别的字符串构成的集合</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114210627920.png" alt="image-20221114210627920"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114210634702.png" alt="image-20221114210634702"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114210708297.png" alt="image-20221114210708297"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114210939682.png" alt="image-20221114210939682"></p>
-<p>空集也是一种语言</p>
-<p>包含空串的语言和空集是不一样的</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114211159261.png" alt="image-20221114211159261"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114211343450.png" alt="image-20221114211343450"></p>
-<p>如 <code>*</code> 和 <code>+</code> 就是前面的正则中的<strong>理论支撑</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114213005414.png" alt="image-20221114213005414"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114213145518.png" alt="image-20221114213145518"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114213214619.png" alt="image-20221114213214619"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114213456479.png" alt="image-20221114213456479"></p>
-<p>正则表达式不能很好理解，尽可能写成右边的少括号的形式，利用好优先级</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114214039758.png" alt="image-20221114214039758"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114214224877.png" alt="image-20221114214224877"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114214408261.png" alt="image-20221114214408261"></p>
-<p><strong>不同的正则语言的规则是不一样的</strong>，比如上面的 <code>&quot;s&quot;</code> ，但是在 <code>Antlr</code> 中是 <code>'s'</code>；上面 <code>.</code> 匹配除了换行符外的任何字符，而 <code>Antlr</code> 中匹配任何字符；上面用 <code>^</code> 表示不在 s 中的任意一个字符，而在 <code>Antlr</code> 中是 <code>~</code></p>
- 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114153952664.png" alt="image-20221114153952664"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -346,7 +263,8 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>2 手写词法分析器</h1>
+  
+        <h1>2 手写词法分析器</h1>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120173533584.png" alt="image-20221120173533584"></p>
 <p>要实现的词法分析器需要识别的词法单元</p>
 <ol>
@@ -354,39 +272,12 @@ var _hmt = _hmt || [];
 <li>（绿色）关系运算符，relop = relation operation，考虑 6 种</li>
 <li>（蓝色）标识符 id：由字母和数字组成，且以字母开头</li>
 <li>数字：整型、浮点型（是否为指数形式）</li>
-</ol>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120174710291.png" alt="image-20221120174710291"></p>
-<p>对于 3.14 不会匹配成 3 为一个 REAL，因为匹配是贪婪的，而是会把 3.14 整体匹配成 REAL</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120175442376.png" alt="image-20221120175442376"></p>
-<p><code>Antlr</code> 在不能匹配很长的数字的时候，会返回它能匹配的最长的前缀</p>
-<p>比如这里的 123.45E+xyz，先发现 123，匹配整数，又发现 .45，匹配浮点数，再发现 E 匹配带指数的浮点数，但发现 + 后面不是数字，那么会回退到最长能匹配的 123.45，然后继续扫描后面的 E</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120180121624.png" alt="image-20221120180121624"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120180311263.png" alt="image-20221120180311263"></p>
-<ol start="3">
-<li></li>
-</ol>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120180404210.png" alt="image-20221120180404210"></p>
-<hr>
-<p>对所有的词法单元进行分组</p>
-<p>G0：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120180804408.png" alt="image-20221120180804408"></p>
-<p>G1：只需要看一个字符就能知道应该去比较哪个词法单元的规则，因为 ID 和 INT 的开头第一个字符是不一样的（<em>ID ：由字母和数字组成，且以字母开头</em>）</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120180824011.png" alt="image-20221120180824011"></p>
-<p>G2：需要看两个字符才能确定，比如看到 &lt;，不能确定是 &lt; 还是 &lt;=</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120181002229.png" alt="image-20221120181002229"></p>
-<p>G3：需要向前看任意多个字符才能确定是属于哪个类型</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120181156683.png" alt="image-20221120181156683"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120200158451.png" alt="image-20221120200158451"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120200220260.png" alt="image-20221120200220260"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120201337636.png" alt="image-20221120201337636"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120201346107.png" alt="image-20221120201346107"></p>
-<p>当状态转移复杂时，直接使用 <code>if-else</code> 会导致多层嵌套以及重复的代码，采用下面这种 <code>switch case</code> 状态来处理会更好</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221120201414961.png" alt="image-20221120201414961"></p>
-<p>在上图的状态图中，14、16、17没有其他的状态转移，如果在 14 遇到一个不是数字的字符，没有状态转移，因此不完整</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122120103508.png" alt="image-20221122120103508"></p>
-<p>对于这样的式子，在语法上是错误的，但是对于当前的词法分析，只是会最长识别出 123.45，然后把后面的 E 当作 ID。语法上的报错是交给语法分析来做的</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122132028095.png" alt="image-20221122132028095"></p>
- 
+</ol> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/2%20%E6%89%8B%E5%86%99%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -443,156 +334,15 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>3 自动机理论和词法分析器生成器</h1>
+  
+        <h1>3 自动机理论和词法分析器生成器</h1>
 <p>在上次课中已经能够根据模拟状态转换图完成一个词法分析器，因此解决<strong>如何将写好的正则表达式转换成状态转换图</strong>，即可完成一个自动的词法分析器生成器</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172202774.png" alt="image-20221122172202774"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172321107.png" alt="image-20221122172321107"></p>
-<p>本节课讲的是有限状态机，表达能力比较弱，但对于表达词法单元的规约是足够的</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172515902.png" alt="image-20221122172515902"></p>
-<p>NFA(<em>非确定有限状态自动机</em>) 自动机容易理解但不容易模拟，因此将 NFA 转换成 DFA，DFA 就很好模拟了，上次课的内容就是模拟 DFA(<em>确定有限状态自动机</em>)</p>
-<p>根据图的环形，DFA、NFA、RE 的表达能力是相同的，因为可以相互转化</p>
-<h2 id="NFA">NFA</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122210834879.png" alt="image-20221122210834879"></p>
-<p><strong>非确定性：</strong></p>
-<ol>
-<li>对于相同的字符，行为可能是不确定的，比如上面的 a，可能仍在 0 状态，也可能转换到 1 状态</li>
-<li>对于不在字母表中的字符 ε【如空字符】，也能使状态发生改变</li>
-</ol>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122212427502.png" alt="image-20221122212427502"></p>
-<p>其中 3 为接受状态</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122212608404.png" alt="image-20221122212608404"></p>
-<p>一个正则表达式和一个自动机定义的语言是相同的，那么就说这两者等价</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122212942871.png" alt="image-20221122212942871"></p>
-<p>对于 aabb 最终可以是处于 0 状态或者是 3 状态，因为可以到达 3 即终止状态，因此可以接受</p>
-<p>注意如 1 状态没有 a 的出边则说明 1 不能接受 a 字符，根据上面的约定，即默认指向一个空状态。因此 ababab 是不能最终到 3 状态的，因此不可接受</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122213422611.png" alt="image-20221122213422611"></p>
-<h3 id="更多的例子：">更多的例子：</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122213758656.png" alt="image-20221122213758656"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122213819192.png" alt="image-20221122213819192"></p>
-<h2 id="DFA">DFA</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122214126878.png" alt="image-20221122214126878"></p>
-<p>相比于 NFA，消除了不确定性的两个因素</p>
-<p><strong>DFA 要求在每个状态上，对于 Σ 中的每一个字符都要有下一个转移状态</strong></p>
-<p>但在实际画的时候，如果不画转移，那么默认转移到死状态【<em>相当于把需要画出的很多个转移到死状态的边给省略了</em>】</p>
-<blockquote>
-<p>死状态是指不论什么字符，都始终在死状态，不会转移走</p>
-</blockquote>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122215313399.png" alt="image-20221122215313399"></p>
-<ul>
-<li>这个 DFA 描述的语言和上面 NFA 中的一样，但显然可以看出对于 DFA 想要写出它要描述的语言更难。</li>
-<li>但 DFA 的好处是，给定一个字符串，可以很容易的判断是不是符合的字符串</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122215959017.png" alt="image-20221122215959017"></p>
-<h2 id="RE-到-NFA-Thompson-构造法">RE 到 NFA Thompson 构造法</h2>
-<p>从 RE 到 NFA: Thompson 构造法</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221350876.png" alt="image-20221122221350876"></p>
-<p>即按照上面对正则表达式结构的定义来归纳将正则表达式转换成 NFA</p>
-<h3 id="归纳">归纳</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221633881.png" alt="image-20221122221633881"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221642185.png" alt="image-20221122221642185"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122221656640.png" alt="image-20221122221656640"></p>
-<p>加个括号不影响语言，因此直接等价</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222032856.png" alt="image-20221122222032856"></p>
-<p>对 s 和 t 加一个初始状态并用  ε 转移到 s 和 t的初始状态；同样的，增加终止状态，用 ε 从 s 和 t 的终止状态转移到这个终止状态</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222109645.png" alt="image-20221122222109645"></p>
-<p>将 s 的终止状态作为 t 的初始状态</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222150535.png" alt="image-20221122222150535"></p>
-<p>底下的 ε 表示 s 可以是 0 个；上面的 ε 表示 s 可以任意多个</p>
-<h3 id="复杂度">复杂度</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222350735.png" alt="image-20221122222350735"></p>
-<p>3 表示构造出的 NFA 不会太复杂，最多只是原来正则表达式复杂度的两倍（因为上面的构造中最多就是添加一个初始状态和一个终止状态）</p>
-<h3 id="构造的例子">构造的例子</h3>
-<p>完成按照上面的构造方式就能成功构造出</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122222712224.png" alt="image-20221122222712224"></p>
-<h2 id="NFA-到-DFA-子集构造法">NFA 到 DFA 子集构造法</h2>
-<p>思想：用 DFA 来模拟 NFA</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123170116496.png" alt="image-20221123170116496"></p>
-<p>模拟就需要模拟 NFA 的所有状态和状态转移</p>
-<ul>
-<li>上面 NFA 中的 0、1、2、4、7 都是可以通过 ε 来转移的，因此它们都是 DFA 中的初始状态</li>
-<li>因为是 DFA，因此要考虑所有的输入字符即 a 和 b，对于初始状态：
-<ul>
-<li>输入字符 a，可以转移到 3、8，而对于 3，又可以通过 ε 转移到 6、7，6 又可以通过 ε 转移到 1，进而通过 1 到 2、4，因此第二个状态包含 3、8、6、7、1、4、2</li>
-<li>同理，输入字符 b 可以到 5、4、7、1、2、4</li>
-</ul>
-</li>
-<li>一直下去，需要注意转移得到的状态是不是和已经有的状态子集相同，如果相同，则这个转移是回到自己</li>
-<li>如果构造的状态子集中包含至少一个 NFA 的终止状态，那么它就是 DFA 的终止状态</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123171451263.png" alt="image-20221123171451263"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123171456189.png" alt="image-20221123171456189"></p>
-<h3 id="公式化子集构造法">公式化子集构造法</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172625988.png" alt="image-20221123172625988"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123171931706.png" alt="image-20221123171931706"></p>
-<ul>
-<li>ε 闭包也包含 s 自身，因为公式中的 ε 是 *，可以是 0 个 ε 转移</li>
-<li>move 是指，当前的 DFA 状态集合为 T，当看到 a 字符时，DFA 可以到达哪些状态【其实就是上面的不断找状态子集的过程】</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172039402.png" alt="image-20221123172039402"></p>
-<p>公式化上面的构造过程</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172106671.png" alt="image-20221123172106671"></p>
-<p>最坏情况下复杂度是指数级别的：如下例子，得到的 DFA 非常复杂</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172315437.png" alt="image-20221123172315437"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123172326017.png" alt="image-20221123172326017"></p>
-<h2 id="DFA-最小化">DFA 最小化</h2>
-<p>通过子集构造法得到的 DFA 不一定是<strong>最简的</strong>，如下图上面的 DFA 的状态数就比用子集构造法得到的更少</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123174351307.png" alt="image-20221123174351307"></p>
-<p>DFA 最小化算法基本思想: <strong>等价的状态可以合并</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123175738586.png" alt="image-20221123175738586"></p>
-<p>如下反例：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123175902674.png" alt="image-20221123175902674"></p>
-<p>采取相反的策略，先假设<strong>全部都等价</strong>，再根据不等价定义【<em>转移的状态都不同，那肯定是不等价的</em>】进行不等价的分裂：注意下面的不等价定义是存在 a，因此需要把每一个字母表中的都试一下，找到或者试完为止</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123181305524.png" alt="image-20221123181305524"></p>
-<ul>
-<li>先把 E 从其他状态中分裂出来，E 所在的集合只有 E 一个，因此不用再分裂，接下来对剩余状态进一步分裂</li>
-<li>D 通过 b 会到 E，而 ABC 通过 b 都还是到 ABCD 这个等价类，因此分裂出 D</li>
-<li>然后分裂出 B</li>
-<li>对于 A、C，不能分裂出来，因此 AC 就等价了，此时达到了不动点，不能再继续分裂了</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182148356.png" alt="image-20221123182148356"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182253383.png" alt="image-20221123182253383"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182606312.png" alt="image-20221123182606312"></p>
-<p>合并后一定是 DFA，否则就说明分裂不完全，还需要继续分裂</p>
-<p>合并后的初始状态是合并后包含初始状态的等价类，接受状态同理</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221123182820639.png" alt="image-20221123182820639"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201000573.png" alt="image-20221201201000573"></p>
-<h2 id="DFA-到-词法分析器">DFA 到 词法分析器</h2>
-<p>下面展示了从 RE =&gt; NFA =&gt; DFA =&gt; 词法分析器</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201719715.png" alt="image-20221201201719715"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201728844.png" alt="image-20221201201728844"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201734138.png" alt="image-20221201201734138"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201201741539.png" alt="image-20221201201741539"></p>
-<p>**注意：**如果在 DFA 中的接受状态包含 NFA 中的多个接受状态，如上面的 68，都要确定到底是要接受其中的哪个，因为我们需要最前优先匹配，所以 68 这个状态应该接受 abb</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201202116272.png" alt="image-20221201202116272"></p>
-<p>**注意：**其中 68 对于输入 a 没有状态转移，默认是转移到一个死状态的，如果加上了死状态，那么在 68 接受到 a 时就会进入死状态，并且永远停留在死状态，这是不合理的，所以要消除死状态，让状态机在 68 接收到 a 时就停止</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201202333097.png" alt="image-20221201202333097"></p>
-<p>上面的模拟过程就是手写词法分析器中的要考虑的步骤。报错会忽略第 1 个字符，从第 2 个字符开始重新识别</p>
-<p>例子：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201202539258.png" alt="image-20221201202539258"></p>
-<p>对于 DFA 最小化，根据之前 DFA 最小化的方法，我们把 0137 和 7 作为一类，其他 4 个终止状态为一类。</p>
-<p>但如果这个 DFA 是用于生成词法分析器的，那么在一开始的时候不能把所有的终止状态分为一类，因为它们识别的是不同的词法单元。如下的 Π<sub>0</sub>。其中的空就是死状态，因为在之前已经提到，要保证这是一个 DFA，所以需要补齐没有转移的线条。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208172013713.png" alt="image-20221208172013713"></p>
-<p>最小化的结果是 Π<sub>1</sub>，和原来一样，即原图就是一个最小化的 DFA 了。</p>
-<h2 id="DFA-到-RE">DFA 到 RE</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208172421163.png" alt="image-20221208172421163"></p>
-<p>对于 DFA 要找到与之等价的 RE，它们表达的是一个语言</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208173122845.png" alt="image-20221208173122845"></p>
-<p>所有的路径的集合，就是这个语言，因此正则就是所有的路径的或</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208173355802.png" alt="image-20221208173355802"></p>
-<p>使用 floyed 算法找到所有的路径</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208174323606.png" alt="image-20221208174323606"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208174811492.png" alt="image-20221208174811492"></p>
-<p>上面的箭头上的是转移条件</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208174837335.png" alt="image-20221208174837335"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175002663.png" alt="image-20221208175002663"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175016382.png" alt="image-20221208175016382"></p>
-<p>过程：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175340138.png" alt="image-20221208175340138"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175350339.png" alt="image-20221208175350339"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175357852.png" alt="image-20221208175357852"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208175405165.png" alt="image-20221208175405165"></p>
-<p>只需要选择我们要的，即从初始状态到接受状态的结果，上面就是 R<sup>2</sup><sub>01</sub></p>
- 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172202774.png" alt="image-20221122172202774"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/3%20%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%90%86%E8%AE%BA%E5%92%8C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -649,103 +399,15 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>4.1  语法分析——ANTLR 4 语法分析器</h1>
+  
+        <h1>4.1  语法分析——ANTLR 4 语法分析器</h1>
 <h2 id="call-graphs">call graphs</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201170040681.png" alt="image-20221201170040681"></p>
-<p>**目标：**利用语法分析功能来构建程序的函数调用图</p>
-<hr>
-<p>对于 <code>Cymbol</code> 语言</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129215359028.png" alt="image-20221129215359028"></p>
-<p>一个程序是由变量声明或函数声明来组成的</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129215704442.png" alt="image-20221129215704442"></p>
-<p>block 由 stat 组成，stat 又可以由 block 组成，这样表达是嵌套，即在大括号中可以嵌套大括号</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129220356258.png" alt="image-20221129220356258"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129220421090.png" alt="image-20221129220421090"></p>
-<hr>
-<h3 id="二义性文法">二义性文法</h3>
-<p>二义性文法：对于一个语法如果一个表达式可以有两种解释方式，即有歧义，是不可以的</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129220904650.png" alt="image-20221129220904650"></p>
-<p>如上述语法，对于 <code>if a then if b then c else d</code></p>
-<ul>
-<li>可以把 <code>if b then c else</code> 整体作为 <code>stat</code>，适用第一条规则；</li>
-<li>也可以把 <code>if b then c</code> 作为 <code>stat</code>，适用第二条规则。</li>
-<li>【<strong>即 <code>else</code> 到底属于哪个 <code>if</code> 的问题</strong>】</li>
-</ul>
-<p><strong>没有</strong>算法<strong>可以判定</strong>语法是否有二义性，一般靠经验对一些特定结构的语法来判断，并针对性的消除二义性</p>
-<p>对于上面的二义性语法通过下面的改变来消除二义性，让 <code>else</code> 与最近的 <code>if</code> 匹配</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129221552085.png" alt="image-20221129221552085"></p>
-<p>但是 <code>Antlr</code> 不需要上面的改写就可以消除二义性【<em>即我们不需要改写，只需要写原来的具有二义性的语法，<code>Antlr</code> 会帮我们消除二义性</em>】，它的策略是：如果规则有多条可能性，那么在进行语法分析时会按照规则的书写顺序<strong>从上往下</strong>进行匹配，当上面的匹配不了才会采用下面的进行匹配。</p>
-<p>【因此书写时一定要注意书写顺序，<strong>顺序就是匹配的优先级</strong>】</p>
-<p>例如在上面的二义性规则中，<strong>优先匹配第一条规则就能解决二义性。</strong></p>
-<h4 id="表达式文法的二义性">表达式文法的二义性</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129223132251.png" alt="image-20221129223132251"></p>
-<p>结合性：对于 <code>1-2-3</code> 可以是 <code>(1-2)-3</code> 也可以是 <code>1-(2-3)</code></p>
-<p>优先级：对于 <code>1-2*3</code> 可以是 <code>1-(2*3)</code> 也可以是 <code>(1-2)*3</code></p>
-<p>上面的规则是 <code>expr</code> 是左右递归，即 <code>*</code> 的左右都有 <code>expr</code></p>
-<p>可以改写成左递归和右递归的形式来<strong>实现优先级</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130094517724.png" alt="image-20221130094517724"></p>
-<p>但改写会导致简单的表达式<strong>很复杂</strong>，如下：同时注意<strong>右递归会导致运算符是右结合</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130094634606.png" alt="image-20221130094634606"></p>
-<p>对于 <code>Antlr</code>，可以直接处理，不需要改写，同样将书写顺序来作为优先级。并且如果不做特殊标记，默认是左结合的，如果要右结合，只需要加上一个标记告诉 <code>Antlr</code> 即可，如下：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130095611017.png" alt="image-20221130095611017"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130095927135.png" alt="image-20221130095927135"></p>
-<p>对于<strong>一元运算符</strong>，不需要标记即为右结合，因为类似上面的右递归，对于一元运算法只能按照右结合进行语法树构建，没有其他的构建方式，如下：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130095907900.png" alt="image-20221130095907900"></p>
-<hr>
-<h3 id="Left-Factoring">Left-Factoring</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129222810642.png" alt="image-20221129222810642"></p>
-<p>有些算法没法处理有相同的左公因子的规则，因此必须要提取出来，表示成右边的样式。</p>
-<p>但是显然，<code>Antlr</code> 可以处理有相同的左公因子的规则，不需要我们自己提取</p>
-<hr>
-<h3 id="Listener">Listener</h3>
-<p><code>Antlr</code> 会为每一条规则生成监听器【<code>enterXXX, exitXXX</code>】，<strong>我们可以实现这个监听器</strong>【因为要完成自动构建函数调用图的功能，需要实现 <code>enterXXX</code>，当到达该节点的时候就执行；如果实现 <code>exitXXX</code>，一般是当前节点的信息依赖于子节点的信息时，才会在访问完子节点后才执行当前节点的函数】</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130141616493.png" alt="image-20221130141616493"></p>
-<p>监听器功能：在深度遍历语法树时【<em>enter和exit分别在到达和离开这个节点时监听</em>】，如果是该监听器监听的类型，那么会执行监听器中的功能。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130100922002.png" alt="image-20221130100922002"></p>
-<p>在规则后面加上 <code>#name</code> 即可让 <code>Antlr</code> 遇到这个规则时生成粒度更细的 <code>name</code> 类型，而不是粗粒度的 <code>expr</code>。如果 <code>expr</code> 中的一个加上了 <code>#</code>，那么其他的 <code>expr</code> 中的<strong>其他规则</strong>也<strong>都要加上</strong> <code>#</code></p>
-<p>对于同一个规则里面用 | 分隔的两个运算，使用 <code>#</code> 也无法区分，因此再加上 <code>op=</code>，这样在这条规则对应的树节点上面有一个成员 <code>op</code>，根据这个来区分，如下</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221130141455875.png" alt="image-20221130141455875"></p>
-<h2 id="calculator">calculator</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201175439066.png" alt="image-20221201175439066"></p>
-<p><strong>目标</strong>：实现一个小计算器</p>
-<p>要记录的信息即计算结果，需要在运算符节点记录叶子节点的计算结果，因此依赖于叶子节点，所以需要实现 <code>exitXXX</code></p>
-<p>因为 <code>exitXXX</code> 方法都是返回值为 0 的，所以无法记录状态，可以考虑使用全局变量，但是不好。事实上，<code>Antlr</code> 提供了一个 <code>map&lt;ParseTree, T&gt;</code> <code>ParseTreeProperty&lt;T&gt;</code> 来给<strong>每个节点记录信息</strong></p>
-<p>如下将 INT 节点的值放到了 map 中<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201180841366.png" alt="image-20221201180841366"></p>
-<p>这样比如在计算取反操作的时候，右下角的整数值是已经知道了的，并存在 map 中，所以当回到父节点时也即执行 <code>exitXXX</code> 时就可以直接使用这个存入的整数值</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201181027643.png" alt="image-20221201181027643"></p>
-<p>对于 +/- 操作因为的 <code>g4</code> 中标明了 <code>lhs,rhs,op</code> 所以它们是 <code>ctx</code> 的成员</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201181706852.png" alt="image-20221201181706852"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201181502393.png" alt="image-20221201181502393"></p>
-<h2 id="理论部分">理论部分</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201191816864.png" alt="image-20221201191816864"></p>
-<p>如果没有指定开始符号，那么第一条规则是开始符号</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201192156911.png" alt="image-20221201192156911"></p>
-<p><code>g4</code> 中用的是 [E]BNF，即加入了 <code>*+?</code> 这类语法糖</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201192412141.png" alt="image-20221201192412141"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201192715436.png" alt="image-20221201192715436"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193233236.png" alt="image-20221201193233236"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193338765.png" alt="image-20221201193338765"></p>
-<p>所有的推导都是<strong>句型</strong>，当推导到只有终结符时是<strong>句子</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193439194.png" alt="image-20221201193439194"></p>
-<p>文法定义的语言就是它能推导出的所有句子的集合</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193555433.png" alt="image-20221201193555433"></p>
-<p>第一个问题决定了我们怎么去设计构建语法分析树的算法</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193706323.png" alt="image-20221201193706323"></p>
-<h3 id="L-G-是什么？">L(G) 是什么？</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193730169.png" alt="image-20221201193730169"></p>
-<p>简单的例子：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193912595.png" alt="image-20221201193912595"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201193921986.png" alt="image-20221201193921986"></p>
-<h3 id="上下文无关文法表达能力更强">上下文无关文法表达能力更强</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201195018637.png" alt="image-20221201195018637"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201195219917.png" alt="image-20221201195219917"></p>
-<p><img src="C:%5CUsers%5Cwbl%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20221201195357332.png" alt="image-20221201195357332"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201195417989.png" alt=""></p>
-<p>因为 m &gt; k，所以肯定会有<strong>相同的状态</strong> S<sub>i</sub> 出现</p>
-<p>假设在第一次碰到  S<sub>i</sub> 时输入的是 a<sup>i</sup>，那么在输入 a<sup>m</sup> 时，在 i~m 之间的 j 会重新回到  S<sub>i</sub> 。而根据定义，在输入 a<sup>i</sup> 后输入 b<sup>i</sup> 会到达终止状态，即被接受，那么输入 a<sup>i+j</sup>b<sup>i</sup> 也能到达终止状态，这与定义矛盾</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201200310030.png" alt="image-20221201200310030"></p>
-<p>这是所谓的<strong>泵引理</strong>，同理下面的语言是上下文无关文法也无法表达的</p>
- 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201170040681.png" alt="image-20221201170040681"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -802,93 +464,16 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>4.3  语法分析——Adaptive LL(∗) 语法分析算法</h1>
+  
+        <h1>4.3  语法分析——Adaptive LL(∗) 语法分析算法</h1>
 <p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212193950896.png" alt="image-20221212193950896"></p>
-<p>（间接左递归：A→B，B→A，因此最终还是 A→A，不支持是因为工程上一般不会这么去写，且如果要改写，改写后的会非常复杂，因此干脆不支持了）</p>
-<h2 id="Antlr-4-处理直接左递归和优先级——优先级上升算法">Antlr 4 处理直接左递归和优先级——优先级上升算法</h2>
-<blockquote>
-<p>如果想在当前层的下一层展开，那么优先级要上升/更高。</p>
-</blockquote>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212194938861.png" alt="image-20221212194938861"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212194944130.png" alt="image-20221212194944130"></p>
-<p><code>antlr4 LRExpr -Xlog</code> 加上这个参数后，可以在 log 中看到 <code>Antlr4</code> 重写语法后的语法（<code>Antlr4</code> 会把上面这样左递归的文法(expr:expr)改写成非左递归的）</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212195251775.png" alt="image-20221212195251775"></p>
-<p>下面的转化成了上面的形式</p>
-<p>上面左递归的 expr 和 expr : (INT|ID)(*expr  | +expr )* 这样的非左递归的形式是等价的，也即上面改写后的形式。但是 <code>Antlr4</code>增加了：</p>
-<ul>
-<li>
-<p>expr 中的 int _p 就是定义了这 expr 的优先级（<code>Antlr4</code>规定的是写在上面的优先级最高，因此 <code>*</code> 的优先级最高是 5），在展开 expr 的时候都要带上优先级，比如上面写的 expr[5]，</p>
-</li>
-<li>
-<p>{4 &gt;= $p}? 就是 if 判断，如果传入的优先级比 4 小，那么就用当前的展开</p>
-</li>
-<li>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201104139.png" alt="image-20221212201104139"></p>
-</li>
-<li>
-<p>在 exp[4] 处发现不能展开，因此就回到上层，展开成下面的样子</p>
-</li>
-<li>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230221153924579.png" alt="image-20230221153924579"></p>
-<p><strong>优先级控制了是在这一层展开还是回到上一层去展开</strong>，比如这里的 4，就不能满足 + 的条件，因此不能在这一层展开，会回到上一层，也即 exp[4] 所在是层进行展开 2+3，这样就实现了加法的左结合。【()*就相当于 while 循环，当循环中的都不满足，那就结束本层的递归调用回到上一层】</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212203534294.png" alt="image-20221212203534294"></p>
-</li>
-<li>
-<p>因此<strong>关键</strong>就是展开后<strong>下一层递归传入的优先级</strong>是多少，在<strong>本层循环中的条件设置成多少</strong></p>
-</li>
-<li>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201611414.png" alt="image-20221212201611414"></p>
-</li>
-<li>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201743471.png" alt="image-20221212201743471"></p>
-</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201826603.png" alt="image-20221212201826603"></p>
-<p>括号的优先级更高，为什么不放到 +* 的上面呢，因此它<strong>不是左递归</strong>的，<strong>因此和 INT、ID所在的位置一样，会被优先处理</strong></p>
-<p>下面同理</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201954910.png" alt=""></p>
-<p>-expr 和 ID 是一组，因为不是左递归，剩下两个是一组，因此改写后是这样的形式：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212202030143.png" alt="image-20221212202030143"></p>
-<p>处理<strong>右结合</strong>的：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212203711516.png" alt="image-20221212203711516"></p>
-<p>对于 ^ 判断条件是 3，传入到下一层递归的参数也是 3，因此可以连续在下一层展开 ^，也即<strong>实现右结合</strong>，<strong>没有优先级上升</strong></p>
-<p><strong>总结：</strong></p>
-<ul>
-<li><strong>处理左结合运算符，采用优先级上升</strong></li>
-<li><strong>处理右结合运算符，采用优先级不变</strong></li>
-</ul>
-<h2 id="Antlr-4-处理错误报告与恢复">Antlr 4 处理错误报告与恢复</h2>
-<p>原则：报错、<strong>恢复</strong>、继续分析</p>
-<p>在当前词法单元出错时：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204344328.png" alt="image-20221212204344328"></p>
-<ul>
-<li>
-<p>单词法符号移除：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204556589.png" alt="image-20221212204556589"></p>
-</li>
-<li>
-<p>单词法符号补全</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204631678.png" alt="image-20221212204631678"></p>
-</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204715719.png" alt="image-20221212204715719"></p>
-<p>group:1 表示选择第一个备选分支进行展开</p>
-<p><strong>FOLLOWING 是在运行这个文法时动态的集合</strong>【<em>相比于静态的 FOLLOW，动态可以有更多信息去利用，因此集合内的元素也更少更确定，比如已知是group:1，那么肯定不会期望 )</em>】。因为我们选择了 group 的第一个备选分支，因此我们知道，如果能从 expr 中恢复过来，我们期望的是 ]，因此跟在 expr 后面的是 ]，同理从 atom 恢复过来是期望后面的是 ^</p>
-<p><strong>因此整个流程</strong>就是，先看到 [，选择第一个备选分支，然后看到 ]，当作 expr 来处理，然后当作 atom 来处理，结果发现 atom 中没有与之匹配的终结符，<strong>因此出错。现在要恢复</strong>过来：先计算 FOLLOWING(expr,atom)={^,]}，因此读取后面的输入发现了 ]，就假装 atom 成功找到了它的下一个字符，回到 expr，因为 atom 成功，所以 expr 要匹配 ^，但确实 ]，同理计算，然后假装成功并返回到 group，并与 group 想要的 ] 匹配成功。</p>
-<h2 id="Adaptive-LL-∗-不做考试要求">Adaptive LL(∗) [不做考试要求]</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212210317624.png" alt="image-20221212210317624"></p>
-<p>P表示的语言用正则表达式表示就是 S→a*bc | a*bd</p>
-<p>这个文法<strong>不是 LL(k)文法</strong>，因为不论 k 取多少，都不能唯一确定 S 要选取哪个备选分支，因为 A 可以产生任意多个 a、</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212214909916.png" alt="image-20221212214909916"></p>
-<p>在决策点，对于每个备选分支产生一个解析器，并行地看当前的输入是不是符合的，如果不是，那么这个解析器 die；如果有歧义【多个达到了一个相同的状态或者都到达了 EOF，即说明这几个解析器没有区分开，是歧义】，最后选择仍然存活的分支（如果有多个即存在歧义，那么选择其中的第一个）</p>
-<p><strong>三元组的含义</strong>分别是：（当前状态，当前分支，进入下一个非终结符后并完成后要返回的状态栈【即一个递归调用栈】）</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212220109822.png" alt="image-20221212220109822"></p>
-<p>注意：这里更准确的说法是，f<sub>1</sub> 里两个三元组的第二个分量都是 1，所以可以确定使用第 1 条产生式，与是否进入 P<sub>s</sub>’ 没有直接关系。这里是巧合。</p>
-<blockquote>
-<p>什么叫做通过move，通过闭包得到的状态</p>
-</blockquote>
- 
+<p>（间接左递归：A→B，B→A，因此最终还是 A→A，不支持是因为工程上一般不会这么去写，且如果要改写，改写后的会非常复杂，因此干脆不支持了）</p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -945,116 +530,18 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>4.2  语法分析——递归下降的 LL(1) 语法分析器</h1>
+  
+        <h1>4.2  语法分析——递归下降的 LL(1) 语法分析器</h1>
 <p>语法分析器分为两大类：<strong>LL、LR</strong>，后者不论是在理解还是实现上都比 LL 复杂得多</p>
 <p>课程介绍 LL 中比较简单的一类</p>
 <p>语法分析要做的事情就是<strong>构建语法分析树</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208214928911.png" alt="image-20221208214928911"></p>
-<p>LL 是自顶向下，LR 是自底向上</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208215012195.png" alt="image-20221208215012195"></p>
-<p>图中的圈就是文法的表达能力</p>
-<p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
-<p>LL(1) 语法分析器<strong>特点</strong>：</p>
-<ul>
-<li>自顶向下的</li>
-<li>递归下降的【可以递归下降的实现并不是一定要这样实现，<em>所有的递归都能改写成非递归形式</em>】</li>
-<li>基于预测分析表的</li>
-<li>适用于LL(1) 文法的</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208215627622.png" alt="image-20221208215627622"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208215632808.png" alt="image-20221208215632808"></p>
-<p>对于中间节点的两个问题：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208215641601.png" alt="image-20221208215641601"></p>
-<p>对于第二个问题——选择哪个产生式进行展开，可以暂时先放一下，即不管这个问题，先写一个语法分析器框架，如下【<em>任何一个语法分析器的大框架都是基本类似的，它们不同的是对于非终结符怎么选择产生式（备选分支）</em>】</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208220117781.png" alt="image-20221208220117781"></p>
-<p>为每个非终结符写一个递归函数，比如上面对 A 这个非终结符进行展开</p>
-<p><strong>例子</strong>：左边方框中的是语法规则</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209104500098.png" alt="image-20221209104500098"></p>
-<p>同样是展开非终结符 S, 为什么前两次选择了 S → (S + F), 而第三次选择了 S → F</p>
-<p><strong>因为它们面对的当前词法单元不同，根据当前看到的词法单元来决定选择哪个语法规则(备选分支)</strong></p>
-<blockquote>
-<p>前两次都是它看到的第一个字符是 ( ，因此选择第二个语法规则进行展开，第三次看到的不是括号，因此选择第一个进行展开</p>
-</blockquote>
-<p>上面的决定过程在实现上是通过<strong>预测分析表</strong>来实现的（空白表示报错，即不能展开）</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209104812554.png" alt="image-20221209104812554"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209105333344.png" alt="image-20221209105333344"></p>
-<p>因为每个单元格只有一个产生式可选，因此只需要<strong>根据当前字符就能确定要选择哪个产生式</strong></p>
-<p>当有了预测分析表后，上面的框架就能具体化了：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209105533939.png" alt="image-20221209105533939"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209105847396.png" alt="image-20221209105847396"></p>
-<p>LL(1)在预测展开时要选择哪个产生式，<strong>要考虑：</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209112145823.png" alt="image-20221209112145823"></p>
-<ol>
-<li>
-<p>【<strong>FIRST</strong>】使用的产生式后续的<strong>所有展开</strong>中，最左边的非终结符有没有我们想要的。</p>
-<p>如对于 prog 的展开是选择 func_call 还是 decl，根据第一个非终结符是不是 int 即可判断</p>
-</li>
-<li>
-<p>【<strong>FOLLOW</strong>】如果想展开的非终结符，它有个备选分支<strong>是 ε，那就要考虑这个非终结符展成 ε 后</strong>，它<strong>后面的那个字符</strong>有没有我们想要的</p>
-<p>如 int x; 在 optional_init 展开成 ε，那么就要看 optional_init  后面的 ; 在输入的字符串中有没有出现</p>
-</li>
-</ol>
-<h3 id="形式化表述-FIRST和FOLLOW">形式化表述 FIRST和FOLLOW</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209113730193.png" alt="image-20221209113730193"></p>
-<p>FISRT(α) 其中 α 是产生式的右部，即冒号右边的部分，FISRT(α) 是 α 所能产生的所有的句型（α 当然可以继续产生右部）的最左边的终结符的集合</p>
-<p>如上面的 prog 中 FISRT(prog)={int, ID}， FISRT(decl)={int}</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209113922505.png" alt="image-20221209113922505"></p>
-<p>FOLLOW 中包含文件结束符 $ (EOF)</p>
-<p>A 是产生式的左部，因此会出现在某些产生式的右部的部分中，如 optional_init 是产生式的左部，出现在 del 和 arg 的右部中</p>
-<p>FOLLOW(A) 是非终结符 A 在其他所有产生式右部中紧跟在 A 右部的终结符的集合。<strong>此外</strong>如果 A 是其他产生式 B 中最右边的一个，如上面的optional_init 是 arg 最右边的，那么 FOLLOW(arg) 一定是 FOLLOW(optional_init) 的<strong>子集</strong></p>
-<p>如 FOLLOW(optional_init) = {; , )}</p>
-<h3 id="计算-FIRST和FOLLOW">计算 FIRST和FOLLOW</h3>
-<p><strong>得到 FIRST和FOLLOW =&gt; 预测分析表 =&gt; LL(1)文法</strong></p>
-<h4 id="FIRST">FIRST</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212152733310.png" alt="image-20221212152733310"></p>
-<p>如果是非终结符，那么 FIRST(X) 包含 FIRST(Y<sub>1</sub>)，Y<sub>1</sub> 有可能推出 ε，这里要把 ε 给去掉，如果有  ε，那么后面的 for 循环就是看 Y<sub>2</sub> 的 FIRST</p>
-<p>在 9-10 行是只有当整个 Y<sub>1</sub>~Y<sub>k</sub> 能推出 ε 时，才把  ε 加入到 FIRST(X)</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212160730782.png" alt="image-20221212160730782"></p>
-<p>例子：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212161300396.png" alt="image-20221212161300396"></p>
-<h4 id="FOLLOW">FOLLOW</h4>
-<p>follow 集合中一定终结符，不会有 ε</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212161424240.png" alt="image-20221212161424240"></p>
-<p>如之前的例子 FOLLOW(optional_init) = {; , )}</p>
-<p>第一条产生式<strong>默认是开始符号</strong>，如果 X 是开始符号，那么要把 $ 加到 FOLLOW(X)，就像之前写的语法中的 prog，$ 是我们人为加进去的，prog 就是整个程序，程序结束自然是文件结束符 $</p>
-<p>例子：</p>
-<p>最开始的 FOLLOW 是空集，是一个个符号往里面加的，因此 FOLLOW(Z)是FOLLOW(Z)的子集，因此是空集，并且这也是不奇怪，在产生式中可以发现，在任何的产生式都不会在 Z 后有一个终结符</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212165019863.png" alt="image-20221212165019863"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212165319432.png" alt="image-20221212165319432"></p>
-<h4 id="计算预测分析表">计算预测分析表</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212170216718.png" alt="image-20221212170216718"></p>
-<p>对于 LL(1)，每个输入都有确定唯一的产生式，只要看最开始的终结符即可，如果选择了之后后面无法继续推下去了，说明输入的句子不符合 LL(1)，即语法错误</p>
-<p>例子</p>
-<p>对于每个非终结符 A，逐个看它的所有产生式，根据上面的<strong>两条规则</strong>【<em>规则(2)表示先看 FIRST 中有没有 ε，如果有，那么再看 t 是不是属于 FOLLOW</em>】，t 满足其中一条即可在这个位置 [A,t] 中填入这个产生式子的序号，即表示要展开这个非终结符并且输入字符为 t 时，应该选择的产生式</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212170736354.png" alt="image-20221212170736354"></p>
-<p>显然上面的这个例子不是 LL(1) 文法</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212170801257.png" alt="image-20221212170801257"></p>
-<p>（最左推导指每次选择最左边的非终结符进行展开）</p>
-<p>因此 LL(0) 意思就是不需要看输入字符就知道用哪个展开式，因此只适用于每个非终结符都只有一个产生式的情况（即不需要选择产生式）</p>
-<h3 id="非递归的预测分析算法">非递归的预测分析算法</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212171333741.png" alt="image-20221212171333741"></p>
-<p>图中的 S 就表示开始符号</p>
-<p>用栈的方式来实现非递归</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212171341692.png" alt="image-20221212171341692"></p>
-<p>第一个 else if 是指 X 不是 ip 所指的符号，同时又是一个终结符，说明输入的句子是语法错误的</p>
-<p>注意压栈是要先压 Y<sub>k</sub>，因为是最左推导，要先推导 Y<sub>1</sub></p>
-<h3 id="改造非-LL-1-文法的文法">改造非 LL(1) 文法的文法</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212174759075.png" alt="image-20221212174759075"></p>
-<p>这两个方法都是比较老的技术，<code>Antlr</code> 采用的是另一种新技术</p>
-<h4 id="提取左公因子">提取左公因子</h4>
-<p>比如 X→aB|aC，第一个字符都是 a，因此仍然无法判断选择哪个，因此可以把 a提取出来改写成 X→aD，D→B|C</p>
-<h4 id="消除左递归">消除左递归</h4>
-<p>要想让乘法比加法的优先级更高，那么就要在构建语法分析树的时候让乘法更靠近叶子节点。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212180724745.png" alt="image-20221212180724745"></p>
-<p>要在文法中表达这个，那么就是引入一个中间的非终结符，如上面的 T，就是引入的新的，必须要 T 展开后才会去计算加法</p>
-<p>对于这个左递归文法，如果用 LL(1) 算法来执行，在一开始的产生式中就要递归 E【如 E→E+T】，而不需要消耗任何词法单元，这样会造成死循环</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212181248305.png" alt="image-20221212181248305"></p>
-<p>把上面的文法改造成右递归，就可以让 LL(1) 处理</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212181427062.png" alt="image-20221212181427062"></p>
-<p>执行例子：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212181543967.png" alt="image-20221212181543967"></p>
-<p>最后三行体现了 $ 的必要性，那么当输入已经没有了，而栈中还有元素，因此栈中的元素都是使用生成 ε 的产生式</p>
- 
+<p>LL 是自顶向下，LR 是自底向上</p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.2%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E7%9A%84%20LL(1)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -1111,7 +598,8 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>6.1 语义分析——类型系统和类型检查</h1>
+  
+        <h1>6.1 语义分析——类型系统和类型检查</h1>
 <p>类型系统是一个语言的核心</p>
 <blockquote>
 <p>推荐学习一门函数式语言，才能更好了解类型系统的基本原理，可以更好的掌握编程【推荐书：<strong>实用编程语言理论基础</strong>、<strong>编程与类型系统</strong>】</p>
@@ -1121,31 +609,12 @@ var _hmt = _hmt || [];
 <p>类型检查</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213114403495.png" alt="image-20221213114403495"></p>
 </li>
-<li>
-<p>类型转换</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213114409676.png" alt="image-20221213114409676"></p>
-<p>多个if 是冗长的，应该使用表驱动</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213114458265.png" alt="image-20221213114458265"></p>
-</li>
-<li>
-<p>类型综合</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213114615990.png" alt="image-20221213114615990"></p>
-</li>
-<li>
-<p>类型推导</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213115507573.png" alt="image-20221213115507573"></p>
-<p>比如 <code>C++</code> 中的 <code>auto</code></p>
-</li>
-</ul>
-<h3 id="数组类型文法举例">数组类型文法举例</h3>
-<p>例子：定义数组类型</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213115738444.png" alt="image-20221213115738444"></p>
-<p>即其实没有二维数组，是一维数组的每个元素都是一个一维数组，递归定义</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221192042186.png" alt="image-20221221192042186"></p>
-<h3 id="类型声明文法举例">类型声明文法举例</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221195848739.png" alt="image-20221221195848739"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221200026581.png" alt="image-20221221200026581"></p>
- 
+</ul> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.1%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -1202,31 +671,14 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>5 语义分析——符号表</h1>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213102821223.png" alt="image-20221213102821223"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213102827748.png" alt="image-20221213102827748"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213103048408.png" alt="image-20221213103048408"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213103052640.png" alt="image-20221213103052640"></p>
-<p>对于通用语言有嵌套作用域，因此我们要写的其实是一个符号表树</p>
-<p><strong>例子：</strong></p>
-<p>一个函数带来了<strong>两个作用域</strong>：参数作用域和函数体作用域</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213103330978.png" alt="image-20221213103330978"></p>
-<p><strong>实现：</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213103505911.png" alt="image-20221213103505911"></p>
-<ul>
-<li><code>define</code> 是在当前作用域加入符号</li>
-<li><code>resolve</code> 是根据名称查找符号是不是被定义过，<strong>不仅要在当前作用域查找，还要到上层父作用域查找</strong>，即沿着树不停向上查找。直到根节点都没找到就说明未定义使用，从而报错</li>
-</ul>
-<p>只考虑三种作用域：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213104634553.png" alt="image-20221213104634553"></p>
-<ul>
-<li>全局作用域（全局变量、函数名、内置类型如int,void）</li>
-<li>局部作用域（用大括号包围的作用域）</li>
-<li>函数作用域（函数的<strong>形参</strong>）</li>
-</ul>
-<p>更复杂的作用域</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213113627768.png" alt="image-20221213113627768"></p>
- 
+  
+        <h1>5 语义分析——符号表</h1>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213102821223.png" alt="image-20221213102821223"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E7%AC%A6%E5%8F%B7%E8%A1%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -1283,127 +735,20 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>6.2 语义分析——属性文法</h1>
+  
+        <h1>6.2 语义分析——属性文法</h1>
 <blockquote>
 <p><strong>形式文法</strong>描述形式语言的基本想法是，从一个特殊的初始符号出发，不断的应用一些产生式规则，从而生成出一个字串的集合。产生式规则指定了某些符号组合如何被另外一些符号组合替换。</p>
 <p>所有的文法分成四种类型：<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E9%99%90%E5%88%B6%E6%96%87%E6%B3%95/8353653?fromModule=lemma_inlink">无限制文法</a></strong>、<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E5%85%B3%E6%96%87%E6%B3%95/19064473?fromModule=lemma_inlink">上下文相关文法</a></strong>、<strong>上下文无关文法</strong>和**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%AD%A3%E8%A7%84%E6%96%87%E6%B3%95/8982395?fromModule=lemma_inlink">正规文法</a>**</p>
 <p>对于规则 V-&gt;<em>w</em>，上下文无关文法取名为“上下文无关”的原因就是因为字符 V 总可以被字串 w 自由替换，而无需考虑字符 V 出现的上下文。一个形式语言是上下文无关的，如果它是由上下文无关文法生成的。</p>
 <p>上下文无关文法重要的原因在于它们拥有足够强的表达力来表示大多数<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">程序设计语言</a>的语法；实际上，几乎所有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">程序设计语言</a>都是通过上下文无关文法来定义的。另一方面，上下文无关文法又足够简单，使得我们可以构造有效的分析算法来检验一个给定字串是否是由某个上下文无关文法产生的。例子可以参见LR 分析器和LL 分析器。</p>
 </blockquote>
-<p><strong>属性文法：为上下文无关文法赋予语义</strong></p>
-<p>上下文无关文法是不含任何语义的，其中的语义是我们赋给它的，比如对于一个 ID，想知道它的类型，那么就赋于它一个类型属性</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221201244045.png" alt="image-20221221201244045"></p>
-<p>上下文无关文法在表达语法方面是足够的，但在表达语义方面是不够的，<strong>要表达语义，那么需要使用到上下文相关文法</strong>，比如一个变量我们要求先声明才能使用，即这个变量依赖于之前它有没有被声明。</p>
-<p>但是上下文相关文法的复杂度很高，即使上下文无关文法不够用了，也不愿意去用前者，因此引入了<strong>属性文法</strong>：在上下文无关文法的<strong>节点</strong>上<strong>赋予一个属性</strong>，在构建语法树的过程中计算属性，从而得到了语义。</p>
-<p><strong>关键</strong>：安排好语义信息在语法分析树上的流动【DFS】</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221201942685.png" alt="image-20221221201942685"></p>
-<p>之前在 <code>Antlr</code> 都是离线遍历，即先构造了语法树，再去遍历一遍。</p>
-<p>属性文法的想法是在构建的过程中就处理属性，减少一次对语法树的遍历：下面的 {a} 就是要执行的动作 ，相当于在离线处理中在 <code>exitX()</code> 后进行动作 a</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221202041694.png" alt="image-20221221202041694"></p>
-<h2 id="例子1">例子1</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221202805121.png" alt="image-20221221202805121"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221202955462.png" alt="image-20221221202955462"></p>
-<p>对 <code>exp</code> 赋予 <code>val</code> 值，因为每个 <code>exp</code>  的 <code>val </code> 都依赖它的子节点，那么要计算得到 <code>exp</code> 的值，只需要在 <code>exp</code> 文法的右部最右部执行动作即可，也即当子节点都完成后再执行动作</p>
-<h3 id="code">code</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221203246304.png" alt="image-20221221203246304"></p>
-<p>上面的 <code>members</code> 会在编译后<strong>完全地拷贝</strong>到生成的 <code>parser</code> 文件中，因为是生成 <code>java</code> 文件，所以这里也是用 <code>java</code> 写的内容【但没有代码提示】，这样我们就能在 <code>g4</code> 文件中使用这嵌入的 <code>java</code> 代码了</p>
-<p>同时插入的动作都是写 <code>java</code> 代码</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221203832232.png" alt="image-20221221203832232"></p>
-<p><code>expr</code> 有 <code>val</code> 属性，要引用时，使用 <code>$expr.val</code> 即可。前提是在 <code>expr</code> 文法处写明它的返回值 <code>expr returns [int val]</code>，用中括号</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221204403058.png" alt="image-20221221204403058"></p>
-<p>直接 <code>$val</code> 表示在引用左部的 <code>expr</code> 的 <code>val</code></p>
-<p>其中的 <code>getOrDefault</code> 是 <code>java8</code> 开始的 <code>HashMap</code> 中的方法：取不到就返回默认值</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221204655587.png" alt="image-20221221204655587"></p>
-<p>在 <code>main</code> 中不需要 <code>listener,visitor</code>，而是在构建语法分析树的过程中就把上面的动作执行了</p>
-<h2 id="例子2">例子2</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221204837195.png" alt="image-20221221204837195"></p>
-<p>CSV 解析器</p>
-<p>要求第一行是表格的列名，后面是表格的内容</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221205106467.png" alt="image-20221221205106467"></p>
-<p>​</p>
-<p>因为要得到总的行数，所以每个 <code>row</code> 被识别出来后就要有个统计行号++，并在最后输出这个行数的动作</p>
-<p>要输出每行的 <code>values</code>，只有 <code>row</code> 不能得到列名，列名信息在 <code>hdr</code> 中，因此需要使用继承属性来传递列名</p>
-<h3 id="code-2">code</h3>
-<p>文法：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221211344739.png" alt="image-20221221211344739"></p>
-<p>动作：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221211237028.png" alt="image-20221221211237028"></p>
-<p>+= 所以最终 <code>rows</code> 可以得到一个 <code>row</code> 节点的 <code>list</code></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221221211411795.png" alt="image-20221221211411795"></p>
-<p><code>locals</code> 表示局部变量</p>
-<p><code>@init</code> 表示在还没有匹配 <code>row</code> 的时候进行初始化动作</p>
-<p><code>@after</code> 是在匹配一次后执行的操作</p>
-<p><strong>继承属性</strong>是通过参数的形式传递的，如 <code>row[$hdr.text.split(&quot;,&quot;)]</code> 就是把 <code>hdr</code> 分隔得到的 <code>String[]</code> 传递给 <code>row</code> ，因此在 <code>row</code> 处会用 <code>row[String[] columns] </code> 表示传入的参数</p>
-<p>事实上，实践中将 <code>java</code> 和 <code>g4</code> 分开来写更好，即使用之前的离线分析（<code>listener,visitor</code>）更好，上面这样的属性文法，会导致 <code>g4</code> 文件可读性很差，因此 <code>Antlr4</code> 作者也不建议这种方式，但工业上为了性能，还是会有人这样来写。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222173741122.png" alt="image-20221222173741122"></p>
-<h2 id="理论">理论</h2>
-<h3 id="SDD">SDD</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222161152590.png" alt="image-20221222161152590"></p>
-<ul>
-<li>SDD 唯一确定了语法分析树上每个非终结符节点的属性值</li>
-<li>SDD 没有规定以什么方式、什么顺序计算这些属性值</li>
-</ul>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222161644526.png" alt="image-20221222161644526"></p>
-<p>S 属性定义的<strong>依赖图</strong>刻画了属性实例之间<strong>自底向上</strong>的<strong>信息流动</strong></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222161810260.png" alt="image-20221222161810260"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222162124587.png" alt="image-20221222162124587"></p>
-<p>上面是乘法的文法规则的右递归写法【因为T→T*T会有歧义，不确定是左结合还是右结合】；其中第二行的 T<sub>1</sub> 只是与左边的 T 相区分，并不是一个新的终结符</p>
-<p>右递归的乘法会导致乘法是右结合的，但是我们可以通过调整语义规则来达到左结合的效果，如下使用继承属性和综合属性：【即在向下传递信息的过程中就已经开始计算了】</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222162928170.png" alt="image-20221222162928170"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222163723544.png" alt="image-20221222163723544"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222163956571.png" alt="image-20221222163956571"></p>
-<p>到 X<sub>i</sub> 的时候，前面的节点都已经计算完了，因此可以依赖它们</p>
-<h4 id="例子1：">例子1：</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222165021176.png" alt="image-20221222165021176"></p>
-<h4 id="例子2：">例子2：</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222165216368.png" alt="image-20221222165216368"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222165231575.png" alt="image-20221222165231575"></p>
-<h4 id="例子3：">例子3：</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222165633498.png" alt="image-20221222165633498"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222165656924.png" alt="image-20221222165656924"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222165737146.png" alt="image-20221222165737146"></p>
-<p>只使用 S 属性即可</p>
-<h4 id="例子4：">例子4：</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222170056794.png" alt="image-20221222170056794"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222170101954.png" alt="image-20221222170101954"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222170114879.png" alt="image-20221222170114879"></p>
-<h3 id="SDT">SDT</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222170740729.png" alt="image-20221222170740729"></p>
-<p>左边即 SDD，右边为 SDT，即将 SDD 描述的语义规则翻译成动作嵌入</p>
-<h4 id="S-属性后缀翻译方案">S 属性后缀翻译方案</h4>
-<p>例子：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222170857375.png" alt="image-20221222170857375"></p>
-<p>因为节点属性的计算仅仅取决于子节点或本身</p>
-<p>实践代码见上面的 CSV 例子</p>
-<h4 id="L-属性翻译方案">L 属性翻译方案</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222171038373.png" alt="image-20221222171038373"></p>
-<p>对于 L 属性定义：</p>
-<p>原则: 从左到右处理各个 X<sub>i</sub> 符号 对每个 X<sub>i</sub> , <strong>先计算继承属性, 后计算综合属性</strong></p>
-<p>递归下降子过程 A → X1 · · · Xi · · · Xn</p>
-<ol>
-<li>在调用 Xi 子过程之前, 计算 Xi 的继承属性
-<ul>
-<li>实践中：以 Xi 的<strong>继承属性为参数</strong>调用 Xi 子过程</li>
-</ul>
-</li>
-<li>在 Xi 子过程返回之前, 计算 Xi 的综合属性
-<ul>
-<li>实践中：在 Xi 子过程结束时<strong>返回 Xi 的综合属性</strong></li>
-</ul>
-</li>
-</ol>
-<p>例子：XY*</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222173302209.png" alt="image-20221222173302209"></p>
-<p>伪代码：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222173523358.png" alt="image-20221222173523358"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222173535492.png" alt="image-20221222173535492"></p>
-<h3 id="关于右递归">关于右递归</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222172747808.png" alt="image-20221222172747808"></p>
-<p>对于不支持其他左递归的生成器，要想生成编译器，那么需要改写文法为右递归。</p>
-<p>但是在<strong>左递归中的 S 属性定义</strong>，会在改写后的右递归中变成 <strong>L 属性定义</strong>。示例如下：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222172905341.png" alt="image-20221222172905341"></p>
-<p>继承属性来计算，综合属性往回传</p>
- 
+<p><strong>属性文法：为上下文无关文法赋予语义</strong></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.2%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%B1%9E%E6%80%A7%E6%96%87%E6%B3%95/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -1460,52 +805,16 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>8 LLVM-IR-(表达式的翻译与控制流的翻译)</h1>
+  
+        <h1>8 LLVM-IR-(表达式的翻译与控制流的翻译)</h1>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108200242191.png" alt=""></p>
 <p>父节点需要为子节点传递跳转指令的目标标签，以继承属性的形式传递给子节点</p>
-<p>如上面的例子中，<strong>B 是条件语句需要生成跳转指令</strong>，但 B 不知道该跳转到什么标签，如果 B 是 true，应该跳转到 S<sub>1</sub> 标签，而 S<sub>1</sub> 是 S 才知道的，因此由 S 传递给 B；如果 B 是 false，那么应该跳转到 S 后面的语句的标签，但 S 也不知道到底是什么标签，但 P 知道，因此需要由  p 传递给 B。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108204811522.png" alt="image-20230108204811522"></p>
-<h2 id="1-表达式的中间代码翻译">1. 表达式的中间代码翻译</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108204931249.png" alt="image-20230108204931249"></p>
-<h2 id="2-数组引用的中间代码翻译">2. 数组引用的中间代码翻译</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108205535816.png" alt="image-20230108205535816"></p>
-<p>继承属性得到数组类型的宽度</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108210004925.png" alt="image-20230108210004925"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108210108328.png" alt="image-20230108210108328"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108210132405.png" alt="image-20230108210132405"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108210832591.png" alt="image-20230108210832591"></p>
-<p>a[i] 在上面中间代码中的 i64 0 是因为， %2 是 [2 × [3 × i32]]* 类型的，因此虽然它指向的是数组首地址，但因为类型是整个数组，因此直接对 %2 加上偏移量 i 会偏移 i 个数组大小的长度，这不是我们想要的，因此需要先降一层，先取偏移量为 0，得到指向同一个地址，但是类型是 [3 × i32]* 类型的，对这个类型进行我们想要的 i 偏移才是正确的</p>
-<h2 id="3-控制流语句与布尔表达式的中间代码翻译">3. 控制流语句与布尔表达式的中间代码翻译</h2>
-<h3 id="if-语句">if 语句</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108211354248.png" alt="image-20230108211354248"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108211603964.png" alt="image-20230108211603964"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108212423027.png" alt="image-20230108212423027"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108212415996.png" alt="image-20230108212415996"></p>
-<p>上面例子中的代码生成的中间代码就是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p.code:</span><br><span class="line">	s.code:</span><br><span class="line">            goto L1 // 对应if(true)</span><br><span class="line">         L1:		// : 都是标签label</span><br><span class="line">            goto L0 // 对应if(false),因此assign没有被执行,直接到L0</span><br><span class="line">         L3:</span><br><span class="line">            assign  // 对应assign	</span><br><span class="line">    L0:</span><br></pre></td></tr></table></figure>
-<h3 id="if-else语句">if-else语句</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108212933325.png" alt="image-20230108212933325"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108214001284.png" alt="image-20230108214001284"></p>
-<p>上面例子中的代码生成的中间代码就是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p.code:</span><br><span class="line">	s.code:</span><br><span class="line">            goto L1 // 对应if(true)</span><br><span class="line">         L1:		// : 都是标签label</span><br><span class="line">            s1.code:</span><br><span class="line">            		goto L3 // 对应if(true)</span><br><span class="line">            	  L3:</span><br><span class="line">            	  	 assign</span><br><span class="line">            	     goto L0 // 第二层if-true结束，跳转到第二层if-else后面</span><br><span class="line">            	  L4:</span><br><span class="line">            	  	 assign</span><br><span class="line">            goto L0 // 第一层if-true结束，跳转到第一层if-else后面</span><br><span class="line">         L2:</span><br><span class="line">            assign  // 对应第一层else的assign	</span><br><span class="line">    L0:</span><br></pre></td></tr></table></figure>
-<h3 id="while-语句">while 语句</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230108215139970.png" alt="image-20230108215139970"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110191037687.png" alt="image-20230110191037687"></p>
-<p>上面例子中的代码生成的中间代码就是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">p.code:</span><br><span class="line">	s.code:</span><br><span class="line">		 begin:</span><br><span class="line">            goto L1 // 对应while(true)</span><br><span class="line">         L1:		// : 都是标签label</span><br><span class="line">            s1.code:</span><br><span class="line">            		goto L4 // 对应if(false)</span><br><span class="line">            	  L3:</span><br><span class="line">            	  	 assign</span><br><span class="line">            	     goto begin // 跳到while循环开始</span><br><span class="line">            	  L4:</span><br><span class="line">            	  	 assign</span><br><span class="line">            goto begin // 跳到while循环开始</span><br><span class="line">    L0:</span><br></pre></td></tr></table></figure>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110191439360.png" alt="image-20230110191439360"></p>
-<h2 id="4-布尔表达式的中间代码翻译">4. 布尔表达式的中间代码翻译</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110193632692.png" alt="image-20230110193632692"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110194827798.png" alt="image-20230110194827798"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110195006411.png" alt="image-20230110195006411"></p>
-<p>短路求值，当 B<sub>1</sub> 是 true 时，那么直接就是 B 是 true 了，当 B<sub>1</sub> 是 false，才跳转到 B<sub>2</sub> 的 code</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110195133929.png" alt="image-20230110195133929"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110195337123.png" alt="image-20230110195337123"></p>
-<p>关系运算符表达式：≥，&gt;等</p>
-<p>例子：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110201224607.png" alt="image-20230110201224607"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230110201234027.png" alt="image-20230110201234027"></p>
- 
+<p>如上面的例子中，<strong>B 是条件语句需要生成跳转指令</strong>，但 B 不知道该跳转到什么标签，如果 B 是 true，应该跳转到 S<sub>1</sub> 标签，而 S<sub>1</sub> 是 S 才知道的，因此由 S 传递给 B；如果 B 是 false，那么应该跳转到 S 后面的语句的标签，但 S 也不知道到底是什么标签，但 P 知道，因此需要由  p 传递给 B。</p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/8%20LLVM-IR-(%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E7%BF%BB%E8%AF%91%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%B5%81%E7%9A%84%E7%BF%BB%E8%AF%91)/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>

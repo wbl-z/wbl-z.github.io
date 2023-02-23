@@ -193,47 +193,18 @@ var _hmt = _hmt || [];
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1>7 LLVM-IR</h1>
+  
+        <h1>7 LLVM-IR</h1>
 <blockquote>
 <p>在之前 LLVM 是 Low-Level Virtual Machine 的缩写，然后发展到现在，已经脱离的虚拟机的概念，因此 LLVM 不再是缩写，而是这个项目就叫 LLVM。</p>
 </blockquote>
 <p>LLVM 不是一个编译器，而是编译器的基础设施，当写一个编译器时，可以在 LLVM 上进行开发，而不是从头开始。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222200155928.png" alt="image-20221222200155928"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222200709146.png" alt="image-20221222200709146"></p>
-<p>广义的 LLVM 是包含前端的，如 Clang 就是 LLVM 的子项目，但最核心的 LLVM 是注重优化和后端的。</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222201302601.png" alt="image-20221222201302601"></p>
-<p>中间表示是强类型的</p>
-<h3 id="例子——没有函数体，只有函数声明">例子——没有函数体，只有函数声明</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222202516690.png" alt="image-20221222202516690"></p>
-<h4 id="0-级优化">0 级优化</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222202510842.png" alt="image-20221222202510842"></p>
-<p>@开头表示是全局变量/函数，%表示局部变量，align 是 4 字节对齐。</p>
-<p>%8 的类型起始是 i1，因为布尔值一个 bit 就行，但返回值是 i32，因此要进行拓展。</p>
-<p>LLVM 中要求 <strong>SSA 静态单赋值</strong>，即每个寄存器/变量只能被赋值一次，如上面的 %6 和 %7，再执行 %6 和 7 的操作后，不能把结果再存储到 %6 中</p>
-<h4 id="1-级优化">1 级优化</h4>
-<p>1 级优化-O1，其中 -g0 是指不输出调试信息，可以看到<strong>①</strong>优化后 main 函数的参数被优化掉了，因为从来没有使用过；<strong>②</strong>内存操作[上图的 store]被转换成虚拟寄存器操作[如%6,%7]：</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222202958544.png" alt="image-20221222202958544"></p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222203308753.png" alt="image-20221222203308753"></p>
-<p>SSA 在分支中会有点问题，左边的代码转换成中间的 IR 后，会出现不知道使用哪个 y 的情况：<strong>①</strong>一个解决的办法是<strong>使用 Φ 函数</strong>，根据控制流来决定；<strong>②</strong>也可以通过<strong>存到同一块内存</strong>来解决</p>
-<h3 id="例子——有函数体——分支结构">例子——有函数体——分支结构</h3>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222204823614.png" alt="image-20221222204823614"></p>
-<p>图被称为 Control Flow Graph (CFG)</p>
-<h4 id="0-级优化-2">0 级优化</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222204925688.png" alt="image-20221222204925688"></p>
-<p>通过把值都存储到 %2 来解决分支问题</p>
-<h4 id="1-级优化-2">1 级优化</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222204939222.png" alt="image-20221222204939222"></p>
-<p>优化后就是使用寄存器，那么就不能用相同内存的方式来存储了，而是使用了 <strong>phi 函数</strong>来决定分支：如果是从 %3 的分支来的，那么就返回 %6 的值；如果是从 %1 的控制块来的，那就返回 1</p>
-<h3 id="例子——有函数体——循环结构">例子——有函数体——循环结构</h3>
-<h4 id="0-级优化-3">0 级优化</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222210011904.png" alt="image-20221222210011904"></p>
-<p>这里是 <code>%8 = icmp sle i32 %6,%7</code> 是比较 <code>i</code> 是不是小于等于 <code>val</code></p>
-<h4 id="1-级优化-3">1 级优化</h4>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222210059615.png" alt="image-20221222210059615"></p>
-<p>这里是 <code>%2 = icmp slt i32 %0,2</code> 是比较  <code>val</code>  是不是大于 <code>i=2</code></p>
-<p>其中 %6 是在选择 i 取哪个值，%7 是在选择 tmep 取哪个值，%8 %9 分别为修改后的 i 和 temp</p>
-<h2 id="？不能重复赋值"><mark>？不能重复赋值</mark></h2>
- 
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222200155928.png" alt="image-20221222200155928"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/7%20LLVM-IR/"
+        >阅读更多&gt;&gt;</a
+      >
+       
       <!-- reward -->
       
     </div>
