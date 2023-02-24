@@ -7521,10 +7521,10 @@
   </entry>
   <entry>
     <title>web前端复习提纲</title>
-    <url>/web%E5%89%8D%E7%AB%AF/web%E5%89%8D%E7%AB%AF%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/</url>
-    <content><![CDATA[<h2 id="web前端复习提纲">web前端复习提纲</h2>
+    <url>/web%E5%89%8D%E7%AB%AF/web%E5%89%8D%E7%AB%AF%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2+2023%E5%9B%9E%E5%BF%86/</url>
+    <content><![CDATA[<h2 id="web前端复习提纲-2023回忆">web前端复习提纲+2023回忆</h2>
 <blockquote>
-<p>参考自 zhy 的博客[<a href="https://spricoder.github.io/2021/01/19/2020-Web-Front-End-development/2020-Web-Front-End-development-Exam01-Summary/">2020-Web前端开发-Exam01-Summary - SpriCoder的博客</a></p>
+<p>参考自 zhy 的博客 <a href="https://spricoder.github.io/2021/01/19/2020-Web-Front-End-development/2020-Web-Front-End-development-Exam01-Summary/">2020-Web前端开发-Exam01-Summary - SpriCoder的博客</a></p>
 <p>feat: 新增若干内容</p>
 </blockquote>
 <h1>1. 基础知识</h1>
@@ -7539,7 +7539,6 @@
 <li>URN(统一资源名称，Uniform Resource Name) 是资源的唯一名称</li>
 <li><strong>URL、URN 是 URI 的子集，其中 URL 和 URN 有交集。</strong></li>
 </ol>
-<span id="more"></span>
 <h3 id="1-1-3-DNS">1.1.3. DNS</h3>
 <ol>
 <li>
@@ -7590,7 +7589,7 @@
 </tr>
 <tr>
 <td>HTTP2.0</td>
-<td>⼆进制协议而不是⽂本协议；支持 HTTP1.1，在<strong>数据如何封装成帧上有区别</strong>，<strong>头部压缩</strong>，请求和响应多路复用</td>
+<td>⼆进制协议而不是⽂本协议；支持 HTTP1.1，在<strong>数据如何封装成帧上有区别</strong>，<strong>头部压缩</strong>，请求和响应<strong>多路复用</strong></td>
 </tr>
 <tr>
 <td>HTTP3.0</td>
@@ -7664,11 +7663,12 @@
 <p><strong>常用状态码</strong>：</p>
 <ul>
 <li>200 OK</li>
-<li>301 Moved Permanently</li>
+<li>301 Moved Permanently 搜索引擎会删除原页面，收录重定向的页面，并转移权重</li>
+<li>302 Found 是一种临时性的重定向，大部分搜索引擎把它作为内部的重定向，不会缓存重定向的结果</li>
 <li>400 Bad Request</li>
 <li>401 Unauthorized</li>
 <li>403 forbidden</li>
-<li>404 Not Found</li>
+<li>404 Not Found 搜索引擎放弃对该链接的索引</li>
 <li>500 Internal Server Error</li>
 </ul>
 <h2 id="1-2-网络机器人">1.2. 网络机器人</h2>
@@ -7722,7 +7722,6 @@
 </ol>
 </li>
 </ol>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Web-Front-End-development/img/exam1/11.png" alt=""></p>
 <h3 id="2-1-1-结构、表现、行为">2.1.1. 结构、表现、行为</h3>
 <p><strong>结构：</strong></p>
 <ol>
@@ -7778,8 +7777,10 @@
 <li>
 <p>br</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在 HTML 中，&lt;br&gt;标签没有结束标签。</p>
-<p>在 XHTML 中，&lt;br&gt; 标签必须被正确地关闭，比如这样：&lt;br /&gt;。</p>
+<ul>
+<li>在 HTML 中，&lt;br&gt;标签没有结束标签。</li>
+<li>在 XHTML 中，&lt;br&gt; 标签必须被正确地关闭，比如这样：&lt;br /&gt;。</li>
+</ul>
 </li>
 <li>
 <p>a</p>
@@ -7841,7 +7842,7 @@
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">hidden</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>强大，但从语义化角度讲<strong>不是好的设计</strong>，因为<strong>具体样式渲染要等读到 type 属性值</strong>才能确定</li>
-<li>不需要 JS，新增原生日期、颜色选择器以及其他新类型，提供客户端验证机制和旋转框、滑块</li>
+<li>不需要 JS，H5 新增原生日期、颜色选择器以及其他新类型，提供客户端表单验证机制和旋转框、滑块</li>
 </ul>
 </li>
 <li>
@@ -7931,7 +7932,7 @@
 <p><strong>客户端存储数据的两个对象</strong>为：【js可以从这里面获取需要的数据】</p>
 <ul>
 <li><strong>localStorage</strong> - 用于<strong>长久</strong>保存整个网站的数据，保存的数据<strong>没有过期时间</strong>，直到手动去除。</li>
-<li><strong>sessionStorage</strong> - 用于<strong>临时</strong>保存同一窗⼝(或标签页)的数据，在<strong>关闭窗⼝</strong>或标签页之后将会<strong>删除</strong>这些数据。</li>
+<li><strong>sessionStorage</strong> - 用于<strong>临时</strong>保存同一窗口(或标签页)的数据，在<strong>关闭窗口</strong>或标签页之后将会<strong>删除</strong>这些数据。</li>
 </ul>
 <p>HTML5 引⼊了<strong>应用程序缓存</strong>，这意味着 web 应用可进行缓存，并可在没有因特网连接时进行访问。通过创建 <strong>cache manifest</strong> 文件，可以轻松地创建 <strong>web 应用的离线版本</strong></p>
 </li>
@@ -7954,7 +7955,7 @@
 <li><strong>简洁、清晰</strong></li>
 <li>多页面应用</li>
 <li><strong>多设备兼容性</strong>：样式表允许针对多种不同类型的设备进行优化内容。</li>
-<li>减少开发成本与维护成本</li>
+<li><strong>减少开发成本与维护成本</strong></li>
 <li><strong>提高页面性能</strong></li>
 </ol>
 <h3 id="2-2-2-CSS-2-1，3-新特性">2.2.2. CSS 2.1，3 新特性</h3>
@@ -7968,11 +7969,11 @@
 </ol>
 <h3 id="2-2-3-选择器">2.2.3 选择器</h3>
 <ol>
-<li>
-<p><strong>id选择器</strong></p>
+<li><strong>id选择器</strong></li>
+</ol>
 <ul>
-<li>标有特定 id 的 HTML 元素指定特定的样式。</li>
-</ul>
+<li>
+<p>标有特定 id 的 HTML 元素指定特定的样式。</p>
 <ul>
 <li>下面的样式规则将应用于有<strong>属性id=“para1&quot;的元素</strong>
 <ul>
@@ -7982,6 +7983,8 @@
 </li>
 </ul>
 </li>
+</ul>
+<ol start="2">
 <li>
 <p><strong>class选择器</strong></p>
 <ul>
@@ -8147,6 +8150,7 @@
 </li>
 <li>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221128151322960.png" alt="image-20221128151322960"></p>
+<p>(上图最后：<code>:not()</code> 伪类的优先级将由其逗号分割的参数中<strong>优先级最高的选择器指定</strong>)</p>
 </li>
 <li>
 <p><strong>每个!important值：无穷大</strong></p>
@@ -8317,8 +8321,8 @@
 <ol>
 <li>CSS <strong>媒体查询</strong> ( 不同屏幕分辨率，不同 CSS 规则 )</li>
 <li>不使用绝对大小，而使用<strong>相对大小</strong>:<code>width:20%/auto</code>、<code>px/em</code>【em 相对于当前对象内文本的字体尺寸。如当前对文本的字体尺寸未被人为设置，则相对于浏览器的默认字体尺寸 16px。】</li>
-<li>流动布局</li>
-<li>图片自动缩放</li>
+<li><strong>流动布局</strong></li>
+<li>图片<strong>自动缩放</strong></li>
 </ol>
 </li>
 </ol>
@@ -8438,7 +8442,7 @@
 </ol>
 <h3 id="2-3-2-严格模式">2.3.2. 严格模式</h3>
 <ol>
-<li>脚本或函数头使用添加<code>use strict;</code>的目的是指代码在严格条件下执行。</li>
+<li><strong>脚本或函数头</strong>使用添加<code>use strict;</code>的目的是指代码在严格条件下执行。</li>
 <li><strong>为什么使用严格模式</strong>
 <ol>
 <li>消除 js 语法的一些<strong>不合理、不严谨的地方</strong>，减少怪异的行为</li>
@@ -8451,10 +8455,10 @@
 <ol>
 <li><strong>变量必须声明后使用</strong></li>
 <li><strong>函数参数不可以同名</strong></li>
-<li>不可以使用 with 语句</li>
+<li><strong>不可以使用 with 语句</strong></li>
 <li>不能<strong>对只读属性赋值</strong></li>
-<li>不能使用前缀 0 表示八进制</li>
-<li>不可以删除不可删除属性</li>
+<li>不能使用<strong>前缀 0 表示八进制</strong></li>
+<li><strong>不可以删除不可删除属性</strong></li>
 <li>不可以使用 delete prop 删除变量，只能删除属性 delete global[prop]</li>
 <li>eval 不会从它的外层作用域引入变量</li>
 <li>eval 和 arguments 不可以被重新赋值</li>
@@ -8620,8 +8624,8 @@ function fn() &#123;
   &#125;
   return bar
 &#125;
-var x = fn(),
-  b = 200
+var x = fn()
+b = 200
 x() //bar()
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   4. &gt; 作用域和执行上下文之间最大的区别是：</span><br><span class="line">      &gt;</span><br><span class="line">      &gt; **执行上下文在运行时确定，随时可能改变；作用域在定义时就确定，并且不会改变**。</span><br><span class="line"></span><br><span class="line">3. **闭包**</span><br><span class="line"></span><br><span class="line">   1. 是可以读取其他函数内部变量的函数</span><br><span class="line"></span><br><span class="line">   2. 由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成&quot;**定义在一个函数内部的函数**&quot;。</span><br><span class="line"></span><br><span class="line">   3. ```js</span><br><span class="line">      function f1()&#123;</span><br><span class="line">      　　var n=999;</span><br><span class="line">         // 匿名函数，本质也是闭包，nAdd是全局变量</span><br><span class="line">      　　nAdd=function()&#123;n+=1;&#125;</span><br><span class="line">         // f2 闭包函数</span><br><span class="line">         function f2()&#123;</span><br><span class="line">      　　　alert(n);</span><br><span class="line">      　　&#125;</span><br><span class="line">         return f2;</span><br><span class="line">      &#125;</span><br><span class="line">      // f2 被赋值被全局变量，因此 f2 一直在内存中，而 f2 依赖于 f1，于是 f1 也在内存中，而不会在调用结束后被垃圾回收机制回收。</span><br><span class="line">      var result=f1();</span><br><span class="line">      result(); // 999</span><br><span class="line">      nAdd();</span><br><span class="line">      result(); // 1000</span><br><span class="line">      </span><br><span class="line">      // 关于 this 的例子</span><br><span class="line">      // this 和调用时有关，而不是创建时</span><br><span class="line">      var name=&quot;XL&quot;;</span><br><span class="line">      var person=&#123;</span><br><span class="line">         name:&quot;xl&quot;,</span><br><span class="line">         showName:function()&#123;</span><br><span class="line">            console.log(this.name);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      person.showName();//  xl</span><br><span class="line">      //这里是 person 对象调用 showName 方法，很显然 this 关键字是指向 person 对象的，所以会输出 name</span><br><span class="line">      </span><br><span class="line">      var showNameA=person.showName;</span><br><span class="line">      showNameA();     //输出  XL</span><br><span class="line">      //这里将 person.showName 方法赋给 showNameA 变量，此时 showNameA 变量相当于 window 对象的一个属性，因此 showNameA() 执行的时候相当于 window.showNameA(),即 window 对象调用 showNameA 这个方法，所以 this 关键字指向 window</span><br></pre></td></tr></table></figure>
 
@@ -8676,15 +8680,15 @@ with (obj) &#123;
 	b = 4;
 	c = 5;
 &#125;
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">5. **this**：</span><br><span class="line"></span><br><span class="line">   **显式绑定**：通过call、apply、bind、new 确定指向</span><br><span class="line"></span><br><span class="line">   &gt; **call、apply、bind 都是用来改变 this 的指向的，第一个参数都是 this 要指向的对象。**</span><br><span class="line">   &gt;</span><br><span class="line">   &gt; - call 只是临时改变一次 this 指向，并立即执行函数。但后面参数形式是 `obj.myFun.call(db,&#x27;成都&#x27;,&#x27;上海&#x27;)；`</span><br><span class="line">   &gt; - apply 只是临时改变一次 this 指向，并立即执行函数。但后面参数是 `obj.myFun.apply(db,[&#x27;成都&#x27;,&#x27;上海&#x27;]); `</span><br><span class="line">   &gt; - bind 返回一个永久改变 this 指向的函数，不会立即执行函数，它的参数形式和 call 一样。</span><br><span class="line"></span><br><span class="line">   **隐式绑定**：根据调用关系确定this指向</span><br><span class="line"></span><br><span class="line">   - 在函数体中，非显式或隐式地简单调用函数时，在**严格**模式下，函数内的this会被绑定到 **undefined **上，在**非严格模式下则会被绑定到全局对象 window/global **上【例子1，2】</span><br><span class="line"></span><br><span class="line">   - ⼀般通过上下文对象调用函数时，函数体内的 this 会被绑定到该对象上【例子3，4】</span><br><span class="line"></span><br><span class="line">     ```js</span><br><span class="line">      // 例子1</span><br><span class="line">      function f1() &#123;</span><br><span class="line">       console.log(this);</span><br><span class="line">      &#125;</span><br><span class="line">      function f2() &#123;</span><br><span class="line">       &quot;use strict&quot;;</span><br><span class="line">       console.log(this);</span><br><span class="line">      &#125;</span><br><span class="line">      f1(); // window</span><br><span class="line">      f2(); // undefined</span><br><span class="line">     </span><br><span class="line">     // 例子2</span><br><span class="line">     var foo = &#123;</span><br><span class="line">      bar: 10,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      console.log(this)</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     var fn1 = foo.fn</span><br><span class="line">     fn1()// window，因为是用window来调用的</span><br><span class="line">     </span><br><span class="line">     // 例子3</span><br><span class="line">     var foo = &#123;</span><br><span class="line">      bar: 10,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      console.log(this)</span><br><span class="line">      console.log(this.bar)</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     foo.fn()// &#123;bar:10,fn:f&#125;，这里是由foo调用</span><br><span class="line">     </span><br><span class="line">     // 例子4</span><br><span class="line">     var o1 = &#123;</span><br><span class="line">      text: &#x27;o1&#x27;,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      	return this.text</span><br><span class="line">      &#125; &#125;</span><br><span class="line">     var o2 = &#123;</span><br><span class="line">      text: &#x27;o2&#x27;,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      	return o1.fn()</span><br><span class="line">      &#125; &#125;</span><br><span class="line">     var o3 = &#123;</span><br><span class="line">      text: &#x27;o3&#x27;,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      var fn = o1.fn</span><br><span class="line">      	return fn()</span><br><span class="line">      &#125; &#125;</span><br><span class="line">     console.log(o1.fn())// o1，o1调用</span><br><span class="line">     console.log(o2.fn())// o1，在o2中o1进行调用，因此o1中的this指向o1</span><br><span class="line">     console.log(o3.fn())// undefined，return fn()，直接调用函数，不指名this，则this默认指向window，即fn就是由window来调用的，而window中没有text属性，因此是undefined</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">5. **this**：</span><br><span class="line"></span><br><span class="line">   **显式绑定**：通过call、apply、bind、new 确定指向</span><br><span class="line"></span><br><span class="line">   &gt; **call、apply、bind 都是用来改变 this 的指向的，第一个参数都是 this 要指向的对象。**</span><br><span class="line">   &gt;</span><br><span class="line">   &gt; - call 只是临时改变一次 this 指向，并立即执行函数。但后面参数形式是 `obj.myFun.call(db,&#x27;成都&#x27;,&#x27;上海&#x27;)；`</span><br><span class="line">   &gt; - apply 只是临时改变一次 this 指向，并立即执行函数。但后面参数是 `obj.myFun.apply(db,[&#x27;成都&#x27;,&#x27;上海&#x27;]); `</span><br><span class="line">   &gt; - bind 返回一个永久改变 this 指向的函数，不会立即执行函数，它的参数形式和 call 一样。</span><br><span class="line"></span><br><span class="line">   **隐式绑定**：根据调用关系确定this指向</span><br><span class="line"></span><br><span class="line">   - 在函数体中，非显式或隐式地简单调用函数时，在**严格**模式下，函数内的this会被绑定到 **undefined **上，在**非严格模式下则会被绑定到全局对象 window **上【例子1，2】</span><br><span class="line"></span><br><span class="line">   - ⼀般通过上下文对象调用函数时，函数体内的 this 会被绑定到该对象上【例子3，4】</span><br><span class="line"></span><br><span class="line">     ```js</span><br><span class="line">      // 例子1</span><br><span class="line">      function f1() &#123;</span><br><span class="line">       console.log(this);</span><br><span class="line">      &#125;</span><br><span class="line">      function f2() &#123;</span><br><span class="line">       &quot;use strict&quot;;</span><br><span class="line">       console.log(this);</span><br><span class="line">      &#125;</span><br><span class="line">      f1(); // window</span><br><span class="line">      f2(); // undefined</span><br><span class="line">     </span><br><span class="line">     // 例子2</span><br><span class="line">     var foo = &#123;</span><br><span class="line">      bar: 10,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      console.log(this)</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     var fn1 = foo.fn</span><br><span class="line">     fn1()// window，因为是用window来调用的</span><br><span class="line">     </span><br><span class="line">     // 例子3</span><br><span class="line">     var foo = &#123;</span><br><span class="line">      bar: 10,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      console.log(this)</span><br><span class="line">      console.log(this.bar)</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     foo.fn()// &#123;bar:10,fn:f&#125;，这里是由foo调用</span><br><span class="line">     </span><br><span class="line">     // 例子4</span><br><span class="line">     var o1 = &#123;</span><br><span class="line">      text: &#x27;o1&#x27;,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      	return this.text</span><br><span class="line">      &#125; &#125;</span><br><span class="line">     var o2 = &#123;</span><br><span class="line">      text: &#x27;o2&#x27;,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      	return o1.fn()</span><br><span class="line">      &#125; &#125;</span><br><span class="line">     var o3 = &#123;</span><br><span class="line">      text: &#x27;o3&#x27;,</span><br><span class="line">      fn: function() &#123;</span><br><span class="line">      var fn = o1.fn</span><br><span class="line">      	return fn()</span><br><span class="line">      &#125; &#125;</span><br><span class="line">     console.log(o1.fn())// o1，o1调用</span><br><span class="line">     console.log(o2.fn())// o1，在o2中o1进行调用，因此o1中的this指向o1</span><br><span class="line">     console.log(o3.fn())// undefined，return fn()，直接调用函数，不指名this，则this默认指向window，即fn就是由window来调用的，而window中没有text属性，因此是undefined</span><br></pre></td></tr></table></figure>
 
 </code></pre>
 </li>
 </ol>
 <ul>
 <li>
-<p>⼀般通过 <strong>call/apply/bind 方法显示调用函数</strong>时，函数体内的 this 会被绑定到<strong>指定参数的对象</strong>上。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = &#123;</span><br><span class="line"> <span class="attr">name</span>: <span class="string">&#x27;Tim&#x27;</span>,</span><br><span class="line"> <span class="attr">logName</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> bar = &#123;</span><br><span class="line"> <span class="attr">name</span>: <span class="string">&#x27;mike&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">logName</span>.<span class="title function_">call</span>(bar))<span class="comment">// mike</span></span><br></pre></td></tr></table></figure>
+<p>通过 <strong>call/apply/bind 方法显示调用函数</strong>时，函数体内的 this 会被绑定到<strong>指定参数的对象</strong>上。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = &#123;</span><br><span class="line"> <span class="attr">name</span>: <span class="string">&#x27;Tim&#x27;</span>,</span><br><span class="line"> <span class="attr">logName</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> bar = &#123;</span><br><span class="line"> <span class="attr">name</span>: <span class="string">&#x27;mike&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">foo.<span class="property">logName</span>.<span class="title function_">call</span>(bar)<span class="comment">// mike</span></span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p>⼀般使用 new 方法调用构造函数时，<strong>构造函数内的 this 会被绑定到新创建的对象上</strong></p>
@@ -8692,14 +8696,14 @@ with (obj) &#123;
 </li>
 <li>
 <p>箭头函数<strong>不适用上面的规则</strong>，而是根据<strong>外层（函数或者全局）上下文</strong>来决定 this 的指向，始终指向外部对象，因为箭头函数没有<code>this</code>，因此它自身不能进行<code>new</code>实例化，同时也不能使用<code>call, apply, bind</code>等方法来改变<code>this</code>的指向</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 类似上面的例子2</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123; </span><br><span class="line"> <span class="attr">fn</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123; </span><br><span class="line">     (<span class="keyword">function</span>(<span class="params"></span>) &#123; </span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">     &#125;)()<span class="comment">// 匿名函数立即执行</span></span><br><span class="line"> &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="title function_">fn</span>())<span class="comment">// window</span></span><br><span class="line"><span class="comment">// 取决于外层上下文，箭头函数位于foo内，那么this指向foo</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123; </span><br><span class="line"> <span class="attr">fn</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123; </span><br><span class="line">     (<span class="function">() =&gt;</span> &#123; </span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">     &#125;)()<span class="comment">// 箭头函数立即执行</span></span><br><span class="line"> &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="title function_">fn</span>())<span class="comment">// &#123;fn:f&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 匿名类似上面的例子2</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123; </span><br><span class="line"> <span class="attr">fn</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123; </span><br><span class="line">     (<span class="keyword">function</span>(<span class="params"></span>) &#123; </span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">     &#125;)()<span class="comment">// 匿名函数直接执行，因此是window</span></span><br><span class="line"> &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="title function_">fn</span>())<span class="comment">// window</span></span><br><span class="line"><span class="comment">// 取决于外层上下文，箭头函数位于foo内，那么this指向foo</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123; </span><br><span class="line"> <span class="attr">fn</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123; </span><br><span class="line">     (<span class="function">() =&gt;</span> &#123; </span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">     &#125;)()<span class="comment">// 箭头函数立即执行</span></span><br><span class="line"> &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="title function_">fn</span>())<span class="comment">// &#123;fn:f&#125;</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line"> <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>)</span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line"> <span class="attr">a</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line"> <span class="attr">a</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo.<span class="title function_">call</span>(obj1)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar.<span class="title function_">call</span>(obj2))<span class="comment">// 1 undefined</span></span><br></pre></td></tr></table></figure>
-<p>foo.call(obj1) 使得使得 foo 中的 this 指向 obj1【因此箭头函数的 this 指向 obj1】，并立即执行 foo，因此 foo.call(obj1) 会返回一个<strong>箭头函数</strong>即 a =&gt; {console.log(this.a)}，并保存在 bar 中，箭头函数直接对其修改 this 指向，因此 bar.call(obj2) 执行时，this 仍然是 指向 obj1。另外 call 不返回函数，因此 console.log(bar.call(obj2)) 输出 undefind</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>)</span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line"> <span class="attr">a</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line"> <span class="attr">a</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo.<span class="title function_">call</span>(obj1)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar.<span class="title function_">call</span>(obj2))<span class="comment">// 1 undefined</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ol>
+<p>foo.call(obj1) 使得使得 foo 中的 this 指向 obj1【因此箭头函数的 this 指向 obj1】，并立即执行 foo，因此 foo.call(obj1) 会返回一个<strong>箭头函数</strong>即 a =&gt; {console.log(this.a)}，并保存在 bar 中，而箭头函数不能直接对其修改 this 指向，因此 bar.call(obj2) 执行时，this 仍然是 指向 obj1。另外 call 不返回函数，因此 console.log(bar.call(obj2)) 输出 undefind</p>
 <p>ref</p>
 <ol>
 <li><a href = "https://www.cnblogs.com/fundebug/p/10535230.html">作用域、作用域链</a></li>
@@ -8919,7 +8923,7 @@ with (obj) &#123;
 <li>history对象包含用（在浏览器窗口中）访问过的 URL</li>
 </ul>
 <h2 id="不考——2-5-Ajax">不考——2.5. Ajax</h2>
-<h3 id="2-5-1-RIA-Rich-Internet-Applications-丰富互联网应用程序">2.5.1. RIA Rich Internet Applications 丰富互联网应用程序</h3>
+<h3 id="2-5-1-RIA-Rich-Internet-Applications-富互联网应用">2.5.1. RIA Rich Internet Applications 富互联网应用</h3>
 <ol>
 <li>是一种具有近似于传统桌面应用软件系统<strong>功能和特性</strong>的网络应用系统。</li>
 <li>RIA 系统最大的<strong>特点</strong>是将大部分处理任务都从<strong>用户界面端移植到客户端</strong>，仅保留一些必要数据与服务器端进行信息交互。</li>
@@ -9106,7 +9110,7 @@ with (obj) &#123;
 <h1>3. 服务器端</h1>
 <h2 id="3-1-Node-js-重要">3.1. Node.js 重要</h2>
 <ol>
-<li>Node.js  <strong>不是⼀个web框架，也不是⼀种语言，而是一个运行时环境（类比 JVM）</strong></li>
+<li>Node.js <strong>不是⼀个web框架，也不是⼀种语言，而是一个运行时环境（类比 JVM）</strong></li>
 <li>Node.js 使用<strong>事件驱动</strong>的<strong>非阻塞异步 I/O 模型</strong>，在单⼀进程中可以处理成千上万的<strong>并发</strong>连接，非常适合处理<strong>高并发</strong>。Node所针对的应用程序有⼀个专门的简称：<strong>DIRT</strong>，表示<strong>数据密集型实时</strong>（data-intensive real-time）<strong>程序</strong>【但都对 cpu 使用少】</li>
 </ol>
 <h3 id="3-1-1-特点，应用场景">3.1.1. 特点，应用场景</h3>
@@ -9216,7 +9220,7 @@ with (obj) &#123;
 <ol>
 <li>ES6 模块，简称 ESM Node.js</li>
 <li>CommonJS 模块，简称 CJS</li>
-<li><strong>CommonJS 模块是 Node.js 专用的</strong>，与 ES6 模块不兼容。而<strong>ES6模块化在浏览器和node.js中都可以用。</strong>】</li>
+<li><strong>CommonJS 模块是 Node.js 专用的</strong>，与 ES6 模块不兼容。而<strong>ES6模块化在浏览器和node.js中都可以用。</strong></li>
 </ol>
 <h3 id="3-2-1-差异">3.2.1. <strong>差异</strong></h3>
 <ol>
@@ -9231,10 +9235,10 @@ with (obj) &#123;
 <p><strong>机制</strong>：</p>
 <ul>
 <li>
-<p><strong>输出</strong>：CommonJS 模块<strong>输出的是一个值的拷贝</strong>，ES6 模块输出的是<strong>值的引用</strong>。</p>
+<p><strong>输出</strong>：CommonJS 模块输出的是一个<strong>值的拷贝</strong>，ES6 模块输出的是<strong>值的引用</strong>。</p>
 </li>
 <li>
-<p><strong>加载</strong>：CommonJS 模块是<strong>运行时加载</strong>，ES6 模块是<strong>编译时输出接口</strong>。</p>
+<p><strong>加载</strong>：CommonJS 模块是<strong>同步加载</strong>，ES6 模块是<strong>静态解析</strong>。</p>
 <ul>
 <li>原因：CommonJS 加载的是一个<strong>对象</strong>（即module.exports属性），该对象只有在脚本运行完才会生成。而 <strong>ES6 模块不是对象</strong>，它的对外接口只是一种<strong>静态定义</strong>，在代码<strong>静态解析阶段就会生成</strong>。</li>
 </ul>
@@ -9273,7 +9277,7 @@ console.log(counter); // 4，增加，因为是值的引用
 </ul>
 </li>
 </ol>
-<h2 id="3-2-2-循环加载">3.2.2. 循环加载</h2>
+<h3 id="3-2-2-循环加载">3.2.2. 循环加载</h3>
 <p>“循环加载”（circular dependency）指的是，<code>a</code>脚本的执行依赖<code>b</code>脚本，而<code>b</code>脚本的执行又依赖<code>a</code>脚本。</p>
 <p>对于 JavaScript 语言来说，目前最常见的两种模块格式 CommonJS 和 ES6，处理“循环加载”的方法是不一样的，返回的结果也不一样。</p>
 <ul>
@@ -9366,7 +9370,7 @@ console.log(counter); // 4，增加，因为是值的引用
 <li>html：标准兼容、去除空白符、结构尽量简单、做到浏览器和移动端的兼容</li>
 <li><strong>针对 HTTP1.x 的优化</strong>
 <ol>
-<li>利用 http 管道</li>
+<li>利用 <strong>http 管道</strong></li>
 <li>域名分片：将资源分散到多个来源</li>
 <li>打包资源以减少 HTTP 请求</li>
 <li>父文档中嵌入小资源：从而减少请求数量</li>
@@ -9376,7 +9380,7 @@ console.log(counter); // 4，增加，因为是值的引用
 <ol>
 <li>少发数据，减少请求，减少传输数据量和不必要网络延迟，调整资源供给</li>
 <li>每个来源一个链接 ( 多个链接会抵消新协议中首部压缩和请求优先级的作用，域名分区在 HTTP2 下是反作用的 )</li>
-<li>去掉不必要资源资源打包 (资源打包不利于缓存，单个文件比较大 )</li>
+<li>去掉不必要资源打包 (资源打包不利于缓存，单个文件比较大 )</li>
 <li>利用服务器推送 ( 充分使用缓存的机制，即还没有收到浏览器的请求，服务器就把各种资源推送给浏览器；比如，浏览器只请求了<code>index.html</code>，但是服务器把<code>index.html</code>、<code>style.css</code>、<code>example.png</code>全部发送给浏览器。这样的话，只需要一轮 HTTP 通信，浏览器就得到了全部资源，提高了性能。 )</li>
 </ol>
 </li>
@@ -9397,7 +9401,7 @@ console.log(counter); // 4，增加，因为是值的引用
 </ul>
 </li>
 <li>
-<p><strong>权限控制</strong>(Access/Permission Control)：将可执行的<strong>操作</strong>定义为<strong>权限列表</strong>，然后判断操作<strong>是否允许/禁止</strong>。如通过 web 后端服务，来控制接⼝访问，允许或拒绝访问请求</p>
+<p><strong>权限控制</strong>(Access/Permission Control)：将可执行的<strong>操作</strong>定义为<strong>权限列表</strong>，然后判断操作<strong>是否允许/禁止</strong>。如通过 web 后端服务，来控制接口访问，允许或拒绝访问请求</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230223192856091.png" alt="image-20230223192856091"></p>
 </li>
 </ul>
@@ -9437,6 +9441,32 @@ console.log(counter); // 4，增加，因为是值的引用
 <h2 id="6-1-基本概念-所有课件中涉及的，不限于总结">6.1. 基本概念 ( 所有课件中涉及的，不限于总结 )</h2>
 <h2 id="6-2-简答题">6.2. 简答题</h2>
 <h2 id="6-3-问答题">6.3. 问答题</h2>
+<h1>7. 2023 web回忆</h1>
+<h2 id="7-1-基本概念">7.1. 基本概念</h2>
+<ul>
+<li>URN</li>
+<li>CSSOM</li>
+<li>SVG</li>
+<li>CANVAS</li>
+<li>render tree</li>
+<li>WebAssembly</li>
+</ul>
+<h2 id="7-2-简答题">7.2. 简答题</h2>
+<ul>
+<li>web3.0 特点</li>
+<li>箭头函数和普通函数的区别</li>
+<li>NodeJs高并发原因</li>
+<li>js 数据类型</li>
+<li>前端智能的理解，前端智能的典型应用</li>
+<li>闭包的定义，优缺点，应用场景</li>
+<li>状态码含义：200、301、303，404，500</li>
+</ul>
+<h2 id="7-3-问答题">7.3. 问答题</h2>
+<ul>
+<li>列举前端流行框架，什么是 Vanilla JS，为什么要推广 Vanilla JS</li>
+<li>http1——http3的发展，各自特点，http3 解决了前面什么问题</li>
+<li>前端鉴权 4 种方式，优缺点（20 分）</li>
+</ul>
 ]]></content>
       <categories>
         <category>web前端</category>
