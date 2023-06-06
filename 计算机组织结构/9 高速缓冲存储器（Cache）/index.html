@@ -144,11 +144,14 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211028142420549.png" alt="image-20211028142420549"></p>
 <p>如果大部分时间都是未命中，那么使用cache后反而时间会更慢，而事实上cache很好的处理了内存墙问题，因此大部分情况应当是命中的</p>
 <p>这是由于程序访问的局部性原理，<strong>即CPU总是会频繁的访问相同位置或者是相邻位置的内容</strong>：</p>
-<ul>
-<li>时间局部性：在相对短时间内，重复访问相同位置的信息</li>
-<li>空间局部性：在相对短时间内，会访问相邻存储位置的数据
-<ul>
-<li>顺序局部性：相邻位置的按顺序的，如访问数组</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>时间局部性：在相对短时间内，重复访问相同位置的信息</p>
+</li>
+<li class="lvl-2">
+<p>空间局部性：在相对短时间内，会访问相邻存储位置的数据</p>
+<ul class="lvl-2">
+<li class="lvl-4">顺序局部性：相邻位置的按顺序的，如访问数组</li>
 </ul>
 </li>
 </ul>
@@ -166,9 +169,13 @@ var _hmt = _hmt || [];
 <h2 id="一、cache容量">一、cache容量</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211030133602704.png" alt="image-20211030133602704"></p>
 <p>cache容量不是越大越好，也不是越小越好。</p>
-<ul>
-<li>因为内存是以地址来寻找的，所以直接解码地址就能找到要的信息，而cache则是通过遍历来找的（遍历块的标号），所以如果cache很大的话，会导致遍历检查的时间增加，增大了T<sub>c</sub>。</li>
-<li>如果cache很小的话，则可能出现从内存中复制的新的块把原来cache中的块覆盖后，又需要原来的块中的内容，因此又需要从内存中复制到cache，浪费时间</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>因为内存是以地址来寻找的，所以直接解码地址就能找到要的信息，而cache则是通过遍历来找的（遍历块的标号），所以如果cache很大的话，会导致遍历检查的时间增加，增大了T<sub>c</sub>。</p>
+</li>
+<li class="lvl-2">
+<p>如果cache很小的话，则可能出现从内存中复制的新的块把原来cache中的块覆盖后，又需要原来的块中的内容，因此又需要从内存中复制到cache，浪费时间</p>
+</li>
 </ul>
 <h2 id="二、映射功能">二、映射功能</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211030134508748.png" alt="image-20211030134508748"></p>
@@ -184,32 +191,56 @@ var _hmt = _hmt || [];
 <p>因此只要比较块号的前面$log_2M-log_2C$位即可（M是块的数量，C是cache中行的数量）<strong>相当于把C个块当作一个组，只要记录这个组的地址即可</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105091937397.png" alt="image-20211105091937397"></p>
 <p>再看主存中一个具体的字节，它在主存的地址可以被分成三个部分：</p>
-<ul>
-<li>块内地址（用于块内寻址）</li>
-<li>块映射到cache的行号</li>
-<li>若干个块分为一个组对应的标号，用于区分映射到相同行的不同块，记录为cache标号</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>块内地址（用于块内寻址）</p>
+</li>
+<li class="lvl-2">
+<p>块映射到cache的行号</p>
+</li>
+<li class="lvl-2">
+<p>若干个块分为一个组对应的标号，用于区分映射到相同行的不同块，记录为cache标号</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105092857092.png" alt="image-20211105092857092"></p>
-<ul>
-<li><strong>优点</strong>：因为块映射到cache中的行的位置是固定的，因此检查时，只要去找这一行中有没有要的数据即可，而不必全部搜索一遍，<strong>所以T<sub>c</sub>是固定的，不会因cache容量增大而使得T<sub>c</sub>变大</strong></li>
-<li><strong>缺点</strong>：抖动现象：如果要重复访问的两个块刚好映射到同一行，就会降低命中率，<strong>当两个块比较相邻（才可能被重复访问）时并被映射到同一行，说明cache比较小，即行数比较少</strong>时会出现这种情况。</li>
-<li>因此<strong>直接映射适合大容量cache使用</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>优点</strong>：因为块映射到cache中的行的位置是固定的，因此检查时，只要去找这一行中有没有要的数据即可，而不必全部搜索一遍，<strong>所以T<sub>c</sub>是固定的，不会因cache容量增大而使得T<sub>c</sub>变大</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>缺点</strong>：抖动现象：如果要重复访问的两个块刚好映射到同一行，就会降低命中率，<strong>当两个块比较相邻（才可能被重复访问）时并被映射到同一行，说明cache比较小，即行数比较少</strong>时会出现这种情况。</p>
+</li>
+<li class="lvl-2">
+<p>因此<strong>直接映射适合大容量cache使用</strong></p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105093628480.png" alt="image-20211105093628480"></p>
 <ol>
-<li>根据内存地址的块地址去找cache对应行</li>
-<li>再比较cache标记和主存地址的块标记是否相等</li>
-<li>相等就命中，命中就再根据主存地址的块内地址到cache取对应字节</li>
+<li class="lvl-3">
+<p>根据内存地址的块地址去找cache对应行</p>
+</li>
+<li class="lvl-3">
+<p>再比较cache标记和主存地址的块标记是否相等</p>
+</li>
+<li class="lvl-3">
+<p>相等就命中，命中就再根据主存地址的块内地址到cache取对应字节</p>
+</li>
 </ol>
 <h3 id="2-关联映射">2.关联映射</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105094020890.png" alt="image-20211105094020890"></p>
 <p>关联映射中的标记<strong>必须是块号</strong>，所以长度只能是$log_2M$，不像直接映射中有规律，可以缩短。<strong>关联映射是可以按一定规则放的，只要有空位就能放</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105094456359.png" alt="image-20211105094456359"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105094539163.png" alt="image-20211105094539163"></p>
-<ul>
-<li><strong>优点</strong>：在cache比较小时<strong>不会出现抖动</strong>，想加载哪些块都可，不会出现反复加载，除非cache行数不够了</li>
-<li><strong>缺点</strong>：怎么规定放块实现比较复杂，同时检查时要<strong>平均检查$\frac{1}{2}$的cache，在cache很大时开销太大</strong></li>
-<li>因此<strong>关联映射适合容量小的cache</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>优点</strong>：在cache比较小时<strong>不会出现抖动</strong>，想加载哪些块都可，不会出现反复加载，除非cache行数不够了</p>
+</li>
+<li class="lvl-2">
+<p><strong>缺点</strong>：怎么规定放块实现比较复杂，同时检查时要<strong>平均检查$\frac{1}{2}$的cache，在cache很大时开销太大</strong></p>
+</li>
+<li class="lvl-2">
+<p>因此<strong>关联映射适合容量小的cache</strong></p>
+</li>
 </ul>
 <h3 id="3-组关联映射（介于前面两种方法之间）">3.组关联映射（介于前面两种方法之间）</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211105100521745.png" alt="image-20211105100521745"></p>

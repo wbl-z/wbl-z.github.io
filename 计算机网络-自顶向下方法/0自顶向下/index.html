@@ -145,8 +145,12 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>网络层的工作方式有两种</p>
 <ol>
-<li>传统方式：<strong>IP协议、路由协议</strong>。网络层<strong>基本功能</strong>是路由和转发，由路由协议交换路由信息，路由算法算出路由表，之后IP协议实体根据到来的分组的目标ip查路由表，找到合适的表项后，从相应的端口转发<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220307174255235.png" alt="image-20220307174255235">传统的方式不能增加新功能，只能按照写好的协议运行</li>
-<li>SDN（软件定义网络Software Defined Network）方式：<strong>数据平面（交换机）和控制平面（网络操作系统）</strong>。不仅仅根据目标IP，还有很多其他字段。可编程，可以增加新功能</li>
+<li class="lvl-3">
+<p>传统方式：<strong>IP协议、路由协议</strong>。网络层<strong>基本功能</strong>是路由和转发，由路由协议交换路由信息，路由算法算出路由表，之后IP协议实体根据到来的分组的目标ip查路由表，找到合适的表项后，从相应的端口转发<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220307174255235.png" alt="image-20220307174255235">传统的方式不能增加新功能，只能按照写好的协议运行</p>
+</li>
+<li class="lvl-3">
+<p>SDN（软件定义网络Software Defined Network）方式：<strong>数据平面（交换机）和控制平面（网络操作系统）</strong>。不仅仅根据目标IP，还有很多其他字段。可编程，可以增加新功能</p>
+</li>
 </ol>
 <p><strong>数据链路层</strong>提供的点到点（point to point <strong>P2P</strong>）的<strong>以帧为单位</strong>的服务，即相邻的网络设备之间的连接，如上图，端到端的服务中间需要经过很多个点，两两之间就是点到点的服务</p>
 <p><strong>物理层</strong>把数字信号变成物理信号，借助物理介质medium（网线，光缆，电话线等）传播。同样的也要处理物理信号到数字信号的转换</p>

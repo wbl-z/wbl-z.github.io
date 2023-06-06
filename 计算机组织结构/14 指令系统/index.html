@@ -139,10 +139,16 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212093423565.png" alt="image-20211212093423565"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212094308250.png" alt="image-20211212094308250"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212094720725.png" alt="image-20211212094720725"></p>
-<ul>
-<li>寄存器可以支持没有嵌套的函数调用，如果要多层调用，多个寄存器会用来存放返回地址</li>
-<li>每一个过程开始的位置是空出来的，空出来存放调用它的程序需要返回的位置，可以多层调用，但不能支持如递归调用，重复调用一个过程。</li>
-<li>使用栈可以解决上述问题</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>寄存器可以支持没有嵌套的函数调用，如果要多层调用，多个寄存器会用来存放返回地址</p>
+</li>
+<li class="lvl-2">
+<p>每一个过程开始的位置是空出来的，空出来存放调用它的程序需要返回的位置，可以多层调用，但不能支持如递归调用，重复调用一个过程。</p>
+</li>
+<li class="lvl-2">
+<p>使用栈可以解决上述问题</p>
+</li>
 </ul>
 <h2 id="操作数">操作数</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212095506376.png" alt="image-20211212095506376"></p>
@@ -191,11 +197,19 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212163843782.png" alt="image-20211212163843782"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212163935559.png" alt="image-20211212163935559"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212164209420.png" alt="image-20211212164209420"></p>
-<ul>
-<li>中缀表达式转后缀表达式，<strong>对于操作数，直接输出</strong>，而对于<strong>运算符</strong>，则<strong>看这个运算符和栈顶的运算符的优先级</strong>，如果这个运算符比栈顶运算符优先级<strong>高</strong>，那么把这个运算符<strong>压栈</strong>，反之，如果<strong>小于等于</strong>，则<strong>弹出栈顶运算符</strong>，然后再比较下一个运算符</li>
-<li><strong>对于左括号，直接压入</strong>，但括号的优先级比其他运算符低，所以新的+遇到栈顶的括号，+优先级比括号高，直接压入</li>
-<li><strong>对于右括号，则把运算符弹出</strong>，直到遇到左括号，把左括号弹出就结束，即左右括号被消除了</li>
-<li><strong>当输入为空，则把栈中的运算符逐个弹出</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>中缀表达式转后缀表达式，<strong>对于操作数，直接输出</strong>，而对于<strong>运算符</strong>，则<strong>看这个运算符和栈顶的运算符的优先级</strong>，如果这个运算符比栈顶运算符优先级<strong>高</strong>，那么把这个运算符<strong>压栈</strong>，反之，如果<strong>小于等于</strong>，则<strong>弹出栈顶运算符</strong>，然后再比较下一个运算符</p>
+</li>
+<li class="lvl-2">
+<p><strong>对于左括号，直接压入</strong>，但括号的优先级比其他运算符低，所以新的+遇到栈顶的括号，+优先级比括号高，直接压入</p>
+</li>
+<li class="lvl-2">
+<p><strong>对于右括号，则把运算符弹出</strong>，直到遇到左括号，把左括号弹出就结束，即左右括号被消除了</p>
+</li>
+<li class="lvl-2">
+<p><strong>当输入为空，则把栈中的运算符逐个弹出</strong></p>
+</li>
 </ul>
 <h2 id="指令格式">指令格式</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212170223424.png" alt="image-20211212170223424"></p>

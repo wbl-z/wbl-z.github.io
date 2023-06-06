@@ -140,31 +140,31 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212195251775.png" alt="image-20221212195251775"></p>
 <p>下面的转化成了上面的形式</p>
 <p>上面左递归的 expr 和 expr : (INT|ID)(*expr  | +expr )* 这样的非左递归的形式是等价的，也即上面改写后的形式。但是 <code>Antlr4</code>增加了：</p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>expr 中的 int _p 就是定义了这 expr 的优先级（<code>Antlr4</code>规定的是写在上面的优先级最高，因此 <code>*</code> 的优先级最高是 5），在展开 expr 的时候都要带上优先级，比如上面写的 expr[5]，</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>{4 &gt;= $p}? 就是 if 判断，如果传入的优先级比 4 小，那么就用当前的展开</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201104139.png" alt="image-20221212201104139"></p>
 </li>
-<li>
+<li class="lvl-2">
 <p>在 exp[4] 处发现不能展开，因此就回到上层，展开成下面的样子</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20230221153924579.png" alt="image-20230221153924579"></p>
 <p><strong>优先级控制了是在这一层展开还是回到上一层去展开</strong>，比如这里的 4，就不能满足 + 的条件，因此不能在这一层展开，会回到上一层，也即 exp[4] 所在是层进行展开 2+3，这样就实现了加法的左结合。【()*就相当于 while 循环，当循环中的都不满足，那就结束本层的递归调用回到上一层】</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212203534294.png" alt="image-20221212203534294"></p>
 </li>
-<li>
+<li class="lvl-2">
 <p>因此<strong>关键</strong>就是展开后<strong>下一层递归传入的优先级</strong>是多少，在<strong>本层循环中的条件设置成多少</strong></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201611414.png" alt="image-20221212201611414"></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212201743471.png" alt="image-20221212201743471"></p>
 </li>
 </ul>
@@ -178,20 +178,24 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212203711516.png" alt="image-20221212203711516"></p>
 <p>对于 ^ 判断条件是 3，传入到下一层递归的参数也是 3，因此可以连续在下一层展开 ^，也即<strong>实现右结合</strong>，<strong>没有优先级上升</strong></p>
 <p><strong>总结：</strong></p>
-<ul>
-<li><strong>处理左结合运算符，采用优先级上升</strong></li>
-<li><strong>处理右结合运算符，采用优先级不变</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>处理左结合运算符，采用优先级上升</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>处理右结合运算符，采用优先级不变</strong></p>
+</li>
 </ul>
 <h2 id="Antlr-4-处理错误报告与恢复">Antlr 4 处理错误报告与恢复</h2>
 <p>原则：报错、<strong>恢复</strong>、继续分析</p>
 <p>在当前词法单元出错时：</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204344328.png" alt="image-20221212204344328"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>单词法符号移除：</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204556589.png" alt="image-20221212204556589"></p>
 </li>
-<li>
+<li class="lvl-2">
 <p>单词法符号补全</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212204631678.png" alt="image-20221212204631678"></p>
 </li>
@@ -299,9 +303,9 @@ var _hmt = _hmt || [];
       </a>
     
     
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.2%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E7%9A%84%20LL(1)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E7%AC%A6%E5%8F%B7%E8%A1%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">4.2 语法分析——递归下降的 LL(1) 语法分析器</div>
+        <div class="article-nav-title">5 语义分析——符号表</div>
       </a>
     
   </nav>

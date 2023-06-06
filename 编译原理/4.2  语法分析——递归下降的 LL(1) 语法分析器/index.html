@@ -136,11 +136,19 @@ var _hmt = _hmt || [];
 <p>图中的圈就是文法的表达能力</p>
 <p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
 <p>LL(1) 语法分析器<strong>特点</strong>：</p>
-<ul>
-<li>自顶向下的</li>
-<li>递归下降的【可以递归下降的实现并不是一定要这样实现，<em>所有的递归都能改写成非递归形式</em>】</li>
-<li>基于预测分析表的</li>
-<li>适用于LL(1) 文法的</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>自顶向下的</p>
+</li>
+<li class="lvl-2">
+<p>递归下降的【可以递归下降的实现并不是一定要这样实现，<em>所有的递归都能改写成非递归形式</em>】</p>
+</li>
+<li class="lvl-2">
+<p>基于预测分析表的</p>
+</li>
+<li class="lvl-2">
+<p>适用于LL(1) 文法的</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208215627622.png" alt="image-20221208215627622"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221208215632808.png" alt="image-20221208215632808"></p>
@@ -166,11 +174,11 @@ var _hmt = _hmt || [];
 <p>LL(1)在预测展开时要选择哪个产生式，<strong>要考虑：</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221209112145823.png" alt="image-20221209112145823"></p>
 <ol>
-<li>
+<li class="lvl-3">
 <p>【<strong>FIRST</strong>】使用的产生式后续的<strong>所有展开</strong>中，最左边的非终结符有没有我们想要的。</p>
 <p>如对于 prog 的展开是选择 func_call 还是 decl，根据第一个非终结符是不是 int 即可判断</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>【<strong>FOLLOW</strong>】如果想展开的非终结符，它有个备选分支<strong>是 ε，那就要考虑这个非终结符展成 ε 后</strong>，它<strong>后面的那个字符</strong>有没有我们想要的</p>
 <p>如 int x; 在 optional_init 展开成 ε，那么就要看 optional_init  后面的 ; 在输入的字符串中有没有出现</p>
 </li>
@@ -312,19 +320,19 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/" class="article-nav-link">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/3%20%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%90%86%E8%AE%BA%E5%92%8C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            4.3 语法分析——Adaptive LL(∗) 语法分析算法
+            3 自动机理论和词法分析器生成器
           
         </div>
       </a>
     
     
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.1%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/" class="article-nav-link">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">6.1 语义分析——类型系统和类型检查</div>
+        <div class="article-nav-title">4.1 语法分析——ANTLR 4 语法分析器</div>
       </a>
     
   </nav>

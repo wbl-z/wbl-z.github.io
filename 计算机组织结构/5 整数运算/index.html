@@ -162,8 +162,12 @@ var _hmt = _hmt || [];
 <p><strong>两个数加的补码是两个数补码的和</strong></p>
 <p>溢出的两种判定：</p>
 <ol>
-<li>加数符号相同而和不同（若符号不同不可能溢出）</li>
-<li>Cn异或Cn-1</li>
+<li class="lvl-3">
+<p>加数符号相同而和不同（若符号不同不可能溢出）</p>
+</li>
+<li class="lvl-3">
+<p>Cn异或Cn-1</p>
+</li>
 </ol>
 <h2 id="减法">减法</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003094430337.png" alt="image-20211003094430337"></p>
@@ -210,32 +214,41 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003110958423.png" alt="image-20211003110958423"></p>
 <p>判断够不够减，是根据<strong>余数的左边四位</strong>来比较的</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003111354476.png" alt="image-20211003111354476"></p>
-<ul>
-<li><strong>余数减去除数后，余数符号不发生改变，那么就是够减的</strong></li>
-<li><strong><font color =#FF00>要使得余数的绝对值不断变小，并且符号不改变</font></strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>余数减去除数后，余数符号不发生改变，那么就是够减的</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong><font color =#FF00>要使得余数的绝对值不断变小，并且符号不改变</font></strong></p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003111751337.png" alt="image-20211003111751337"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003113300997.png" alt="image-20211003113300997"></p>
 <p><strong>最后如果除数和被除数的符号不同，那么要将商变成相反数，即取反加一</strong></p>
 <p><strong>没有办法事先去判断够不够减，因此只能运算后看符号有没有变</strong>，因此对于机器来说，尝试运算后，发现不够减，<strong>那么要恢复余数</strong></p>
 <p>当商为4位时，达到所需精度，就运算完成，留下了余数</p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>有没有可能左移的过程中符号变号了，如果有，那么余数的符号到底应该以那个为准**?**</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>我认为不会移出，如32位cpu中，除数和被除数都是32位，为了得到32位的商，应当把32位被除数符号拓展成64位，而总共运算n=32次，因此不会移出符号位，<strong>因此在这个过程中，符号一定不会发生改变，因此发生改变说明不够减，那么需要恢复</strong></p>
 </li>
 </ul>
 <h3 id="不恢复余数的除法">不恢复余数的除法</h3>
 <p>类似开车，当车偏离直线时，不会退回去变成直线，而是往右偏来纠正</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003113412552.png" alt="image-20211003113412552"></p>
-<ul>
-<li><strong>乘2是左移</strong></li>
-<li><strong>这里的余数R<sub>i</sub>是不论是否够减了，都减去Y得到的</strong></li>
-<li>只考虑减法（当然有可能是加法，余数和除数异号时）：
-<ul>
-<li>如果不够减，不需要在上一步进行恢复，而是在下一步通过加Y来<strong>同时实现上一步的恢复和这一步的减Y</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>乘2是左移</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>这里的余数R<sub>i</sub>是不论是否够减了，都减去Y得到的</strong></p>
+</li>
+<li class="lvl-2">
+<p>只考虑减法（当然有可能是加法，余数和除数异号时）：</p>
+<ul class="lvl-2">
+<li class="lvl-4">如果不够减，不需要在上一步进行恢复，而是在下一步通过加Y来<strong>同时实现上一步的恢复和这一步的减Y</strong></li>
 </ul>
 </li>
 </ul>
@@ -248,46 +261,50 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003114435963.png" alt="image-20211003114435963"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211218231331207.png" alt="image-20211218231331207"></p>
 <p>最后还需要对整除可能出现的问题进行判断（原因是如果发生整除，0的符号是0，会产生错误的判断）：</p>
-<ul>
-<li>如果余数+除数=0，说明多减去一个除数，所以商要-1，余数置0</li>
-<li>如果余数=除数，说明少减去一个除数，所以商要+1，余数置0</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果余数+除数=0，说明多减去一个除数，所以商要-1，余数置0</p>
+</li>
+<li class="lvl-2">
+<p>如果余数=除数，说明少减去一个除数，所以商要+1，余数置0</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003171509243.png" alt="image-20211003171509243"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003115033240.png" alt="image-20211003115033240"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211003115057588.png" alt="image-20211003115057588"></p>
 <h2 id="原码加减法理解">原码加减法理解</h2>
 <ol>
-<li>
+<li class="lvl-3">
 <p>特点：</p>
-<ul>
-<li>符号位不作为数的一部分参与运算</li>
-<li>符号位和加减法指令共同作为运算的依据</li>
+<ul class="lvl-2">
+<li class="lvl-5">符号位不作为数的一部分参与运算</li>
+<li class="lvl-5">符号位和加减法指令共同作为运算的依据</li>
 </ul>
 </li>
-<li>
+<li class="lvl-3">
 <p>规则</p>
-<ul>
-<li>加法指令：同号求和，异号求差</li>
-<li>减法指令：异号求和，同号求差</li>
+<ul class="lvl-2">
+<li class="lvl-5">加法指令：同号求和，异号求差</li>
+<li class="lvl-5">减法指令：异号求和，同号求差</li>
 </ul>
 </li>
-<li>
+<li class="lvl-3">
 <p>对于求和：</p>
-<ul>
-<li>两个操作数相加得到的数值位，如果数值位最高位产生进位，则结果溢出</li>
-<li>若不溢出，则和的符号位采用<strong>第一操作数的符号</strong></li>
+<ul class="lvl-2">
+<li class="lvl-5">两个操作数相加得到的数值位，如果数值位最高位产生进位，则结果溢出</li>
+<li class="lvl-5">若不溢出，则和的符号位采用<strong>第一操作数的符号</strong></li>
 </ul>
 </li>
-<li>
+<li class="lvl-3">
 <p>对于求差：第一操作数的数值位<strong>加上</strong>第二操作数数值位的补码</p>
-<ul>
-<li>
+<ul class="lvl-2">
+<li class="lvl-5">
 <p>最高数值位有进位，表明加法结果为正，结果符号位采用第一操作数的符号</p>
 </li>
-<li>
+<li class="lvl-5">
 <p>最高数值位没有进位，表明结果为负（补码形式），应对结果求补码，还原成原码形式，结果的符号位为第一操作数的符号取反</p>
 </li>
-<li>
+<li class="lvl-5">
 <p><strong>理解</strong>：事实上，是通过加模再减模（2^k）的方式把减法转成加法，因此如果加后最高位有进位，那么结果减去模就仍然是正数，那么直接取n位结果即可，最高位的进位截断（或者理解为减去了模，因此这个1被减去了）</p>
 <p>如果没有进位，那么说明结果减去模是负数，那么res-2<sup>k</sup>就不够减，那么就提个负号出来变成-(2<sup>k</sup>-res)，括号里面自然就是取反加1，同时外面的负号用于把第一操作数的符号位取反</p>
 </li>

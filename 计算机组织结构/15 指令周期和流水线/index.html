@@ -157,10 +157,10 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212175521345.png" alt="image-20211212175521345"></p>
 <p>黄色箭头代表两个含义：</p>
 <ol>
-<li>
+<li class="lvl-3">
 <p>控制PC传输地址，从而取指令</p>
 </li>
-<li>
+<li class="lvl-3">
 <p><strong>当指令取完后、指令执行前</strong>（一般是<strong>要取到IR中后才加1</strong>，即在<strong>取指周期的最后</strong>加1，否则不知道+1是加多少），而不是指令执行完，控制PC+1。但其实也不一定，<strong>如下，PC+1可以和其他的一起执行</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220107160454915.png" alt="image-20220107160454915"></p>
 </li>
@@ -184,9 +184,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212200713610.png" alt="image-20211212200713610"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212200819371.png" alt="image-20211212200819371"></p>
 <p>取指令要访问内存，执行指令也可能要访问内存，可能会造成访存冲突</p>
-<ul>
-<li><strong>取指令的等待</strong>是执行的时间比取指令的时间长，所以要等待</li>
-<li><strong>执行阶段的等待</strong>是可能执行的是跳转指令，所以取指令在执行期间取好的指令就要<strong>作废</strong>，要<strong>根据新的地址去取指令</strong>，此时执行阶段要等待</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>取指令的等待</strong>是执行的时间比取指令的时间长，所以要等待</p>
+</li>
+<li class="lvl-2">
+<p><strong>执行阶段的等待</strong>是可能执行的是跳转指令，所以取指令在执行期间取好的指令就要<strong>作废</strong>，要<strong>根据新的地址去取指令</strong>，此时执行阶段要等待</p>
+</li>
 </ul>
 <h3 id="六阶段方法">六阶段方法</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212201501405.png" alt="image-20211212201501405"></p>
@@ -195,10 +199,16 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212201648969.png" alt="image-20211212201648969"></p>
 <p>如同生产矿泉水的流水线</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212201926683.png" alt="image-20211212201926683"></p>
-<ul>
-<li>为了简化流水线的设计，可以假定每个指令都是6个阶段，如果没有某个阶段，不执行即可（如果为特殊指令设计不同阶段，那么是非常不划算的）</li>
-<li>阶段之间<strong>不一定全都能并行，如对内存的访问，会产生访存冲突</strong></li>
-<li>几乎相等，仍然是有差别时间，那么会导致一定的等待，所以<strong>时间单位应该以最长的时间的为准</strong>，保证每个阶段在这个时间单位内都能执行完</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>为了简化流水线的设计，可以假定每个指令都是6个阶段，如果没有某个阶段，不执行即可（如果为特殊指令设计不同阶段，那么是非常不划算的）</p>
+</li>
+<li class="lvl-2">
+<p>阶段之间<strong>不一定全都能并行，如对内存的访问，会产生访存冲突</strong></p>
+</li>
+<li class="lvl-2">
+<p>几乎相等，仍然是有差别时间，那么会导致一定的等待，所以<strong>时间单位应该以最长的时间的为准</strong>，保证每个阶段在这个时间单位内都能执行完</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211212203056479.png" alt="image-20211212203056479"></p>
 <p><strong>限制</strong>：在两阶段中跳转指令会使得已经取得的下一条指令失效。而在六阶段中会使得上面<strong>红框中执行了一半的指令的全部失效</strong></p>

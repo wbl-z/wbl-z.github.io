@@ -141,9 +141,13 @@ var _hmt = _hmt || [];
 <p>通过仅将当前需要的页调用主存，其他的页暂时放在外存上，可以让主存中尽可能多的包含更多的任务，提高CPU的利用率</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129175319015.png" alt="image-20211129175319015"><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129183712793.png" alt="image-20211129183712793"></p>
 <p>分区方式：（系统区占用的大小在不同分区方式中都是一样的，不同分区方式是针对用户分区的）</p>
-<ul>
-<li><strong>简单固定分区：<strong>把用户区划分成长度不等的固定长度的区域，给任务分配一个</strong>可用</strong>且可以<strong>容纳它</strong>的<strong>最小</strong>分区。<strong>注意一个分区只能放一个任务，不能多个任务一起放在一个分区，因此会非常浪费内存</strong></li>
-<li>**可变长分区：**根据任务需要的大小来分配内存，提高主存利用率，但时间长了之后，<strong>碎片会变多，这些碎片很难被利用</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>简单固定分区：<strong>把用户区划分成长度不等的固定长度的区域，给任务分配一个</strong>可用</strong>且可以<strong>容纳它</strong>的<strong>最小</strong>分区。<strong>注意一个分区只能放一个任务，不能多个任务一起放在一个分区，因此会非常浪费内存</strong></p>
+</li>
+<li class="lvl-2">
+<p>**可变长分区：**根据任务需要的大小来分配内存，提高主存利用率，但时间长了之后，<strong>碎片会变多，这些碎片很难被利用</strong></p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129184112800.png" alt="image-20211129184112800"></p>
 <p><strong>利用页可以使得一个任务的不同页不需要用连续的页框来存储</strong>，注意这里是把一个任务的<strong>所有部分都分成页装进来</strong>（还不是下面的请求分页的思想）</p>
@@ -151,14 +155,22 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129191908177.png" alt="image-20211129191908177"></p>
 <p>任务越来越多，对内存的需求越来越大</p>
 <p>基本思想：</p>
-<ul>
-<li><strong>请求分页</strong>：仅仅把需要的页面载进来，而不是把任务的所有页都载进来。因此会存在未命中的问题</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>请求分页</strong>：仅仅把需要的页面载进来，而不是把任务的所有页都载进来。因此会存在未命中的问题</p>
+</li>
 </ul>
 <p>优点：</p>
-<ul>
-<li>在物理内存不变的情况下，可以载入更多的任务</li>
-<li>编写程序时无需考虑物理内存的情况，因此程序可以在不同内存大小的计算机上运行</li>
-<li>可以在比物理内存还大的虚拟地址空间中编程</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在物理内存不变的情况下，可以载入更多的任务</p>
+</li>
+<li class="lvl-2">
+<p>编写程序时无需考虑物理内存的情况，因此程序可以在不同内存大小的计算机上运行</p>
+</li>
+<li class="lvl-2">
+<p>可以在比物理内存还大的虚拟地址空间中编程</p>
+</li>
 </ul>
 <h3 id="流程">流程</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129192341451.png" alt="image-20211129192341451"></p>
@@ -166,10 +178,16 @@ var _hmt = _hmt || [];
 <h3 id="设计">设计</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129192616096.png" alt="image-20211129192616096"></p>
 <p>cache比主存快10倍，而主存比硬盘快100000倍，因此在cache中缺失来访问主存比在内存中缺失来访问硬盘的开销要小很多，所以要<strong>尽可能减少对硬盘的访问</strong></p>
-<ul>
-<li>增大页大小，一次能多加载些：如4KB</li>
-<li>使用关联映射，增大命中率</li>
-<li>采用写回法，减少对硬盘的访问</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>增大页大小，一次能多加载些：如4KB</p>
+</li>
+<li class="lvl-2">
+<p>使用关联映射，增大命中率</p>
+</li>
+<li class="lvl-2">
+<p>采用写回法，减少对硬盘的访问</p>
+</li>
 </ul>
 <h2 id="分页式虚拟存储器">分页式虚拟存储器</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211129193003620.png" alt="image-20211129193003620"></p>

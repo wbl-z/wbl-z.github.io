@@ -193,25 +193,48 @@ var _hmt = _hmt || [];
 <h3 id="IP-数据报格式">IP 数据报格式</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430111703747.png" alt="image-20220430111703747"></p>
 <p><strong>20 B 的头部</strong> + 可能的 option 【由 head len 字段记录头部总长】+ data</p>
-<ul>
-<li><strong>版本号</strong>：在 IPv4 为 4【4 bit】</li>
-<li><strong>首部长度</strong> head len 的单位是 4 B ，因此如果head len = 5 ，那么表示 4*5 = 20 B 【4 bit】</li>
-<li><strong>区分服务</strong>: 用来区分不同的数据报，以便按优先级获得更好的服务,但实际上一直没被用过【8 bit】</li>
-<li><strong>总长度</strong>：IP 报头+数据的长度【16 bit】</li>
-<li><strong>标识</strong> identification：在IP软件在存储器中维持着一个计数器，每产生一个数据报，计数器就+1，并将此值赋值给标识字段。当IP数据报长度超过 MTU 而必须进行分片，这个标识字段的值就被复制到所有的数据报片的标识字段中。相同的标识字段的值使分片后的各个数据报片最后的能正确地重装成为原来的数据。【16 bit】</li>
-<li><strong>标志</strong> flag：目前只有两位有意义【3 bit】
-<ul>
-<li>标志字段中的<strong>最低位为MF</strong> <em>more fragments</em>。MF=1即表示后面“还有分片”的数据报。MF=0表示的是这个数据报的最后一个。</li>
-<li>标志字段中的<strong>中间一位记为DF</strong> <em>don’t fragment</em>，当DF记为1时，表示的是“不能分片”。</li>
-<li>最高位：<em>reversed bit</em></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>版本号</strong>：在 IPv4 为 4【4 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>首部长度</strong> head len 的单位是 4 B ，因此如果head len = 5 ，那么表示 4*5 = 20 B 【4 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>区分服务</strong>: 用来区分不同的数据报，以便按优先级获得更好的服务,但实际上一直没被用过【8 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>总长度</strong>：IP 报头+数据的长度【16 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>标识</strong> identification：在IP软件在存储器中维持着一个计数器，每产生一个数据报，计数器就+1，并将此值赋值给标识字段。当IP数据报长度超过 MTU 而必须进行分片，这个标识字段的值就被复制到所有的数据报片的标识字段中。相同的标识字段的值使分片后的各个数据报片最后的能正确地重装成为原来的数据。【16 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>标志</strong> flag：目前只有两位有意义【3 bit】</p>
+<ul class="lvl-2">
+<li class="lvl-4">标志字段中的<strong>最低位为MF</strong> <em>more fragments</em>。MF=1即表示后面“还有分片”的数据报。MF=0表示的是这个数据报的最后一个。</li>
+<li class="lvl-4">标志字段中的<strong>中间一位记为DF</strong> <em>don’t fragment</em>，当DF记为1时，表示的是“不能分片”。</li>
+<li class="lvl-4">最高位：<em>reversed bit</em></li>
 </ul>
 </li>
-<li><strong>片偏移</strong>：某片在原分组中的相对位置，便于后续接收时正确地重组。<strong>片偏移以8字节为单位</strong>。这就是说，<strong>每个分片长度一定是8字节的整数倍。</strong>【13 bit】</li>
-<li><strong>生存时间</strong> ：数据报能在因特网中经过的路由器的最大数值是<strong>255</strong>【8 bit】</li>
-<li><strong>上层协议</strong> protocol：指出此数据携带的数据是使用何种协议，以便让目的 IP 层知道将数据部分上交到哪个处理过程。如TCP，UDP**[17]**等等【8 bit】</li>
-<li><strong>首部检验和</strong>：检验头部是否正确【16 bit】</li>
-<li><strong>源IP地址</strong>：【32 bit】</li>
-<li><strong>目的IP地址</strong>：【32 bit】</li>
+<li class="lvl-2">
+<p><strong>片偏移</strong>：某片在原分组中的相对位置，便于后续接收时正确地重组。<strong>片偏移以8字节为单位</strong>。这就是说，<strong>每个分片长度一定是8字节的整数倍。</strong>【13 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>生存时间</strong> ：数据报能在因特网中经过的路由器的最大数值是<strong>255</strong>【8 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>上层协议</strong> protocol：指出此数据携带的数据是使用何种协议，以便让目的 IP 层知道将数据部分上交到哪个处理过程。如TCP，UDP**[17]**等等【8 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>首部检验和</strong>：检验头部是否正确【16 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>源IP地址</strong>：【32 bit】</p>
+</li>
+<li class="lvl-2">
+<p><strong>目的IP地址</strong>：【32 bit】</p>
+</li>
 </ul>
 <h3 id="分片和重组">分片和重组</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430142315368.png" alt="image-20220430142315368"></p>
@@ -235,9 +258,13 @@ var _hmt = _hmt || [];
 <h4 id="子网">子网</h4>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430144422811.png" alt="image-20220430144422811"></p>
 <p>IP 地址：</p>
-<ul>
-<li>子网部分（高位 bit）</li>
-<li>主机部分（低位 bit）</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>子网部分（高位 bit）</p>
+</li>
+<li class="lvl-2">
+<p>主机部分（低位 bit）</p>
+</li>
 </ul>
 <p>一个子网内部的主机的到达<strong>在 IP 层面一跳可达</strong>，<strong>不需要借助路由器，可以借助交换机即可</strong></p>
 <blockquote>
@@ -248,24 +275,24 @@ var _hmt = _hmt || [];
 <p>如上，有 <strong>6</strong> 个子网</p>
 <h4 id="IP-地址分类">IP 地址分类</h4>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430145244700.png" alt="image-20220430145244700"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>A 类地址：<strong>最高地址为0</strong>，2<sup>7</sup>-2 = 126 个网络，<strong>注意减 2 是因为全 0 和全 1 的网络不使用</strong>，每个网络有 2<sup>24</sup>-2 个主机</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>B 类地址：<strong>最高地址为 10</strong>，2<sup>14</sup>-2 个网络，2<sup>16</sup>-2 个主机</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>C 类地址：<strong>最高地址为 110</strong>，2<sup>21</sup>-2 个网络，2<sup>8</sup>-2个 主机</p>
 <p>ABC 类地址均为单播地址，D类地址为组播地址<a target="_blank" rel="noopener" href="https://m.elecfans.com/article/1163386.html">单播与组播、广播及任播有什么区别-电子发烧友网 (elecfans.com)</a></p>
 <blockquote>
 <p>组播解决了单播和广播方式效率低的问题，组播路由器借助组播路由协议为组播数据包建立树型路由，被传递的信息在尽可能远的分叉路口才开始复制和分发。</p>
 </blockquote>
 </li>
-<li>
+<li class="lvl-2">
 <p>D 类地址：<strong>最高地址为 1110</strong>，2<sup>28</sup>-2 个，D类地址不能出现在IP报文的<strong>源IP地址</strong>字段。</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>E 类地址：<strong>最高地址为 11110</strong>，为未来预留的</p>
 </li>
 </ul>
@@ -274,24 +301,24 @@ var _hmt = _hmt || [];
 <h4 id="特殊-IP-地址">特殊 IP 地址</h4>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430152710393.png" alt="image-20220430152710393"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430154658524.png" alt="image-20220430154658524"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>网络地址</strong>：{<Network-number>，<Host-number>}={<Network-number>，0} 该地址用于标识网络，不能分配给主机，因此不能作为数据的源地址和目的地址。</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>直接广播地址</strong>：{<Network-number>，<Host-number>}={<Network-number>, -1} 向某个网络上所有的主机发送报文。<strong>直接广播地址只能作为目的地址。</strong></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>受限广播地址</strong>：{<Network-number>，<Host-umber>}={-1, -1} 受限广播地址是在本网络内部进行广播的一种广播地址。TCP/IP规定，32比特全为“1”的IP地址用于本网络内的广播。**受限广播地址只能作为目的地址。 **</p>
 <blockquote>
 <p>直接广播要求发送方必须知道信宿网络的网络号。但有些主机在启动时，往往并不知道本网络的网络号，这时候如果想要向本网络广播，只能采用受限广播地址（Limited Broadcast Address）。 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv14336375">https://www.bilibili.com/read/cv14336375</a></p>
 </blockquote>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>回环地址</strong>：127开头，后面任意*【除了全0，全0表示网络地址和全1，全1表示该网络的广播地址】*到了 IP 层会直接返回</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430152840849.png" alt="image-20220430152840849"></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>0.0.0.0</strong>，特殊的源地址，表示的是网络上的所有主机，一般在写服务端程序绑定监听地址时常用此地址。</p>
 </li>
 </ul>
@@ -320,17 +347,17 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430161402186.png" alt="image-20220430161402186"></p>
 <p>自动申请IP地址的过程：</p>
 <ol>
-<li>
+<li class="lvl-3">
 <p>主机**广播请求【全1的 IP 广播】**寻找能够提供IP地址的DHCP服务器</p>
 <p>【DHCP 请求报文👉目的端口 <strong>67</strong> （DHCP服务器）和源端口 <strong>68</strong> （DHCP客户）的UDP报文段👉有广播 IP 目的地址（<strong>255.255.255.255</strong>）和源 IP 地址 <strong>0. 0. 0. 0</strong> 的 IP 数据报👉有目的 MAC 地址 <strong>FF : FF : FF : FF : FF : FF</strong> 和 源 MAC 地址的以太网帧】</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>服务器收到请求后，查看自己是否有可提供的IP地址（需要事先在DHCP服务器上配置地址池和可以提供的IP地址范围）。如果有，就回应可以提供的IP地址和可使用的时间（通常叫租期）</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>主机收到服务器回应的消息后，知道可以使用这个IP地址和租期，会发送确认请求</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>服务器收到来自主机的请求，再 ACK</p>
 </li>
 </ol>
@@ -365,10 +392,16 @@ var _hmt = _hmt || [];
 <h3 id="IPv6">IPv6</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220430172244401.png" alt="image-20220430172244401"></p>
 <p>IPv4 的问题</p>
-<ul>
-<li>每到一个路由器，<strong>TTL要减去 1，因此首部校验和也要作相应的改变</strong>，会加重路由器负担</li>
-<li>会产生分片</li>
-<li>IPv4 的头部没有机制对 <strong>QoS</strong> <em>Quality of Service</em>，<strong>服务质量</strong> 的支持，即是尽力而为的</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>每到一个路由器，<strong>TTL要减去 1，因此首部校验和也要作相应的改变</strong>，会加重路由器负担</p>
+</li>
+<li class="lvl-2">
+<p>会产生分片</p>
+</li>
+<li class="lvl-2">
+<p>IPv4 的头部没有机制对 <strong>QoS</strong> <em>Quality of Service</em>，<strong>服务质量</strong> 的支持，即是尽力而为的</p>
+</li>
 </ul>
 <blockquote>
 <p>IPv5是一个<strong>实验性的</strong>资源预留协议，被称为因特网流协议(ST)，目的是提供服务质量-QOS。</p>
@@ -397,16 +430,16 @@ var _hmt = _hmt || [];
 <p>这里所说的<strong>网络操作系统</strong>是指 <strong>SDN 下的远程控制器</strong>，不是指 windows 等【SDN 控制器在<strong>逻辑上是集中的</strong>，但为了可拓展性、性能等也可以采用分布式实现】</p>
 <p>SDN 体系结构的 <strong>4 个关键特征</strong>：</p>
 <ol>
-<li>
+<li class="lvl-3">
 <p>通用“flow-based”<strong>基于流</strong>的匹配+行动</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>控制平面和数据平面分离</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>控制平面功能在数据交换设备外实现，由两个组件组成：一个 SDN 控制器或网络 OS；若干的网络控制应用</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>可编程控制：在远程控制器之上以网络应用的形式【<em>如防火墙、负载均衡等</em>】实现各种网络功能，<strong>SDN 控制器通过北向接口 API 和网络控制应用交互</strong></p>
 <p>编程的结果形成流表，控制器通过<strong>南向接口 API （如 OpenFlow 标准）<strong>下发给</strong>分组交换机</strong>，南向接口同时支持分组交换机将自身的状态上报给 SDN 控制器</p>
 <p>OpenFlow协议运行在<strong>TCP</strong>之上，<strong>使用6653的默认端口号</strong></p>
@@ -498,19 +531,19 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/1%E6%A6%82%E8%BF%B0/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            3 传输层
+            1概述
           
         </div>
       </a>
     
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/6%20%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/3%20%E4%BC%A0%E8%BE%93%E5%B1%82/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">6 链路层和局域网</div>
+        <div class="article-nav-title">3 传输层</div>
       </a>
     
   </nav>

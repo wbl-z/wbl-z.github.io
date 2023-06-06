@@ -133,9 +133,13 @@ var _hmt = _hmt || [];
 <span id="more"></span>
 <h2 id="差错error">差错error</h2>
 <p>以存储为例：</p>
-<ul>
-<li>硬故障：永久性物理故障</li>
-<li>软故障：随机非破坏性事件，改变了某些内容，但没有损坏机器</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>硬故障：永久性物理故障</p>
+</li>
+<li class="lvl-2">
+<p>软故障：随机非破坏性事件，改变了某些内容，但没有损坏机器</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220105195420473.png" alt="image-20220105195420473"></p>
 <h2 id="纠错error-correction">纠错error correction</h2>
@@ -187,8 +191,10 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925120852514.png" alt="image-20210925120852514"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20210925121203909.png" alt="image-20210925121203909"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211219095317053.png" alt="image-20211219095317053"></p>
-<ul>
-<li>当<strong>余数位数与除数位数相同</strong>时，才进行异或运算（模二除法），<strong>即与除数对齐的第一位为1时才异或并上商为1，否则不进行异或直把除数右移并上商为0</strong>了，直到被除数最后一位</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>当<strong>余数位数与除数位数相同</strong>时，才进行异或运算（模二除法），<strong>即与除数对齐的第一位为1时才异或并上商为1，否则不进行异或直把除数右移并上商为0</strong>了，直到被除数最后一位</p>
+</li>
 </ul>
 <p>如果这两个 CRC结果不一致，则说明发送中出现了差错，接收方计算机可要求发送方计算机重新发送该数据</p>
 <p>CRC 算法检验的检错能力极强，且检测成本较低</p>

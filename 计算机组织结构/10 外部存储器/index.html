@@ -176,11 +176,11 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211114162349970.png" alt="image-20211114162349970"></p>
 <p><strong>同步字节是用来告诉磁头接下来就是一个新的扇区了</strong>，就可以读取后面的内容来判断如扇号等信息了</p>
 <p><strong>间隙的留出是让磁头去处理判定读到的信息如扇号是不是想要的那个</strong>（因为盘是不停地在转的，而判断需要时间，如果没有间隙，数据和扇号紧挨着，那么当判定完时，数据已经转过一部分了。如果判断的时间是固定的，那么就可以用一个固定长度的间隙让其反应）。<strong>转速越快，那么间隙就要越大</strong></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>仅消除数据是<strong>高级格式化</strong></p>
 </li>
-<li>
+<li class="lvl-2">
 <p>建立磁道，建立扇区是<strong>低级格式化</strong>，完全清除数据，对整个硬盘做格式化，不能区分C/D盘等，同时低级格式化是对硬盘有损伤的</p>
 </li>
 </ul>
@@ -192,9 +192,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211114165106721.png" alt="image-20211114165106721"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211114170106854.png" alt="image-20211114170106854"></p>
 <p>访问多个相邻磁道</p>
-<ul>
-<li><strong>旋转延迟都要考虑</strong></li>
-<li>寻道时间通常指考虑<strong>第一个磁道的寻道时间</strong>，<strong>因为后续磁道很近，寻道时间非常短</strong>，但在明确指出跨越每个磁道的寻道时间时仍要考虑</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>旋转延迟都要考虑</strong></p>
+</li>
+<li class="lvl-2">
+<p>寻道时间通常指考虑<strong>第一个磁道的寻道时间</strong>，<strong>因为后续磁道很近，寻道时间非常短</strong>，但在明确指出跨越每个磁道的寻道时间时仍要考虑</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211114170520159.png" alt="image-20211114170520159"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211114170530312.png" alt="image-20211114170530312"></p>

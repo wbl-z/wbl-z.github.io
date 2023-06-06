@@ -196,10 +196,16 @@ var _hmt = _hmt || [];
 <p>Ready信号说明已经准备好了，设备可以来取，Ack信号表明告诉对方已经取完了，对方可以把ready信号给拿走了</p>
 <p>信号都有上升沿和下降沿，分别表示把信号放到总线上和把信号从总线上拿走的过程</p>
 <p><strong>一次握手其实就是表明一个前后关系</strong></p>
-<ul>
-<li><strong>非互锁</strong>是一个自然的状态，只通过<strong>一次握手</strong>，而没有加额外的限制，只是一个自然的先后关系，先准备好才能去取，然后才有取好信号</li>
-<li><strong>半互锁</strong>是用<strong>两次握手</strong>强调已经取完了之后Ready信号才能撤走，这是为了防止出现在取之前（并不是一出现Ready就去取，可能正在处理其他事务）就已经撤走了Ready，即撤早了，而无法取数据就一直处于等待的情况</li>
-<li><strong>全互锁</strong>是用<strong>三次握手</strong>强调只有Ready撤走后，才能撤走Ack，如果ready的设备正在处理其他事务，而另一个设备已经取好了，并撤走了Ack，那么设备就以为对方还没有取好，因此会一直处于Ready状态</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>非互锁</strong>是一个自然的状态，只通过<strong>一次握手</strong>，而没有加额外的限制，只是一个自然的先后关系，先准备好才能去取，然后才有取好信号</p>
+</li>
+<li class="lvl-2">
+<p><strong>半互锁</strong>是用<strong>两次握手</strong>强调已经取完了之后Ready信号才能撤走，这是为了防止出现在取之前（并不是一出现Ready就去取，可能正在处理其他事务）就已经撤走了Ready，即撤早了，而无法取数据就一直处于等待的情况</p>
+</li>
+<li class="lvl-2">
+<p><strong>全互锁</strong>是用<strong>三次握手</strong>强调只有Ready撤走后，才能撤走Ack，如果ready的设备正在处理其他事务，而另一个设备已经取好了，并撤走了Ack，那么设备就以为对方还没有取好，因此会一直处于Ready状态</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211207205114405.png" alt="image-20211207205114405"></p>
 <p>注意总共为<strong>7次握手</strong>，<strong>握手中即有数据传输的时间</strong>，所有的握手时间加起来即一次总线事务的时间，而不需要额外考虑数据传输。</p>

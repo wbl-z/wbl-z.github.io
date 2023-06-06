@@ -143,10 +143,16 @@ var _hmt = _hmt || [];
 <p>二义性文法：对于一个语法如果一个表达式可以有两种解释方式，即有歧义，是不可以的</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221129220904650.png" alt="image-20221129220904650"></p>
 <p>如上述语法，对于 <code>if a then if b then c else d</code></p>
-<ul>
-<li>可以把 <code>if b then c else</code> 整体作为 <code>stat</code>，适用第一条规则；</li>
-<li>也可以把 <code>if b then c</code> 作为 <code>stat</code>，适用第二条规则。</li>
-<li>【<strong>即 <code>else</code> 到底属于哪个 <code>if</code> 的问题</strong>】</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>可以把 <code>if b then c else</code> 整体作为 <code>stat</code>，适用第一条规则；</p>
+</li>
+<li class="lvl-2">
+<p>也可以把 <code>if b then c</code> 作为 <code>stat</code>，适用第二条规则。</p>
+</li>
+<li class="lvl-2">
+<p>【<strong>即 <code>else</code> 到底属于哪个 <code>if</code> 的问题</strong>】</p>
+</li>
 </ul>
 <p><strong>没有</strong>算法<strong>可以判定</strong>语法是否有二义性，一般靠经验对一些特定结构的语法来判断，并针对性的消除二义性</p>
 <p>对于上面的二义性语法通过下面的改变来消除二义性，让 <code>else</code> 与最近的 <code>if</code> 匹配</p>
@@ -299,11 +305,11 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/3%20%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%90%86%E8%AE%BA%E5%92%8C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8/" class="article-nav-link">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.2%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E7%9A%84%20LL(1)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            3 自动机理论和词法分析器生成器
+            4.2 语法分析——递归下降的 LL(1) 语法分析器
           
         </div>
       </a>

@@ -163,9 +163,13 @@ var _hmt = _hmt || [];
 <p>这样CPU就不需要区等待数据的存取，而是知道会在哪个时钟周期完成数据的存取，到时后再去执行即可，而中间时间CPU则可以进行其他操作</p>
 <p>注意这里的时钟不是CPU时钟</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211014150922689.png" alt="image-20211014150922689"></p>
-<ul>
-<li>SDRAM在一个时钟周期内只传输一次数据，它是在时钟上升期进行数据传输；</li>
-<li>而DDR则是一个时钟周期内可传输两次数据，也就是在时钟的上升期和下降期各传输一次数据。<strong>使得数据传输数率更快</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>SDRAM在一个时钟周期内只传输一次数据，它是在时钟上升期进行数据传输；</p>
+</li>
+<li class="lvl-2">
+<p>而DDR则是一个时钟周期内可传输两次数据，也就是在时钟的上升期和下降期各传输一次数据。<strong>使得数据传输数率更快</strong></p>
+</li>
 </ul>
 <h2 id="ROM">ROM</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211014151455163.png" alt="image-20211014151455163"></p>
@@ -191,18 +195,18 @@ var _hmt = _hmt || [];
 <p>2048=2^11，所以需要11根线，图中的行/列地址缓冲器可以一次由11位的地址线传入行，下一次再传入列，当两者都有后，再去找存储单元</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211024204118897.png" alt="image-20211024204118897"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211024204126649.png" alt="image-20211024204126649"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>集中式刷新：停止所有读写操作并刷新，这样内存就是一会工作一会不工作，对计算机影响很大</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>分散式刷新：在每个存储周期中，当完成读写时刷新，刷新时间和集中式是一样长的，只是把这段时间分散到多个周期内，因此不会出现突然不工作的情况，因为刷新时间就是死区，那么没有刷新时间就没有死区，所以分散式刷新不存在死区。代价就是，由于把刷新时间融入到了存取周期中，<strong>导致存取T周期变长</strong><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220106134846778.png" alt="image-20220106134846778"></p>
 <p><strong>这里是每次读写完这个行后，就刷新这个行</strong>，并且不考虑CPU一直读取一行而导致其他行没有被刷新的情况，默认CPU从第一行一直读取到最后一行，<strong><font color=#ff00>所以刷新间隔就为行数个存取周期</font></strong></p>
 <blockquote>
 <p>再用概率的视角来看，每一行被读/写的概率几乎相同，若把时间扩展到足够长，读取次数足够多（即从宏观的视角），每一行被读取的次数几乎是相同的，那么平均来看，从微观来看，我们也可以近似的看成cpu每一次都读/写了不同行。</p>
 </blockquote>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>异步刷新</strong>（效率高，常用）：设置一个时间间隔，在这个间隔内要保证每一行都被刷新一次，至于在间隔中什么时候刷新，是根据被不被访问来决定的，如果现在被访问，就不刷新，不被访问就刷新。<strong>但如果一直被访问，那么可能会去影响读写强行刷新</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220106135525380.png" alt="image-20220106135525380"></p>
 <blockquote>
@@ -215,22 +219,26 @@ var _hmt = _hmt || [];
 </ul>
 <blockquote>
 <ol>
-<li><strong>某一行充一次电/刷新一次的时间，也等于一个存取周期（存储周期）。</strong></li>
-<li>刷新间隔：<strong>所有</strong>存储单元都刷新一遍所需要的时间，也是两次<strong>所有</strong>存储单元开始刷新之间间隔的时间。</li>
+<li class="lvl-3">
+<p><strong>某一行充一次电/刷新一次的时间，也等于一个存取周期（存储周期）。</strong></p>
+</li>
+<li class="lvl-3">
+<p>刷新间隔：<strong>所有</strong>存储单元都刷新一遍所需要的时间，也是两次<strong>所有</strong>存储单元开始刷新之间间隔的时间。</p>
+</li>
 </ol>
 </blockquote>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211024205216480.png" alt="image-20211024205216480"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211024205628703.png" alt="image-20211024205628703"></p>
 <p>图中内存条上黑色的是芯片，芯片连接在一起是通过板子上的金属线</p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>位扩展</strong>：地址线不变，数据线增加。如1bit到8bit，<strong>数据线要增加8倍</strong>，<strong>几个bit就要几根</strong></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>字扩展</strong>：改变寻址单元个数，但不改变每个单元中的位数，即寻址能力不变。地址线增加，数据线不变。</p>
 <p>16K=2<sup>14</sup>，所以换成行列除2，因此地址线需要7条。变成64K=2<sup>16</sup>，所以地址线需要8根 <em>（因为行列复用，所以扩大四倍只要多加1根线即可，如果不复用则要多加两根）</em></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>字、位同时扩展</strong>：地址线和数据线都增加</p>
 </li>
 </ul>

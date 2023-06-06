@@ -133,10 +133,16 @@ var _hmt = _hmt || [];
 <span id="more"></span>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124202340250.png" alt="image-20211124202340250"></p>
 <p>目的：</p>
-<ul>
-<li>增加容量</li>
-<li>数据分散在多个磁盘上，并行提高数据传输速率</li>
-<li>纠错</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>增加容量</p>
+</li>
+<li class="lvl-2">
+<p>数据分散在多个磁盘上，并行提高数据传输速率</p>
+</li>
+<li class="lvl-2">
+<p>纠错</p>
+</li>
 </ul>
 <p><strong>逻辑上是一个磁盘，物理上是多个的</strong>，同时<strong>数据是分布在多个物理磁盘</strong>上的，这样才能多个磁盘并行工作来提高效率</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124202714276.png" alt="image-20211124202714276"></p>
@@ -146,14 +152,22 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124203104344.png" alt="image-20211124203104344"></p>
 <p><strong>条带化即把一个磁盘/一个组（如后面的10，01，50）分散成多个条带放到不同的磁盘上</strong></p>
 <p><strong>优点：</strong></p>
-<ul>
-<li><strong>大I/O数据传输速率快</strong>，每个物理硬盘都可以传输，所以对于<strong>大</strong>的数据块，可以被拆分成多个部分来传输</li>
-<li><strong>小I/O响应速度快</strong>，如果是一个硬盘，那么一次只能响应一个请求，而对于多个分布在不同物理磁盘上<strong>小</strong>的数据块，RAID 0则可以同时响应</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>大I/O数据传输速率快</strong>，每个物理硬盘都可以传输，所以对于<strong>大</strong>的数据块，可以被拆分成多个部分来传输</p>
+</li>
+<li class="lvl-2">
+<p><strong>小I/O响应速度快</strong>，如果是一个硬盘，那么一次只能响应一个请求，而对于多个分布在不同物理磁盘上<strong>小</strong>的数据块，RAID 0则可以同时响应</p>
+</li>
 </ul>
 <p><strong>缺点：</strong></p>
-<ul>
-<li><strong>数据可用性低</strong>，多个磁盘，出现错误的概率大</li>
-<li><strong>没有冗余检验</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>数据可用性低</strong>，多个磁盘，出现错误的概率大</p>
+</li>
+<li class="lvl-2">
+<p><strong>没有冗余检验</strong></p>
+</li>
 </ul>
 <h2 id="镜像">镜像</h2>
 <h3 id="RAID-1">RAID 1</h3>
@@ -161,14 +175,22 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124204604960.png" alt="image-20211124204604960"></p>
 <p>深色的是冗余盘，简单地把原来的数据进行了拷贝</p>
 <p><strong>优点：</strong></p>
-<ul>
-<li><strong>数据可用性很高</strong>，如果一个盘坏了，还能找到一个一模一样的盘</li>
-<li><strong>大I/O传输读比单盘快，而写的速度与单盘差不多</strong>，因为同时要写两个盘，受限于速度慢的磁盘</li>
-<li><strong>小I/O响应速度比单盘快一倍</strong>，即使两个请求位于同一个盘上，也能同时响应，因为有备份，而RAID0则只能在位于不同盘时同时响应</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>数据可用性很高</strong>，如果一个盘坏了，还能找到一个一模一样的盘</p>
+</li>
+<li class="lvl-2">
+<p><strong>大I/O传输读比单盘快，而写的速度与单盘差不多</strong>，因为同时要写两个盘，受限于速度慢的磁盘</p>
+</li>
+<li class="lvl-2">
+<p><strong>小I/O响应速度比单盘快一倍</strong>，即使两个请求位于同一个盘上，也能同时响应，因为有备份，而RAID0则只能在位于不同盘时同时响应</p>
+</li>
 </ul>
 <p><strong>缺点：</strong></p>
-<ul>
-<li>价格昂贵</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>价格昂贵</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124205124993.png" alt="image-20211124205124993"></p>
 <p><strong>只用于关键数据，重要数据的保存</strong></p>
@@ -180,10 +202,16 @@ var _hmt = _hmt || [];
 <h2 id="并行存取——解决单次大I-O传输">并行存取——解决单次大I/O传输</h2>
 <h3 id="RAID-2">RAID 2</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124210109478.png" alt="image-20211124210109478"></p>
-<ul>
-<li>不论是大的还是小的I/O请求，要求<strong>所有磁盘都参与</strong>请求的执行。</li>
-<li>每个磁盘的轴<strong>同步旋转，磁头始终处于同一位置</strong></li>
-<li><strong>数据条带很小如一个字节或字</strong>，这样才能让所有磁盘都调动起来，注意这里条带同样是满了才到下一个条带，而不是一个条带用一点，另一个条带用一点，因此要让条带很容易的被装满</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>不论是大的还是小的I/O请求，要求<strong>所有磁盘都参与</strong>请求的执行。</p>
+</li>
+<li class="lvl-2">
+<p>每个磁盘的轴<strong>同步旋转，磁头始终处于同一位置</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>数据条带很小如一个字节或字</strong>，这样才能让所有磁盘都调动起来，注意这里条带同样是满了才到下一个条带，而不是一个条带用一点，另一个条带用一点，因此要让条带很容易的被装满</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124210453301.png" alt="image-20211124210453301"></p>
 <p><strong>冗余盘用来存储校验码——海明码</strong>，</p>
@@ -205,10 +233,16 @@ var _hmt = _hmt || [];
 <p>采用较大的数据条带，各个磁盘的操作是独立的</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211124212959982.png" alt="image-20211124212959982"></p>
 <p>每次写时，不但要修改数据，还要修改校验位，对于小的I/O写请求，会产生写损失，而在RAID 3中则没有影响，因为条带小，每次都一定要修改校验位，并且直接用写入的数据修改即可，无需取出原有数据。</p>
-<ul>
-<li>此外经过异或计算，可以发现如上公式，因此如果仅修改<strong>很小的数据如1位</strong>，<strong>修改校验位</strong>，<strong>只需要从原来的数据中取出P(B)和B<sub>i</sub>（要被修改的数据的原来数据）即可（<em>原理和之前的RAID 3一样，p(b）异或b<sub>i</sub>=剩下所有数据的异或</em>），B‘是指经过修改的数据</strong></li>
-<li>而如果是<strong>整个数据都要修改掉</strong>，则原来的数据已经不重要了，直接用新的数据生成校验码即可</li>
-<li>因此综上，<strong>在修改大的I/O时，写损失少，而修改小的I/O时，要从原来数据中再读出来后再修改</strong>，这个读的过程造成很多损失</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>此外经过异或计算，可以发现如上公式，因此如果仅修改<strong>很小的数据如1位</strong>，<strong>修改校验位</strong>，<strong>只需要从原来的数据中取出P(B)和B<sub>i</sub>（要被修改的数据的原来数据）即可（<em>原理和之前的RAID 3一样，p(b）异或b<sub>i</sub>=剩下所有数据的异或</em>），B‘是指经过修改的数据</strong></p>
+</li>
+<li class="lvl-2">
+<p>而如果是<strong>整个数据都要修改掉</strong>，则原来的数据已经不重要了，直接用新的数据生成校验码即可</p>
+</li>
+<li class="lvl-2">
+<p>因此综上，<strong>在修改大的I/O时，写损失少，而修改小的I/O时，要从原来数据中再读出来后再修改</strong>，这个读的过程造成很多损失</p>
+</li>
 </ul>
 <p>只要涉及写操作，一定要涉及校验盘，所有没法做到各个盘的写是独立的，<strong>校验盘会成为瓶颈</strong></p>
 <p><strong>RAID 4同样被弃用</strong>，它在设计上有缺陷，即上面所述，在读取操作和一次写操作时都没什么问题，但小I/O存取有瓶颈</p>

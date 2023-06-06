@@ -133,10 +133,16 @@ var _hmt = _hmt || [];
 <span id="more"></span>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222144607958.png" alt="image-20211222144607958"></p>
 <p>外设提供了<strong>外部环境与计算机系统之间的数据交换</strong></p>
-<ul>
-<li>人可读设备</li>
-<li>机器可读设备</li>
-<li>通信设备</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>人可读设备</p>
+</li>
+<li class="lvl-2">
+<p>机器可读设备</p>
+</li>
+<li class="lvl-2">
+<p>通信设备</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222163028529.png" alt="image-20211222163028529"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222163205466.png" alt="image-20211222163205466"></p>
@@ -158,15 +164,23 @@ var _hmt = _hmt || [];
 <p>而上面的<strong>状态/控制模块传输的是CPU对外设的控制指令</strong>，如打印等，同时由于CPU传输给外设的控制信息和外设传输回来的状态信息是不会同时出现的，因此<strong>可以复用一个寄存器</strong></p>
 <h3 id="外部接口">外部接口</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222165008723.png" alt="image-20211222165008723"></p>
-<ul>
-<li>并行接口</li>
-<li>串行接口</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>并行接口</p>
+</li>
+<li class="lvl-2">
+<p>串行接口</p>
+</li>
 </ul>
 <p>总线上的数据都是多位同时传输的。</p>
 <p>但对于外部的数据传输，并行传送要求上面每一根线的数据能同时到达。如何实现同时到达：</p>
 <ol>
-<li>减少走的距离（距离长了，不同速度的差异会放大）：<strong>那么数据传输线不能太长</strong></li>
-<li>两批数据之间的传输间隔增大：<strong>那么数据传输的频率会降低</strong></li>
+<li class="lvl-3">
+<p>减少走的距离（距离长了，不同速度的差异会放大）：<strong>那么数据传输线不能太长</strong></p>
+</li>
+<li class="lvl-3">
+<p>两批数据之间的传输间隔增大：<strong>那么数据传输的频率会降低</strong></p>
+</li>
 </ol>
 <p>因此外部的数据传输入<strong>大多采用串行接口</strong>，虽然<strong>一次只传输一位</strong>，<strong>但可以以很高的频率传输，同时可以传输得非常远。</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222165634136.png" alt="image-20211222165634136"></p>
@@ -184,9 +198,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222172212631.png" alt="image-20211222172212631"></p>
 <p><strong>指令是对CPU的</strong>，需要CPU去执行的指令</p>
 <p>编址方式：</p>
-<ul>
-<li>存储器映射式I/O：即把I/O设备也当作一个地址，和其他存储单元地址一样统一在一起，访问这个地址就是去调用I/O设备，可以方便的编程。但会占用存储单元的地址空间</li>
-<li>分离式I/O：总线上有专门的输入输出线，不与存储器的线共用</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>存储器映射式I/O：即把I/O设备也当作一个地址，和其他存储单元地址一样统一在一起，访问这个地址就是去调用I/O设备，可以方便的编程。但会占用存储单元的地址空间</p>
+</li>
+<li class="lvl-2">
+<p>分离式I/O：总线上有专门的输入输出线，不与存储器的线共用</p>
+</li>
 </ul>
 <h3 id="中断驱动式I-O">中断驱动式I/O</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222172705302.png" alt="image-20211222172705302"></p>
@@ -250,9 +268,13 @@ var _hmt = _hmt || [];
 <p>只有在连续读写时才交给DMA，<strong>而其他时候仍然是CPU在处理</strong>，因此CPU仍然有很高的参与度，仅仅是无需CPU负责存储器和I/O模块之间的数据传递</p>
 <h2 id="I-O模块的演变">I/O模块的演变</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222195415943.png" alt="image-20211222195415943"></p>
-<ul>
-<li>I/O模块有了自己的处理器就叫做I/O通道</li>
-<li>I/O模块有了自己的局部存储器就叫做I/O处理器</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>I/O模块有了自己的处理器就叫做I/O通道</p>
+</li>
+<li class="lvl-2">
+<p>I/O模块有了自己的局部存储器就叫做I/O处理器</p>
+</li>
 </ul>
 <h2 id="总结">总结</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211222195715027.png" alt="image-20211222195715027"></p>

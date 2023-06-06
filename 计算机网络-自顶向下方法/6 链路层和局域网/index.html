@@ -133,20 +133,20 @@ var _hmt = _hmt || [];
 <h2 id="6-1-引论和服务">6.1 引论和服务</h2>
 <h3 id="网络连接形式">网络连接形式</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505193511923.png" alt="image-20220505193511923"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>点到点</strong>的链路是指两个路由器之间<strong>有链路相连</strong>，A 通过这条链路<strong>就是发给 B</strong>，不可能到其他地方去，就是封装和解封装的过程，因此比较简单，同理 B 就是发给 A。<strong>一般用于广域网</strong>，如海底电缆、拨号接入【家里面的 ADSL 连接到运营商的 modem 池也是点到点的，因为这条线路被一个人占用，其他人不能用】</p>
-<ul>
-<li>广域网带宽大，延迟大，因此信道容量大，因此容易碰撞冲突，不适合用多点连接</li>
+<ul class="lvl-2">
+<li class="lvl-4">广域网带宽大，延迟大，因此信道容量大，因此容易碰撞冲突，不适合用多点连接</li>
 </ul>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>多点连接</strong>指多个设备连到交换机上，经过交换机到达其他点。存在<strong>寻址和媒介访问控制问题[在 WAN 中没有]</strong>，要区分不同的网卡( MAC )，处理多个设备发出的报文。<strong>一般用于局域网</strong></p>
-<ul>
-<li>
+<ul class="lvl-2">
+<li class="lvl-4">
 <p><strong>共享型介质</strong>：用同轴电缆将多个设备连接在一起，报文发送到电缆上，其他设备都能收到<img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505193231365.png" alt="image-20220505193231365"></p>
 </li>
-<li>
+<li class="lvl-4">
 <p><strong>网络交换机</strong>：所有设备与网络交换机连接，通过网络交换机来转发</p>
 <p>如教室中的 <strong>AP</strong> 无线访问接入点 <em>WirelessAccessPoint</em></p>
 <blockquote>
@@ -163,19 +163,32 @@ var _hmt = _hmt || [];
 <h3 id="服务">服务</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505195836892.png" alt="image-20220505195836892"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505200634302.png" alt="image-20220505200634302"></p>
-<ul>
-<li>成帧</li>
-<li>链路接入【发送帧之前要获得信道的使用权】</li>
-<li>相邻两点之间完成可靠数据传输
-<ul>
-<li>出错率低的链路很少使用，避免了为了保证可靠所做的代价以太网直接有线链路连接，本身很可靠，因此不提供 RDT</li>
-<li>无线链路出错率高，RDT 是有必要的。<strong>如果</strong>在链路层<strong>这里不重传</strong>，那么<strong>只能靠源主机重传，这样的代价太大</strong>【这就是为什么在实现了传输层 RDT 时还要实现链路层的 RDT，即<strong>减少代价</strong>】</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>成帧</p>
+</li>
+<li class="lvl-2">
+<p>链路接入【发送帧之前要获得信道的使用权】</p>
+</li>
+<li class="lvl-2">
+<p>相邻两点之间完成可靠数据传输</p>
+<ul class="lvl-2">
+<li class="lvl-4">出错率低的链路很少使用，避免了为了保证可靠所做的代价以太网直接有线链路连接，本身很可靠，因此不提供 RDT</li>
+<li class="lvl-4">无线链路出错率高，RDT 是有必要的。<strong>如果</strong>在链路层<strong>这里不重传</strong>，那么<strong>只能靠源主机重传，这样的代价太大</strong>【这就是为什么在实现了传输层 RDT 时还要实现链路层的 RDT，即<strong>减少代价</strong>】</li>
 </ul>
 </li>
-<li>流量控制</li>
-<li>错误检测</li>
-<li>差错纠正</li>
-<li>半双工和全双工：像对讲机就是半双工，一次只能一个人讲话</li>
+<li class="lvl-2">
+<p>流量控制</p>
+</li>
+<li class="lvl-2">
+<p>错误检测</p>
+</li>
+<li class="lvl-2">
+<p>差错纠正</p>
+</li>
+<li class="lvl-2">
+<p>半双工和全双工：像对讲机就是半双工，一次只能一个人讲话</p>
+</li>
 </ul>
 <p>注意这些服务的链路层<strong>各种协议服务的总和</strong>，<strong>具体到某个协议</strong>时，这个协议提供的服务可能<strong>只是上面服务的一个子集</strong>【如以太网就不提供 RDT】</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505201034992.png" alt="image-20220505201034992"></p>
@@ -192,11 +205,21 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505202015191.png" alt="image-20220505202015191"></p>
 <p><em>Cyclic Redundancy Check</em></p>
 <ol>
-<li><strong>模二运算</strong>，位的加法不进位，减法不借位，<strong>就是异或运算</strong></li>
-<li><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505202606426.png" alt="image-20220505202606426">两种表示方式等价</li>
-<li><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505202732087.png" alt="image-20220505202732087">r 次方生成多项式，共 r+1 位</li>
-<li><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220506094959577.png" alt="image-20220506094959577">D 左移 R 位模二除 G 得到 R 位余数</li>
-<li>接收方使用 G 去除以 D+R 如果除尽，则说明没有出错，否则出错</li>
+<li class="lvl-3">
+<p><strong>模二运算</strong>，位的加法不进位，减法不借位，<strong>就是异或运算</strong></p>
+</li>
+<li class="lvl-3">
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505202606426.png" alt="image-20220505202606426">两种表示方式等价</p>
+</li>
+<li class="lvl-3">
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220505202732087.png" alt="image-20220505202732087">r 次方生成多项式，共 r+1 位</p>
+</li>
+<li class="lvl-3">
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220506094959577.png" alt="image-20220506094959577">D 左移 R 位模二除 G 得到 R 位余数</p>
+</li>
+<li class="lvl-3">
+<p>接收方使用 G 去除以 D+R 如果除尽，则说明没有出错，否则出错</p>
+</li>
 </ol>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220506095814138.png" alt="image-20220506095814138"></p>
 <h2 id="6-3-多点访问协议">6.3 多点访问协议</h2>
@@ -210,10 +233,18 @@ var _hmt = _hmt || [];
 <p>可以分成三大类</p>
 <p>在理想情况下，对于速率为 R bps 的广播信 道，<strong>多路访问协议应该具有以下所希望的特点</strong></p>
 <ol>
-<li>当仅有一个节点发送数据时，该节点具有R bps 的吞吐量；</li>
-<li>当有 M 个节点发送数据时，每个节点吞吐量为 R/M bps 这<strong>不必要求 M 个节点中 的每一个节点总是有 R/M 的瞬间速率</strong>，而是每个节点在一些适当定义的时间间隔内应该有 R/M 的平均传输速率。</li>
-<li>协议是分散的；这就是说<strong>不会因某主节点故障而使整个系统崩溃</strong>。</li>
-<li>协议是<strong>简单的</strong>，使实现不昂贵。</li>
+<li class="lvl-3">
+<p>当仅有一个节点发送数据时，该节点具有R bps 的吞吐量；</p>
+</li>
+<li class="lvl-3">
+<p>当有 M 个节点发送数据时，每个节点吞吐量为 R/M bps 这<strong>不必要求 M 个节点中 的每一个节点总是有 R/M 的瞬间速率</strong>，而是每个节点在一些适当定义的时间间隔内应该有 R/M 的平均传输速率。</p>
+</li>
+<li class="lvl-3">
+<p>协议是分散的；这就是说<strong>不会因某主节点故障而使整个系统崩溃</strong>。</p>
+</li>
+<li class="lvl-3">
+<p>协议是<strong>简单的</strong>，使实现不昂贵。</p>
+</li>
 </ol>
 <h4 id="1-信道划分协议">1.信道划分协议</h4>
 <p><em>channel partitioning protocol</em></p>
@@ -228,9 +259,13 @@ var _hmt = _hmt || [];
 <p><strong>低负载时利用率高，高负载时冲突增加，利用率下降</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220507105722306.png" alt="image-20220507105722306"></p>
 <p>协议规定：【有上百种此类型协议】</p>
-<ul>
-<li>如何检测冲突</li>
-<li>如何从冲突中恢复</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如何检测冲突</p>
+</li>
+<li class="lvl-2">
+<p>如何从冲突中恢复</p>
+</li>
 </ul>
 <p><strong>以太网采用 CSMA/CD</strong></p>
 <p><strong>无线局域网 802.11 采用 CSMA/CA</strong></p>
@@ -271,9 +306,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508142649572.png" alt="image-20220508142649572"></p>
 <p><strong>二进制指数退避算法</strong> <em>exponential backoff</em>：发送冲突时，进入退避状态，<strong>分布式</strong>在一个范围内选择值，如果两个冲突的适配器<strong>选择了不同的值，那么就可以避免冲突</strong>。如果持续失败，那么每次范围<strong>扩大两倍</strong>，两个适配器<strong>选择同一个值的概率指数下降，因此冲突概率指数下降</strong>，但因为范围大，<strong>等待时间也会变大</strong>。其中的 <strong>K 最大为 10</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220507114842201.png" alt="image-20220507114842201"></p>
-<ul>
-<li>当传播时延接近0时，效率接近1。碰撞的节点将立即中止而不会浪费信道。</li>
-<li>传输帧时间变成无穷大时效率为 1 是因为这个帧的传输一直占用信道，其他节点一直等待，也就不存在冲突了</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>当传播时延接近0时，效率接近1。碰撞的节点将立即中止而不会浪费信道。</p>
+</li>
+<li class="lvl-2">
+<p>传输帧时间变成无穷大时效率为 1 是因为这个帧的传输一直占用信道，其他节点一直等待，也就不存在冲突了</p>
+</li>
 </ul>
 <h5 id="CSMA-CA">CSMA/CA</h5>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220507115348328.png" alt="image-20220507115348328"></p>
@@ -299,14 +338,19 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220507141127462.png" alt="image-20220507141127462"></p>
 <p><strong>电缆数据机终端系统 CMTS</strong> <em>Cable Modem Temination System</em></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220507142431441.png" alt="image-20220507142431441"></p>
-<ul>
-<li>使用 FDM 将上行和下行划分成多个频率信道，上行和下行在不同的频率上发送</li>
-<li>下行不存在竞争，只有一个 CMTS，它发送的信息所有节点都能收到，节点通过比较地址来接收数据</li>
-<li>上行信道通过 TDM 划分时隙：
-<ul>
-<li>有一组<strong>专门用于发送时隙请求帧的时隙</strong>，节点需要向 CMTS 发送时隙请求，<strong>请求是独立随机的，这里是会产生碰撞的</strong>。【但不检测碰撞】</li>
-<li>CMTS 在下行信道上发送 MAP 报文指定哪个节点可以在哪个指定的时间间隔内发送。如果请求的节点<strong>没有</strong>收到下行报文种对请求分配的<strong>响应</strong>，那么节点就知道<strong>发送碰撞</strong>了。<strong>使用二进制指数退避算法</strong></li>
-<li>对于其他用于分配的时隙，因为节点是在<strong>各自时隙上发送信息的，因此不会产生冲突</strong>。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用 FDM 将上行和下行划分成多个频率信道，上行和下行在不同的频率上发送</p>
+</li>
+<li class="lvl-2">
+<p>下行不存在竞争，只有一个 CMTS，它发送的信息所有节点都能收到，节点通过比较地址来接收数据</p>
+</li>
+<li class="lvl-2">
+<p>上行信道通过 TDM 划分时隙：</p>
+<ul class="lvl-2">
+<li class="lvl-4">有一组<strong>专门用于发送时隙请求帧的时隙</strong>，节点需要向 CMTS 发送时隙请求，<strong>请求是独立随机的，这里是会产生碰撞的</strong>。【但不检测碰撞】</li>
+<li class="lvl-4">CMTS 在下行信道上发送 MAP 报文指定哪个节点可以在哪个指定的时间间隔内发送。如果请求的节点<strong>没有</strong>收到下行报文种对请求分配的<strong>响应</strong>，那么节点就知道<strong>发送碰撞</strong>了。<strong>使用二进制指数退避算法</strong></li>
+<li class="lvl-4">对于其他用于分配的时隙，因为节点是在<strong>各自时隙上发送信息的，因此不会产生冲突</strong>。</li>
 </ul>
 </li>
 </ul>
@@ -319,32 +363,40 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508093900481.png" alt="image-20220508093900481"></p>
 <p>由主节点一个个询问节点要不要传输数据</p>
 <p>主节点首先向节点1发送一个报文，告诉它（节点1） 能够传输的帧的最多数量。在节点1传输了某些帧后，主节点告诉节点2它（节点2）能够传输的帧的最多数量。</p>
-<ul>
-<li>等待问题</li>
-<li>主节点故障问题</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>等待问题</p>
+</li>
+<li class="lvl-2">
+<p>主节点故障问题</p>
+</li>
 </ul>
 <h5 id="令牌传递-分布式">令牌传递-分布式</h5>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508094106210.png" alt="image-20220508094106210"></p>
 <p>令牌：特殊的帧</p>
 <p>当一个节点收到令牌时，仅当它有一些帧要发送时，它才持有这个令牌，发送完最大数目的帧数后，又将令牌转交给下一个节点；否则，它立即向下一个节点转发该令牌。</p>
 <p>谁发的，最终要由其接收</p>
-<ul>
-<li>节点忘记释放令牌问题</li>
-<li>令牌丢失问题</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>节点忘记释放令牌问题</p>
+</li>
+<li class="lvl-2">
+<p>令牌丢失问题</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508094533196.png" alt="image-20220508094533196"></p>
 <h2 id="6-4-LANS-局域网技术">6.4 LANS 局域网技术</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508112252694.png" alt="image-20220508112252694"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>IP 地址是分层的，便于路由聚集、计算，减少路由表数量；</strong></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>MAC 地址是平面的</strong><br>
 <strong>48 位</strong> MAC 地址/链路层地址/局域网地址：<strong>用于区分一个物理网络内部的不同网卡/节点，从而将数据封装成帧发送</strong></p>
 <p>前3个字节代表网络硬件制造商的编号，后3个字节代表该制造商所制造的某个网络产品(如网卡)的系列号</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508112953182.png" alt="image-20220508112953182"><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508113255757.png" alt="image-20220508113255757"></p>
 </li>
 </ul>
@@ -378,14 +430,20 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508121936688.png" alt="image-20220508121936688"></p>
 <p><strong>发展：总线→星形</strong></p>
 <ol>
-<li><strong>同轴电缆</strong>，2 Mbps。但如果电缆损坏一部分，那么所有节点都不能使用，会有反射影响 CSMA/CD</li>
-<li><strong>使用集线器 HUB</strong></li>
-<li><strong>交换机 switch</strong></li>
+<li class="lvl-3">
+<p><strong>同轴电缆</strong>，2 Mbps。但如果电缆损坏一部分，那么所有节点都不能使用，会有反射影响 CSMA/CD</p>
+</li>
+<li class="lvl-3">
+<p><strong>使用集线器 HUB</strong></p>
+</li>
+<li class="lvl-3">
+<p><strong>交换机 switch</strong></p>
+</li>
 </ol>
 <h4 id="以太网帧结构">以太网帧结构</h4>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508122149754.png" alt="image-20220508122149754"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>前导码/前同步码 Preamble</strong>【<strong>8 B</strong>】：前 7 个字节是 10101010，后 1 个字节是 10101011</p>
 <blockquote>
 <p>前同步码字段的前 7 字节用于“唤醒”接收适配器，并且将<strong>它们的时钟和发送方的时钟同步。</strong></p>
@@ -393,24 +451,24 @@ var _hmt = _hmt || [];
 <p>记住适配器的目的是根据以太局域网类型的不同，分别以 10 Mbps、100 Mbps或者 1 Gbps 的速率传输帧。然而网卡不会以精确的额定速率传输帧；相对于额定速率总有一些<strong>漂移</strong>，局域网上的其他适配器不会预先知道这种漂移的。<strong>接收适配器只需通过锁定前同步码的前7字节的比特的速率，就能够锁定适配器A的时钟。<strong>前同步码的第 8 个字节的最后两个比特（第一个出现的</strong>两个连续的 1</strong>）警告接收适配器数据要到来了。</p>
 </blockquote>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>目标 MAC 地址</strong>【<strong>6 B</strong>】：网卡接收：</p>
 <ol>
-<li>目标 MAC 地址是自己地址的，<strong>非混杂模式</strong>，此时网卡只接受来自网络端口的目的地址指向自己的数据。<strong>其他丢弃</strong></li>
-<li>目标 MAC 地址是全 1 的广播地址</li>
-<li>其他的不是上面两种情况的 MAC，把网卡设置成<strong>混杂模式</strong>，能够接收所有经过它的数据流，而不论其目的地址是否是它。因此抓包软件就是使用的混杂模式</li>
+<li class="lvl-5">目标 MAC 地址是自己地址的，<strong>非混杂模式</strong>，此时网卡只接受来自网络端口的目的地址指向自己的数据。<strong>其他丢弃</strong></li>
+<li class="lvl-5">目标 MAC 地址是全 1 的广播地址</li>
+<li class="lvl-5">其他的不是上面两种情况的 MAC，把网卡设置成<strong>混杂模式</strong>，能够接收所有经过它的数据流，而不论其目的地址是否是它。因此抓包软件就是使用的混杂模式</li>
 </ol>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>源 MAC 地址【6 B】</strong></p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>类型 TYPE【2 B】</strong>：标识上层的网络协议是什么，如 type = 0x0806 时会将帧交给 ARP 协议</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>数据/载荷</strong>【<strong>46 ~ 1500 B</strong>】：这个字段承载了 IP数据报。以太网的<strong>最大传输单元 （MTU）是1500字节</strong>。这意味着如果<strong>IP数据报超过了 1500字节【包括头部】</strong>，则主机必须将该数据报分片。数据字段的<strong>最小长度是46字节</strong>。这意味着如 果IP数据报小于46字节，数据报必须被<strong>填充到46字节</strong>。</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>CRC【4 B】</strong>：放在最后，因此可以边发边生成，发完数据直接发送 CRC 即可</p>
 </li>
 </ul>
@@ -423,9 +481,13 @@ var _hmt = _hmt || [];
 <h4 id="802-3-以太网标准">802.3 以太网标准</h4>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508142223948.png" alt="image-20220508142223948"></p>
 <p>很多的以太网标准：<em>是链路层也是物理层的规范</em></p>
-<ul>
-<li><strong>相同</strong>的 MAC 协议和帧结构</li>
-<li><strong>不同</strong>的速率、不同的物理层标准、不同的物理层媒介</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>相同</strong>的 MAC 协议和帧结构</p>
+</li>
+<li class="lvl-2">
+<p><strong>不同</strong>的速率、不同的物理层标准、不同的物理层媒介</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508142924466.png" alt="image-20220508142924466"></p>
 <p>100 Mbps 为 fast Ethernet</p>
@@ -468,9 +530,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508152822632.png" alt="image-20220508152822632"></p>
 <p>在有帧通过端口<strong>发送进来</strong>时，才根据<strong>源 MAC 学习 MAC : 端口</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508152915407.png" alt="image-20220508152915407"></p>
-<ul>
-<li>如果<strong>进来的端口</strong>和匹配目标 MAC 后要发<strong>出去的端口一致</strong>，那么就<strong>过滤</strong>掉，不转发【<em>原因是下层主机要发送到下层某个主机，经过下层级联的交换机泛洪，或者是下层的 HUB 向所有节点转发</em>】</li>
-<li>如果<strong>不知道</strong>目标 MAC 从哪个端口转发，表中还没有，那么就<strong>泛洪</strong>，向所有端口转发</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果<strong>进来的端口</strong>和匹配目标 MAC 后要发<strong>出去的端口一致</strong>，那么就<strong>过滤</strong>掉，不转发【<em>原因是下层主机要发送到下层某个主机，经过下层级联的交换机泛洪，或者是下层的 HUB 向所有节点转发</em>】</p>
+</li>
+<li class="lvl-2">
+<p>如果<strong>不知道</strong>目标 MAC 从哪个端口转发，表中还没有，那么就<strong>泛洪</strong>，向所有端口转发</p>
+</li>
 </ul>
 <h5 id="交换机和路由器">交换机和路由器</h5>
 <p>通常，由<strong>几百台主机组成的小网络通常有几个局域网网段</strong>。对于这些<strong>小网络</strong>，<strong>交换机</strong>就足够了，因为它们不要求IP地址的任何配置就能使流量局部化并增加总计吞吐量。但是在由几千台主机组成的更大网络中，通常在网络中（除了交换机之外）还包括路由器。路由器提供了更健壮的流量隔离方式和对广播风暴的控制，并在网络的主机之间使用更“智能的”路由。</p>
@@ -482,9 +548,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508153813514.png" alt="image-20220508153813514"><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508154315076.png" alt="image-20220508154315076"></p>
 <h3 id="VLANS-虚拟局域网">VLANS 虚拟局域网</h3>
 <p>局域网存在：问题</p>
-<ul>
-<li>缺乏流量隔离</li>
-<li>用户在不同局域网内移动需要改变物理布线</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>缺乏流量隔离</p>
+</li>
+<li class="lvl-2">
+<p>用户在不同局域网内移动需要改变物理布线</p>
+</li>
 </ul>
 <p>能够通过支持虚拟局域网（Virtula Local Network, VLAN）的交换机来处理。</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220508195502445.png" alt="image-20220508195502445"></p>
@@ -583,11 +653,11 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/4%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/5%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            4 网络层-数据平面
+            5 网络层-控制平面
           
         </div>
       </a>

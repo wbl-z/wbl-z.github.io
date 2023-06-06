@@ -165,10 +165,16 @@ var _hmt = _hmt || [];
 <p>如上，PC+1的操作放到t2和放到t3均可以</p>
 <h3 id="微操作分组的原则">微操作分组的原则</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220145554405.png" alt="image-20211220145554405"></p>
-<ul>
-<li>事件的顺序必须是<strong>恰当的</strong></li>
-<li><strong>同一时间段</strong>内的微操作必须是<strong>无关的</strong>，可以同时进行的，即谁先谁后都一样，如上面的PC+1</li>
-<li>满足前两条的情况下，要让<strong>所用时间单位尽可能少</strong>，如上面的IR&lt;—(MBR)不能放到第四个时间单位t4，因为这样所花费的时间更多了，事实上3个时间单位就能完成</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>事件的顺序必须是<strong>恰当的</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>同一时间段</strong>内的微操作必须是<strong>无关的</strong>，可以同时进行的，即谁先谁后都一样，如上面的PC+1</p>
+</li>
+<li class="lvl-2">
+<p>满足前两条的情况下，要让<strong>所用时间单位尽可能少</strong>，如上面的IR&lt;—(MBR)不能放到第四个时间单位t4，因为这样所花费的时间更多了，事实上3个时间单位就能完成</p>
+</li>
 </ul>
 <h3 id="间址周期">间址周期</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220150048983.png" alt="image-20211220150048983"></p>
@@ -192,34 +198,54 @@ var _hmt = _hmt || [];
 <p>上面右图中的空心圆就表示门，由控制信号来决定这些门的开关</p>
 <p>这里的例子是一个加法指令，其中数据要先存放到一个Y寄存器中，<strong>Y寄存器起到暂存数据的作用，Y与ALU直接连接</strong>。</p>
 <p>注意：</p>
-<ul>
-<li>总线上一次只能有一个数据，否则会出错，因此不能说把上图中红色和绿色的实心箭头的门都打开，两个数据一起到ALU运算。</li>
-<li>同时，当ALU运算完成后，也不能直接把数据存到AC中，因为这时候总线上还是AC的数据，因此要把结果先存放到另一个寄存器Z中，再通过关闭红色的两个箭头的门，打开蓝色的两个箭头的门，将结果送到AC中</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>总线上一次只能有一个数据，否则会出错，因此不能说把上图中红色和绿色的实心箭头的门都打开，两个数据一起到ALU运算。</p>
+</li>
+<li class="lvl-2">
+<p>同时，当ALU运算完成后，也不能直接把数据存到AC中，因为这时候总线上还是AC的数据，因此要把结果先存放到另一个寄存器Z中，再通过关闭红色的两个箭头的门，打开蓝色的两个箭头的门，将结果送到AC中</p>
+</li>
 </ul>
 <p><strong>因此，一个add M %eax的指令事实上包含了若干个微操作</strong></p>
 <hr>
 <h2 id="控制器">控制器</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220153912815.png" alt="image-20211220153912815"></p>
 <p>控制器的基本任务：</p>
-<ul>
-<li><strong>定序</strong></li>
-<li><strong>执行</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>定序</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>执行</strong></p>
+</li>
 </ul>
 <h3 id="控制器的输入">控制器的输入</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220154436278.png" alt="image-20211220154436278"></p>
 <p>控制器的输入有四个：</p>
-<ul>
-<li>指令寄存器</li>
-<li>标志</li>
-<li>时钟</li>
-<li>来自控制总线的控制信号：一般情况下是控制器发出信号，在特定情况下，如控制器会收到中断请求</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>指令寄存器</p>
+</li>
+<li class="lvl-2">
+<p>标志</p>
+</li>
+<li class="lvl-2">
+<p>时钟</p>
+</li>
+<li class="lvl-2">
+<p>来自控制总线的控制信号：一般情况下是控制器发出信号，在特定情况下，如控制器会收到中断请求</p>
+</li>
 </ul>
 <h3 id="控制器的输出">控制器的输出</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220154808602.png" alt="image-20211220154808602"></p>
 <p>控制器输出控制信号：</p>
-<ul>
-<li>CPU内的控制信号</li>
-<li>到控制总线的控制信号（CPU外的）</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CPU内的控制信号</p>
+</li>
+<li class="lvl-2">
+<p>到控制总线的控制信号（CPU外的）</p>
+</li>
 </ul>
 <p><strong>控制信号最终作为二进制输入量（即0和1）来控制各个逻辑门，如0即关闭门，1打开门</strong></p>
 <h4 id="控制信号示例：取指周期">控制信号示例：取指周期</h4>
@@ -258,9 +284,13 @@ var _hmt = _hmt || [];
 <p>控制缓冲寄存器的<strong>左半部分</strong>与控制器的控制线相连，发出控制信号，<strong>右半部分</strong>用于为定序逻辑提供下一条地址信息</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220180926089.png" alt="image-20211220180926089"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220181215826.png" alt="image-20211220181215826"></p>
-<ul>
-<li>由于微程序设计的易实现性，它已经成为CISC控制器的主要技术</li>
-<li>而对于RISC，由于指令格式简单，所以一般使用硬布线控制器</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于微程序设计的易实现性，它已经成为CISC控制器的主要技术</p>
+</li>
+<li class="lvl-2">
+<p>而对于RISC，由于指令格式简单，所以一般使用硬布线控制器</p>
+</li>
 </ul>
 <h2 id="总结">总结</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20211220181456373.png" alt="image-20211220181456373"></p>

@@ -137,9 +137,13 @@ var _hmt = _hmt || [];
 <p>复用/解复用技术:</p>
 <p><strong>将多条运输连接上的数据汇集到一条网络连接上传输</strong>。本来逻辑上是有多个进程之间的通讯线路的，但通过复用（标识两者之间）只需要一条线路即可，在目标端对所有的信息解复用，分发给不同的应用进程</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414112948542.png" alt="image-20220414112948542"></p>
-<ul>
-<li>因此套接字仅为本主机的IP和端口，因此即使源IP和端口不同，目标相同，那么都将定位到相同的socket</li>
-<li>但TCP捆绑4元组，只要有一个不一样，就是不同的socket</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>因此套接字仅为本主机的IP和端口，因此即使源IP和端口不同，目标相同，那么都将定位到相同的socket</p>
+</li>
+<li class="lvl-2">
+<p>但TCP捆绑4元组，只要有一个不一样，就是不同的socket</p>
+</li>
 </ul>
 <h2 id="3-3-无连接传输：UDP">3.3 无连接传输：UDP</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220414113438493.png" alt="image-20220414113438493"></p>
@@ -174,19 +178,31 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415115721842.png" alt="image-20220415115721842"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415120013739.png" alt="image-20220415120013739"></p>
 <p>使用<strong>校验和</strong> <em>checksum</em>来检验错误</p>
-<ul>
-<li>发送方要编码检错，接收方要解码校验</li>
-<li>接收方要告诉发送方，是<strong>正确的ACK <em>Acknowledgment</em></strong>，还是<strong>错误的NAK  <em>Negative Acknowledgment</em></strong></li>
-<li>发送方要保存副本，ACK则无需处理，等待上层有没有新的调用，NAK则重新发送副本（<strong>检错重传</strong>）</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>发送方要编码检错，接收方要解码校验</p>
+</li>
+<li class="lvl-2">
+<p>接收方要告诉发送方，是<strong>正确的ACK <em>Acknowledgment</em></strong>，还是<strong>错误的NAK  <em>Negative Acknowledgment</em></strong></p>
+</li>
+<li class="lvl-2">
+<p>发送方要保存副本，ACK则无需处理，等待上层有没有新的调用，NAK则重新发送副本（<strong>检错重传</strong>）</p>
+</li>
 </ul>
 <h3 id="RDT-2-1">RDT 2.1</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415121524024.png" alt="image-20220415121524024"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415121855666.png" alt="image-20220415121855666"></p>
 <p>但是<strong>显然ACK/NAK也是可能出错的</strong>【<em>这个信息同样是需要校验的，校验和</em>】，因此发送方可能无法判断接收方返回的信息是什么</p>
-<ul>
-<li>因此对发送的packet<strong>编号0和1</strong>【在01之间切换即可】，发送方先发送p<sub>0</sub></li>
-<li>接收方返回的信息ACK出错了，<strong>发送方无法识别，则发送方认为是NAK，再发一次p<sub>0</sub></strong></li>
-<li>接收方本来在等待编号1，但收到<strong>相同编号的内容</strong>，因此知道是ACK发送失败，因此将收到的<strong>重复信息丢弃</strong>，但仍然<strong>再返回ACK确认</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>因此对发送的packet<strong>编号0和1</strong>【在01之间切换即可】，发送方先发送p<sub>0</sub></p>
+</li>
+<li class="lvl-2">
+<p>接收方返回的信息ACK出错了，<strong>发送方无法识别，则发送方认为是NAK，再发一次p<sub>0</sub></strong></p>
+</li>
+<li class="lvl-2">
+<p>接收方本来在等待编号1，但收到<strong>相同编号的内容</strong>，因此知道是ACK发送失败，因此将收到的<strong>重复信息丢弃</strong>，但仍然<strong>再返回ACK确认</strong></p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415122203332.png" alt="image-20220415122203332"></p>
 <p><strong>停止等待协议 <em>stop-and-wait protocol</em></strong> ：每发送完一个分组就停止发送，等待对方的确认。在收到确认后再发送下一个分组。</p>
@@ -200,9 +216,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220415173250336.png" alt="image-20220415173250336"></p>
 <p>增加了分组可能丢失的情况</p>
 <p><strong>超时重传机制</strong>：重传时间一般设置为<strong>比正常一个往返稍长一点的时间</strong>，一旦超过这个时间，一般就能确定分组丢失，然后重传即可</p>
-<ul>
-<li><strong>数据链路层的timeout一般是确定的</strong>，因为就是在两个节点之间传输</li>
-<li><strong>而传输层的timeout是自适应的</strong>，即需要根据情况调整，因为中间可能跨越的节点数目会变化</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>数据链路层的timeout一般是确定的</strong>，因为就是在两个节点之间传输</p>
+</li>
+<li class="lvl-2">
+<p><strong>而传输层的timeout是自适应的</strong>，即需要根据情况调整，因为中间可能跨越的节点数目会变化</p>
+</li>
 </ul>
 <p>如果是ACK丢失了，那么重传会导致数据重复问题，但接收方可以根据分组序号知道重复，从而丢弃即可</p>
 <blockquote>
@@ -302,13 +322,13 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422142240682.png" alt="image-20220422142240682"></p>
 <p>TCP头部长度<strong>至少20 B</strong>，但还有一些可选项以一起构成头部，其中的<strong>首部长度</strong>就记录了头部的长度，用以区分出数据部分</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422143005451.png" alt="image-20220422143005451"></p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>序号</strong>指的是一个TCP数据报的数据部分的第一个字节在整个字节流中的偏移量，字节为单位。</p>
 <p>即指的是segment中第一个字节的在整个字节流中的编号，<strong>而不是segment的编号</strong></p>
 <p>此外序号通常不是从0开始，而是开始建立TCP连接时，<strong>双方随机选择序列号</strong>。防止被攻击者猜到，或与其他冲突，所以设置随机</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>确认号</strong>是指确认n-1及以前的字节，比如ACK 555，那么就表示554及之前的都已经收到了，期待555，<em>类似GBN</em>，也是<strong>累计确认</strong>：该序列号之前的所有字节均已被正确接收到</p>
 </li>
 </ul>
@@ -333,18 +353,24 @@ var _hmt = _hmt || [];
 <p><strong>TCP采用pipe-line 是GBN和SR的混合体</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422145815666.png" alt="image-20220422145815666"></p>
 <p>RDT:</p>
-<ul>
-<li><strong>流水线机制</strong></li>
-<li><strong>累计确认</strong>：是对这个字节的期待</li>
-<li><strong>TCP使用单一重传定时器</strong>：仅一个计时器</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>流水线机制</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>累计确认</strong>：是对这个字节的期待</p>
+</li>
+<li class="lvl-2">
+<p><strong>TCP使用单一重传定时器</strong>：仅一个计时器</p>
+</li>
 </ul>
 <p>触发重传：</p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>超时</strong>：只发生最早的那个未确认的段，即发生超时的这个段</p>
 <p>【超时定时器是比较保守的，在4倍偏差，因此如果超时，可以有极大的把握确定报文丢失】</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>重复的ACK</strong>：收到了<strong>1个正确</strong>ACK，然后又收到<strong>3个冗余</strong>的重复ACK，那么重传，而此时超时定时器还没超时，因此称为<strong>快速重传</strong></p>
 </li>
 </ul>
@@ -359,16 +385,16 @@ var _hmt = _hmt || [];
 <p><strong>累计确认</strong>，因此即使ACK=100没到，也没关系，ACK=120就能代表ACK=100</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422152059304.png" alt="image-20220422152059304"></p>
 <ol>
-<li>
+<li class="lvl-3">
 <p>到了一个报文段后等待500 ms，如果第二个报文段在500 ms没来，那么发送第一个的ACK</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>如果上面等待过程中<strong>第二个连续</strong>的报文段到达，立即发送第二个报文段的累计确认，<strong>同时确认两个报文段</strong></p>
 </li>
-<li>
+<li class="lvl-3">
 <p><strong>乱序到达</strong>，需要的一个报文段比如第一个字节位置为y<sub>0</sub>，而到达了第一个字节大于y<sub>0</sub>的，说明乱序，<strong>立即发送重复的ACK=y<sub>0</sub>，表示对y<sub>0</sub>的期待，让发送方重发</strong></p>
 </li>
-<li>
+<li class="lvl-3">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422152825411.png" alt="image-20220422152825411">如果在3的情况中，到达了能够完全补充gap，即y<sub>0</sub>到乱序报文起始处的报文，那么立即发送乱序到达的报文的后面一个字节的的位置ACK，累计确认</p>
 <p>如果是部分补齐，如上，在立即发送部分补齐的报文的后一个字节的ACK，让发送方快点补齐</p>
 </li>
@@ -399,18 +425,18 @@ var _hmt = _hmt || [];
 <p><strong>理论上3次是最少需要的</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422162117847.png" alt="image-20220422162117847"></p>
 <ol>
-<li>
+<li class="lvl-3">
 <p>Client发送连接建立请求SYN=1并携带它将要从序号为x处开始传Seq=x</p>
 </li>
-<li>
+<li class="lvl-3">
 <p><strong>服务器会分配缓存</strong></p>
 <p>server需要对这个信息进行ACK，ACKNum=x+1【期望x+1及之后的数据】</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>然后server需要SYN=1并将自己从序号为y处开始传Seq=y告诉client</p>
 <p><strong>这两个信息2，3可以合并在一起</strong>SYN&amp;ACK**(piggyback)**</p>
 </li>
-<li>
+<li class="lvl-3">
 <p>然后client对server的y进行确认ACKNum=y+1【期望y+1及之后的数据】</p>
 <p><strong>这个ACK通常会和第一次数据传递放在一起</strong></p>
 </li>
@@ -421,13 +447,18 @@ var _hmt = _hmt || [];
 </blockquote>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220422161237312.png" alt="image-20220422161237312"></p>
 <ol>
-<li>第一种情况，因为需要3次握手，因此不会存在半连接</li>
-<li>第二种情况，因为不会存在半连接，所以连接不存在，延迟到达的data会被丢弃</li>
-<li>此外第三种情况：假设客户端使用555端口与服务器80端口建立连接，在第二种情况的基础上，如果data卡了很久才到达服务器，而此时正好客户端又用555端口和服务器80端口建立连接了，那么连接存在，且收到数据。
-<ul>
-<li><strong>如果序号都是从0开始的话</strong>，那么这个老数据会被当成当前需要的数据，<strong>而产生错误</strong>。</li>
-<li>因此<strong>每次选择随机的开始序号</strong>，可以避免老的滞留的数据对连接的影响，比如老数据从x开始，而新的开始序号是x+1，那么老的数据肯定会被抛弃，因为都不在连接的序号范围内(≥x+1)</li>
-<li>当然有可能随机选择的序号正好又包含老数据，但概率极小，那这就没有办法了👉”<strong>网络不能解决所有问题</strong>“</li>
+<li class="lvl-3">
+<p>第一种情况，因为需要3次握手，因此不会存在半连接</p>
+</li>
+<li class="lvl-3">
+<p>第二种情况，因为不会存在半连接，所以连接不存在，延迟到达的data会被丢弃</p>
+</li>
+<li class="lvl-3">
+<p>此外第三种情况：假设客户端使用555端口与服务器80端口建立连接，在第二种情况的基础上，如果data卡了很久才到达服务器，而此时正好客户端又用555端口和服务器80端口建立连接了，那么连接存在，且收到数据。</p>
+<ul class="lvl-2">
+<li class="lvl-5"><strong>如果序号都是从0开始的话</strong>，那么这个老数据会被当成当前需要的数据，<strong>而产生错误</strong>。</li>
+<li class="lvl-5">因此<strong>每次选择随机的开始序号</strong>，可以避免老的滞留的数据对连接的影响，比如老数据从x开始，而新的开始序号是x+1，那么老的数据肯定会被抛弃，因为都不在连接的序号范围内(≥x+1)</li>
+<li class="lvl-5">当然有可能随机选择的序号正好又包含老数据，但概率极小，那这就没有办法了👉”<strong>网络不能解决所有问题</strong>“</li>
 </ul>
 </li>
 </ol>
@@ -487,14 +518,19 @@ var _hmt = _hmt || [];
 <p>在电路交换中，每个节点花费1bit的存储时间，在分组交换中每个节点花费一个分组的存储时间，而在 ATM 中信元比 1bit 大，比一个分组小，只花费53B的存储时间。<strong>所以网络调度很容易，兼具两种交换网络的特性</strong></p>
 <p>ATM 网络具有很多模式，如 <strong>ABR</strong> <em>available bit rate</em> <strong>弹性服务</strong>：如果网络轻载，那么用户可以使用网络的可用带宽，但当网络拥塞时，用户只能使用网络承诺的带宽，不能超过如1 Mbps</p>
 <p>发送方在发送数据信元中<strong>间隔插入</strong>资源管理信元 <strong>RM</strong> ，其中的 bit 被交换机设置：</p>
-<ul>
-<li><strong>NI bit</strong> : <em>no increase in rate</em> 轻微拥塞时</li>
-<li><strong>CI bit</strong> : <em>congesting indication</em> 拥塞提升
-<ul>
-<li>也可能交换机将 RM 信元前面的数据信元的 <strong>EFCI bit</strong> <em>Explicit Forward Congestion Indication</em>  <code>显性前向拥塞指示</code> 置为1，那么将由接收端把 RM 信元的 CI bit 置1</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>NI bit</strong> : <em>no increase in rate</em> 轻微拥塞时</p>
+</li>
+<li class="lvl-2">
+<p><strong>CI bit</strong> : <em>congesting indication</em> 拥塞提升</p>
+<ul class="lvl-2">
+<li class="lvl-4">也可能交换机将 RM 信元前面的数据信元的 <strong>EFCI bit</strong> <em>Explicit Forward Congestion Indication</em>  <code>显性前向拥塞指示</code> 置为1，那么将由接收端把 RM 信元的 CI bit 置1</li>
 </ul>
 </li>
-<li><strong>ER</strong> 2 Byte : <em>explicit rate</em> 记录两个主机通讯过程中的交换机所能支持的最小带宽[<em>每经过一个就看是否更小，更小就修改，更大则不改</em>]，因此发送方根据最小带宽发送，就不会发送拥塞</li>
+<li class="lvl-2">
+<p><strong>ER</strong> 2 Byte : <em>explicit rate</em> 记录两个主机通讯过程中的交换机所能支持的最小带宽[<em>每经过一个就看是否更小，更小就修改，更大则不改</em>]，因此发送方根据最小带宽发送，就不会发送拥塞</p>
+</li>
 </ul>
 <p>接收端不修改 RM 信元，并将其返回给发送方，从而发送方可用知道网络状况，控制发送速率</p>
 <h2 id="3-7-TCP-拥塞控制">3.7 TCP 拥塞控制</h2>
@@ -504,15 +540,25 @@ var _hmt = _hmt || [];
 <h3 id="如何检测拥塞">如何检测拥塞</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426081045830.png" alt="image-20220426081045830"></p>
 <p><strong>超时即认为是拥塞</strong></p>
-<ul>
-<li><strong>网络拥塞</strong>，段被丢弃：概率大，判断正确</li>
-<li><strong>段出错</strong>，段被丢弃： 概率小，判断错误，但概率小，对整个影响不大</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>网络拥塞</strong>，段被丢弃：概率大，判断正确</p>
+</li>
+<li class="lvl-2">
+<p><strong>段出错</strong>，段被丢弃： 概率小，判断错误，但概率小，对整个影响不大</p>
+</li>
 </ul>
 <p>出现**3次重复的冗余 **ACK <strong>即认为轻微拥塞</strong>，即出现丢失，但还有一定传输能力(<em>后面3个段都到达了，此时还没超时，因为超时时间比较保守，加上4倍偏差</em>)</p>
-<ul>
-<li>第一个 ACK 正确</li>
-<li>后续 1~2 个 ACK ，会被认为是乱序，<strong>乱序的可能性更大</strong></li>
-<li>出现第 3 个 ACK ，<strong>大概率是段丢失</strong></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一个 ACK 正确</p>
+</li>
+<li class="lvl-2">
+<p>后续 1~2 个 ACK ，会被认为是乱序，<strong>乱序的可能性更大</strong></p>
+</li>
+<li class="lvl-2">
+<p>出现第 3 个 ACK ，<strong>大概率是段丢失</strong></p>
+</li>
 </ul>
 <h3 id="速率控制方法">速率控制方法</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426082135576.png" alt="image-20220426082135576"></p>
@@ -529,13 +575,16 @@ var _hmt = _hmt || [];
 <p>每收到一个 ACK，拥塞窗口加 1 == 下一次的拥塞窗口是上一次的两倍</p>
 <p><strong>初始速率很慢，但是快速攀升</strong></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220426092734182.png" alt="image-20220426092734182"></p>
-<ul>
-<li><strong>AI</strong> <em>Additive Increase</em> <strong>加性增</strong>：到达 SS 的阈值后，每个RTT将 CongWin 增大一个 MSS 线性地探测-----<strong>拥塞避免阶段</strong></li>
-<li><strong>MD</strong> <em>Multiplicative Decrease</em> <strong>乘性减</strong>：
-<ul>
-<li>当<strong>发送超时</strong>后，将 CongWin 降为 1 MSS，开始 SS 并将 CongWin / 2 作为 SS 倍增的阈值。</li>
-<li>当<strong>收到 3 个冗余 ACK</strong> 时，直接将<strong>阈值降为 CongWin / 2，并将 CongWin 设置为 阈值 + 3</strong>【<em>+3是因为返回 3 个 ACK 所以后面有三个已经确认了</em>】，然后直接线性增加 1【<em>此时 CongWin &gt; 阈值</em>】，而无需从 1 开始 SS。</li>
-<li>当收到重复 ACK 时，什么都不做，<strong>只是对重复的个数进行计数</strong>，为上面的情况做好准备</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>AI</strong> <em>Additive Increase</em> <strong>加性增</strong>：到达 SS 的阈值后，每个RTT将 CongWin 增大一个 MSS 线性地探测-----<strong>拥塞避免阶段</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>MD</strong> <em>Multiplicative Decrease</em> <strong>乘性减</strong>：</p>
+<ul class="lvl-2">
+<li class="lvl-4">当<strong>发送超时</strong>后，将 CongWin 降为 1 MSS，开始 SS 并将 CongWin / 2 作为 SS 倍增的阈值。</li>
+<li class="lvl-4">当<strong>收到 3 个冗余 ACK</strong> 时，直接将<strong>阈值降为 CongWin / 2，并将 CongWin 设置为 阈值 + 3</strong>【<em>+3是因为返回 3 个 ACK 所以后面有三个已经确认了</em>】，然后直接线性增加 1【<em>此时 CongWin &gt; 阈值</em>】，而无需从 1 开始 SS。</li>
+<li class="lvl-4">当收到重复 ACK 时，什么都不做，<strong>只是对重复的个数进行计数</strong>，为上面的情况做好准备</li>
 </ul>
 </li>
 </ul>
@@ -635,19 +684,19 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/4%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            2应用层
+            4 网络层-数据平面
           
         </div>
       </a>
     
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/4%20%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">4 网络层-数据平面</div>
+        <div class="article-nav-title">2应用层</div>
       </a>
     
   </nav>

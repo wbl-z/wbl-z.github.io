@@ -142,17 +142,25 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501165607293.png" alt="image-20220501165607293"><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501165721998.png" alt="image-20220501165721998"></p>
 <h3 id="分类">分类</h3>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501170151575.png" alt="image-20220501170151575"></p>
-<ul>
-<li>全局/分布式</li>
-<li>静态/动态：非自适应/自适应</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>全局/分布式</p>
+</li>
+<li class="lvl-2">
+<p>静态/动态：非自适应/自适应</p>
+</li>
 </ul>
 <h3 id="link-state-全局算法">link state-全局算法</h3>
 <p>链路状态算法：<strong>即Dijkstra 算法</strong></p>
 <p>贪心算法</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501170746624.png" alt="image-20220501170746624"></p>
 <ol>
-<li>获得整个网络拓扑</li>
-<li>使用Dijkstra 算法获得到达其他路由器的最短路径</li>
+<li class="lvl-3">
+<p>获得整个网络拓扑</p>
+</li>
+<li class="lvl-3">
+<p>使用Dijkstra 算法获得到达其他路由器的最短路径</p>
+</li>
 </ol>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501171117187.png" alt="image-20220501171117187"></p>
 <p>扩散即泛洪 <em>flooding</em> 让所有的路由器都能得到这个链路状态分组 LS。大家都这么做，所有可以让每个路由器都能得到其他所有节点的状况</p>
@@ -171,9 +179,15 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501175221942.png" alt="image-20220501175221942"></p>
 <p>距离矢量中要记录</p>
 <ol>
-<li>目标节点</li>
-<li>到达目标节点路径上的下一跳</li>
-<li>到达目标节点所需要的 cost</li>
+<li class="lvl-3">
+<p>目标节点</p>
+</li>
+<li class="lvl-3">
+<p>到达目标节点路径上的下一跳</p>
+</li>
+<li class="lvl-3">
+<p>到达目标节点所需要的 cost</p>
+</li>
 </ol>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501180228299.png" alt="image-20220501180228299"></p>
 <p>和邻居交换距离矢量，再加上自己到邻居的代价，即可得到到达目标的最低代价</p>
@@ -184,27 +198,33 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501181100156.png" alt="image-20220501181100156"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501181731171.png" alt="image-20220501181731171"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501182023121.png" alt="image-20220501182023121"></p>
-<ul>
-<li>自己到邻居的代价改变了，<strong>要重新计算</strong></li>
-<li>邻居给自己的到达目标节点的代价改变了，邻居重新发给自己了，<strong>要重新计算</strong></li>
-<li>自己的 DV 更新改变后要通知其他的邻居</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>自己到邻居的代价改变了，<strong>要重新计算</strong></p>
+</li>
+<li class="lvl-2">
+<p>邻居给自己的到达目标节点的代价改变了，邻居重新发给自己了，<strong>要重新计算</strong></p>
+</li>
+<li class="lvl-2">
+<p>自己的 DV 更新改变后要通知其他的邻居</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501182434262.png" alt="image-20220501182434262"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501182718158.png" alt="image-20220501182718158"></p>
 <p>特点：</p>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p>好消息传得快</p>
 </li>
-<li>
+<li class="lvl-2">
 <p>坏消息传的慢，需要很多次迭代才能发现不可达</p>
-<ul>
-<li>
+<ul class="lvl-2">
+<li class="lvl-4">
 <p>解决办法</p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501195112398.png" alt="image-20220501195112398"></p>
 <p>因为 C 要通过 B 才能到达 A，所以当 B 向 C 请求到达 A 时，C 应当告诉 B 为 INF。但告诉 D 时 C 会告诉 D 自己是可达的，这样就形成了水平分裂，<strong>C 的左右两边的信息不一样</strong></p>
 </li>
-<li>
+<li class="lvl-4">
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501200139928.png" alt="image-20220501200139928"></p>
 <p>但水平分裂在<strong>环状的网络拓扑中效果不好</strong>，可以<strong>缓解</strong>传得慢【C 立即知道不可达】，<strong>但不能解决</strong>【A，B 需要很长时间才能发现】</p>
 </li>
@@ -221,15 +241,20 @@ var _hmt = _hmt || [];
 <p><em>Routing Information Protocol</em></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501201958125.png" alt="image-20220501201958125"></p>
 <p>基于 DV 算法</p>
-<ul>
-<li>每条链路的 cost = 1，<strong>最大跳数为 15</strong>，如果跳数超过 15，即当作不可达</li>
-<li>通告 advertisements：
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>每条链路的 cost = 1，<strong>最大跳数为 15</strong>，如果跳数超过 15，即当作不可达</p>
+</li>
+<li class="lvl-2">
+<p>通告 advertisements：</p>
 <ol>
-<li>邻居定期<strong>每隔 30 s</strong>，则交换通告</li>
-<li><strong>如果对方请求</strong>，那么可以直接发送通告</li>
+<li class="lvl-5">邻居定期<strong>每隔 30 s</strong>，则交换通告</li>
+<li class="lvl-5"><strong>如果对方请求</strong>，那么可以直接发送通告</li>
 </ol>
 </li>
-<li>每个通告<strong>最多通告 25 个目标网络的 DV</strong>，因此<strong>适合小网的自治</strong></li>
+<li class="lvl-2">
+<p>每个通告<strong>最多通告 25 个目标网络的 DV</strong>，因此<strong>适合小网的自治</strong></p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501202834977.png" alt="image-20220501202834977"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220501202845156.png" alt="image-20220501202845156"></p>
@@ -254,8 +279,12 @@ var _hmt = _hmt || [];
 <p><strong>自治系统 AS</strong>  <em>Autonomous System</em></p>
 <p>因此采用层次性路由，分为两层：</p>
 <ol>
-<li>将网络划分成一个个的自治区域【<em>规模小，使用之前的路由协议可以轻松解决</em>】，<strong>自治区域内使用内部网关协议</strong> <em>intra-AS routing protocol</em>，且没有要求使用哪种协议，可以是 RIP 也可以是 OSPF 或者是其他的私有的协议</li>
-<li>自治区之间的路由：一个自治区在这个层面上只表现为一个点或者若干个很少的点，<strong>使用外部网关协议</strong> <em>inter-As routing protocol</em></li>
+<li class="lvl-3">
+<p>将网络划分成一个个的自治区域【<em>规模小，使用之前的路由协议可以轻松解决</em>】，<strong>自治区域内使用内部网关协议</strong> <em>intra-AS routing protocol</em>，且没有要求使用哪种协议，可以是 RIP 也可以是 OSPF 或者是其他的私有的协议</p>
+</li>
+<li class="lvl-3">
+<p>自治区之间的路由：一个自治区在这个层面上只表现为一个点或者若干个很少的点，<strong>使用外部网关协议</strong> <em>inter-As routing protocol</em></p>
+</li>
 </ol>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220504152817951.png" alt="image-20220504152817951"></p>
 <h3 id="BGP">BGP</h3>
@@ -266,12 +295,12 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>对于每个AS，每台路由器要么是一台网关路由器（gateway router），要么是一台内部路由器（internal router）。网关路由器位于AS边缘，直接连接到其他AS的路由器。内部路由器仅连接自己AS中的主机和路由器。</p>
 </blockquote>
-<ul>
-<li>
+<ul class="lvl-0">
+<li class="lvl-2">
 <p><strong>eBGP</strong> <em>exterior BGP</em> 网关路由器从其他相邻的网关路由器得到他们收集来的自己所在的 AS 的可达信息</p>
 <p>如下的 1c 把自己子网的可达信息告诉 2a 后，2a 内都得到这个信息，那么 2c 就可以把这个信息进行 re-advertisement，将其<strong>转发</strong>给 3a【<code>但注意加增加一跳信息，即3a 要达到 AS1 需要通过 AS2</code>】，所以 3a 就可以知道 AS1 中的可达信息了，同时 2c 也会把<strong>自己</strong> AS2 的可达信息告诉 3a</p>
 </li>
-<li>
+<li class="lvl-2">
 <p><strong>iBGP</strong> <em>interior BGP</em> 网关路由器将上面得到的子网可达信息传遍 AS 内部的所有路由器。告诉内部路由器，到到某个子网通过我这个网关路由器就可以到</p>
 <p>但注意下面的虚线不一定是物理链路，而是 TCP 连接，通过 TCP 传递子网可达信息，那么 TCP 怎么路由呢？自然是通过内部网关协议即可</p>
 </li>
@@ -296,18 +325,30 @@ var _hmt = _hmt || [];
 <h2 id="5-5-SDN-控制平面">5.5 SDN 控制平面</h2>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220504165114192.png" alt="image-20220504165114192"></p>
 <p>SDN 控制器：</p>
-<ul>
-<li><code>网络控制应用界面层</code>：控制器通过**“北向”接口**与网络控制应用程序交互。</li>
-<li><code>网络范围状态管理层</code>：网络的主机，链路，交换机和其他SDN控制设备的<strong>最新状态信息，以及各种受控设备的流表。</strong></li>
-<li><code>通信层</code>：SDN控制器和受控网络设备之间的<strong>通信</strong>。现在被称为<strong>控制器的“南向”接口</strong>。<strong>OpenFlow</strong>就是一种提供这种功能的特定协议。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>网络控制应用界面层</code>：控制器通过**“北向”接口**与网络控制应用程序交互。</p>
+</li>
+<li class="lvl-2">
+<p><code>网络范围状态管理层</code>：网络的主机，链路，交换机和其他SDN控制设备的<strong>最新状态信息，以及各种受控设备的流表。</strong></p>
+</li>
+<li class="lvl-2">
+<p><code>通信层</code>：SDN控制器和受控网络设备之间的<strong>通信</strong>。现在被称为<strong>控制器的“南向”接口</strong>。<strong>OpenFlow</strong>就是一种提供这种功能的特定协议。</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220504165445283.png" alt="image-20220504165445283"></p>
 <p>采用 TCP 交换报文</p>
 <p>3 种类型：</p>
-<ul>
-<li>控制器–&gt;分组交换机</li>
-<li>控制器&lt;–分组交换机</li>
-<li>控制器&lt;–&gt;分组交换机</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>控制器–&gt;分组交换机</p>
+</li>
+<li class="lvl-2">
+<p>控制器&lt;–分组交换机</p>
+</li>
+<li class="lvl-2">
+<p>控制器&lt;–&gt;分组交换机</p>
+</li>
 </ul>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220504165938040.png" alt="image-20220504165938040"></p>
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20220504170140801.png" alt="image-20220504170140801"></p>
@@ -412,19 +453,19 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/1%E6%A6%82%E8%BF%B0/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            1概述
+            2应用层
           
         </div>
       </a>
     
     
-      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/2%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-nav-link">
+      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/6%20%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2应用层</div>
+        <div class="article-nav-title">6 链路层和局域网</div>
       </a>
     
   </nav>
