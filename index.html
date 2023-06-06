@@ -254,6 +254,81 @@ var _hmt = _hmt || [];
       </div>
       <div class="outer">
         <article
+  id="post-编译原理/1 词法分析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"
+    >1 词法分析</a> 
+</h2>
+ 
+
+      
+    <div class="article-author" >
+        作者： wbl
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/" class="article-date">
+  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  
+        <h1>1 词法分析</h1>
+<p>语法分析器会按需向词法分析器索要token</p>
+<p>输入一个字符串，要输出词法单元流。</p>
+<p>但仅仅是字符串是不够的，还需要一个隐含的且是最重要的输入：<strong>词法单元（Token）的规约</strong></p>
+<blockquote>
+<p>需要有一个语言来描述每次词法单元的结构，比如要从字符串中识别出ID，那必须要知道这个ID的结构才行。词法单元（Token）的规约就是完成这样的工作</p>
+</blockquote>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114153952664.png" alt="image-20221114153952664"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"
+        >阅读更多&gt;&gt;</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+      </div>
+    
+      <div class="space">
+      </div>
+      <div class="outer">
+        <article
   id="post-编译原理/2 手写词法分析器"
   class="article article-type-post"
   itemscope
@@ -338,81 +413,6 @@ var _hmt = _hmt || [];
       </div>
       <div class="outer">
         <article
-  id="post-编译原理/1 词法分析"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"
-    >1 词法分析</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： wbl
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/" class="article-date">
-  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  
-        <h1>1 词法分析</h1>
-<p>语法分析器会按需向词法分析器索要token</p>
-<p>输入一个字符串，要输出词法单元流。</p>
-<p>但仅仅是字符串是不够的，还需要一个隐含的且是最重要的输入：<strong>词法单元（Token）的规约</strong></p>
-<blockquote>
-<p>需要有一个语言来描述每次词法单元的结构，比如要从字符串中识别出ID，那必须要知道这个ID的结构才行。词法单元（Token）的规约就是完成这样的工作</p>
-</blockquote>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221114153952664.png" alt="image-20221114153952664"></p> 
-        
-      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/1%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"
-        >阅读更多&gt;&gt;</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
   id="post-编译原理/3 自动机理论和词法分析器生成器"
   class="article article-type-post"
   itemscope
@@ -455,6 +455,147 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221122172202774.png" alt="image-20221122172202774"></p> 
         
       <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/3%20%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%90%86%E8%AE%BA%E5%92%8C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+      </div>
+    
+      <div class="space">
+      </div>
+      <div class="outer">
+        <article
+  id="post-编译原理/4.3  语法分析——Adaptive LL(∗) 语法分析算法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/"
+    >4.3 语法分析——Adaptive LL(∗) 语法分析算法</a> 
+</h2>
+ 
+
+      
+    <div class="article-author" >
+        作者： wbl
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  
+        <h1>4.3  语法分析——Adaptive LL(∗) 语法分析算法</h1>
+<p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212193950896.png" alt="image-20221212193950896"></p>
+<p>（间接左递归：A→B，B→A，因此最终还是 A→A，不支持是因为工程上一般不会这么去写，且如果要改写，改写后的会非常复杂，因此干脆不支持了）</p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/"
+        >阅读更多&gt;&gt;</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+      </div>
+    
+      <div class="space">
+      </div>
+      <div class="outer">
+        <article
+  id="post-编译原理/4.1  语法分析——ANTLR 4 语法分析器"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
+    >4.1 语法分析——ANTLR 4 语法分析器</a> 
+</h2>
+ 
+
+      
+    <div class="article-author" >
+        作者： wbl
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-date">
+  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  
+        <h1>4.1  语法分析——ANTLR 4 语法分析器</h1>
+<h2 id="call-graphs">call graphs</h2>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201170040681.png" alt="image-20221201170040681"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
         >阅读更多&gt;&gt;</a
       >
        
@@ -556,147 +697,6 @@ var _hmt = _hmt || [];
       </div>
       <div class="outer">
         <article
-  id="post-编译原理/4.1  语法分析——ANTLR 4 语法分析器"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
-    >4.1 语法分析——ANTLR 4 语法分析器</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： wbl
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" class="article-date">
-  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  
-        <h1>4.1  语法分析——ANTLR 4 语法分析器</h1>
-<h2 id="call-graphs">call graphs</h2>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221201170040681.png" alt="image-20221201170040681"></p> 
-        
-      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.1%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94ANTLR%204%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/"
-        >阅读更多&gt;&gt;</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
-  id="post-编译原理/4.3  语法分析——Adaptive LL(∗) 语法分析算法"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/"
-    >4.3 语法分析——Adaptive LL(∗) 语法分析算法</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： wbl
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/" class="article-date">
-  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  
-        <h1>4.3  语法分析——Adaptive LL(∗) 语法分析算法</h1>
-<p><code>Antlr</code> 使用的算法是 LL：Adaptive LL(*)</p>
-<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221212193950896.png" alt="image-20221212193950896"></p>
-<p>（间接左递归：A→B，B→A，因此最终还是 A→A，不支持是因为工程上一般不会这么去写，且如果要改写，改写后的会非常复杂，因此干脆不支持了）</p> 
-        
-      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/4.3%20%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94Adaptive%20LL(%E2%88%97)%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/"
-        >阅读更多&gt;&gt;</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
   id="post-编译原理/5 符号表"
   class="article article-type-post"
   itemscope
@@ -738,6 +738,79 @@ var _hmt = _hmt || [];
 <p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221213102821223.png" alt="image-20221213102821223"></p> 
         
       <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E7%AC%A6%E5%8F%B7%E8%A1%A8/"
+        >阅读更多&gt;&gt;</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+      </div>
+    
+      <div class="space">
+      </div>
+      <div class="outer">
+        <article
+  id="post-编译原理/7 LLVM-IR"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/7%20LLVM-IR/"
+    >7 LLVM-IR</a> 
+</h2>
+ 
+
+      
+    <div class="article-author" >
+        作者： wbl
+    </div>
+
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/7%20LLVM-IR/" class="article-date">
+  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  
+        <h1>7 LLVM-IR</h1>
+<blockquote>
+<p>在之前 LLVM 是 Low-Level Virtual Machine 的缩写，然后发展到现在，已经脱离的虚拟机的概念，因此 LLVM 不再是缩写，而是这个项目就叫 LLVM。</p>
+</blockquote>
+<p>LLVM 不是一个编译器，而是编译器的基础设施，当写一个编译器时，可以在 LLVM 上进行开发，而不是从头开始。</p>
+<p><img src="https://wbl-z-pic.obs.cn-east-3.myhuaweicloud.com/image-20221222200155928.png" alt="image-20221222200155928"></p> 
+        
+      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/7%20LLVM-IR/"
         >阅读更多&gt;&gt;</a
       >
        
@@ -816,81 +889,6 @@ var _hmt = _hmt || [];
 </ul> 
         
       <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.1%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/"
-        >阅读更多&gt;&gt;</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-      </div>
-    
-      <div class="space">
-      </div>
-      <div class="outer">
-        <article
-  id="post-编译原理/6.2 语义分析——属性文法"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.2%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%B1%9E%E6%80%A7%E6%96%87%E6%B3%95/"
-    >6.2 语义分析——属性文法</a> 
-</h2>
- 
-
-      
-    <div class="article-author" >
-        作者： wbl
-    </div>
-
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.2%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%B1%9E%E6%80%A7%E6%96%87%E6%B3%95/" class="article-date">
-  <time datetime="2023-02-21T10:02:10.000Z" itemprop="datePublished">2023-02-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  
-        <h1>6.2 语义分析——属性文法</h1>
-<blockquote>
-<p><strong>形式文法</strong>描述形式语言的基本想法是，从一个特殊的初始符号出发，不断的应用一些产生式规则，从而生成出一个字串的集合。产生式规则指定了某些符号组合如何被另外一些符号组合替换。</p>
-<p>所有的文法分成四种类型：<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E9%99%90%E5%88%B6%E6%96%87%E6%B3%95/8353653?fromModule=lemma_inlink">无限制文法</a></strong>、<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E5%85%B3%E6%96%87%E6%B3%95/19064473?fromModule=lemma_inlink">上下文相关文法</a></strong>、<strong>上下文无关文法</strong>和**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%AD%A3%E8%A7%84%E6%96%87%E6%B3%95/8982395?fromModule=lemma_inlink">正规文法</a>**</p>
-<p>对于规则 V-&gt;<em>w</em>，上下文无关文法取名为“上下文无关”的原因就是因为字符 V 总可以被字串 w 自由替换，而无需考虑字符 V 出现的上下文。一个形式语言是上下文无关的，如果它是由上下文无关文法生成的。</p>
-<p>上下文无关文法重要的原因在于它们拥有足够强的表达力来表示大多数<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">程序设计语言</a>的语法；实际上，几乎所有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">程序设计语言</a>都是通过上下文无关文法来定义的。另一方面，上下文无关文法又足够简单，使得我们可以构造有效的分析算法来检验一个给定字串是否是由某个上下文无关文法产生的。例子可以参见LR 分析器和LL 分析器。</p>
-</blockquote>
-<p><strong>属性文法：为上下文无关文法赋予语义</strong></p> 
-        
-      <a class="article-more-link" href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6.2%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%B1%9E%E6%80%A7%E6%96%87%E6%B3%95/"
         >阅读更多&gt;&gt;</a
       >
        
