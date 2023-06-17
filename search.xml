@@ -10618,7 +10618,7 @@ console.log(counter); // 4，增加，因为是值的引用
 <h2 id="1-1-软件系统架构">1.1. 软件系统架构</h2>
 <ol>
 <li class="lvl-4">
-<p>✅ 【必考】如何进行质量属性方案建模？请使用&quot;刺激-相应&quot;图的格式进行建模 How to model quality attribute scenarios? Graphically model one quality attributes in “stimulus-response” format:</p>
+<p>✅ 【gao’p】如何进行质量属性方案建模？请使用&quot;刺激-相应&quot;图的格式进行建模 How to model quality attribute scenarios? Graphically model one quality attributes in “stimulus-response” format:</p>
 </li>
 <li class="lvl-6">
 <p>【2015】availiability and Performance</p>
